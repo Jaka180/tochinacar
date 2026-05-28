@@ -730,7 +730,7 @@ function pageAbout() {
             </div>
             <div>
               <h4>${t('about.sidebar.contact')}</h4>
-              <p><a href="mailto:hello@tochinacar.com" style="color:var(--accent);">${t('about.sidebar.contact.val')}</a></p>
+              <p><a href="mailto:hello@topchinacar.com" style="color:var(--accent);">${t('about.sidebar.contact.val')}</a></p>
             </div>
           </aside>
           <div class="about-main">
@@ -782,7 +782,7 @@ function pageAbout() {
         <div class="section-eyebrow">${t('about.contact.eyebrow')}</div>
         <h2 class="about-block-title">${t('about.contact.title')}</h2>
         <p class="about-block-body">${t('about.contact.body')}</p>
-        <a href="mailto:hello@tochinacar.com" class="btn btn-primary" style="margin-top:24px;">${t('about.contact.cta')}</a>
+        <a href="mailto:hello@topchinacar.com" class="btn btn-primary" style="margin-top:24px;">${t('about.contact.cta')}</a>
       </div>
     </section>
   `;
