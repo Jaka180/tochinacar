@@ -12,6 +12,7 @@ const vm = require('vm');
 
 const ROOT = __dirname;
 const SITE = 'https://www.topchinacar.com';
+const BUILD_V = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, ''); // cache-busting version
 
 // ---- Collect daily articles (articles/*.json, written by the GCP pipeline) ----
 const ARTICLES_DIR = path.join(ROOT, 'articles');
@@ -271,11 +272,11 @@ ${NEWSLETTER}
 
 ${FOOTER}
 
-<script src="/js/data.js"></script>
-<script src="/js/i18n.js"></script>
-<script src="/js/articles-data.js"></script>
-<script src="/js/pages.js"></script>
-<script src="/js/app.js"></script>
+<script src="/js/data.js?v=${BUILD_V}"></script>
+<script src="/js/i18n.js?v=${BUILD_V}"></script>
+<script src="/js/articles-data.js?v=${BUILD_V}"></script>
+<script src="/js/pages.js?v=${BUILD_V}"></script>
+<script src="/js/app.js?v=${BUILD_V}"></script>
 </body>
 </html>
 `;
