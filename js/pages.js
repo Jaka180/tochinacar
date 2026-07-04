@@ -112,14 +112,14 @@ function newsThumbHTML(n, variant) {
   const klass = variant === 'main' ? 'news-main-thumb' : 'news-thumb';
   const shape = variant === 'main' ? 'sedan-long' : 'sedan';
   if (n.image) {
-    return `<div class="${klass} has-photo"><img src="${n.image}" alt="${n.title_en || ''}" loading="lazy" />${n.imageCredit ? `<span class="img-credit">Photo: ${n.imageCredit}</span>` : ''}</div>`;
+    return `<div class="${klass} has-photo"><img src="/${n.image}" alt="${n.title_en || ''}" loading="lazy" />${n.imageCredit ? `<span class="img-credit">Photo: ${n.imageCredit}</span>` : ''}</div>`;
   }
   return `<div class="${klass}">${carSVG(shape, n.accent)}</div>`;
 }
 
 function modelCardHTML(m, lang) {
   const visual = m.image
-    ? `<img src="${m.image}" alt="${m.brand} ${m.name}" loading="lazy" />` + (m.imageCredit ? `<span class="img-credit">Photo: ${m.imageCredit}</span>` : '')
+    ? `<img src="/${m.image}" alt="${m.brand} ${m.name}" loading="lazy" />` + (m.imageCredit ? `<span class="img-credit">Photo: ${m.imageCredit}</span>` : '')
     : carSVG(m.shape, m.colorA);
   const dual = priceDualLine(m.price);
   return `
@@ -150,7 +150,7 @@ function brandCardHTML(b, lang) {
     : '';
   return `
     <article class="brand-card" id="brand-${b.id}" data-brand-id="${b.id}">
-      <div class="brand-card-thumb${b.image ? ' has-photo' : ''}">${b.image ? `<img src="${b.image}" alt="${b.name}" loading="lazy" />` : brandMarkSVG(b)}</div>
+      <div class="brand-card-thumb${b.image ? ' has-photo' : ''}">${b.image ? `<img src="/${b.image}" alt="${b.name}" loading="lazy" />` : brandMarkSVG(b)}</div>
       <div class="brand-card-body">
         ${parentBadge}
         <h3 class="brand-card-name"><a href="/brands/${b.id}" style="color:inherit;text-decoration:none;">${b.name}</a></h3>
@@ -231,7 +231,7 @@ function pageHome() {
           </div>
         </div>
         <div class="hero-visual">
-          <img src="images/hero-xiaomi.jpg" alt="Xiaomi SU7 Ultra Prototype" loading="eager" />
+          <img src="/images/hero-xiaomi.jpg" alt="Xiaomi SU7 Ultra Prototype" loading="eager" />
           <span class="img-credit">Photo: Xiaomi</span>
         </div>
       </div>
@@ -252,7 +252,7 @@ function pageHome() {
       <div class="feature-grid">
         ${features.map((f, i) => `
           <article class="feature-card${f.large ? ' large' : ''}">
-            <div class="feature-thumb${f.image ? ' has-photo' : ''}">${f.image ? `<img src="${f.image}" alt="${f['title_' + lang]}" loading="lazy" />${f.imageCredit ? `<span class="img-credit">Photo: ${f.imageCredit}</span>` : ''}` : carSVG(f.shape, f.accent)}</div>
+            <div class="feature-thumb${f.image ? ' has-photo' : ''}">${f.image ? `<img src="/${f.image}" alt="${f['title_' + lang]}" loading="lazy" />${f.imageCredit ? `<span class="img-credit">Photo: ${f.imageCredit}</span>` : ''}` : carSVG(f.shape, f.accent)}</div>
             <div class="feature-body">
               <div class="feature-tag">${f['tag_' + lang]}</div>
               <h3 class="feature-title">${f['title_' + lang]}</h3>
