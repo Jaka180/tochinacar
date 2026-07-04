@@ -239,7 +239,7 @@ function pageHTML(route, meta, mainHTML) {
 <link rel="canonical" href="${canonical}" />
 
 <!-- Open Graph -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content="${meta.ogType || 'website'}" />
 <meta property="og:site_name" content="TopChinaCar" />
 <meta property="og:title" content="${meta.title}" />
 <meta property="og:description" content="${meta.desc}" />
@@ -249,6 +249,7 @@ function pageHTML(route, meta, mainHTML) {
 <meta property="og:image:height" content="630" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:locale:alternate" content="zh_CN" />
+${meta.published ? `<meta property="article:published_time" content="${meta.published}" />\n<meta property="article:section" content="China Auto Export" />` : ''}
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -461,7 +462,9 @@ for (const a of articles) {
   const route = `/news/${a.slug}`;
   const html = pageHTML(route, {
     title: `${a.title_en} | TopChinaCar`,
-    desc: (a.excerpt_en || a.title_en).slice(0, 300)
+    desc: (a.excerpt_en || a.title_en).slice(0, 300),
+    ogType: 'article',
+    published: a.date
   }, articleMain(a)).replace('</head>', articleJsonLd(a) + '\n</head>');
   fs.writeFileSync(path.join(NEWS_OUT, `${a.slug}.html`), html);
 }

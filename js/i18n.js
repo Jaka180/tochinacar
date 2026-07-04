@@ -45,9 +45,9 @@ const I18N = {
     'newsletter.cta': 'Subscribe',
     'newsletter.success': 'Thanks — first issue lands tomorrow at 7am.',
 
-    'news.column.eyebrow': 'Weekly Column',
+    'news.column.eyebrow': 'The Column',
     'news.column.title': 'China Export Watch',
-    'news.column.deck': 'Every Friday: shipments, registrations and policy moves shaping the world\'s biggest car-exporting nation.',
+    'news.column.deck': 'Shipments, registrations and policy moves shaping the world\'s biggest car-exporting nation — updated every weekday with the Daily Briefing.',
     'news.column.cta': 'Read the latest dispatch',
     'news.column.latest': 'Latest dispatch',
     'news.column.date': 'May 22, 2026 · Issue #14',
@@ -178,9 +178,9 @@ const I18N = {
     'newsletter.cta': '订阅',
     'newsletter.success': '谢谢——首期明天早上 7 点送达。',
 
-    'news.column.eyebrow': '周报专栏',
+    'news.column.eyebrow': '专栏',
     'news.column.title': '中国汽车出海观察',
-    'news.column.deck': '每周五更新：展现出口、上牌与政策走势，一起看清这个汽车出口冠军国。',
+    'news.column.deck': '出口、上牌与政策走势，一起看清这个汽车出口冠军国——每个工作日随每日简报更新。',
     'news.column.cta': '阅读最新一期',
     'news.column.latest': '最新一期',
     'news.column.date': '2026 年 5 月 22 日 · 第 14 期',

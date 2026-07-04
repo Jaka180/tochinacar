@@ -3,8 +3,47 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
 
+# HTML, robots and sitemap must never be served stale by any CDN/cache layer.
+# (The 2026-07-05 incident: the edge kept serving the pre-rebuild SPA homepage,
+#  a fallback-HTML robots.txt and a missing sitemap for days after deploy.)
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/brands
+  Cache-Control: public, max-age=0, must-revalidate
+
+/brands/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/models
+  Cache-Control: public, max-age=0, must-revalidate
+
+/news
+  Cache-Control: public, max-age=0, must-revalidate
+
+/news/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/tech
+  Cache-Control: public, max-age=0, must-revalidate
+
+/about
+  Cache-Control: public, max-age=0, must-revalidate
+
+/quote
+  Cache-Control: public, max-age=0, must-revalidate
+
+/robots.txt
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sitemap.xml
+  Cache-Control: public, max-age=0, must-revalidate
+
 /images/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400
 
 /css/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+
+/js/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=86400

@@ -616,6 +616,11 @@ function dailyArticlesHTML(lang) {
 
 function pageNews() {
   const lang = getLang();
+  // Latest daily dispatch auto-fills the column card so it never goes stale.
+  const latestA = (typeof SITE_ARTICLES !== 'undefined' && SITE_ARTICLES.length) ? SITE_ARTICLES[0] : null;
+  const colHref = latestA ? `/news/${latestA.slug}` : '/news';
+  const colDate = latestA ? latestA.date : t('news.column.date');
+  const colHeadline = latestA ? (latestA['title_' + lang] || latestA.title_en) : t('news.column.headline');
   return `
     <section class="page-header">
       <div class="container">
@@ -632,12 +637,12 @@ function pageNews() {
             <div class="news-column-eyebrow">${t('news.column.eyebrow')}</div>
             <h2 class="news-column-title">${t('news.column.title')}</h2>
             <p class="news-column-deck">${t('news.column.deck')}</p>
-            <a href="/news" class="news-column-cta">${t('news.column.cta')} →</a>
+            <a href="${colHref}" class="news-column-cta">${t('news.column.cta')} →</a>
           </div>
           <div class="news-column-right">
             <div class="news-column-latest-label">${t('news.column.latest')}</div>
-            <div class="news-column-date">${t('news.column.date')}</div>
-            <h3 class="news-column-headline">${t('news.column.headline')}</h3>
+            <div class="news-column-date">${colDate}</div>
+            <h3 class="news-column-headline"><a href="${colHref}" style="color:inherit;text-decoration:none;">${colHeadline}</a></h3>
           </div>
         </div>
       </div>
