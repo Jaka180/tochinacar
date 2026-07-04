@@ -429,7 +429,14 @@ function articleMain(a) {
         ${langBlock('en', a.html_en)}
         ${langBlock('zh', a.html_zh || a.html_en)}
       </article>
-      <p style="margin-top:40px;"><a href="/news" style="color:var(--accent);font-family:var(--mono);font-size:13px;">← All news</a></p>
+      <div style="margin:44px 0 0;padding:26px 28px;background:#f9fafb;border-left:3px solid #d4302a;">
+        <h2 style="margin:0 0 8px;font-size:19px;">${langSpan('Import these vehicles', '进口这些车辆')}</h2>
+        <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#4b5563;">${langSpan(
+          'Dealer, fleet or importer? We source availability and FOB/CIF quotes for any Chinese brand through licensed exporters — response within 48 hours.',
+          '经销商、车队或进口商？我们通过持牌出口商为任意中国品牌匹配货源与 FOB/CIF 报价——48 小时内回复。')}</p>
+        <a href="/quote" class="btn btn-primary">${langSpan('Request a quote', '提交询价')}</a>
+      </div>
+      <p style="margin-top:32px;"><a href="/news" style="color:var(--accent);font-family:var(--mono);font-size:13px;">← All news</a></p>
     </div>
   </section>`;
 }

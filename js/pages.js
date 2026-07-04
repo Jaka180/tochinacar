@@ -212,7 +212,12 @@ function pageHome() {
     <div class="container">
       <div class="hero-grid">
         <div>
-          <div class="hero-eyebrow">${t('hero.eyebrow')}</div>
+          <div class="hero-eyebrow">${(() => {
+            const d = new Date();
+            return lang === 'zh'
+              ? `每日更新 · ${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
+              : `Updated daily · ${d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+          })()}</div>
           <h1 class="hero-title">${t('hero.title')}</h1>
           <p class="hero-deck">${t('hero.deck')}</p>
           <div class="hero-cta">
@@ -220,9 +225,9 @@ function pageHome() {
             <a href="/brands" class="btn btn-ghost" data-i18n="hero.cta.secondary">${t('hero.cta.secondary')}</a>
           </div>
           <div class="hero-meta">
-            <span><strong>${t('hero.meta.issue')}</strong></span>
-            <span>${t('hero.meta.date')}</span>
-            <span>${t('hero.meta.read')}</span>
+            <span><strong>${lang === 'zh' ? '每日简报' : 'DAILY BRIEFING'}</strong></span>
+            <span>${lang === 'zh' ? '追踪 31 个品牌' : '31 BRANDS TRACKED'}</span>
+            <span>${lang === 'zh' ? '中英双语' : 'EN · 中文'}</span>
           </div>
         </div>
         <div class="hero-visual">
@@ -351,6 +356,18 @@ function pageHome() {
         </div>
         <a href="/news" style="font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);">${lang === 'zh' ? '更多新闻 →' : 'More news →'}</a>
       </div>
+      ${typeof SITE_ARTICLES !== 'undefined' && SITE_ARTICLES.length ? `
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-bottom:36px;">
+        ${SITE_ARTICLES.slice(0, 3).map(a => `
+        <article style="border:1px solid #e5e7eb;border-radius:10px;padding:22px 24px;background:#ffffff;display:flex;flex-direction:column;gap:10px;">
+          <div style="font-family:var(--mono, monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dc2626;">${a['tag_' + lang] || a.tag_en} · ${a.date}</div>
+          <h3 style="font-family:var(--serif, Georgia, serif);font-size:21px;font-weight:700;line-height:1.3;margin:0;">
+            <a href="/news/${a.slug}" style="color:inherit;text-decoration:none;">${a['title_' + lang] || a.title_en}</a>
+          </h3>
+          <p style="font-size:14px;color:#6b7280;line-height:1.65;margin:0;">${a['excerpt_' + lang] || a.excerpt_en || ''}</p>
+          <a href="/news/${a.slug}" style="margin-top:auto;color:#dc2626;font-family:var(--mono, monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '阅读全文 →' : 'Read dispatch →'}</a>
+        </article>`).join('')}
+      </div>` : ''}
       <div class="news-grid">
         <article class="news-main-article">
           ${newsThumbHTML(D.news[0], 'main')}
