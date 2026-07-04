@@ -132,12 +132,12 @@ function headerHTML(route) {
   <div class="hot-strip">
     <div class="container hot-strip-inner">
       <span class="hot-strip-label" data-i18n="nav.hot">Hot brands</span>
-      <a href="/brands?focus=byd" class="hot-pill" data-focus="byd">BYD</a>
-      <a href="/brands?focus=xiaomi" class="hot-pill" data-focus="xiaomi">Xiaomi</a>
-      <a href="/brands?focus=nio" class="hot-pill" data-focus="nio">NIO</a>
-      <a href="/brands?focus=xpeng" class="hot-pill" data-focus="xpeng">Xpeng</a>
-      <a href="/brands?focus=zeekr" class="hot-pill" data-focus="zeekr">Zeekr</a>
-      <a href="/brands?focus=geely" class="hot-pill" data-focus="geely">Geely</a>
+      <a href="/brands/byd" class="hot-pill">BYD</a>
+      <a href="/brands/xiaomi" class="hot-pill">Xiaomi</a>
+      <a href="/brands/nio" class="hot-pill">NIO</a>
+      <a href="/brands/xpeng" class="hot-pill">Xpeng</a>
+      <a href="/brands/zeekr" class="hot-pill">Zeekr</a>
+      <a href="/brands/geely" class="hot-pill">Geely</a>
     </div>
   </div>
 </header>`;
@@ -290,6 +290,124 @@ for (const [route, meta] of Object.entries(PAGES)) {
   count++;
 }
 
+// ---- Brand detail pages (/brands/<id>) ----
+const SITE_DATA = vm.runInContext('SITE_DATA', sandbox);
+const BRANDS_OUT = path.join(ROOT, 'brands');
+if (!fs.existsSync(BRANDS_OUT)) fs.mkdirSync(BRANDS_OUT);
+
+const CATEGORY_LABEL = {
+  group:    { en: 'Legacy Group', zh: '传统车企集团' },
+  startup:  { en: 'New-Energy Startup', zh: '造车新势力' },
+  subbrand: { en: 'Group Sub-Brand', zh: '集团子品牌' }
+};
+
+// Category-level buyer context (adds substance beyond the short brand blurb)
+const CATEGORY_CONTEXT = {
+  group: {
+    en: 'As an established manufacturing group, it ships complete knock-down and fully-built vehicles worldwide, with mature homologation experience across left- and right-hand-drive markets. For dealers, that typically means broader spare-parts availability and factory-backed export documentation.',
+    zh: '作为成熟的制造集团，其整车与 KD 件出口遍及全球，在左舵/右舵市场均有成熟的认证经验。对经销商而言，这通常意味着更完善的配件供应与厂家出口文件支持。'
+  },
+  startup: {
+    en: 'As a new-energy startup, its lineup is EV-first with over-the-air software updates and rapid model cycles. Dealers importing these vehicles should verify charging-standard compatibility (CCS/GB-T) and local service arrangements for the destination market.',
+    zh: '作为新势力车企，其产品以纯电为主，支持整车 OTA、车型迭代快。进口时需确认目的市场的充电标准兼容性（CCS/GB-T）与本地售后安排。'
+  },
+  subbrand: {
+    en: 'It operates as an independent marque within its parent group, sharing platforms and the export network while targeting a distinct segment. Parts and homologation support generally flow through the parent group\'s international channels.',
+    zh: '它作为母集团旗下的独立品牌运营，共享平台与出口网络，同时瞄准差异化细分市场。配件与认证支持通常通过母集团的国际渠道提供。'
+  }
+};
+
+function langSpan(en, zh) {
+  return `<span data-lang="en">${en}</span><span data-lang="zh" hidden>${zh}</span>`;
+}
+
+function brandMain(b) {
+  const cat = CATEGORY_LABEL[b.category] || CATEGORY_LABEL.group;
+  const ctx = CATEGORY_CONTEXT[b.category] || CATEGORY_CONTEXT.group;
+  const models = SITE_DATA.models.filter(m => m.brand === b.name);
+  const related = articles.filter(a =>
+    (a.title_en + ' ' + (a.excerpt_en || '')).toLowerCase().includes(b.name.toLowerCase())).slice(0, 5);
+
+  const fact = (labelEn, labelZh, val) => `
+    <div class="brand-fact"><span class="spec-label">${langSpan(labelEn, labelZh)}</span><span class="spec-value">${val}</span></div>`;
+
+  return `
+  <section class="page-header">
+    <div class="container">
+      <div class="section-eyebrow">${langSpan(cat.en, cat.zh)}${b.parent_en ? ` · ${langSpan('Part of ' + b.parent_en, '隶属于' + (b.parent_zh || b.parent_en))}` : ''}</div>
+      <h1 class="page-title">${b.name} <span style="font-size:.55em;color:#9ca3af;font-weight:500;">${b.cn}</span></h1>
+      <p class="page-deck">${langSpan(b.desc_en, b.desc_zh)}</p>
+    </div>
+  </section>
+  <section style="padding-top:0;">
+    <div class="container" style="max-width:920px;">
+      <div class="brand-facts" style="display:flex;gap:36px;flex-wrap:wrap;margin-bottom:36px;">
+        ${fact('Founded', '创立', b.founded)}
+        ${fact('HQ', '总部', b.hq)}
+        ${fact('Focus', '主攻', b.focus)}
+        ${b.subBrands_en ? fact('Sub-brands', '旗下品牌', `${langSpan(b.subBrands_en, b.subBrands_zh || b.subBrands_en)}`) : ''}
+      </div>
+      <div style="font-size:16px;line-height:1.8;color:#374151;">
+        <p>${langSpan(ctx.en, ctx.zh)}</p>
+      </div>
+      <div style="margin:32px 0;padding:24px;background:#f9fafb;border-left:3px solid #d4302a;">
+        <h2 style="margin:0 0 8px;font-size:18px;">${langSpan(`Import ${b.name} vehicles`, `进口 ${b.name} 车辆`)}</h2>
+        <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#4b5563;">${langSpan(
+          `Dealer or fleet buyer? Tell us your market and volume — we respond within 48 hours with availability and FOB/CIF quotes for ${b.name} models through licensed Chinese exporters.`,
+          `经销商或车队买家？告诉我们目标市场与数量——48 小时内回复 ${b.name} 车型的货源与 FOB/CIF 报价，由持牌中国出口商执行。`)}</p>
+        <a href="/quote?model=${encodeURIComponent(b.name)}" class="btn btn-primary">${langSpan('Request a quote', '提交询价')}</a>
+      </div>
+      ${models.length ? `
+      <h2 style="font-size:22px;margin:40px 0 20px;">${langSpan('Featured ' + b.name + ' models', b.name + ' 明星车型')}</h2>
+      <div class="models-grid">
+        ${models.map(m => modelCardHTML(m, 'en')).join('')}
+      </div>` : ''}
+      ${related.length ? `
+      <h2 style="font-size:22px;margin:40px 0 20px;">${langSpan('Latest ' + b.name + ' news', b.name + ' 最新动态')}</h2>
+      <ul style="list-style:none;padding:0;margin:0;">
+        ${related.map(a => `<li style="margin-bottom:14px;"><a href="/news/${a.slug}" style="color:inherit;text-decoration:none;"><strong>${a.title_en}</strong></a><br/><span style="font-size:13px;color:#9ca3af;">${a.date}</span></li>`).join('')}
+      </ul>` : ''}
+      <p style="margin-top:40px;"><a href="/brands" style="color:var(--accent, #d4302a);font-family:var(--mono);font-size:13px;">← All 31 Chinese car brands</a></p>
+    </div>
+  </section>`;
+}
+
+function brandJsonLd(b) {
+  return `<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Brand",
+      "name": "${b.name}",
+      "alternateName": "${b.cn}",
+      "url": "${SITE}/brands/${b.id}",
+      "description": ${JSON.stringify(b.desc_en)}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "${SITE}/"},
+        {"@type": "ListItem", "position": 2, "name": "Brands", "item": "${SITE}/brands"},
+        {"@type": "ListItem", "position": 3, "name": "${b.name}", "item": "${SITE}/brands/${b.id}"}
+      ]
+    }
+  ]
+}
+</script>`;
+}
+
+const modelCardHTML = vm.runInContext('modelCardHTML', sandbox);
+for (const b of SITE_DATA.brands) {
+  const catEn = (CATEGORY_LABEL[b.category] || CATEGORY_LABEL.group).en;
+  const html = pageHTML(`/brands/${b.id}`, {
+    title: `${b.name} (${b.cn}) Export — Models, Markets & Wholesale Quotes | TopChinaCar`,
+    desc: `${b.desc_en} ${catEn}, founded ${b.founded}, HQ ${b.hq}. Dealer and fleet export quotes for ${b.name} vehicles through licensed Chinese exporters.`.slice(0, 300)
+  }, brandMain(b)).replace('</head>', brandJsonLd(b) + '\n</head>');
+  fs.writeFileSync(path.join(BRANDS_OUT, `${b.id}.html`), html);
+}
+console.log(`✓ ${SITE_DATA.brands.length} brand pages → brands/`);
+
 // ---- Daily article pages (/news/<slug>) ----
 const NEWS_OUT = path.join(ROOT, 'news');
 if (!fs.existsSync(NEWS_OUT)) fs.mkdirSync(NEWS_OUT);
@@ -315,12 +433,28 @@ function articleMain(a) {
   </section>`;
 }
 
+function articleJsonLd(a) {
+  return `<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": ${JSON.stringify(a.title_en)},
+  "description": ${JSON.stringify(a.excerpt_en || a.title_en)},
+  "datePublished": "${a.date}",
+  "inLanguage": ["en", "zh-CN"],
+  "mainEntityOfPage": "${SITE}/news/${a.slug}",
+  "author": {"@type": "Organization", "name": "TopChinaCar", "url": "${SITE}/"},
+  "publisher": {"@id": "${SITE}/#organization"}
+}
+</script>`;
+}
+
 for (const a of articles) {
   const route = `/news/${a.slug}`;
   const html = pageHTML(route, {
     title: `${a.title_en} | TopChinaCar`,
     desc: (a.excerpt_en || a.title_en).slice(0, 300)
-  }, articleMain(a));
+  }, articleMain(a)).replace('</head>', articleJsonLd(a) + '\n</head>');
   fs.writeFileSync(path.join(NEWS_OUT, `${a.slug}.html`), html);
 }
 if (articles.length) console.log(`✓ ${articles.length} article page(s) → news/`);
@@ -342,11 +476,13 @@ console.log('✓ 404.html');
 const today = new Date().toISOString().slice(0, 10);
 const staticUrls = Object.keys(PAGES).map(r =>
   `  <url><loc>${r === '/' ? SITE + '/' : SITE + r}</loc><lastmod>${today}</lastmod></url>`);
+const brandUrls = SITE_DATA.brands.map(b =>
+  `  <url><loc>${SITE}/brands/${b.id}</loc><lastmod>${today}</lastmod></url>`);
 const articleUrls = articles.map(a =>
   `  <url><loc>${SITE}/news/${a.slug}</loc><lastmod>${a.date}</lastmod></url>`);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticUrls.concat(articleUrls).join('\n')}
+${staticUrls.concat(brandUrls, articleUrls).join('\n')}
 </urlset>
 `;
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemap);

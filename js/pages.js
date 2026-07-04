@@ -153,7 +153,7 @@ function brandCardHTML(b, lang) {
       <div class="brand-card-thumb${b.image ? ' has-photo' : ''}">${b.image ? `<img src="${b.image}" alt="${b.name}" loading="lazy" />` : brandMarkSVG(b)}</div>
       <div class="brand-card-body">
         ${parentBadge}
-        <h3 class="brand-card-name">${b.name}</h3>
+        <h3 class="brand-card-name"><a href="/brands/${b.id}" style="color:inherit;text-decoration:none;">${b.name}</a></h3>
         <div class="brand-card-cn">${b.cn}</div>
         <p class="brand-card-desc">${b['desc_' + lang]}</p>
         ${subBrandsLine}
@@ -162,6 +162,7 @@ function brandCardHTML(b, lang) {
           <div class="brand-fact"><span class="spec-label">${t('brands.fact.hq')}</span><span class="spec-value">${b.hq}</span></div>
           <div class="brand-fact"><span class="spec-label">${t('brands.fact.focus')}</span><span class="spec-value" style="font-size:12px;">${b.focus}</span></div>
         </div>
+        <a href="/brands/${b.id}" style="display:inline-block;margin-top:12px;color:var(--accent, #d4302a);font-family:var(--mono, monospace);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '品牌详情 →' : 'Full profile →'}</a>
       </div>
     </article>
   `;
@@ -277,7 +278,7 @@ function pageHome() {
           </div>
           <div class="home-brands-col-list">
             ${D.brands.filter(b=>b.category==='group').map(b => `
-              <a href="/brands?focus=${b.id}" class="brand-cell">
+              <a href="/brands/${b.id}" class="brand-cell">
                 <div class="brand-name">${b.name}</div>
                 <div class="brand-cell-sub">${b.cn}</div>
               </a>
@@ -291,7 +292,7 @@ function pageHome() {
           </div>
           <div class="home-brands-col-list">
             ${D.brands.filter(b=>b.category==='startup').map(b => `
-              <a href="/brands?focus=${b.id}" class="brand-cell">
+              <a href="/brands/${b.id}" class="brand-cell">
                 <div class="brand-name">${b.name}</div>
                 <div class="brand-cell-sub">${b.cn}</div>
               </a>
@@ -305,7 +306,7 @@ function pageHome() {
           </div>
           <div class="home-brands-col-list home-brands-col-list-compact">
             ${D.brands.filter(b=>b.category==='subbrand').map(b => `
-              <a href="/brands?focus=${b.id}" class="brand-pill">${b.name}</a>
+              <a href="/brands/${b.id}" class="brand-pill">${b.name}</a>
             `).join('')}
           </div>
         </div>

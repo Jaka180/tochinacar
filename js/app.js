@@ -109,7 +109,9 @@
       if (focus) focusBrandCard(focus);
     }
     // nav active state (article pages highlight News)
-    const navRoute = route || (location.pathname.startsWith('/news/') ? '/news' : null);
+    const navRoute = route
+      || (location.pathname.startsWith('/news/') ? '/news' : null)
+      || (location.pathname.startsWith('/brands/') ? '/brands' : null);
     document.querySelectorAll('.main-nav a').forEach(a => {
       const target = (a.getAttribute('href') || '').replace(/\/$/, '') || '/';
       a.classList.toggle('active', target === navRoute);
