@@ -572,13 +572,13 @@ function pageModels() {
 function dailyArticlesHTML(lang) {
   if (typeof SITE_ARTICLES === 'undefined' || !SITE_ARTICLES.length) return '';
   const items = SITE_ARTICLES.slice(0, 30).map(a => `
-    <article class="news-item">
-      <div>
-        <div class="news-meta">${a['tag_' + lang] || a.tag_en}</div>
-        <h4 class="news-title"><a href="/news/${a.slug}" style="color:inherit;text-decoration:none;">${a['title_' + lang] || a.title_en}</a></h4>
-        <div class="news-date">${a.date}</div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.5;margin-top:6px;">${a['excerpt_' + lang] || a.excerpt_en || ''}</p>
-      </div>
+    <article style="border:1px solid #e5e7eb;border-radius:10px;padding:22px 24px;background:#ffffff;display:flex;flex-direction:column;gap:10px;">
+      <div style="font-family:var(--mono, monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dc2626;">${a['tag_' + lang] || a.tag_en} · ${a.date}</div>
+      <h3 style="font-family:var(--serif, Georgia, serif);font-size:21px;font-weight:700;line-height:1.3;margin:0;">
+        <a href="/news/${a.slug}" style="color:inherit;text-decoration:none;">${a['title_' + lang] || a.title_en}</a>
+      </h3>
+      <p style="font-size:14px;color:#6b7280;line-height:1.65;margin:0;">${a['excerpt_' + lang] || a.excerpt_en || ''}</p>
+      <a href="/news/${a.slug}" style="margin-top:auto;color:#dc2626;font-family:var(--mono, monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '阅读全文 →' : 'Read dispatch →'}</a>
     </article>
   `).join('');
   return `
@@ -590,7 +590,7 @@ function dailyArticlesHTML(lang) {
             <h2 class="section-title">${lang === 'zh' ? '最新出海动态' : 'Latest Dispatches'}</h2>
           </div>
         </div>
-        <div class="news-side" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;">
           ${items}
         </div>
       </div>
