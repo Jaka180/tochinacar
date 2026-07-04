@@ -113,7 +113,25 @@ const I18N = {
     'about.contact.eyebrow': 'Contact',
     'about.contact.title': 'Tips, corrections, partnerships.',
     'about.contact.body': 'Email the editor at hello@topchinacar.com. We read every message; we reply to most. Press inquiries within 48 hours.',
-    'about.contact.cta': 'Email the editor'
+    'about.contact.cta': 'Email the editor',
+
+    'nav.quote': 'Get a Quote',
+    'quote.page.title': 'Export & Wholesale Inquiries',
+    'quote.page.deck': 'For dealers, fleets and importers. Tell us the market, the models and the volume — we respond within 48 hours with availability and FOB/CIF quotes through licensed Chinese exporters.',
+    'quote.form.name': 'Your name',
+    'quote.form.company': 'Company',
+    'quote.form.email': 'Email',
+    'quote.form.whatsapp': 'WhatsApp / phone (optional)',
+    'quote.form.market': 'Destination market (country)',
+    'quote.form.model': 'Model(s) of interest',
+    'quote.form.qty': 'Quantity',
+    'quote.form.message': 'Anything else — spec, budget, timeline',
+    'quote.form.submit': 'Request quote',
+    'quote.form.success': 'Received — we will get back to you within 48 hours.',
+    'quote.form.error': 'Something went wrong — please email hello@topchinacar.com instead.',
+    'quote.note.title': 'How it works',
+    'quote.note.body': 'TopChinaCar works with licensed Chinese vehicle exporters. We scope your requirement, source quotes, and coordinate the deal — homologation, shipping and payment terms are confirmed per market before any commitment.',
+    'models.cta.quote': 'Request export quote'
   },
   zh: {
     'logo.sub': '中国汽车新时代',
@@ -228,7 +246,25 @@ const I18N = {
     'about.contact.eyebrow': '联系',
     'about.contact.title': '报料、勘误、合作。',
     'about.contact.body': '请发邮件至 hello@topchinacar.com。我们阅读每一封，回复大多数。媒体查询 48 小时内回复。',
-    'about.contact.cta': '发邮件给编辑'
+    'about.contact.cta': '发邮件给编辑',
+
+    'nav.quote': '询价',
+    'quote.page.title': '出口与批发询价',
+    'quote.page.deck': '面向经销商、车队与进口商。告诉我们目标市场、车型与数量——48 小时内回复货源与 FOB/CIF 报价，通过持牌中国出口商执行。',
+    'quote.form.name': '姓名',
+    'quote.form.company': '公司',
+    'quote.form.email': '邮箱',
+    'quote.form.whatsapp': 'WhatsApp / 电话（选填）',
+    'quote.form.market': '目的市场（国家）',
+    'quote.form.model': '意向车型',
+    'quote.form.qty': '数量',
+    'quote.form.message': '其他需求——配置、预算、时间',
+    'quote.form.submit': '提交询价',
+    'quote.form.success': '已收到——我们将在 48 小时内回复。',
+    'quote.form.error': '提交失败——请直接发邮件至 hello@topchinacar.com。',
+    'quote.note.title': '流程说明',
+    'quote.note.body': 'TopChinaCar 与持牌中国整车出口商合作。我们确认需求、匹配货源与报价，并协调交易——认证、海运与付款条件在承诺前按市场逐项确认。',
+    'models.cta.quote': '获取出口报价'
   }
 };
 

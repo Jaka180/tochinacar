@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TopChinaCar — The New Era of Chinese Automobiles</title>
 <meta name="description" content="An editorial guide to Chinese automobiles for overseas readers: BYD, Xiaomi, NIO, Xpeng, Zeekr, Geely — brands, models, technology and the EV revolution reshaping the global auto industry." />
-<meta name="keywords" content="Chinese EV, BYD, Xiaomi SU7, NIO, Xpeng, Zeekr, Geely, Lynk Co, Polestar, electric vehicles China, China car exports, TopChinaCar" />
 <meta name="author" content="TopChinaCar Editorial" />
 <meta name="theme-color" content="#1a1a1a" />
 <link rel="canonical" href="https://www.topchinacar.com/" />
@@ -14,7 +13,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="TopChinaCar" />
 <meta property="og:title" content="TopChinaCar — The New Era of Chinese Automobiles" />
-<meta property="og:description" content="An independent editorial guide to BYD, Xiaomi, NIO, Xpeng, Zeekr, Geely and the Chinese EV revolution — for overseas readers." />
+<meta property="og:description" content="An editorial guide to Chinese automobiles for overseas readers: BYD, Xiaomi, NIO, Xpeng, Zeekr, Geely — brands, models, technology and the EV revolution reshaping the global auto industry." />
 <meta property="og:url" content="https://www.topchinacar.com/" />
 <meta property="og:image" content="https://www.topchinacar.com/images/hero-xiaomi.jpg" />
 <meta property="og:image:width" content="1200" />
@@ -25,10 +24,9 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="TopChinaCar — The New Era of Chinese Automobiles" />
-<meta name="twitter:description" content="BYD, Xiaomi, NIO, Xpeng, Zeekr, Geely — the Chinese EV revolution, written for overseas readers." />
+<meta name="twitter:description" content="An editorial guide to Chinese automobiles for overseas readers: BYD, Xiaomi, NIO, Xpeng, Zeekr, Geely — brands, models, technology and the EV revolution reshaping the global auto industry." />
 <meta name="twitter:image" content="https://www.topchinacar.com/images/hero-xiaomi.jpg" />
 
-<!-- Structured data: Organization + Website -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,8 +53,8 @@
       "@type": "NewsMediaOrganization",
       "name": "TopChinaCar",
       "url": "https://www.topchinacar.com/",
-      "diversityPolicy": "https://www.topchinacar.com/#/about",
-      "ethicsPolicy": "https://www.topchinacar.com/#/about"
+      "diversityPolicy": "https://www.topchinacar.com/about",
+      "ethicsPolicy": "https://www.topchinacar.com/about"
     }
   ]
 }
@@ -64,15 +62,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="/css/style.css" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231a1a1a'/><text x='16' y='22' font-family='Playfair Display,serif' font-size='20' font-weight='900' text-anchor='middle' fill='%23d4302a'>T</text></svg>">
 </head>
 <body>
 
-<!-- ============ HEADER ============ -->
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
-    <a href="#/" class="logo" aria-label="TopChinaCar home">
+    <a href="/" class="logo" aria-label="TopChinaCar home">
       <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <rect width="32" height="32" rx="2" fill="currentColor"/>
         <text x="16" y="23" font-family="Playfair Display,serif" font-size="22" font-weight="900" text-anchor="middle" fill="#d4302a">T</text>
@@ -84,12 +81,13 @@
     </a>
 
     <nav class="main-nav" aria-label="Primary">
-      <a href="#/" data-i18n="nav.home">Home</a>
-      <a href="#/brands" data-i18n="nav.brands">Brands</a>
-      <a href="#/models" data-i18n="nav.models">Models</a>
-      <a href="#/news" data-i18n="nav.news">News</a>
-      <a href="#/tech" data-i18n="nav.tech">Tech</a>
-      <a href="#/about" data-i18n="nav.about">About</a>
+      <a href="/" class="active" data-i18n="nav.home">Home</a>
+      <a href="/brands" data-i18n="nav.brands">Brands</a>
+      <a href="/models" data-i18n="nav.models">Models</a>
+      <a href="/news" data-i18n="nav.news">News</a>
+      <a href="/tech" data-i18n="nav.tech">Tech</a>
+      <a href="/about" data-i18n="nav.about">About</a>
+      <a href="/quote" data-i18n="nav.quote">Get a Quote</a>
     </nav>
 
     <div class="header-tools">
@@ -105,20 +103,429 @@
   <div class="hot-strip">
     <div class="container hot-strip-inner">
       <span class="hot-strip-label" data-i18n="nav.hot">Hot brands</span>
-      <a href="#/brands?focus=byd" class="hot-pill" data-focus="byd">BYD</a>
-      <a href="#/brands?focus=xiaomi" class="hot-pill" data-focus="xiaomi">Xiaomi</a>
-      <a href="#/brands?focus=nio" class="hot-pill" data-focus="nio">NIO</a>
-      <a href="#/brands?focus=xpeng" class="hot-pill" data-focus="xpeng">Xpeng</a>
-      <a href="#/brands?focus=zeekr" class="hot-pill" data-focus="zeekr">Zeekr</a>
-      <a href="#/brands?focus=geely" class="hot-pill" data-focus="geely">Geely</a>
+      <a href="/brands?focus=byd" class="hot-pill" data-focus="byd">BYD</a>
+      <a href="/brands?focus=xiaomi" class="hot-pill" data-focus="xiaomi">Xiaomi</a>
+      <a href="/brands?focus=nio" class="hot-pill" data-focus="nio">NIO</a>
+      <a href="/brands?focus=xpeng" class="hot-pill" data-focus="xpeng">Xpeng</a>
+      <a href="/brands?focus=zeekr" class="hot-pill" data-focus="zeekr">Zeekr</a>
+      <a href="/brands?focus=geely" class="hot-pill" data-focus="geely">Geely</a>
     </div>
   </div>
 </header>
 
-<!-- ============ MAIN ============ -->
-<main id="app"><!-- Content rendered by JS --></main>
+<main id="app">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-eyebrow">Cover Story · Spring 2026</div>
+          <h1 class="hero-title">The <em>Electric</em> Revolution<br/>Is Made in China.</h1>
+          <p class="hero-deck">Once dismissed as copies, Chinese automakers now lead the world in electric vehicles, batteries, autonomous driving and connected cockpits. This is the story of how — and what overseas buyers should know.</p>
+          <div class="hero-cta">
+            <a href="/news" class="btn btn-primary" data-i18n="hero.cta.primary">Read the Cover Story</a>
+            <a href="/brands" class="btn btn-ghost" data-i18n="hero.cta.secondary">Explore Brands</a>
+          </div>
+          <div class="hero-meta">
+            <span><strong>ISSUE 04</strong></span>
+            <span>MAY 2026</span>
+            <span>12 MIN READ</span>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="images/hero-xiaomi.jpg" alt="Xiaomi SU7 Ultra Prototype" loading="eager" />
+          <span class="img-credit">Photo: Xiaomi</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- ============ NEWSLETTER ============ -->
+  <!-- FEATURES -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-eyebrow">In This Issue</div>
+          <h2 class="section-title">The Stories Reshaping<br/>the Global Auto Industry</h2>
+        </div>
+        <p class="section-deck">From battery breakthroughs to brands you've never heard of, the most consequential car news of 2026 is being written in Chinese.</p>
+      </div>
+
+      <div class="feature-grid">
+        
+          <article class="feature-card large">
+            <div class="feature-thumb has-photo"><img src="images/byd-seal.jpg" alt="How China Built the World's Best EV Battery Supply Chain" loading="lazy" /><span class="img-credit">Photo: BYD</span></div>
+            <div class="feature-body">
+              <div class="feature-tag">Cover</div>
+              <h3 class="feature-title">How China Built the World's Best EV Battery Supply Chain</h3>
+              <p class="feature-desc">CATL and BYD together produce more than half the world's EV batteries. The story of how that dominance was engineered, mine to module.</p>
+              <div class="feature-meta">TECHNOLOGY · 12 MIN</div>
+            </div>
+          </article>
+        
+          <article class="feature-card">
+            <div class="feature-thumb has-photo"><img src="images/nio-et9.jpg" alt="NIO's Battery Swap Bet" loading="lazy" /><span class="img-credit">Photo: Car and Driver</span></div>
+            <div class="feature-body">
+              <div class="feature-tag">Brand</div>
+              <h3 class="feature-title">NIO's Battery Swap Bet</h3>
+              <p class="feature-desc">Three minutes, full charge. The model BMW just signed onto.</p>
+              <div class="feature-meta">PROFILE · 8 MIN</div>
+            </div>
+          </article>
+        
+          <article class="feature-card">
+            <div class="feature-thumb has-photo"><img src="images/xiaomi-su7-ultra.jpg" alt="Why Xiaomi's SU7 Looks Familiar" loading="lazy" /><span class="img-credit">Photo: Top Gear</span></div>
+            <div class="feature-body">
+              <div class="feature-tag">Design</div>
+              <h3 class="feature-title">Why Xiaomi's SU7 Looks Familiar</h3>
+              <p class="feature-desc">Inside the design language borrowing from Porsche — and where it diverges.</p>
+              <div class="feature-meta">DESIGN · 6 MIN</div>
+            </div>
+          </article>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND STRIP -->
+  <section class="brand-strip">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-eyebrow">Brand Index</div>
+          <h2 class="section-title">Thirty Brands. One Industrial Shift.</h2>
+        </div>
+        <p class="section-deck">Meet the ten parent companies and twenty sub-brands driving China's outbound expansion — from state giants to phone-makers turned EV stars.</p>
+      </div>
+      <div class="home-brands-cols">
+        <div class="home-brands-col">
+          <div class="home-brands-col-head">
+            <span class="home-brands-col-label">Legacy Groups</span>
+            <span class="home-brands-col-count">6</span>
+          </div>
+          <div class="home-brands-col-list">
+            
+              <a href="/brands?focus=byd" class="brand-cell">
+                <div class="brand-name">BYD</div>
+                <div class="brand-cell-sub">比亚迪</div>
+              </a>
+            
+              <a href="/brands?focus=geely" class="brand-cell">
+                <div class="brand-name">Geely</div>
+                <div class="brand-cell-sub">吉利</div>
+              </a>
+            
+              <a href="/brands?focus=chery" class="brand-cell">
+                <div class="brand-name">Chery</div>
+                <div class="brand-cell-sub">奇瑞</div>
+              </a>
+            
+              <a href="/brands?focus=gwm" class="brand-cell">
+                <div class="brand-name">Great Wall</div>
+                <div class="brand-cell-sub">长城</div>
+              </a>
+            
+              <a href="/brands?focus=saic" class="brand-cell">
+                <div class="brand-name">SAIC</div>
+                <div class="brand-cell-sub">上汽</div>
+              </a>
+            
+              <a href="/brands?focus=dongfeng" class="brand-cell">
+                <div class="brand-name">Dongfeng</div>
+                <div class="brand-cell-sub">东风</div>
+              </a>
+            
+          </div>
+        </div>
+        <div class="home-brands-col">
+          <div class="home-brands-col-head">
+            <span class="home-brands-col-label">New-Energy Startups</span>
+            <span class="home-brands-col-count">5</span>
+          </div>
+          <div class="home-brands-col-list">
+            
+              <a href="/brands?focus=nio" class="brand-cell">
+                <div class="brand-name">NIO</div>
+                <div class="brand-cell-sub">蔚来</div>
+              </a>
+            
+              <a href="/brands?focus=xpeng" class="brand-cell">
+                <div class="brand-name">Xpeng</div>
+                <div class="brand-cell-sub">小鹏</div>
+              </a>
+            
+              <a href="/brands?focus=li" class="brand-cell">
+                <div class="brand-name">Li Auto</div>
+                <div class="brand-cell-sub">理想</div>
+              </a>
+            
+              <a href="/brands?focus=leapmotor" class="brand-cell">
+                <div class="brand-name">Leapmotor</div>
+                <div class="brand-cell-sub">零跑</div>
+              </a>
+            
+              <a href="/brands?focus=xiaomi" class="brand-cell">
+                <div class="brand-name">Xiaomi</div>
+                <div class="brand-cell-sub">小米</div>
+              </a>
+            
+          </div>
+        </div>
+        <div class="home-brands-col home-brands-col-subs">
+          <div class="home-brands-col-head">
+            <span class="home-brands-col-label">Sub-Brands</span>
+            <span class="home-brands-col-count">20</span>
+          </div>
+          <div class="home-brands-col-list home-brands-col-list-compact">
+            
+              <a href="/brands?focus=zeekr" class="brand-pill">Zeekr</a>
+            
+              <a href="/brands?focus=haval" class="brand-pill">Haval</a>
+            
+              <a href="/brands?focus=lynkco" class="brand-pill">Lynk & Co</a>
+            
+              <a href="/brands?focus=polestar" class="brand-pill">Polestar</a>
+            
+              <a href="/brands?focus=volvo" class="brand-pill">Volvo</a>
+            
+              <a href="/brands?focus=lotus" class="brand-pill">Lotus</a>
+            
+              <a href="/brands?focus=tank" class="brand-pill">Tank</a>
+            
+              <a href="/brands?focus=wey" class="brand-pill">Wey</a>
+            
+              <a href="/brands?focus=ora" class="brand-pill">Ora</a>
+            
+              <a href="/brands?focus=denza" class="brand-pill">Denza</a>
+            
+              <a href="/brands?focus=yangwang" class="brand-pill">Yangwang</a>
+            
+              <a href="/brands?focus=fangchengbao" class="brand-pill">Fang Cheng Bao</a>
+            
+              <a href="/brands?focus=mg" class="brand-pill">MG</a>
+            
+              <a href="/brands?focus=maxus" class="brand-pill">Maxus</a>
+            
+              <a href="/brands?focus=im" class="brand-pill">IM Motors</a>
+            
+              <a href="/brands?focus=voyah" class="brand-pill">Voyah</a>
+            
+              <a href="/brands?focus=mhero" class="brand-pill">M-Hero</a>
+            
+              <a href="/brands?focus=omoda" class="brand-pill">Omoda</a>
+            
+              <a href="/brands?focus=jaecoo" class="brand-pill">Jaecoo</a>
+            
+              <a href="/brands?focus=exeed" class="brand-pill">Exeed</a>
+            
+          </div>
+        </div>
+      </div>
+      <div class="home-brands-viewall">
+        <a href="/brands" class="home-brands-viewall-link">Open the Brand Index →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODELS -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-eyebrow">Featured Models</div>
+          <h2 class="section-title">Six Cars Worth Crossing Borders For</h2>
+        </div>
+        <a href="/models" class="section-link" style="font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);">View all →</a>
+      </div>
+      <div class="models-grid">
+        
+    <article class="model-card">
+      <div class="model-thumb has-photo"><img src="images/byd-seal.jpg" alt="BYD Seal" loading="lazy" /><span class="img-credit">Photo: BYD</span></div>
+      <div class="model-body">
+        <div class="model-brand">BYD</div>
+        <h3 class="model-name">Seal</h3>
+        <p class="model-tagline">The Tesla Model 3 challenger that's winning Europe</p>
+        <div class="model-specs">
+          <div><span class="spec-label">Range</span><span class="spec-value">570 km</span></div>
+          <div><span class="spec-label">0–100 km/h</span><span class="spec-value">3.8 s</span></div>
+          <div class="spec-price-row"><span class="spec-label">From</span><span class="spec-value">€44,990</span></div>
+        </div>
+        <a href="/quote?model=BYD%20Seal" class="btn btn-primary" style="display:inline-block;margin-top:14px;font-size:13px;padding:9px 18px;">Request export quote</a>
+      </div>
+    </article>
+  
+    <article class="model-card">
+      <div class="model-thumb has-photo"><img src="images/xiaomi-su7-ultra.jpg" alt="Xiaomi SU7 Ultra" loading="lazy" /><span class="img-credit">Photo: Top Gear</span></div>
+      <div class="model-body">
+        <div class="model-brand">Xiaomi</div>
+        <h3 class="model-name">SU7 Ultra</h3>
+        <p class="model-tagline">Nürburgring-honed sedan with 1,548 hp. The supercar killer.</p>
+        <div class="model-specs">
+          <div><span class="spec-label">Range</span><span class="spec-value">630 km</span></div>
+          <div><span class="spec-label">0–100 km/h</span><span class="spec-value">1.98 s</span></div>
+          <div class="spec-price-row"><span class="spec-label">From</span><span class="spec-value">¥529,900</span><span class="spec-price-dual">≈ $73K / €68K</span></div>
+        </div>
+        <a href="/quote?model=Xiaomi%20SU7%20Ultra" class="btn btn-primary" style="display:inline-block;margin-top:14px;font-size:13px;padding:9px 18px;">Request export quote</a>
+      </div>
+    </article>
+  
+    <article class="model-card">
+      <div class="model-thumb has-photo"><img src="images/nio-et9.jpg" alt="NIO ET9" loading="lazy" /><span class="img-credit">Photo: Car and Driver</span></div>
+      <div class="model-body">
+        <div class="model-brand">NIO</div>
+        <h3 class="model-name">ET9</h3>
+        <p class="model-tagline">Flagship saloon with 925V architecture and steer-by-wire.</p>
+        <div class="model-specs">
+          <div><span class="spec-label">Range</span><span class="spec-value">650 km</span></div>
+          <div><span class="spec-label">0–100 km/h</span><span class="spec-value">4.3 s</span></div>
+          <div class="spec-price-row"><span class="spec-label">From</span><span class="spec-value">¥788,000</span><span class="spec-price-dual">≈ $109K / €101K</span></div>
+        </div>
+        <a href="/quote?model=NIO%20ET9" class="btn btn-primary" style="display:inline-block;margin-top:14px;font-size:13px;padding:9px 18px;">Request export quote</a>
+      </div>
+    </article>
+  
+    <article class="model-card">
+      <div class="model-thumb has-photo"><img src="images/xpeng-g6.jpg" alt="Xpeng G6" loading="lazy" /><span class="img-credit">Photo: Top Gear</span></div>
+      <div class="model-body">
+        <div class="model-brand">Xpeng</div>
+        <h3 class="model-name">G6</h3>
+        <p class="model-tagline">Coupe-SUV with industry-leading 800V architecture and XNGP city autonomy.</p>
+        <div class="model-specs">
+          <div><span class="spec-label">Range</span><span class="spec-value">755 km</span></div>
+          <div><span class="spec-label">0–100 km/h</span><span class="spec-value">3.9 s</span></div>
+          <div class="spec-price-row"><span class="spec-label">From</span><span class="spec-value">¥199,800</span><span class="spec-price-dual">≈ $28K / €26K</span></div>
+        </div>
+        <a href="/quote?model=Xpeng%20G6" class="btn btn-primary" style="display:inline-block;margin-top:14px;font-size:13px;padding:9px 18px;">Request export quote</a>
+      </div>
+    </article>
+  
+      </div>
+    </div>
+  </section>
+
+  <!-- PULL QUOTE -->
+  <section class="pullquote">
+    <div class="container">
+      <p class="pullquote-text">In 2026, the world's most innovative cars no longer come from Stuttgart or Detroit. They come from Shenzhen, Hefei, and Hangzhou.</p>
+      <div class="pullquote-attr">— Editor's Letter</div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-eyebrow">Latest</div>
+          <h2 class="section-title">News & Industry Pulse</h2>
+        </div>
+        <a href="/news" style="font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);">More news →</a>
+      </div>
+      <div class="news-grid">
+        <article class="news-main-article">
+          <div class="news-main-thumb has-photo"><img src="images/byd-seal.jpg" alt="Chinese EVs Cross 4 Million Annual Exports in 2025" loading="lazy" /><span class="img-credit">Photo: BYD</span></div>
+          <div class="news-main-body">
+            <div class="news-meta">Industry · May 22, 2026</div>
+            <h3 class="feature-title" style="font-size:28px;margin-bottom:14px;">Chinese EVs Cross 4 Million Annual Exports in 2025</h3>
+            <p class="feature-desc">China surpassed Japan as the world's largest auto exporter for the third consecutive year, with NEV exports growing 38%.</p>
+          </div>
+        </article>
+        <div class="news-side">
+          
+            <article class="news-item">
+              <div class="news-thumb has-photo"><img src="images/byd-brand.jpg" alt="BYD Opens First European Plant in Hungary" loading="lazy" /><span class="img-credit">Photo: BYD</span></div>
+              <div>
+                <div class="news-meta">Export</div>
+                <h4 class="news-title">BYD Opens First European Plant in Hungary</h4>
+                <div class="news-date">May 18, 2026</div>
+              </div>
+            </article>
+          
+            <article class="news-item">
+              <div class="news-thumb has-photo"><img src="images/xpeng-brand.jpg" alt="Xpeng MONA M03 Crosses 200K Deliveries in 12 Months" loading="lazy" /><span class="img-credit">Photo: Electrek</span></div>
+              <div>
+                <div class="news-meta">Launch</div>
+                <h4 class="news-title">Xpeng MONA M03 Crosses 200K Deliveries in 12 Months</h4>
+                <div class="news-date">May 10, 2026</div>
+              </div>
+            </article>
+          
+            <article class="news-item">
+              <div class="news-thumb has-photo"><img src="images/yangwang-u8.jpg" alt="Solid-State Batteries: CATL and BYD Both Target 2027" loading="lazy" /><span class="img-credit">Photo: BYD Yangwang</span></div>
+              <div>
+                <div class="news-meta">Tech</div>
+                <h4 class="news-title">Solid-State Batteries: CATL and BYD Both Target 2027</h4>
+                <div class="news-date">May 04, 2026</div>
+              </div>
+            </article>
+          
+            <article class="news-item">
+              <div class="news-thumb has-photo"><img src="images/nio-brand.jpg" alt="NIO Power Swap Network Hits 3,000 Stations Globally" loading="lazy" /><span class="img-credit">Photo: NIO</span></div>
+              <div>
+                <div class="news-meta">Infrastructure</div>
+                <h4 class="news-title">NIO Power Swap Network Hits 3,000 Stations Globally</h4>
+                <div class="news-date">April 28, 2026</div>
+              </div>
+            </article>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH -->
+  <section class="tech-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-eyebrow">Under The Hood</div>
+          <h2 class="section-title">Four Technologies<br/>That Tipped The Balance</h2>
+        </div>
+        <p class="section-deck">Why Chinese EVs are no longer playing catch-up — they're setting the pace.</p>
+      </div>
+      <div class="tech-grid">
+        
+          <article class="tech-card">
+            <div class="tech-num">01</div>
+            <h3>800V High-Voltage Architecture</h3>
+            <p>China leapfrogged the industry. By 2026, more than 40 Chinese EV models ship with 800V systems enabling 10-minute fast charging. Xpeng, Zeekr, BYD, Li Auto all standardised.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">Silicon Carbide</span><span class="tech-tag">5C Charging</span><span class="tech-tag">10-Min Refill</span>
+            </div>
+          </article>
+        
+          <article class="tech-card">
+            <div class="tech-num">02</div>
+            <h3>City-Level Autonomous Driving</h3>
+            <p>Xpeng XNGP, Huawei ADS 3.0, NIO NAD — point-to-point urban autonomy without HD maps. The technology that surprised Tesla.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">No HD Map</span><span class="tech-tag">BEV+Transformer</span><span class="tech-tag">End-to-End</span>
+            </div>
+          </article>
+        
+          <article class="tech-card">
+            <div class="tech-num">03</div>
+            <h3>Smart Cockpit Revolution</h3>
+            <p>Huawei HarmonyOS Cockpit, Xiaomi HyperOS, Li Auto OS — multi-screen, voice-first, app-rich interiors that make legacy infotainment feel a decade behind.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">HarmonyOS</span><span class="tech-tag">AI Assistant</span><span class="tech-tag">Multi-Screen</span>
+            </div>
+          </article>
+        
+          <article class="tech-card">
+            <div class="tech-num">04</div>
+            <h3>Blade & Cell-to-Body Batteries</h3>
+            <p>BYD's LFP Blade battery and CATL's cell-to-body designs deliver safety and density at lower cost. The reason Chinese EVs hit price parity with ICE first.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">LFP</span><span class="tech-tag">CTB</span><span class="tech-tag">Thermal Safety</span>
+            </div>
+          </article>
+        
+      </div>
+    </div>
+  </section>
+  </main>
+
 <section class="newsletter" aria-label="Newsletter subscription">
   <div class="container newsletter-inner">
     <div class="newsletter-text">
@@ -127,7 +534,7 @@
       <p class="newsletter-deck" data-i18n="newsletter.deck">Every weekday morning. New model launches, overseas expansion, and the sales numbers that matter — in your inbox before the day starts. No spam. Unsubscribe anytime.</p>
     </div>
     <div class="newsletter-form-wrap">
-      <form class="newsletter-form" id="newsletterForm" onsubmit="return false;">
+      <form class="newsletter-form" id="newsletterForm">
         <input type="email" class="newsletter-input" id="newsletterEmail" required placeholder="your@email.com" data-i18n-attr="placeholder:newsletter.placeholder" aria-label="Email address" />
         <button type="submit" class="newsletter-btn" data-i18n="newsletter.cta">Subscribe</button>
       </form>
@@ -136,7 +543,6 @@
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
@@ -145,15 +551,15 @@
     </div>
     <div class="footer-col">
       <h4 data-i18n="footer.explore">Explore</h4>
-      <a href="#/brands" data-i18n="nav.brands">Brands</a>
-      <a href="#/models" data-i18n="nav.models">Models</a>
-      <a href="#/news" data-i18n="nav.news">News</a>
-      <a href="#/tech" data-i18n="nav.tech">Tech</a>
+      <a href="/brands" data-i18n="nav.brands">Brands</a>
+      <a href="/models" data-i18n="nav.models">Models</a>
+      <a href="/news" data-i18n="nav.news">News</a>
+      <a href="/tech" data-i18n="nav.tech">Tech</a>
     </div>
     <div class="footer-col">
       <h4 data-i18n="footer.about">About</h4>
-      <a href="#/about" data-i18n="nav.about">Our story</a>
-      <a href="#/about" data-i18n="footer.contact">Contact</a>
+      <a href="/about" data-i18n="nav.about">Our story</a>
+      <a href="mailto:hello@topchinacar.com" data-i18n="footer.contact">Contact</a>
     </div>
     <div class="footer-col footer-meta">
       <h4 data-i18n="footer.follow">Follow</h4>
@@ -163,336 +569,10 @@
   </div>
 </footer>
 
-<script src="js/data.js"></script>
-<script src="js/i18n.js"></script>
-<script src="js/app.js"></script>
-<script data-pplx-inline-edit>
-(function () {
-  if (window === window.top) return;
-
-  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
-  const MAX_FONT_BYTES = 500 * 1024;
-  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
-  let scrollForwarding = false;
-  let scrollRaf = 0;
-  let trustedTopOrigin = null;
-
-  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
-  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
-  // across multiple labels.
-  function matchesAllowedOrigin(origin) {
-    if (!origin) return false;
-    for (const entry of allowedParentOrigins) {
-      if (!entry.includes("*")) {
-        if (entry === origin) return true;
-        continue;
-      }
-      const pattern = new RegExp(
-        "^" +
-          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
-          "$",
-      );
-      if (pattern.test(origin)) return true;
-    }
-    return false;
-  }
-
-  // Trust decision: when the sender is same-origin-visible (event.origin is a
-  // real origin like https://www.perplexity.ai) we trust event.origin directly.
-  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
-  // broker's stamped `parentOrigin` to identify the top window. The fallback
-  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
-  // on the response path (see postToTrustedTop) to ensure replies can't be
-  // delivered to anyone but the actual top window of that claimed origin.
-  function getTrustedParentOrigin(event) {
-    const forwardedParentOrigin =
-      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
-    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
-    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
-  }
-
-  // All responses go to window.top with targetOrigin = the allowlisted origin.
-  // An attacker that iframes us inside their own null-origin broker can claim
-  // any parentOrigin they like, but the browser will drop the reply whenever
-  // the real top's origin doesn't match — so the screenshot never leaves.
-  function postToTrustedTop(message) {
-    if (!trustedTopOrigin) return;
-    try {
-      window.top.postMessage(message, trustedTopOrigin);
-    } catch (_error) {}
-  }
-
-  function inlineAll(original, clone) {
-    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
-
-    try {
-      const computedStyle = getComputedStyle(original);
-      // cssText on a computed style is the serialized declaration in modern
-      // Chromium/Safari — a single read beats enumerating ~400 longhand
-      // properties. Firefox returns "" here, so we fall back on empty.
-      const serialized = computedStyle.cssText;
-      if (serialized) {
-        clone.style.cssText = serialized;
-      } else {
-        const parts = new Array(computedStyle.length);
-        for (let index = 0; index < computedStyle.length; index += 1) {
-          const property = computedStyle[index];
-          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
-        }
-        clone.style.cssText = parts.join("");
-      }
-    } catch (_error) {}
-
-    const originalChildren = original.children;
-    const clonedChildren = clone.children;
-    for (
-      let index = 0;
-      index < originalChildren.length && index < clonedChildren.length;
-      index += 1
-    ) {
-      inlineAll(originalChildren[index], clonedChildren[index]);
-    }
-  }
-
-  function extractFontUrl(srcValue) {
-    const matches = [
-      ...srcValue.matchAll(
-        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
-      ),
-    ];
-    if (matches.length === 0) return null;
-    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
-    if (woff2) return woff2[1];
-    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
-    if (woff) return woff[1];
-    return matches[0][1];
-  }
-
-  // Cache resolved font URL -> data URI across captures. Fonts on a page
-  // essentially never change, and a batch run emits multiple captures back to
-  // back — without this we'd refetch + re-base64 every time.
-  const fontDataUriCache = new Map();
-  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
-
-  async function fetchAsDataUri(url) {
-    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
-    let dataUri = null;
-    try {
-      const response = await fetch(url, { mode: "cors", credentials: "omit" });
-      if (response.ok) {
-        const blob = await response.blob();
-        if (blob.size <= MAX_FONT_BYTES) {
-          dataUri = await new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onloadend = () =>
-              resolve(typeof reader.result === "string" ? reader.result : null);
-            reader.onerror = () => resolve(null);
-            reader.readAsDataURL(blob);
-          });
-        }
-      }
-    } catch (_error) {
-      dataUri = null;
-    }
-    fontDataUriCache.set(url, dataUri);
-    return dataUri;
-  }
-
-  function collectFontFaceRuleTexts() {
-    const rules = [];
-    for (const sheet of document.styleSheets) {
-      let cssRules;
-      try {
-        cssRules = sheet.cssRules;
-      } catch (_error) {
-        continue;
-      }
-      if (!cssRules) continue;
-      for (const rule of cssRules) {
-        const cssText = rule.cssText || "";
-        if (cssText.startsWith("@font-face")) rules.push(cssText);
-      }
-    }
-    return rules;
-  }
-
-  async function buildInlinedFontCss() {
-    const ruleTexts = collectFontFaceRuleTexts();
-    if (ruleTexts.length === 0) return null;
-
-    const resolved = ruleTexts.map((cssText) => {
-      if (!SRC_DECLARATION_RE.test(cssText)) return null;
-      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
-      if (!srcMatch) return null;
-      const url = extractFontUrl(srcMatch[1]);
-      if (!url) return null;
-      try {
-        return { cssText, url: new URL(url, document.baseURI).href };
-      } catch (_error) {
-        return null;
-      }
-    });
-
-    const dataUris = await Promise.all(
-      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
-    );
-
-    const inlined = [];
-    let totalBytes = 0;
-    for (let index = 0; index < resolved.length; index += 1) {
-      const entry = resolved[index];
-      const dataUri = dataUris[index];
-      if (!entry || !dataUri) continue;
-      const approxBytes = dataUri.length * 0.75;
-      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
-      totalBytes += approxBytes;
-      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
-    }
-    return inlined.length > 0 ? inlined.join("\n") : null;
-  }
-
-  function stripExternal(clone) {
-    const images = clone.querySelectorAll("img");
-    for (let index = 0; index < images.length; index += 1) {
-      const src = images[index].getAttribute("src");
-      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
-    }
-
-    const elements = clone.querySelectorAll("*");
-    for (let index = 0; index < elements.length; index += 1) {
-      const style = elements[index].style.cssText;
-      if (style && style.includes("url(")) {
-        elements[index].style.cssText = style.replace(
-          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
-          "none",
-        );
-      }
-    }
-  }
-
-  function emitScroll() {
-    scrollRaf = 0;
-    if (!scrollForwarding) return;
-    postToTrustedTop({
-      type: "INLINE_EDIT_SCROLL",
-      scrollX: window.scrollX,
-      scrollY: window.scrollY,
-    });
-  }
-
-  window.addEventListener(
-    "scroll",
-    function () {
-      if (!scrollForwarding || scrollRaf) return;
-      scrollRaf = requestAnimationFrame(emitScroll);
-    },
-    { passive: true, capture: true },
-  );
-
-  async function handleCaptureRequest(event) {
-    const requestId = event.data.requestId;
-    const scrollX = window.scrollX;
-    const scrollY = window.scrollY;
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
-    function postResult(dataUrl) {
-      postToTrustedTop({
-        type: "INLINE_EDIT_SCREENSHOT_RESULT",
-        requestId,
-        dataUrl,
-        scrollX,
-        scrollY,
-      });
-    }
-
-    try {
-      // Wait for any pending web fonts to resolve so both inline metrics and
-      // the @font-face inlining below see the same loaded faces.
-      if (document.fonts && document.fonts.ready) {
-        try {
-          await document.fonts.ready;
-        } catch (_error) {}
-      }
-
-      const clone = document.documentElement.cloneNode(true);
-      inlineAll(document.documentElement, clone);
-
-      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
-      for (let index = 0; index < removedNodes.length; index += 1) {
-        removedNodes[index].remove();
-      }
-
-      stripExternal(clone);
-
-      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
-      // can resolve them — external font URLs aren't fetched during
-      // foreignObject rendering, which would otherwise force a fallback face
-      // and change text metrics.
-      const inlinedFontCss = await buildInlinedFontCss();
-      if (inlinedFontCss) {
-        const styleEl = document.createElement("style");
-        styleEl.textContent = inlinedFontCss;
-        const head = clone.querySelector("head");
-        if (head) head.appendChild(styleEl);
-        else clone.insertBefore(styleEl, clone.firstChild);
-      }
-
-      const html = new XMLSerializer().serializeToString(clone);
-      const svg =
-        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
-        '<foreignObject width="100%" height="100%">' +
-        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
-        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
-        html +
-        "</div></div></foreignObject></svg>";
-      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-      const image = new Image();
-      image.onload = function () {
-        const canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-        canvas.getContext("2d").drawImage(image, 0, 0);
-        postResult(canvas.toDataURL("image/png"));
-      };
-      image.onerror = function () {
-        postResult(null);
-      };
-      image.src = svgUrl;
-    } catch (_error) {
-      postResult(null);
-    }
-  }
-
-  window.addEventListener("message", function (event) {
-    if (!event.data) return;
-    // Only accept messages from the direct parent frame. Blocks sibling /
-    // unrelated-window postMessage senders that could otherwise reach us.
-    if (event.source !== window.parent) return;
-
-    const trustedParentOrigin = getTrustedParentOrigin(event);
-    if (!trustedParentOrigin) return;
-    trustedTopOrigin = trustedParentOrigin;
-
-    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
-      scrollForwarding = true;
-      emitScroll();
-      return;
-    }
-
-    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
-      scrollForwarding = false;
-      if (scrollRaf) cancelAnimationFrame(scrollRaf);
-      scrollRaf = 0;
-      return;
-    }
-
-    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
-
-    handleCaptureRequest(event);
-  });
-})();
-
-
-</script></body>
+<script src="/js/data.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/articles-data.js"></script>
+<script src="/js/pages.js"></script>
+<script src="/js/app.js"></script>
+</body>
 </html>
