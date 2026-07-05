@@ -51,6 +51,13 @@ for (const f of ['js/data.js', 'js/i18n.js', 'js/articles-data.js', 'js/pages.js
 }
 const PAGE_ROUTES = vm.runInContext('PAGE_ROUTES', sandbox);
 
+// Feature story bodies (build-time only — never shipped to the client)
+let SITE_STORIES = [];
+if (fs.existsSync(path.join(ROOT, 'js', 'stories-data.js'))) {
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'js', 'stories-data.js'), 'utf-8'), sandbox, { filename: 'js/stories-data.js' });
+  SITE_STORIES = vm.runInContext('typeof SITE_STORIES !== "undefined" ? SITE_STORIES : []', sandbox);
+}
+
 // ---- Per-page metadata ----
 const PAGES = {
   '/': {
@@ -399,6 +406,46 @@ function brandJsonLd(b) {
 </script>`;
 }
 
+// ---- Brand auto-linker: first mention of each brand in article text → /brands/<id> ----
+// Works on HTML strings; skips text inside <a>…</a> and headings.
+function linkifyBrands(html, lang) {
+  if (!html) return html;
+  const done = new Set();
+  const segments = html.split(/(<[^>]+>)/);
+  let skipDepth = 0;
+  const brands = [...SITE_DATA.brands].sort((x, y) => y.name.length - x.name.length);
+  for (let i = 0; i < segments.length; i++) {
+    const seg = segments[i];
+    if (seg.startsWith('<')) {
+      if (/^<(a|h[1-6])[\s>]/i.test(seg)) skipDepth++;
+      else if (/^<\/(a|h[1-6])>/i.test(seg)) skipDepth = Math.max(0, skipDepth - 1);
+      continue;
+    }
+    if (skipDepth > 0 || !seg.trim()) continue;
+    let text = seg;
+    for (const b of brands) {
+      if (done.has(b.id)) continue;
+      const needle = lang === 'zh' ? b.cn : b.name;
+      if (!needle) continue;
+      let idx = -1;
+      if (lang === 'zh') {
+        idx = text.indexOf(needle);
+      } else {
+        const re = new RegExp('\\b' + needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b');
+        const m2 = text.match(re);
+        idx = m2 ? m2.index : -1;
+      }
+      if (idx === -1) continue;
+      text = text.slice(0, idx)
+        + `<a href="/brands/${b.id}" style="color:inherit;text-decoration:underline;text-decoration-color:#d4302a;text-underline-offset:3px;">${needle}</a>`
+        + text.slice(idx + needle.length);
+      done.add(b.id);
+    }
+    segments[i] = text;
+  }
+  return segments.join('');
+}
+
 const modelCardHTML = vm.runInContext('modelCardHTML', sandbox);
 for (const b of SITE_DATA.brands) {
   const catEn = (CATEGORY_LABEL[b.category] || CATEGORY_LABEL.group).en;
@@ -410,12 +457,178 @@ for (const b of SITE_DATA.brands) {
 }
 console.log(`✓ ${SITE_DATA.brands.length} brand pages → brands/`);
 
+// ---- Model detail pages (/models/<id>) ----
+const MODELS_OUT = path.join(ROOT, 'models');
+if (!fs.existsSync(MODELS_OUT)) fs.mkdirSync(MODELS_OUT);
+
+function modelMain(m, brand) {
+  const cat = brand ? (CATEGORY_LABEL[brand.category] || CATEGORY_LABEL.group) : CATEGORY_LABEL.group;
+  const ctx = brand ? (CATEGORY_CONTEXT[brand.category] || CATEGORY_CONTEXT.group) : CATEGORY_CONTEXT.group;
+  const related = articles.filter(a =>
+    (a.title_en + ' ' + (a.excerpt_en || '')).toLowerCase().includes(m.brand.toLowerCase())
+    || (a.title_en + ' ' + (a.excerpt_en || '')).toLowerCase().includes(m.name.toLowerCase())).slice(0, 5);
+  const siblings = SITE_DATA.models.filter(x => x.brand === m.brand && x.id !== m.id);
+  const fact = (labelEn, labelZh, val) => `
+    <div class="brand-fact"><span class="spec-label">${langSpan(labelEn, labelZh)}</span><span class="spec-value">${val}</span></div>`;
+  const visual = m.image
+    ? `<div style="margin:0 0 32px;border-radius:12px;overflow:hidden;position:relative;"><img src="/${m.image}" alt="${m.brand} ${m.name}" style="width:100%;display:block;" />${m.imageCredit ? `<span class="img-credit">Photo: ${m.imageCredit}</span>` : ''}</div>`
+    : '';
+  return `
+  <section class="page-header">
+    <div class="container">
+      <div class="section-eyebrow">${brand ? `<a href="/brands/${brand.id}" style="color:inherit;text-decoration:none;">${m.brand}</a>` : m.brand} · ${langSpan(cat.en, cat.zh)}</div>
+      <h1 class="page-title">${m.brand} ${m.name}</h1>
+      <p class="page-deck">${langSpan(m.tag_en, m.tag_zh)}</p>
+    </div>
+  </section>
+  <section style="padding-top:0;">
+    <div class="container" style="max-width:920px;">
+      ${visual}
+      <div class="brand-facts" style="display:flex;gap:36px;flex-wrap:wrap;margin-bottom:36px;">
+        ${fact('Range', '续航', m.range)}
+        ${fact('0–100 km/h', '零百加速', m.accel)}
+        ${fact('From', '起价', m.price)}
+      </div>
+      <div style="font-size:16px;line-height:1.8;color:#374151;">
+        <p>${langSpan(ctx.en, ctx.zh)}</p>
+        <p style="font-size:13px;color:#9ca3af;">${langSpan(
+          'Prices shown are indicative list prices in the named market and change frequently — confirm current export pricing via a quote request.',
+          '页面价格为对应市场的指导价，波动频繁——实际出口价格以询价回复为准。')}</p>
+      </div>
+      <div style="margin:32px 0;padding:24px;background:#f9fafb;border-left:3px solid #d4302a;">
+        <h2 style="margin:0 0 8px;font-size:18px;">${langSpan(`Import the ${m.brand} ${m.name}`, `进口 ${m.brand} ${m.name}`)}</h2>
+        <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#4b5563;">${langSpan(
+          `Dealer or fleet buyer? Tell us your market and volume — we respond within 48 hours with availability and FOB/CIF quotes for the ${m.name} through licensed Chinese exporters.`,
+          `经销商或车队买家？告诉我们目标市场与数量——48 小时内回复 ${m.name} 的货源与 FOB/CIF 报价，由持牌中国出口商执行。`)}</p>
+        <a href="/quote?model=${encodeURIComponent(m.brand + ' ' + m.name)}" class="btn btn-primary">${langSpan('Request a quote', '提交询价')}</a>
+      </div>
+      ${siblings.length ? `
+      <h2 style="font-size:22px;margin:40px 0 20px;">${langSpan('More ' + m.brand + ' models', m.brand + ' 其他车型')}</h2>
+      <ul style="list-style:none;padding:0;margin:0;">
+        ${siblings.map(s => `<li style="margin-bottom:10px;"><a href="/models/${s.id}" style="color:inherit;text-decoration:none;"><strong>${s.brand} ${s.name}</strong></a> <span style="font-size:13px;color:#9ca3af;">· ${s.range} · ${s.price}</span></li>`).join('')}
+      </ul>` : ''}
+      ${related.length ? `
+      <h2 style="font-size:22px;margin:40px 0 20px;">${langSpan('Related news', '相关动态')}</h2>
+      <ul style="list-style:none;padding:0;margin:0;">
+        ${related.map(a => `<li style="margin-bottom:14px;"><a href="/news/${a.slug}" style="color:inherit;text-decoration:none;"><strong>${a.title_en}</strong></a><br/><span style="font-size:13px;color:#9ca3af;">${a.date}</span></li>`).join('')}
+      </ul>` : ''}
+      <p style="margin-top:40px;">
+        ${brand ? `<a href="/brands/${brand.id}" style="color:var(--accent, #d4302a);font-family:var(--mono);font-size:13px;">← ${m.brand} brand profile</a> · ` : ''}
+        <a href="/models" style="color:var(--accent, #d4302a);font-family:var(--mono);font-size:13px;">← All featured models</a>
+      </p>
+    </div>
+  </section>`;
+}
+
+function modelJsonLd(m) {
+  return `<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "${m.brand} ${m.name}",
+      "brand": {"@type": "Brand", "name": "${m.brand}"},
+      "url": "${SITE}/models/${m.id}",
+      "description": ${JSON.stringify(m.tag_en)},
+      "category": "Vehicle"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "${SITE}/"},
+        {"@type": "ListItem", "position": 2, "name": "Models", "item": "${SITE}/models"},
+        {"@type": "ListItem", "position": 3, "name": "${m.brand} ${m.name}", "item": "${SITE}/models/${m.id}"}
+      ]
+    }
+  ]
+}
+</script>`;
+}
+
+let modelCount = 0;
+for (const m of SITE_DATA.models) {
+  if (!m.id) continue;
+  const brand = SITE_DATA.brands.find(b => b.name === m.brand);
+  const html = pageHTML(`/models/${m.id}`, {
+    title: `${m.brand} ${m.name} Export — Specs, Price & Wholesale Quotes | TopChinaCar`,
+    desc: `${m.tag_en} Range ${m.range}, 0-100 km/h ${m.accel}, from ${m.price}. Dealer and fleet export quotes for the ${m.brand} ${m.name} through licensed Chinese exporters.`.slice(0, 300)
+  }, modelMain(m, brand)).replace('</head>', modelJsonLd(m) + '\n</head>');
+  fs.writeFileSync(path.join(MODELS_OUT, `${m.id}.html`), html);
+  modelCount++;
+}
+console.log(`✓ ${modelCount} model pages → models/`);
+
+// ---- Feature story pages (/stories/<slug>) ----
+const STORIES_OUT = path.join(ROOT, 'stories');
+if (!fs.existsSync(STORIES_OUT)) fs.mkdirSync(STORIES_OUT);
+
+function storyMain(f, s) {
+  const langBlock = (lang, html) => `<div data-lang="${lang}"${lang === 'zh' ? ' hidden' : ''}>${linkifyBrands(html, lang)}</div>`;
+  return `
+  <section class="page-header">
+    <div class="container">
+      <div class="section-eyebrow">${langSpan(f.tag_en, f.tag_zh)} · ${langSpan(f.meta_en, f.meta_zh)}</div>
+      <h1 class="page-title">${langSpan(f.title_en, f.title_zh)}</h1>
+      <p class="page-deck">${langSpan(f.desc_en, f.desc_zh)}</p>
+    </div>
+  </section>
+  <section style="padding-top:0;">
+    <div class="container" style="max-width:820px;">
+      ${f.image ? `<div style="margin:0 0 36px;border-radius:12px;overflow:hidden;position:relative;"><img src="/${f.image}" alt="${f.title_en}" style="width:100%;display:block;" />${f.imageCredit ? `<span class="img-credit">Photo: ${f.imageCredit}</span>` : ''}</div>` : ''}
+      <article class="article-body" style="font-size:16px;line-height:1.8;">
+        ${langBlock('en', s.html_en)}
+        ${langBlock('zh', s.html_zh || s.html_en)}
+      </article>
+      <div style="margin:44px 0 0;padding:26px 28px;background:#f9fafb;border-left:3px solid #d4302a;">
+        <h2 style="margin:0 0 8px;font-size:19px;">${langSpan('Import these vehicles', '进口这些车辆')}</h2>
+        <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#4b5563;">${langSpan(
+          'Dealer, fleet or importer? We source availability and FOB/CIF quotes for any Chinese brand through licensed exporters — response within 48 hours.',
+          '经销商、车队或进口商？我们通过持牌出口商为任意中国品牌匹配货源与 FOB/CIF 报价——48 小时内回复。')}</p>
+        <a href="/quote" class="btn btn-primary">${langSpan('Request a quote', '提交询价')}</a>
+      </div>
+      <p style="margin-top:32px;"><a href="/news" style="color:var(--accent);font-family:var(--mono);font-size:13px;">← All news & features</a></p>
+    </div>
+  </section>`;
+}
+
+function storyJsonLd(f, s) {
+  return `<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": ${JSON.stringify(f.title_en)},
+  "description": ${JSON.stringify(f.desc_en)},
+  "datePublished": "${s.date}",
+  "inLanguage": ["en", "zh-CN"],
+  "mainEntityOfPage": "${SITE}/stories/${f.slug}",
+  "author": {"@type": "Organization", "name": "TopChinaCar", "url": "${SITE}/"},
+  "publisher": {"@id": "${SITE}/#organization"}
+}
+</script>`;
+}
+
+let storyCount = 0;
+for (const s of SITE_STORIES) {
+  const f = (SITE_DATA.features || []).find(x => x.slug === s.slug);
+  if (!f) { console.error(`✗ story ${s.slug} has no matching features[] entry — skipped`); continue; }
+  const html = pageHTML(`/stories/${f.slug}`, {
+    title: `${f.title_en} | TopChinaCar`,
+    desc: f.desc_en.slice(0, 300),
+    ogType: 'article',
+    published: s.date
+  }, storyMain(f, s)).replace('</head>', storyJsonLd(f, s) + '\n</head>');
+  fs.writeFileSync(path.join(STORIES_OUT, `${f.slug}.html`), html);
+  storyCount++;
+}
+if (storyCount) console.log(`✓ ${storyCount} feature stories → stories/`);
+
 // ---- Daily article pages (/news/<slug>) ----
 const NEWS_OUT = path.join(ROOT, 'news');
 if (!fs.existsSync(NEWS_OUT)) fs.mkdirSync(NEWS_OUT);
 function articleMain(a) {
   const dateNice = new Date(a.date + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
-  const langBlock = (lang, html) => `<div data-lang="${lang}"${lang === 'zh' ? ' hidden' : ''}>${html}</div>`;
+  const langBlock = (lang, html) => `<div data-lang="${lang}"${lang === 'zh' ? ' hidden' : ''}>${linkifyBrands(html, lang)}</div>`;
   return `
   <section class="page-header">
     <div class="container">
@@ -489,11 +702,16 @@ const staticUrls = Object.keys(PAGES).map(r =>
   `  <url><loc>${r === '/' ? SITE + '/' : SITE + r}</loc><lastmod>${today}</lastmod></url>`);
 const brandUrls = SITE_DATA.brands.map(b =>
   `  <url><loc>${SITE}/brands/${b.id}</loc><lastmod>${today}</lastmod></url>`);
+const modelUrls = SITE_DATA.models.filter(m => m.id).map(m =>
+  `  <url><loc>${SITE}/models/${m.id}</loc><lastmod>${today}</lastmod></url>`);
+const storyUrls = SITE_STORIES
+  .filter(s => (SITE_DATA.features || []).some(f => f.slug === s.slug))
+  .map(s => `  <url><loc>${SITE}/stories/${s.slug}</loc><lastmod>${s.date}</lastmod></url>`);
 const articleUrls = articles.map(a =>
   `  <url><loc>${SITE}/news/${a.slug}</loc><lastmod>${a.date}</lastmod></url>`);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticUrls.concat(brandUrls, articleUrls).join('\n')}
+${staticUrls.concat(brandUrls, modelUrls, storyUrls, articleUrls).join('\n')}
 </urlset>
 `;
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemap);

@@ -50,8 +50,8 @@ const I18N = {
     'news.column.deck': 'Shipments, registrations and policy moves shaping the world\'s biggest car-exporting nation — updated every weekday with the Daily Briefing.',
     'news.column.cta': 'Read the latest dispatch',
     'news.column.latest': 'Latest dispatch',
-    'news.column.date': 'May 22, 2026 · Issue #14',
-    'news.column.headline': 'Four million NEVs shipped: how 2025 closed and where 2026 is heading',
+    'news.column.date': 'Daily Briefing',
+    'news.column.headline': 'Read the latest China auto export dispatches',
 
     'home.models.eyebrow': 'Featured Models',
     'home.models.title': 'Six Cars Worth Crossing Borders For',
@@ -183,8 +183,8 @@ const I18N = {
     'news.column.deck': '出口、上牌与政策走势，一起看清这个汽车出口冠军国——每个工作日随每日简报更新。',
     'news.column.cta': '阅读最新一期',
     'news.column.latest': '最新一期',
-    'news.column.date': '2026 年 5 月 22 日 · 第 14 期',
-    'news.column.headline': '四百万辆新能源出海：2025 收官与 2026 开局',
+    'news.column.date': '每日简报',
+    'news.column.headline': '阅读最新的中国汽车出海快讯',
 
     'home.models.eyebrow': '明星车型',
     'home.models.title': '六款值得跨越国界的车',

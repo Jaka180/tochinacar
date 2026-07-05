@@ -122,12 +122,13 @@ function modelCardHTML(m, lang) {
     ? `<img src="/${m.image}" alt="${m.brand} ${m.name}" loading="lazy" />` + (m.imageCredit ? `<span class="img-credit">Photo: ${m.imageCredit}</span>` : '')
     : carSVG(m.shape, m.colorA);
   const dual = priceDualLine(m.price);
+  const detailHref = m.id ? `/models/${m.id}` : null;
   return `
     <article class="model-card">
-      <div class="model-thumb${m.image ? ' has-photo' : ''}">${visual}</div>
+      <div class="model-thumb${m.image ? ' has-photo' : ''}">${detailHref ? `<a href="${detailHref}">${visual}</a>` : visual}</div>
       <div class="model-body">
         <div class="model-brand">${m.brand}</div>
-        <h3 class="model-name">${m.name}</h3>
+        <h3 class="model-name">${detailHref ? `<a href="${detailHref}" style="color:inherit;text-decoration:none;">${m.name}</a>` : m.name}</h3>
         <p class="model-tagline">${m['tag_' + lang]}</p>
         <div class="model-specs">
           <div><span class="spec-label">${t('models.spec.range')}</span><span class="spec-value">${m.range}</span></div>
@@ -135,6 +136,7 @@ function modelCardHTML(m, lang) {
           <div class="spec-price-row"><span class="spec-label">${t('models.spec.price')}</span><span class="spec-value">${m.price}</span>${dual}</div>
         </div>
         <a href="/quote?model=${encodeURIComponent(m.brand + ' ' + m.name)}" class="btn btn-primary" style="display:inline-block;margin-top:14px;font-size:13px;padding:9px 18px;">${t('models.cta.quote')}</a>
+        ${detailHref ? `<a href="${detailHref}" style="display:inline-block;margin-top:14px;margin-left:14px;color:var(--accent, #d4302a);font-family:var(--mono, monospace);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '详情 →' : 'Full profile →'}</a>` : ''}
       </div>
     </article>
   `;
@@ -173,38 +175,7 @@ function brandCardHTML(b, lang) {
 function pageHome() {
   const D = SITE_DATA;
   const lang = getLang();
-  const features = [
-    {
-      tag_en: 'Cover', tag_zh: '封面',
-      title_en: 'How China Built the World\'s Best EV Battery Supply Chain',
-      title_zh: '中国如何打造全球最佳的电动车电池供应链',
-      desc_en: 'CATL and BYD together produce more than half the world\'s EV batteries. The story of how that dominance was engineered, mine to module.',
-      desc_zh: '宁德时代与比亚迪合计生产全球过半电动车电池。从矿山到模组，这是这场主导力如何被工程构建的故事。',
-      meta_en: 'TECHNOLOGY · 12 MIN', meta_zh: '技术 · 12 分钟',
-      shape: 'sedan', accent: '#d4302a', large: true,
-      image: 'images/byd-seal.jpg', imageCredit: 'BYD'
-    },
-    {
-      tag_en: 'Brand', tag_zh: '品牌',
-      title_en: 'NIO\'s Battery Swap Bet',
-      title_zh: '蔚来的换电豪赌',
-      desc_en: 'Three minutes, full charge. The model BMW just signed onto.',
-      desc_zh: '三分钟换满电。宝马刚刚加入的模式。',
-      meta_en: 'PROFILE · 8 MIN', meta_zh: '品牌 · 8 分钟',
-      shape: 'sedan-long', accent: '#1d4ed8',
-      image: 'images/nio-et9.jpg', imageCredit: 'Car and Driver'
-    },
-    {
-      tag_en: 'Design', tag_zh: '设计',
-      title_en: 'Why Xiaomi\'s SU7 Looks Familiar',
-      title_zh: '为什么小米 SU7 看起来眼熟',
-      desc_en: 'Inside the design language borrowing from Porsche — and where it diverges.',
-      desc_zh: '解析其向保时捷致敬的设计语言——以及它独立的转折点。',
-      meta_en: 'DESIGN · 6 MIN', meta_zh: '设计 · 6 分钟',
-      shape: 'sedan', accent: '#f97316',
-      image: 'images/xiaomi-su7-ultra.jpg', imageCredit: 'Top Gear'
-    }
-  ];
+  const features = SITE_DATA.features;
 
   return `
   <!-- HERO -->
@@ -252,12 +223,12 @@ function pageHome() {
       <div class="feature-grid">
         ${features.map((f, i) => `
           <article class="feature-card${f.large ? ' large' : ''}">
-            <div class="feature-thumb${f.image ? ' has-photo' : ''}">${f.image ? `<img src="/${f.image}" alt="${f['title_' + lang]}" loading="lazy" />${f.imageCredit ? `<span class="img-credit">Photo: ${f.imageCredit}</span>` : ''}` : carSVG(f.shape, f.accent)}</div>
+            <div class="feature-thumb${f.image ? ' has-photo' : ''}"><a href="/stories/${f.slug}">${f.image ? `<img src="/${f.image}" alt="${f['title_' + lang]}" loading="lazy" />${f.imageCredit ? `<span class="img-credit">Photo: ${f.imageCredit}</span>` : ''}` : carSVG(f.shape, f.accent)}</a></div>
             <div class="feature-body">
               <div class="feature-tag">${f['tag_' + lang]}</div>
-              <h3 class="feature-title">${f['title_' + lang]}</h3>
+              <h3 class="feature-title"><a href="/stories/${f.slug}" style="color:inherit;text-decoration:none;">${f['title_' + lang]}</a></h3>
               <p class="feature-desc">${f['desc_' + lang]}</p>
-              <div class="feature-meta">${f['meta_' + lang]}</div>
+              <div class="feature-meta">${f['meta_' + lang]} · <a href="/stories/${f.slug}" style="color:var(--accent, #d4302a);text-decoration:none;">${lang === 'zh' ? '阅读 →' : 'READ →'}</a></div>
             </div>
           </article>
         `).join('')}
@@ -368,28 +339,6 @@ function pageHome() {
           <a href="/news/${a.slug}" style="margin-top:auto;color:#dc2626;font-family:var(--mono, monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '阅读全文 →' : 'Read dispatch →'}</a>
         </article>`).join('')}
       </div>` : ''}
-      <div class="news-grid">
-        <article class="news-main-article">
-          ${newsThumbHTML(D.news[0], 'main')}
-          <div class="news-main-body">
-            <div class="news-meta">${D.news[0]['tag_' + lang]} · ${D.news[0].date}</div>
-            <h3 class="feature-title" style="font-size:28px;margin-bottom:14px;">${D.news[0]['title_' + lang]}</h3>
-            <p class="feature-desc">${D.news[0]['excerpt_' + lang]}</p>
-          </div>
-        </article>
-        <div class="news-side">
-          ${D.news.slice(1).map(n => `
-            <article class="news-item">
-              ${newsThumbHTML(n, 'side')}
-              <div>
-                <div class="news-meta">${n['tag_' + lang]}</div>
-                <h4 class="news-title">${n['title_' + lang]}</h4>
-                <div class="news-date">${n.date}</div>
-              </div>
-            </article>
-          `).join('')}
-        </div>
-      </div>
     </div>
   </section>
 
@@ -649,28 +598,24 @@ function pageNews() {
     </section>
     <section style="padding-top:0;">
       <div class="container">
-        <div class="news-grid">
-          <article class="news-main-article">
-            ${newsThumbHTML(SITE_DATA.news[0], 'main')}
-            <div class="news-main-body">
-              <div class="news-meta">${SITE_DATA.news[0]['tag_' + lang]} · ${SITE_DATA.news[0].date}</div>
-              <h2 style="font-family:var(--serif);font-size:34px;font-weight:700;line-height:1.2;margin-bottom:16px;">${SITE_DATA.news[0]['title_' + lang]}</h2>
-              <p class="feature-desc" style="font-size:16px;">${SITE_DATA.news[0]['excerpt_' + lang]}</p>
-            </div>
-          </article>
-          <div class="news-side">
-            ${SITE_DATA.news.slice(1).map(n => `
-              <article class="news-item">
-                ${newsThumbHTML(n, 'side')}
-                <div>
-                  <div class="news-meta">${n['tag_' + lang]}</div>
-                  <h4 class="news-title">${n['title_' + lang]}</h4>
-                  <div class="news-date">${n.date}</div>
-                  <p style="font-size:13px;color:var(--muted);line-height:1.5;margin-top:6px;">${n['excerpt_' + lang]}</p>
-                </div>
-              </article>
-            `).join('')}
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">${lang === 'zh' ? '深度' : 'Features'}</div>
+            <h2 class="section-title">${lang === 'zh' ? '深度与分析' : 'Features & Analysis'}</h2>
           </div>
+        </div>
+        <div class="feature-grid">
+          ${SITE_DATA.features.map(f => `
+            <article class="feature-card${f.large ? ' large' : ''}">
+              <div class="feature-thumb${f.image ? ' has-photo' : ''}"><a href="/stories/${f.slug}">${f.image ? `<img src="/${f.image}" alt="${f['title_' + lang]}" loading="lazy" />${f.imageCredit ? `<span class="img-credit">Photo: ${f.imageCredit}</span>` : ''}` : carSVG(f.shape, f.accent)}</a></div>
+              <div class="feature-body">
+                <div class="feature-tag">${f['tag_' + lang]}</div>
+                <h3 class="feature-title"><a href="/stories/${f.slug}" style="color:inherit;text-decoration:none;">${f['title_' + lang]}</a></h3>
+                <p class="feature-desc">${f['desc_' + lang]}</p>
+                <div class="feature-meta">${f['meta_' + lang]} · <a href="/stories/${f.slug}" style="color:var(--accent, #d4302a);text-decoration:none;">${lang === 'zh' ? '阅读 →' : 'READ →'}</a></div>
+              </div>
+            </article>
+          `).join('')}
         </div>
       </div>
     </section>

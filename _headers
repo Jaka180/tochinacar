@@ -18,6 +18,12 @@
 /models
   Cache-Control: public, max-age=0, must-revalidate
 
+/models/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/stories/*
+  Cache-Control: public, max-age=0, must-revalidate
+
 /news
   Cache-Control: public, max-age=0, must-revalidate
 
