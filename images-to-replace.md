@@ -48,6 +48,23 @@
 - leapmotor-c10.png（Stellantis 官图）、xiaomi-brand.jpg（Xiaomi）、byd-seal.jpg（BYD）、
   lynkco-09.jpg / polestar-4.jpg（官方）
 
+## 缺失的车型图片（目前显示 SVG 占位图）
+
+从对应品牌 newsroom 下载官图后，按下面文件名存入 `images/`，然后告诉 Claude 一声即可接线
+（约 1200×675，jpg，<300KB 为宜）：
+
+- images/byd-seagull.jpg、byd-atto-3.jpg、byd-sealion-07.jpg、byd-han.jpg、byd-shark-6.jpg
+- images/xiaomi-su7.jpg
+- images/nio-et5.jpg、nio-onvo-l60.jpg、nio-firefly.jpg
+- images/xpeng-mona-m03.jpg
+- images/li-l6.jpg
+- images/zeekr-7x.jpg
+- images/geely-galaxy-e5.jpg、geely-starship-7.jpg
+- images/tank-300.jpg（注意现有 tank-500.jpg 是坦克500，不能混用）
+- images/mg-mg4.jpg
+- images/leapmotor-b10.jpg（Stellantis media 有官图）
+- images/volvo-ex30.jpg
+
 ## 替换后勿忘
 
 1. `js/data.js` 中对应条目的 `imageCredit` 改为品牌名（如 'BYD'）

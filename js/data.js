@@ -282,7 +282,7 @@ const SITE_DATA = {
       id: 'byd-seal', brand: 'BYD', name: 'Seal',
       tag_en: 'The Tesla Model 3 challenger that\'s winning Europe',
       tag_zh: '正在赢得欧洲市场的特斯拉 Model 3 挑战者',
-      range: '570 km', accel: '3.8 s', price: '€44,990',
+      range: '570 km', accel: '3.8 s', price: 'US$24,800', priceLocal: '¥179,800 China',
       colorA: '#d4302a', shape: 'sedan',
       image: 'images/byd-seal.jpg', imageCredit: 'BYD'
     },
@@ -290,35 +290,35 @@ const SITE_DATA = {
       id: 'byd-seagull', brand: 'BYD', name: 'Seagull',
       tag_en: 'The world\'s most disruptive small EV — exported as the Dolphin Mini.',
       tag_zh: '全球最具颠覆性的小型电动车——海外以 Dolphin Mini 之名出口。',
-      range: '405 km', accel: '~12 s', price: '¥69,800',
+      range: '405 km', accel: '~12 s', price: 'US$9,600', priceLocal: '¥69,800 China',
       colorA: '#0ea5e9', shape: 'suv'
     },
     {
       id: 'byd-atto-3', brand: 'BYD', name: 'Atto 3',
       tag_en: 'BYD\'s global bestseller — the compact SUV that opened 70+ export markets.',
       tag_zh: '比亚迪全球出口主力——打开 70 多个海外市场的紧凑型 SUV。',
-      range: '510 km', accel: '7.3 s', price: '¥119,800',
+      range: '510 km', accel: '7.3 s', price: 'US$16,500', priceLocal: '¥119,800 China',
       colorA: '#d4302a', shape: 'suv'
     },
     {
       id: 'byd-sealion-07', brand: 'BYD', name: 'Sealion 07',
       tag_en: 'Ocean-series coupe SUV aimed squarely at the Tesla Model Y.',
       tag_zh: '海洋网轿跑 SUV，直接对标特斯拉 Model Y。',
-      range: '610 km', accel: '4.5 s', price: '¥189,800',
+      range: '610 km', accel: '4.5 s', price: 'US$26,200', priceLocal: '¥189,800 China',
       colorA: '#1d4ed8', shape: 'suv'
     },
     {
       id: 'byd-han', brand: 'BYD', name: 'Han',
       tag_en: 'The flagship sedan that proved a Chinese brand could sell above ¥200K.',
       tag_zh: '证明中国品牌能站稳 20 万元以上市场的旗舰轿车。',
-      range: '605 km', accel: '3.9 s', price: '¥209,800',
+      range: '605 km', accel: '3.9 s', price: 'US$29,000', priceLocal: '¥209,800 China',
       colorA: '#111827', shape: 'sedan-long'
     },
     {
       id: 'byd-shark-6', brand: 'BYD', name: 'Shark 6',
       tag_en: 'PHEV pickup built for Australia and Latin America — a Hilux fighter.',
       tag_zh: '为澳洲与拉美打造的插混皮卡，直面 Hilux。',
-      range: '100 km EV / 800+ km', accel: '5.7 s', price: 'A$57,900 (AU)',
+      range: '100 km EV / 800+ km', accel: '5.7 s', price: 'US$38,200', priceLocal: 'A$57,900 AU',
       colorA: '#374151', shape: 'suv'
     },
     // ---- Xiaomi ----
@@ -326,14 +326,14 @@ const SITE_DATA = {
       id: 'xiaomi-su7', brand: 'Xiaomi', name: 'SU7',
       tag_en: 'The phone-maker\'s first car — 700 km of range and a cult following overnight.',
       tag_zh: '手机厂商的第一台车——700 公里续航，一夜之间成为现象级爆款。',
-      range: '700 km', accel: '5.28 s', price: '¥215,900',
+      range: '700 km', accel: '5.28 s', price: 'US$29,800', priceLocal: '¥215,900 China',
       colorA: '#f97316', shape: 'sedan'
     },
     {
       id: 'xiaomi-su7-ultra', brand: 'Xiaomi', name: 'SU7 Ultra',
       tag_en: 'Nürburgring-honed sedan with 1,548 hp. The supercar killer.',
       tag_zh: '在纽北赛道调校、1,548 马力的轿车。超跑杀手。',
-      range: '630 km', accel: '1.98 s', price: '¥529,900',
+      range: '630 km', accel: '1.98 s', price: 'US$73,100', priceLocal: '¥529,900 China',
       colorA: '#f97316', shape: 'sedan',
       image: 'images/xiaomi-su7-ultra.jpg',
       imageCredit: 'Top Gear'
@@ -343,14 +343,14 @@ const SITE_DATA = {
       id: 'nio-et5', brand: 'NIO', name: 'ET5',
       tag_en: 'The volume NIO — swap-capable compact sedan sold across Europe.',
       tag_zh: '蔚来走量担当——支持换电、已进入欧洲多国的中型轿车。',
-      range: '560 km', accel: '4.0 s', price: '¥298,000',
+      range: '560 km', accel: '4.0 s', price: 'US$41,100', priceLocal: '¥298,000 China',
       colorA: '#1d4ed8', shape: 'sedan'
     },
     {
       id: 'nio-et9', brand: 'NIO', name: 'ET9',
       tag_en: 'Flagship saloon with 925V architecture and steer-by-wire.',
       tag_zh: '搭载 925V 高压平台与线控转向的旗舰轿车。',
-      range: '650 km', accel: '4.3 s', price: '¥788,000',
+      range: '650 km', accel: '4.3 s', price: 'US$108,700', priceLocal: '¥788,000 China',
       colorA: '#1d4ed8', shape: 'sedan-long',
       image: 'images/nio-et9.jpg', imageCredit: 'Car and Driver'
     },
@@ -358,14 +358,14 @@ const SITE_DATA = {
       id: 'nio-onvo-l60', brand: 'NIO', name: 'Onvo L60',
       tag_en: 'NIO\'s family-SUV sub-brand debut, priced under the Model Y.',
       tag_zh: '蔚来子品牌乐道首款家用 SUV，定价低于 Model Y。',
-      range: '555 km', accel: '5.9 s', price: '¥206,900',
+      range: '555 km', accel: '5.9 s', price: 'US$28,600', priceLocal: '¥206,900 China',
       colorA: '#0ea5e9', shape: 'suv'
     },
     {
       id: 'nio-firefly', brand: 'NIO', name: 'Firefly',
       tag_en: 'NIO\'s premium small EV for Europe-first expansion.',
       tag_zh: '蔚来面向欧洲市场的高端小车品牌萤火虫。',
-      range: '420 km', accel: '~8 s', price: '¥119,800',
+      range: '420 km', accel: '~8 s', price: 'US$16,500', priceLocal: '¥119,800 China',
       colorA: '#22c55e', shape: 'suv'
     },
     // ---- Xpeng ----
@@ -373,7 +373,7 @@ const SITE_DATA = {
       id: 'xpeng-g6', brand: 'Xpeng', name: 'G6',
       tag_en: 'Coupe-SUV with industry-leading 800V architecture and XNGP city autonomy.',
       tag_zh: '搭载行业领先 800V 高压架构与 XNGP 城市智驾的轿跑 SUV。',
-      range: '755 km', accel: '3.9 s', price: '¥199,800',
+      range: '755 km', accel: '3.9 s', price: 'US$27,600', priceLocal: '¥199,800 China',
       colorA: '#22c55e', shape: 'suv',
       image: 'images/xpeng-g6.jpg', imageCredit: 'Top Gear'
     },
@@ -381,7 +381,7 @@ const SITE_DATA = {
       id: 'xpeng-mona-m03', brand: 'Xpeng', name: 'Mona M03',
       tag_en: 'The sub-¥120K smart sedan that made city-level ADAS affordable.',
       tag_zh: '不到 12 万元的智能轿车，让城市级智驾走进大众市场。',
-      range: '515 km', accel: '~7.5 s', price: '¥119,800',
+      range: '515 km', accel: '~7.5 s', price: 'US$16,500', priceLocal: '¥119,800 China',
       colorA: '#22c55e', shape: 'sedan'
     },
     // ---- Li Auto ----
@@ -389,7 +389,7 @@ const SITE_DATA = {
       id: 'li-mega', brand: 'Li Auto', name: 'MEGA',
       tag_en: 'Bullet-train MPV. The most polarising design statement of the year.',
       tag_zh: '高铁造型 MPV。今年最具话题性的设计宣言。',
-      range: '710 km', accel: '5.5 s', price: '¥559,800',
+      range: '710 km', accel: '5.5 s', price: 'US$77,300', priceLocal: '¥559,800 China',
       colorA: '#f59e0b', shape: 'mpv',
       image: 'images/liauto-mega.jpg', imageCredit: 'Electrek'
     },
@@ -397,7 +397,7 @@ const SITE_DATA = {
       id: 'li-l6', brand: 'Li Auto', name: 'L6',
       tag_en: 'The five-seat EREV SUV that made Li Auto a volume player.',
       tag_zh: '让理想真正走量的五座增程 SUV。',
-      range: '1,390 km (EREV)', accel: '5.4 s', price: '¥249,800',
+      range: '1,390 km (EREV)', accel: '5.4 s', price: 'US$34,500', priceLocal: '¥249,800 China',
       colorA: '#f59e0b', shape: 'suv'
     },
     // ---- Zeekr / Lynk & Co ----
@@ -405,7 +405,7 @@ const SITE_DATA = {
       id: 'zeekr-001', brand: 'Zeekr', name: '001',
       tag_en: 'Performance shooting brake. The Porsche Panamera Sport Turismo at 1/3 the price.',
       tag_zh: '高性能猎装车。三分之一价格的保时捷 Panamera Sport Turismo。',
-      range: '750 km', accel: '3.3 s', price: '¥269,000',
+      range: '750 km', accel: '3.3 s', price: 'US$37,100', priceLocal: '¥269,000 China',
       colorA: '#0ea5e9', shape: 'wagon',
       image: 'images/zeekr-001.jpg', imageCredit: 'Top Gear'
     },
@@ -413,14 +413,14 @@ const SITE_DATA = {
       id: 'zeekr-7x', brand: 'Zeekr', name: '7X',
       tag_en: 'Mid-size SUV with 800V and a 10-minute 10–80% charge — Europe-bound.',
       tag_zh: '800V 平台、10 分钟 10–80% 快充的中型 SUV，正进军欧洲。',
-      range: '780 km', accel: '3.8 s', price: '¥229,900',
+      range: '780 km', accel: '3.8 s', price: 'US$31,700', priceLocal: '¥229,900 China',
       colorA: '#0ea5e9', shape: 'suv'
     },
     {
       id: 'lynkco-09', brand: 'Lynk & Co', name: '09',
       tag_en: 'Full-size PHEV SUV on Volvo\'s SPA platform — Lynk\'s flagship.',
       tag_zh: '基于沃尔沃 SPA 平台的全尺寸插混 SUV，领克旗舰。',
-      range: '150 km EV / 1,400 km', accel: '~6 s', price: '~¥265,900',
+      range: '150 km EV / 1,400 km', accel: '~6 s', price: '~US$36,700', priceLocal: '¥265,900 China',
       colorA: '#111827', shape: 'suv',
       image: 'images/lynkco-09.jpg', imageCredit: 'Lynk & Co'
     },
@@ -429,14 +429,14 @@ const SITE_DATA = {
       id: 'geely-galaxy-e5', brand: 'Geely', name: 'Galaxy E5',
       tag_en: 'Geely\'s global compact e-SUV — sold as the EX5 in 50+ markets.',
       tag_zh: '吉利全球化紧凑纯电 SUV——海外以 EX5 之名进入 50 多国。',
-      range: '530 km', accel: '~7 s', price: '¥109,800',
+      range: '530 km', accel: '~7 s', price: 'US$15,200', priceLocal: '¥109,800 China',
       colorA: '#7c3aed', shape: 'suv'
     },
     {
       id: 'geely-starship-7', brand: 'Geely', name: 'Galaxy Starship 7',
       tag_en: 'Super-hybrid SUV rolling out across 57 countries, Brazil assembly planned.',
       tag_zh: '进入 57 国的超级混动 SUV，计划在巴西本地组装。',
-      range: '120 km EV / 1,400+ km', accel: '~8 s', price: '¥99,800',
+      range: '120 km EV / 1,400+ km', accel: '~8 s', price: 'US$13,800', priceLocal: '¥99,800 China',
       colorA: '#7c3aed', shape: 'suv'
     },
     // ---- Great Wall family ----
@@ -444,7 +444,7 @@ const SITE_DATA = {
       id: 'haval-h6', brand: 'Haval', name: 'H6',
       tag_en: 'The best-selling Chinese SUV abroad — a fixture from Bangkok to Brasília.',
       tag_zh: '海外销量第一的中国 SUV——从曼谷到巴西利亚随处可见。',
-      range: 'ICE · HEV · PHEV', accel: '~8 s', price: '¥98,900',
+      range: 'ICE · HEV · PHEV', accel: '~8 s', price: 'US$13,600', priceLocal: '¥98,900 China',
       colorA: '#374151', shape: 'suv',
       image: 'images/haval-brand.jpg', imageCredit: 'GWM'
     },
@@ -452,14 +452,14 @@ const SITE_DATA = {
       id: 'tank-300', brand: 'Tank', name: '300',
       tag_en: 'The retro off-roader that started China\'s overlanding boom.',
       tag_zh: '掀起中国越野热潮的复古硬派 SUV。',
-      range: 'ICE · Hi4-T PHEV', accel: '~9 s', price: '¥199,800',
+      range: 'ICE · Hi4-T PHEV', accel: '~9 s', price: 'US$27,600', priceLocal: '¥199,800 China',
       colorA: '#374151', shape: 'suv'
     },
     {
       id: 'ora-good-cat', brand: 'Ora', name: 'Good Cat',
       tag_en: 'Retro-styled compact EV — a viral hit in Thailand and Australia.',
       tag_zh: '复古造型小车，在泰国与澳洲成为爆款。',
-      range: '501 km', accel: '~8.5 s', price: '~¥103,900',
+      range: '501 km', accel: '~8.5 s', price: '~US$14,300', priceLocal: '¥103,900 China',
       colorA: '#22c55e', shape: 'suv',
       image: 'images/ora-good-cat.jpg', imageCredit: 'GWM Ora'
     },
@@ -467,7 +467,7 @@ const SITE_DATA = {
       id: 'wey-lanshan', brand: 'Wey', name: 'Blue Mountain',
       tag_en: 'Great Wall\'s premium PHEV flagship, gunning for Li Auto\'s family crown.',
       tag_zh: '长城高端插混旗舰蓝山，直指理想的家庭市场。',
-      range: '180 km EV / 1,200 km', accel: '4.9 s', price: '¥273,800',
+      range: '180 km EV / 1,200 km', accel: '4.9 s', price: 'US$37,800', priceLocal: '¥273,800 China',
       colorA: '#111827', shape: 'suv',
       image: 'images/wey-lanshan.jpg', imageCredit: 'GWM Wey'
     },
@@ -476,14 +476,14 @@ const SITE_DATA = {
       id: 'mg-mg4', brand: 'MG', name: 'MG4 EV',
       tag_en: 'Europe\'s best-selling Chinese EV — rear-drive, honest, affordable.',
       tag_zh: '欧洲最畅销的中国电动车——后驱、扎实、亲民。',
-      range: '450 km (WLTP)', accel: '7.7 s', price: 'From £26,995 (UK)',
+      range: '450 km (WLTP)', accel: '7.7 s', price: 'US$34,600', priceLocal: '£26,995 UK',
       colorA: '#d4302a', shape: 'suv'
     },
     {
       id: 'mg-cyberster', brand: 'MG', name: 'Cyberster',
       tag_en: 'The electric roadster reviving MG\'s British sports-car soul.',
       tag_zh: '复活 MG 英伦跑车之魂的电动敞篷。',
-      range: '580 km', accel: '3.2 s', price: '¥319,800',
+      range: '580 km', accel: '3.2 s', price: 'US$44,100', priceLocal: '¥319,800 China',
       colorA: '#d4302a', shape: 'sedan',
       image: 'images/mg-cyberster.jpg', imageCredit: 'MG'
     },
@@ -491,7 +491,7 @@ const SITE_DATA = {
       id: 'maxus-mifa-9', brand: 'Maxus', name: 'Mifa 9',
       tag_en: 'Luxury electric people-mover — a fleet favourite from Oslo to Sydney.',
       tag_zh: '豪华纯电 MPV——从奥斯陆到悉尼的车队宠儿。',
-      range: '560 km', accel: '~8 s', price: '¥269,900',
+      range: '560 km', accel: '~8 s', price: 'US$37,200', priceLocal: '¥269,900 China',
       colorA: '#0ea5e9', shape: 'mpv',
       image: 'images/maxus-mifa9.jpg', imageCredit: 'SAIC Maxus'
     },
@@ -499,7 +499,7 @@ const SITE_DATA = {
       id: 'im-ls6', brand: 'IM Motors', name: 'LS6',
       tag_en: 'Smart-luxury SUV with 800V and laser-lidar city driving.',
       tag_zh: '800V 平台 + 激光雷达城市智驾的智己主力 SUV。',
-      range: '760 km', accel: '3.5 s', price: '¥214,900',
+      range: '760 km', accel: '3.5 s', price: 'US$29,700', priceLocal: '¥214,900 China',
       colorA: '#7c3aed', shape: 'suv',
       image: 'images/im-ls6.jpg', imageCredit: 'IM Motors'
     },
@@ -508,7 +508,7 @@ const SITE_DATA = {
       id: 'voyah-free', brand: 'Voyah', name: 'Free',
       tag_en: 'Premium EREV SUV — Dongfeng\'s spearhead into Europe via Stellantis.',
       tag_zh: '高端增程 SUV——东风借道 Stellantis 进军欧洲的先锋。',
-      range: '106 km EV / 860 km', accel: '4.5 s', price: '¥219,900',
+      range: '106 km EV / 860 km', accel: '4.5 s', price: 'US$30,300', priceLocal: '¥219,900 China',
       colorA: '#1d4ed8', shape: 'suv',
       image: 'images/voyah-free.jpg', imageCredit: 'Voyah'
     },
@@ -516,7 +516,7 @@ const SITE_DATA = {
       id: 'mhero-917', brand: 'M-Hero', name: '917',
       tag_en: '1,088 hp quad-motor electric off-roader with military DNA.',
       tag_zh: '1,088 马力四电机硬派越野，军车基因。',
-      range: '200 km EV / 800 km', accel: '4.2 s', price: '¥637,700',
+      range: '200 km EV / 800 km', accel: '4.2 s', price: 'US$88,000', priceLocal: '¥637,700 China',
       colorA: '#374151', shape: 'suv',
       image: 'images/mhero-917.jpg', imageCredit: 'M-Hero'
     },
@@ -525,7 +525,7 @@ const SITE_DATA = {
       id: 'chery-tiggo-8', brand: 'Chery', name: 'Tiggo 8 Pro',
       tag_en: 'Chery\'s 7-seat export workhorse across Russia, MENA and LatAm.',
       tag_zh: '奇瑞出口主力 7 座 SUV，横扫俄罗斯、中东与拉美。',
-      range: 'ICE · PHEV', accel: '~8 s', price: '~¥129,900',
+      range: 'ICE · PHEV', accel: '~8 s', price: '~US$17,900', priceLocal: '¥129,900 China',
       colorA: '#d4302a', shape: 'suv',
       image: 'images/chery-brand.jpg', imageCredit: 'Chery'
     },
@@ -533,7 +533,7 @@ const SITE_DATA = {
       id: 'omoda-e5', brand: 'Omoda', name: 'E5',
       tag_en: 'Chery\'s global-first electric crossover for the UK, EU and Australia.',
       tag_zh: '奇瑞全球化战略的纯电跨界车，主攻英国、欧盟与澳洲。',
-      range: '430 km (WLTP)', accel: '~7.5 s', price: 'From £33,055 (UK)',
+      range: '430 km (WLTP)', accel: '~7.5 s', price: 'US$42,300', priceLocal: '£33,055 UK',
       colorA: '#22c55e', shape: 'suv',
       image: 'images/omoda-e5.jpg', imageCredit: 'Omoda'
     },
@@ -541,7 +541,7 @@ const SITE_DATA = {
       id: 'jaecoo-7', brand: 'Jaecoo', name: '7 PHEV',
       tag_en: 'Rugged-design SUV with 1,200 km combined range — a UK breakout hit.',
       tag_zh: '硬派设计 + 1,200 公里综合续航,在英国一炮而红。',
-      range: '90 km EV / 1,200 km', accel: '~8.5 s', price: 'From £35,065 (UK)',
+      range: '90 km EV / 1,200 km', accel: '~8.5 s', price: 'US$44,900', priceLocal: '£35,065 UK',
       colorA: '#374151', shape: 'suv',
       image: 'images/jaecoo-7.jpg', imageCredit: 'Jaecoo'
     },
@@ -550,7 +550,7 @@ const SITE_DATA = {
       id: 'leapmotor-c10', brand: 'Leapmotor', name: 'C10',
       tag_en: 'Stellantis-backed family SUV — the value benchmark in Europe.',
       tag_zh: 'Stellantis 加持的家用 SUV——欧洲市场的性价比标杆。',
-      range: '530 km', accel: '~7 s', price: '¥128,800',
+      range: '530 km', accel: '~7 s', price: 'US$17,800', priceLocal: '¥128,800 China',
       colorA: '#0ea5e9', shape: 'suv',
       image: 'images/leapmotor-c10.png', imageCredit: 'Leapmotor'
     },
@@ -558,7 +558,7 @@ const SITE_DATA = {
       id: 'leapmotor-b10', brand: 'Leapmotor', name: 'B10',
       tag_en: 'The first Chinese EV built in Spain — Stellantis\'s Zaragoza plant.',
       tag_zh: '首批在西班牙本土生产的中国电动车——Stellantis 萨拉戈萨工厂出品。',
-      range: '600 km', accel: '~7 s', price: '¥99,800',
+      range: '600 km', accel: '~7 s', price: 'US$13,800', priceLocal: '¥99,800 China',
       colorA: '#0ea5e9', shape: 'suv'
     },
     // ---- Geely premium brands ----
@@ -566,7 +566,7 @@ const SITE_DATA = {
       id: 'polestar-4', brand: 'Polestar', name: '4',
       tag_en: 'The coupe-SUV that replaced the rear window with a screen.',
       tag_zh: '用屏幕取代后窗的轿跑 SUV。',
-      range: '620 km', accel: '3.8 s', price: '¥299,900',
+      range: '620 km', accel: '3.8 s', price: 'US$41,400', priceLocal: '¥299,900 China',
       colorA: '#111827', shape: 'suv',
       image: 'images/polestar-4.jpg', imageCredit: 'Polestar'
     },
@@ -574,14 +574,14 @@ const SITE_DATA = {
       id: 'volvo-ex30', brand: 'Volvo', name: 'EX30',
       tag_en: 'Volvo\'s China-built compact EV — its fastest car ever, at its lowest price.',
       tag_zh: '沃尔沃在华制造的紧凑电动车——史上最快，也最亲民。',
-      range: '480 km (WLTP)', accel: '3.6 s', price: 'From €36,590 (EU)',
+      range: '480 km (WLTP)', accel: '3.6 s', price: 'US$40,200', priceLocal: '€36,590 EU',
       colorA: '#1d4ed8', shape: 'suv'
     },
     {
       id: 'lotus-eletre', brand: 'Lotus', name: 'Eletre',
       tag_en: 'A 905-hp hyper-SUV from the house of Chapman, built in Wuhan.',
       tag_zh: '905 马力的超级 SUV，查普曼血统，武汉制造。',
-      range: '650 km', accel: '2.95 s', price: '¥668,000',
+      range: '650 km', accel: '2.95 s', price: 'US$92,200', priceLocal: '¥668,000 China',
       colorA: '#f59e0b', shape: 'suv',
       image: 'images/lotus-eletre.jpg', imageCredit: 'Lotus'
     },
@@ -590,7 +590,7 @@ const SITE_DATA = {
       id: 'denza-z9gt', brand: 'Denza', name: 'Z9GT',
       tag_en: 'Tri-motor shooting brake with rear-wheel steering — Denza\'s halo.',
       tag_zh: '三电机 + 后轮转向的猎装旗舰，腾势的技术名片。',
-      range: '630 km', accel: '3.4 s', price: '¥334,800',
+      range: '630 km', accel: '3.4 s', price: 'US$46,200', priceLocal: '¥334,800 China',
       colorA: '#111827', shape: 'wagon',
       image: 'images/denza-z9gt.jpg', imageCredit: 'Denza'
     },
@@ -598,7 +598,7 @@ const SITE_DATA = {
       id: 'yangwang-u8', brand: 'Yangwang', name: 'U8',
       tag_en: 'The SUV that tank-turns and floats — BYD\'s ¥1M statement piece.',
       tag_zh: '能原地掉头、能浮水的 SUV——比亚迪的百万级宣言。',
-      range: '180 km EV / 1,000 km', accel: '3.6 s', price: '¥1,098,000',
+      range: '180 km EV / 1,000 km', accel: '3.6 s', price: 'US$151,500', priceLocal: '¥1,098,000 China',
       colorA: '#f59e0b', shape: 'suv',
       image: 'images/yangwang-u8.jpg', imageCredit: 'BYD Yangwang'
     },
@@ -606,7 +606,7 @@ const SITE_DATA = {
       id: 'fangchengbao-bao5', brand: 'Fang Cheng Bao', name: 'Bao 5',
       tag_en: 'Super-hybrid off-roader on BYD\'s DMO platform — Tank\'s new rival.',
       tag_zh: '基于比亚迪 DMO 平台的超级混动越野，坦克的新对手。',
-      range: '125 km EV / 1,200 km', accel: '4.8 s', price: '¥239,800',
+      range: '125 km EV / 1,200 km', accel: '4.8 s', price: 'US$33,100', priceLocal: '¥239,800 China',
       colorA: '#374151', shape: 'suv',
       image: 'images/fangchengbao-5.jpg', imageCredit: 'Fang Cheng Bao'
     }

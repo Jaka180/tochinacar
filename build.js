@@ -487,13 +487,13 @@ function modelMain(m, brand) {
       <div class="brand-facts" style="display:flex;gap:36px;flex-wrap:wrap;margin-bottom:36px;">
         ${fact('Range', '续航', m.range)}
         ${fact('0–100 km/h', '零百加速', m.accel)}
-        ${fact('From', '起价', m.price)}
+        ${fact('From', '起价', `${m.price}${m.priceLocal ? ` <span style="font-size:12px;color:#9ca3af;font-weight:400;">(${m.priceLocal})</span>` : ''}`)}
       </div>
       <div style="font-size:16px;line-height:1.8;color:#374151;">
         <p>${langSpan(ctx.en, ctx.zh)}</p>
         <p style="font-size:13px;color:#9ca3af;">${langSpan(
-          'Prices shown are indicative list prices in the named market and change frequently — confirm current export pricing via a quote request.',
-          '页面价格为对应市场的指导价，波动频繁——实际出口价格以询价回复为准。')}</p>
+          'USD figures are approximate conversions of the local list price shown in brackets, and change with exchange rates — confirm current export pricing via a quote request.',
+          '美元价格为括号内当地指导价的近似换算，随汇率波动——实际出口价格以询价回复为准。')}</p>
       </div>
       <div style="margin:32px 0;padding:24px;background:#f9fafb;border-left:3px solid #d4302a;">
         <h2 style="margin:0 0 8px;font-size:18px;">${langSpan(`Import the ${m.brand} ${m.name}`, `进口 ${m.brand} ${m.name}`)}</h2>

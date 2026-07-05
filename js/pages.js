@@ -121,7 +121,9 @@ function modelCardHTML(m, lang) {
   const visual = m.image
     ? `<img src="/${m.image}" alt="${m.brand} ${m.name}" loading="lazy" />` + (m.imageCredit ? `<span class="img-credit">Photo: ${m.imageCredit}</span>` : '')
     : carSVG(m.shape, m.colorA);
-  const dual = priceDualLine(m.price);
+  const dual = m.priceLocal
+    ? `<span class="spec-price-dual">${m.priceLocal}</span>`
+    : priceDualLine(m.price);
   const detailHref = m.id ? `/models/${m.id}` : null;
   return `
     <article class="model-card">
