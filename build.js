@@ -373,6 +373,80 @@ function collectionJsonLd(route, title, description, itemRoutes = []) {
   });
 }
 
+const STATIC_FAQS = {
+  '/chinese-car-brands': [
+    ['Which Chinese car brands sell internationally?', 'BYD, MG, Geely, Chery, Great Wall, NIO, Xpeng, Zeekr, Leapmotor and several sub-brands sell or prepare vehicles outside China, with coverage varying by market.'],
+    ['What is the difference between Chinese legacy groups and EV startups?', 'Legacy groups such as BYD, Geely, SAIC, Chery and Great Wall have broad manufacturing and export networks, while startups such as NIO, Xpeng, Li Auto, Xiaomi and Leapmotor focus on newer EV, EREV and smart-car platforms.'],
+    ['Which Chinese brands are strongest for export markets?', 'BYD, Chery, SAIC/MG, Geely and Great Wall have the broadest overseas footprints today, while NIO, Xpeng, Zeekr and Leapmotor are expanding selectively by region.']
+  ],
+  '/models': [
+    ['Which Chinese EV models are most relevant for export markets?', 'BYD Seal, BYD Atto 3, MG4, Xiaomi SU7, Xpeng G6, Zeekr 001, NIO ET5 and Leapmotor C10 are among the models international buyers and dealers most often track.'],
+    ['Are the prices listed on TopChinaCar export prices?', 'Model pages use indicative local list prices and approximate USD conversions. Actual export quotes depend on market, trim, homologation, logistics, taxes and exporter availability.'],
+    ['Do Chinese EV specs differ by country?', 'Yes. Battery size, charging standard, safety equipment, software, warranty and homologation package can differ between China-market vehicles and export-market versions.']
+  ],
+  '/news': [
+    ['What does TopChinaCar cover every day?', 'TopChinaCar tracks Chinese automakers overseas, EV and battery news, export data, overseas plants, dealer networks, tariffs, regulations and market-entry stories.'],
+    ['Are TopChinaCar articles sourced?', 'Articles cite primary or reputable secondary sources inline and list source links where available, especially for data, policy and company announcements.'],
+    ['Why focus on Chinese auto exports?', 'China has become the world’s largest car exporter, and export growth now shapes automaker strategy, global pricing, supply chains and policy debates.']
+  ],
+  '/quote': [
+    ['Can I import Chinese cars through TopChinaCar?', 'TopChinaCar connects dealer, fleet and importer inquiries with licensed Chinese vehicle exporters. Availability depends on destination market, model, trim and compliance requirements.'],
+    ['What information is needed for a Chinese car export quote?', 'A useful quote request should include destination market, model, trim if known, quantity, preferred shipping terms such as FOB or CIF, and contact details.'],
+    ['Are FOB and CIF prices final landed prices?', 'No. FOB and CIF quotes do not include all destination-market costs. Import duties, VAT, registration, homologation, inland transport and dealer margins may still apply.']
+  ]
+};
+
+const STATIC_FAQS_ZH = {
+  '/chinese-car-brands': [
+    ['哪些中国汽车品牌正在海外销售？', '比亚迪、MG、吉利、奇瑞、长城、蔚来、小鹏、极氪、零跑及多个子品牌都在海外销售或准备进入海外市场，具体可售情况因地区而异。'],
+    ['传统车企集团和造车新势力有什么区别？', '传统车企集团通常拥有更完整的制造和出口网络；新势力更多聚焦纯电、增程和智能化平台，软件迭代速度更快。'],
+    ['哪些中国品牌的出口能力最强？', '比亚迪、奇瑞、上汽/MG、吉利和长城目前海外版图最广；蔚来、小鹏、极氪和零跑则按区域选择性扩张。']
+  ],
+  '/models': [
+    ['哪些中国电动车最值得海外市场关注？', '比亚迪海豹、BYD Atto 3、MG4、小米 SU7、小鹏 G6、极氪 001、蔚来 ET5 和零跑 C10 是海外买家和经销商常关注的车型。'],
+    ['TopChinaCar 上的价格是出口价吗？', '不是。车型页使用本地指导价和近似美元换算。实际出口报价取决于目的市场、配置、认证、物流、税费和出口商供货情况。'],
+    ['中国电动车在不同国家的配置会不同吗？', '会。电池容量、充电标准、安全配置、软件、质保和认证包可能因中国版与出口版不同而变化。']
+  ],
+  '/news': [
+    ['TopChinaCar 每天报道什么？', 'TopChinaCar 追踪中国车企出海、新能源与电池新闻、出口数据、海外工厂、经销网络、关税、监管和市场进入动态。'],
+    ['TopChinaCar 的文章有信源吗？', '文章会在正文内引用一手或可信二手信源，尤其是涉及数据、政策和企业公告时，会尽量列出可核查链接。'],
+    ['为什么重点关注中国汽车出口？', '中国已经成为全球第一大汽车出口国，出口增长正在影响车企战略、全球定价、供应链和政策讨论。']
+  ],
+  '/quote': [
+    ['可以通过 TopChinaCar 进口中国汽车吗？', 'TopChinaCar 会把经销商、车队和进口商询价对接给持牌中国汽车出口商。能否供应取决于目的市场、车型、配置和合规要求。'],
+    ['询价中国汽车出口需要提供哪些信息？', '有效询价应包含目的市场、车型、已知配置、数量、偏好的贸易条款（如 FOB/CIF）以及联系方式。'],
+    ['FOB 和 CIF 是最终落地价吗？', '不是。FOB 和 CIF 不包含所有目的地成本，进口关税、增值税、注册、认证、内陆运输和经销商利润仍可能另计。']
+  ]
+};
+
+function faqJsonLd(route, lang = 'en') {
+  const items = (lang === 'zh' ? STATIC_FAQS_ZH : STATIC_FAQS)[route];
+  if (!items) return '';
+  return jsonLdScript({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map(([q, a]) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a }
+    }))
+  });
+}
+
+function serviceJsonLd(route) {
+  if (route !== '/quote') return '';
+  return jsonLdScript({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Chinese vehicle export quote request',
+    serviceType: 'Vehicle export sourcing',
+    provider: { '@id': `${SITE}/#organization` },
+    areaServed: 'Worldwide',
+    url: canonicalUrl('/quote', false),
+    description: 'Dealer, fleet and importer quote requests for Chinese vehicles including BYD, Chery, Geely and MG.'
+  });
+}
+
 function pageHTML(route, meta, mainHTML, opts = {}) {
   const isZh = !!opts.zh;
   const enUrl = canonicalUrl(route, false);
@@ -457,21 +531,25 @@ function staticCollectionItems(route) {
   return [];
 }
 
-function staticExtraHead(route, meta) {
+function staticExtraHead(route, meta, lang = 'en') {
   if (route === '/') return '';
-  return collectionJsonLd(route, meta.title.replace(/\s+\|\s+TopChinaCar$/, ''), meta.desc, staticCollectionItems(route));
+  return [
+    collectionJsonLd(route, meta.title.replace(/\s+\|\s+TopChinaCar$/, ''), meta.desc, staticCollectionItems(route)),
+    faqJsonLd(route, lang),
+    serviceJsonLd(route)
+  ].filter(Boolean).join('\n');
 }
 
 // ---- Generate pages (EN + /zh mirror) ----
 let count = 0;
 for (const [route, meta] of Object.entries(PAGES)) {
   const mainHTML = PAGE_ROUTES[route]();
-  fs.writeFileSync(path.join(ROOT, meta.file), pageHTML(route, { ...meta, extraHead: staticExtraHead(route, meta) }, mainHTML));
+  fs.writeFileSync(path.join(ROOT, meta.file), pageHTML(route, { ...meta, extraHead: staticExtraHead(route, meta, 'en') }, mainHTML));
   setSandboxLang('zh');
   const mainZh = PAGE_ROUTES[route]();
   setSandboxLang('en');
   const zhMeta = PAGES_ZH[route] || meta;
-  writeZh(meta.file, zhChrome(pageHTML(route, { ...zhMeta, extraHead: staticExtraHead(route, meta) }, mainZh, { zh: true })));
+  writeZh(meta.file, zhChrome(pageHTML(route, { ...zhMeta, extraHead: staticExtraHead(route, meta, 'zh') }, mainZh, { zh: true })));
   console.log(`✓ ${meta.file} + zh (${mainHTML.length} chars of prerendered content)`);
   count++;
 }

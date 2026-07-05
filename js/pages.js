@@ -106,6 +106,114 @@ function priceDualLine(price) {
   return `<span class="spec-price-dual">≈ ${formatThousand(usd, '$')} / ${formatThousand(eur, '€')}</span>`;
 }
 
+const PAGE_FAQS = {
+  brands: [
+    {
+      q_en: 'Which Chinese car brands sell internationally?',
+      q_zh: '哪些中国汽车品牌正在海外销售？',
+      a_en: 'BYD, MG, Geely, Chery, Great Wall, NIO, Xpeng, Zeekr, Leapmotor and several sub-brands sell or prepare vehicles outside China, with availability varying by market.',
+      a_zh: '比亚迪、MG、吉利、奇瑞、长城、蔚来、小鹏、极氪、零跑及多个子品牌都在海外销售或准备进入海外市场，具体可售情况因地区而异。'
+    },
+    {
+      q_en: 'What is the difference between Chinese legacy groups and EV startups?',
+      q_zh: '传统车企集团和造车新势力有什么区别？',
+      a_en: 'Legacy groups have broad manufacturing and export networks; EV startups usually focus on newer electric, extended-range and smart-car platforms with faster software cycles.',
+      a_zh: '传统车企集团通常拥有更完整的制造和出口网络；新势力更多聚焦纯电、增程和智能化平台，软件迭代速度更快。'
+    },
+    {
+      q_en: 'Which Chinese brands are strongest for export markets?',
+      q_zh: '哪些中国品牌的出口能力最强？',
+      a_en: 'BYD, Chery, SAIC/MG, Geely and Great Wall currently have the broadest overseas footprints, while NIO, Xpeng, Zeekr and Leapmotor are expanding more selectively by region.',
+      a_zh: '比亚迪、奇瑞、上汽/MG、吉利和长城目前海外版图最广；蔚来、小鹏、极氪和零跑则按区域选择性扩张。'
+    }
+  ],
+  models: [
+    {
+      q_en: 'Which Chinese EV models are most relevant for export markets?',
+      q_zh: '哪些中国电动车最值得海外市场关注？',
+      a_en: 'BYD Seal, BYD Atto 3, MG4, Xiaomi SU7, Xpeng G6, Zeekr 001, NIO ET5 and Leapmotor C10 are among the models international buyers and dealers often track.',
+      a_zh: '比亚迪海豹、BYD Atto 3、MG4、小米 SU7、小鹏 G6、极氪 001、蔚来 ET5 和零跑 C10 是海外买家和经销商常关注的车型。'
+    },
+    {
+      q_en: 'Are the prices listed on TopChinaCar export prices?',
+      q_zh: 'TopChinaCar 上的价格是出口价吗？',
+      a_en: 'No. Model pages use indicative local list prices and approximate USD conversions. Export quotes depend on market, trim, homologation, logistics, taxes and exporter availability.',
+      a_zh: '不是。车型页使用本地指导价和近似美元换算。实际出口报价取决于目的市场、配置、认证、物流、税费和出口商供货情况。'
+    },
+    {
+      q_en: 'Do Chinese EV specs differ by country?',
+      q_zh: '中国电动车在不同国家的配置会不同吗？',
+      a_en: 'Yes. Battery size, charging standard, safety equipment, software, warranty and homologation package can differ between China-market vehicles and export-market versions.',
+      a_zh: '会。电池容量、充电标准、安全配置、软件、质保和认证包可能因中国版与出口版不同而变化。'
+    }
+  ],
+  news: [
+    {
+      q_en: 'What does TopChinaCar cover every day?',
+      q_zh: 'TopChinaCar 每天报道什么？',
+      a_en: 'TopChinaCar tracks Chinese automakers overseas, EV and battery news, export data, overseas plants, dealer networks, tariffs, regulations and market-entry stories.',
+      a_zh: 'TopChinaCar 追踪中国车企出海、新能源与电池新闻、出口数据、海外工厂、经销网络、关税、监管和市场进入动态。'
+    },
+    {
+      q_en: 'Are TopChinaCar articles sourced?',
+      q_zh: 'TopChinaCar 的文章有信源吗？',
+      a_en: 'Articles cite primary or reputable secondary sources inline and list source links where available, especially for data, policy and company announcements.',
+      a_zh: '文章会在正文内引用一手或可信二手信源，尤其是涉及数据、政策和企业公告时，会尽量列出可核查链接。'
+    },
+    {
+      q_en: 'Why focus on Chinese auto exports?',
+      q_zh: '为什么重点关注中国汽车出口？',
+      a_en: 'China has become the world’s largest car exporter, and export growth now shapes automaker strategy, global pricing, supply chains and policy debates.',
+      a_zh: '中国已经成为全球第一大汽车出口国，出口增长正在影响车企战略、全球定价、供应链和政策讨论。'
+    }
+  ],
+  quote: [
+    {
+      q_en: 'Can I import Chinese cars through TopChinaCar?',
+      q_zh: '可以通过 TopChinaCar 进口中国汽车吗？',
+      a_en: 'TopChinaCar connects dealer, fleet and importer inquiries with licensed Chinese vehicle exporters. Availability depends on destination market, model, trim and compliance requirements.',
+      a_zh: 'TopChinaCar 会把经销商、车队和进口商询价对接给持牌中国汽车出口商。能否供应取决于目的市场、车型、配置和合规要求。'
+    },
+    {
+      q_en: 'What information is needed for a Chinese car export quote?',
+      q_zh: '询价中国汽车出口需要提供哪些信息？',
+      a_en: 'A useful quote request should include destination market, model, trim if known, quantity, preferred shipping terms such as FOB or CIF, and contact details.',
+      a_zh: '有效询价应包含目的市场、车型、已知配置、数量、偏好的贸易条款（如 FOB/CIF）以及联系方式。'
+    },
+    {
+      q_en: 'Are FOB and CIF prices final landed prices?',
+      q_zh: 'FOB 和 CIF 是最终落地价吗？',
+      a_en: 'No. FOB and CIF quotes do not include all destination-market costs. Import duties, VAT, registration, homologation, inland transport and dealer margins may still apply.',
+      a_zh: '不是。FOB 和 CIF 不包含所有目的地成本，进口关税、增值税、注册、认证、内陆运输和经销商利润仍可能另计。'
+    }
+  ]
+};
+
+function faqSectionHTML(key) {
+  const lang = getLang();
+  const items = PAGE_FAQS[key] || [];
+  if (!items.length) return '';
+  return `
+    <section class="faq-section">
+      <div class="container" style="max-width:920px;">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">${lang === 'zh' ? '常见问题' : 'FAQ'}</div>
+            <h2 class="section-title">${lang === 'zh' ? '搜索者常问的问题' : 'Common Search Questions'}</h2>
+          </div>
+        </div>
+        <div style="display:grid;gap:14px;">
+          ${items.map(item => `
+            <article style="border:1px solid #e5e7eb;border-radius:8px;padding:18px 20px;background:#fff;">
+              <h3 style="font-size:17px;margin:0 0 8px;font-family:var(--serif, Georgia, serif);">${item['q_' + lang]}</h3>
+              <p style="margin:0;color:#4b5563;font-size:14px;line-height:1.7;">${item['a_' + lang]}</p>
+            </article>
+          `).join('')}
+        </div>
+      </div>
+    </section>`;
+}
+
 // News 缩图统一渲染：有 image 用真实照片，否则 fallback 到 carSVG
 function newsThumbHTML(n, variant) {
   // variant: 'main' 或 'side'
@@ -531,6 +639,7 @@ function pageBrands() {
       </section>
       `;
     }).join('')}
+    ${faqSectionHTML('brands')}
   `;
 }
 
@@ -568,6 +677,7 @@ function pageModels() {
         <div class="models-empty" id="modelsEmpty" hidden>${lang === 'zh' ? '该品牌暂无车型。' : 'No models for this brand yet.'}</div>
       </div>
     </section>
+    ${faqSectionHTML('models')}
   `;
 }
 
@@ -655,6 +765,7 @@ function pageNews() {
         </div>
       </div>
     </section>
+    ${faqSectionHTML('news')}
   `;
 }
 
@@ -808,6 +919,7 @@ function pageQuote() {
         </div>
       </div>
     </section>
+    ${faqSectionHTML('quote')}
   `;
 }
 
