@@ -194,7 +194,7 @@ function pageHome() {
           <h1 class="hero-title">${t('hero.title')}</h1>
           <p class="hero-deck">${t('hero.deck')}</p>
           <div class="hero-cta">
-            <a href="/news" class="btn btn-primary" data-i18n="hero.cta.primary">${t('hero.cta.primary')}</a>
+            <a href="/stories/china-ev-battery-supply-chain" class="btn btn-primary" data-i18n="hero.cta.primary">${t('hero.cta.primary')}</a>
             <a href="/brands" class="btn btn-ghost" data-i18n="hero.cta.secondary">${t('hero.cta.secondary')}</a>
           </div>
           <div class="hero-meta">
@@ -764,6 +764,7 @@ function pageQuote() {
           </div>
           ${field('qModel', 'quote.form.model', 'text', 'required')}
           ${field('qMessage', 'quote.form.message', 'textarea')}
+          <p style="margin:0 0 16px;font-size:13px;line-height:1.7;color:#6b7280;">${t('quote.form.privacy')}</p>
           <button type="submit" class="btn btn-primary" id="quoteSubmit">${t('quote.form.submit')}</button>
           <div id="quoteResult" hidden style="margin-top:16px;padding:14px 16px;background:#f9fafb;border-left:3px solid #16a34a;font-size:15px;"></div>
         </form>
@@ -771,6 +772,65 @@ function pageQuote() {
           <h3 style="margin:0 0 10px;font-size:16px;">${t('quote.note.title')}</h3>
           <p style="margin:0;font-size:14px;line-height:1.7;color:#4b5563;">${t('quote.note.body')}</p>
         </div>
+      </div>
+    </section>
+  `;
+}
+
+function pagePrivacy() {
+  const lang = getLang();
+  const zh = lang === 'zh';
+  const S = (en, zhTxt) => zh ? zhTxt : en;
+  const sec = (h, body) => `<h2 style="font-size:20px;margin:36px 0 12px;">${h}</h2>${body}`;
+  const p = t2 => `<p style="margin:0 0 14px;">${t2}</p>`;
+  return `
+    <section class="page-header">
+      <div class="container">
+        <div class="section-eyebrow">${S('Legal', '法律条款')}</div>
+        <h1 class="page-title">${S('Privacy Policy', '隐私政策')}</h1>
+        <p class="page-deck">${S('Effective July 5, 2026 · How we collect, use and protect your information.', '生效日期：2026 年 7 月 5 日 · 我们如何收集、使用与保护您的信息。')}</p>
+      </div>
+    </section>
+    <section style="padding-top:0;">
+      <div class="container" style="max-width:820px;font-size:15px;line-height:1.8;color:#374151;">
+        ${p(S('TopChinaCar ("we") is an independent editorial publication about Chinese automobiles that also connects dealers, fleets and importers with licensed Chinese vehicle exporters. This policy explains what information we collect through this website, why, and the choices you have. Contact: <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a>.',
+                'TopChinaCar（下称"我们"）是一家关于中国汽车的独立编辑出版物，同时为经销商、车队与进口商对接持牌中国汽车出口商。本政策说明我们通过本网站收集哪些信息、原因，以及您可行使的选择。联系方式：<a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a>。'))}
+
+        ${sec(S('What we collect', '我们收集的信息'),
+          p(S('<strong>Quote inquiries</strong> (the "Get a Quote" form): name, company (optional), email, WhatsApp/phone (optional), destination market, quantity, models of interest and your message.',
+              '<strong>询价表单</strong>（"Get a Quote"）：姓名、公司（选填）、邮箱、WhatsApp/电话（选填）、目的市场、数量、意向车型及留言。'))
+        + p(S('<strong>Newsletter</strong>: your email address only.',
+              '<strong>邮件订阅</strong>：仅收集您的邮箱地址。'))
+        + p(S('<strong>Analytics</strong>: we use Cloudflare Web Analytics, which is cookie-less and aggregates anonymous performance data (page views, country, browser). We do not run advertising trackers and we do not build visitor profiles.',
+              '<strong>网站分析</strong>：我们使用 Cloudflare Web Analytics——无 Cookie、仅汇总匿名性能数据（页面访问量、国家、浏览器）。我们不投放广告追踪器，也不建立访客画像。'))
+        + p(S('<strong>Local storage</strong>: your language preference (EN/中文) is stored in your browser only.',
+              '<strong>本地存储</strong>：您的语言偏好（EN/中文）仅保存在您自己的浏览器中。')))}
+
+        ${sec(S('How we use it', '信息的用途'),
+          p(S('Quote details are used solely to source availability and pricing for your request. To do that, we share them with the licensed Chinese exporter(s) needed to prepare your quote — and with no one else. We never sell your data.',
+              '询价信息仅用于为您匹配货源与报价。为此，我们会将其共享给准备报价所必需的持牌中国出口商——不会提供给任何其他方。我们绝不出售您的数据。'))
+        + p(S('Newsletter addresses are used only to send the briefing you subscribed to. Every email includes an unsubscribe link.',
+              '订阅邮箱仅用于发送您订阅的简报。每封邮件都附退订链接。')))}
+
+        ${sec(S('Service providers', '服务提供商'),
+          p(S('The site is hosted on Cloudflare Pages; form submissions and email are processed via Resend. Both act as processors on our behalf. Your data may be transferred to and processed in countries other than your own, protected by the standard safeguards those providers offer.',
+              '本站托管于 Cloudflare Pages；表单与邮件经由 Resend 处理。两者均作为受托处理方运作。您的数据可能被传输至您所在国家/地区之外处理，并受上述服务商的标准保障条款保护。')))}
+
+        ${sec(S('Retention', '保存期限'),
+          p(S('Quote inquiries are kept for up to 24 months so we can follow up on your request, then deleted. Newsletter addresses are kept until you unsubscribe.',
+              '询价信息最长保存 24 个月以便跟进，到期删除。订阅邮箱保存至您退订为止。')))}
+
+        ${sec(S('Your rights', '您的权利'),
+          p(S('You may request a copy of the personal data we hold about you, ask us to correct or delete it, or withdraw consent at any time by emailing <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a>. We respond within 30 days. Depending on where you live (e.g. the EU/EEA or UK under GDPR), you may also have the right to lodge a complaint with your local data protection authority.',
+              '您可随时发邮件至 <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a>，索取我们持有的您的个人数据副本、要求更正或删除，或撤回同意。我们将在 30 天内回复。依据您所在地法律（如欧盟/英国 GDPR），您还有权向当地数据保护机构投诉。')))}
+
+        ${sec(S('Cookies', 'Cookie 说明'),
+          p(S('We set no advertising or profiling cookies. Cloudflare may set strictly-necessary cookies for security (e.g. bot protection). Your language choice lives in localStorage, not a cookie.',
+              '我们不设置任何广告或画像类 Cookie。Cloudflare 可能出于安全需要（如机器人防护）设置必要 Cookie。语言偏好保存在 localStorage 而非 Cookie 中。')))}
+
+        ${sec(S('Changes', '政策更新'),
+          p(S('We will post any changes to this policy on this page with a new effective date.',
+              '政策如有变更，将在本页发布并更新生效日期。')))}
       </div>
     </section>
   `;
@@ -784,7 +844,8 @@ const PAGE_ROUTES = {
   '/news':   pageNews,
   '/tech':   pageTech,
   '/about':  pageAbout,
-  '/quote':  pageQuote
+  '/quote':  pageQuote,
+  '/privacy': pagePrivacy
 };
 
 // Node (build.js) support — no effect in the browser

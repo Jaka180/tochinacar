@@ -51,6 +51,52 @@ for (const f of ['js/data.js', 'js/i18n.js', 'js/articles-data.js', 'js/pages.js
 }
 const PAGE_ROUTES = vm.runInContext('PAGE_ROUTES', sandbox);
 
+// ============ Chinese mirror (/zh/...) helpers ============
+const I18N_ZH = vm.runInContext('I18N.zh', sandbox);
+const I18N_EN = vm.runInContext('I18N.en', sandbox);
+const setSandboxLang = l => vm.runInContext(`document.documentElement.lang='${l}'`, sandbox);
+
+// Post-process a rendered page into its Chinese variant:
+//  - translate header/footer/newsletter chrome (data-i18n / data-i18n-attr)
+//  - flip bilingual data-lang blocks (zh visible, en hidden)
+//  - prefix internal links with /zh (assets, api and external links untouched)
+function zhChrome(html) {
+  // Translate only nodes still holding the exact English dictionary value —
+  // re-rendered zh content (already Chinese) is left untouched.
+  html = html.replace(/(<[^>]*data-i18n="([^"]+)"[^>]*>)([^<]*)/g,
+    (all, open, key, txt) =>
+      (I18N_ZH[key] !== undefined && txt.trim() === String(I18N_EN[key] || '').trim())
+        ? open + I18N_ZH[key] : all);
+  html = html.replace(/placeholder="[^"]*"([^>]*data-i18n-attr="placeholder:([^"]+)")/g,
+    (all, rest, key) => I18N_ZH[key] !== undefined ? `placeholder="${I18N_ZH[key]}"${rest}` : all);
+  html = html
+    .replace(/data-lang="zh" hidden/g, 'data-lang="zh" data-zh-keep')
+    .replace(/data-lang="en"/g, 'data-lang="en" hidden')
+    .replace(/data-lang="zh" data-zh-keep/g, 'data-lang="zh"');
+  html = html.replace(/href="\/(?!zh\/|zh"|images\/|css\/|js\/|api\/|cdn-cgi\/)/g, 'href="/zh/');
+  // fix the /zh/ homepage link form: href="/zh/" → href="/zh"
+  html = html.replace(/href="\/zh\/"/g, 'href="/zh"');
+  return html;
+}
+
+function writeZh(relPath, html) {
+  const dest = path.join(ROOT, 'zh', relPath);
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.writeFileSync(dest, html);
+}
+
+const PAGES_ZH = {
+  '/': { title: 'TopChinaCar — 中国汽车新时代', desc: '面向海外读者的中国汽车编辑指南：比亚迪、小米、蔚来、小鹏、极氪、吉利——品牌、车型、技术，以及正在重塑全球汽车业的电动革命。' },
+  '/brands': { title: '中国汽车品牌大全 — 比亚迪、吉利、蔚来等 31 个品牌 | TopChinaCar', desc: '30 余家中国车企实地指南：传统集团（比亚迪、吉利、上汽、奇瑞、长城、东风）、新势力（蔚来、小鹏、理想、小米、零跑）及其子品牌——创立时间、总部、主攻方向与出口版图。' },
+  '/models': { title: '中国电动车明星车型 — 续航、价格与参数 | TopChinaCar', desc: '定义新时代的中国电动车：比亚迪海豹、小米 SU7 Ultra、蔚来 ET9、小鹏 G6、理想 MEGA、极氪 001——真实续航、零百加速与美元指导价。' },
+  '/news': { title: '中国汽车出海与电动车行业新闻 | TopChinaCar', desc: '中国汽车出口、新车发布、电池技术与政策动态的精选报道，以及每个工作日更新的出海简报。' },
+  '/tech': { title: '中国电动车技术解读：800V、城市智驾、刀片电池 | TopChinaCar', desc: '深度解读中国汽车领先背后的技术：800V 高压平台、城市级智能驾驶、智能座舱、刀片电池与 CTB 电池车身一体化。' },
+  '/about': { title: '关于 TopChinaCar — 独立的中国汽车编辑报道', desc: 'TopChinaCar 是面向海外读者的独立双语编辑出版物，讲解中国汽车——品牌、车型、技术与人。不吹捧，不贬低。' },
+  '/quote': { title: '进口中国汽车 — 经销商出口与批发报价 | TopChinaCar', desc: '经销商、车队与进口商询价：比亚迪、奇瑞、吉利、MG 等。告诉我们市场、车型与数量——48 小时内由持牌中国出口商提供 FOB/CIF 报价。' },
+  '/privacy': { title: '隐私政策 | TopChinaCar', desc: 'TopChinaCar 如何收集、使用与保护您的信息：询价表单、邮件订阅与网站分析的数据用途说明。' }
+};
+
+
 // Feature story bodies (build-time only — never shipped to the client)
 let SITE_STORIES = [];
 if (fs.existsSync(path.join(ROOT, 'js', 'stories-data.js'))) {
@@ -94,6 +140,11 @@ const PAGES = {
     file: 'quote.html',
     title: 'Import Chinese Cars — Export & Wholesale Quotes for Dealers | TopChinaCar',
     desc: 'Dealer, fleet and importer inquiries for Chinese vehicles: BYD, Chery, Geely, MG and more. Tell us your market, models and volume — FOB/CIF quotes through licensed Chinese exporters within 48 hours.'
+  },
+  '/privacy': {
+    file: 'privacy.html',
+    title: 'Privacy Policy | TopChinaCar',
+    desc: 'How TopChinaCar collects, uses and protects your information: quote inquiries, newsletter subscriptions and site analytics.'
   }
 };
 
@@ -164,6 +215,7 @@ const NEWSLETTER = `<section class="newsletter" aria-label="Newsletter subscript
         <button type="submit" class="newsletter-btn" data-i18n="newsletter.cta">Subscribe</button>
       </form>
       <div class="newsletter-ok" id="newsletterOk" hidden data-i18n="newsletter.success">Thanks — first issue lands tomorrow at 7am.</div>
+      <p style="margin:10px 0 0;font-size:12px;color:#9ca3af;"><span data-i18n="newsletter.privacy1">By subscribing you agree to the</span> <a href="/privacy" data-i18n="footer.privacy" style="color:inherit;text-decoration:underline;">Privacy Policy</a><span data-i18n="newsletter.privacy2">.</span></p>
     </div>
   </div>
 </section>`;
@@ -185,6 +237,7 @@ const FOOTER = `<footer class="site-footer">
       <h4 data-i18n="footer.about">About</h4>
       <a href="/about" data-i18n="nav.about">Our story</a>
       <a href="mailto:hello@topchinacar.com" data-i18n="footer.contact">Contact</a>
+      <a href="/privacy" data-i18n="footer.privacy">Privacy Policy</a>
     </div>
     <div class="footer-col footer-meta">
       <h4 data-i18n="footer.follow">Follow</h4>
@@ -231,11 +284,18 @@ function escAttr(s) {
   return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 }
 
-function pageHTML(route, meta, mainHTML) {
-  const canonical = route === '/' ? SITE + '/' : SITE + route;
+function pageHTML(route, meta, mainHTML, opts = {}) {
+  const isZh = !!opts.zh;
+  const enUrl = route === '/' ? SITE + '/' : SITE + route;
+  const zhUrl = route === '/' ? SITE + '/zh' : SITE + '/zh' + route;
+  const canonical = isZh ? zhUrl : enUrl;
+  const altLinks = opts.noAlt ? '' : `<link rel="alternate" hreflang="en" href="${enUrl}" />
+<link rel="alternate" hreflang="zh-CN" href="${zhUrl}" />
+<link rel="alternate" hreflang="x-default" href="${enUrl}" />
+`;
   meta = { ...meta, title: escAttr(meta.title), desc: escAttr(meta.desc) };
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${isZh ? 'zh' : 'en'}">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -244,7 +304,7 @@ function pageHTML(route, meta, mainHTML) {
 <meta name="author" content="TopChinaCar Editorial" />
 <meta name="theme-color" content="#1a1a1a" />
 <link rel="canonical" href="${canonical}" />
-
+${altLinks}
 <!-- Open Graph -->
 <meta property="og:type" content="${meta.ogType || 'website'}" />
 <meta property="og:site_name" content="TopChinaCar" />
@@ -254,8 +314,8 @@ function pageHTML(route, meta, mainHTML) {
 <meta property="og:image" content="${SITE}/images/hero-xiaomi.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:locale" content="en_US" />
-<meta property="og:locale:alternate" content="zh_CN" />
+<meta property="og:locale" content="${isZh ? 'zh_CN' : 'en_US'}" />
+<meta property="og:locale:alternate" content="${isZh ? 'en_US' : 'zh_CN'}" />
 ${meta.published ? `<meta property="article:published_time" content="${meta.published}" />\n<meta property="article:section" content="China Auto Export" />` : ''}
 
 <!-- Twitter -->
@@ -290,12 +350,16 @@ ${FOOTER}
 `;
 }
 
-// ---- Generate pages ----
+// ---- Generate pages (EN + /zh mirror) ----
 let count = 0;
 for (const [route, meta] of Object.entries(PAGES)) {
   const mainHTML = PAGE_ROUTES[route]();
   fs.writeFileSync(path.join(ROOT, meta.file), pageHTML(route, meta, mainHTML));
-  console.log(`✓ ${meta.file} (${mainHTML.length} chars of prerendered content)`);
+  setSandboxLang('zh');
+  const mainZh = PAGE_ROUTES[route]();
+  setSandboxLang('en');
+  writeZh(meta.file, zhChrome(pageHTML(route, PAGES_ZH[route] || meta, mainZh, { zh: true })));
+  console.log(`✓ ${meta.file} + zh (${mainHTML.length} chars of prerendered content)`);
   count++;
 }
 
@@ -446,16 +510,22 @@ function linkifyBrands(html, lang) {
   return segments.join('');
 }
 
+
 const modelCardHTML = vm.runInContext('modelCardHTML', sandbox);
 for (const b of SITE_DATA.brands) {
   const catEn = (CATEGORY_LABEL[b.category] || CATEGORY_LABEL.group).en;
+  const main = brandMain(b);
   const html = pageHTML(`/brands/${b.id}`, {
     title: `${b.name} (${b.cn}) Export — Models, Markets & Wholesale Quotes | TopChinaCar`,
     desc: `${b.desc_en} ${catEn}, founded ${b.founded}, HQ ${b.hq}. Dealer and fleet export quotes for ${b.name} vehicles through licensed Chinese exporters.`.slice(0, 300)
-  }, brandMain(b)).replace('</head>', brandJsonLd(b) + '\n</head>');
+  }, main).replace('</head>', brandJsonLd(b) + '\n</head>');
   fs.writeFileSync(path.join(BRANDS_OUT, `${b.id}.html`), html);
+  writeZh(`brands/${b.id}.html`, zhChrome(pageHTML(`/brands/${b.id}`, {
+    title: `${b.name}（${b.cn}）出口 — 车型、市场与批发报价 | TopChinaCar`,
+    desc: `${b.desc_zh} 创立于 ${b.founded}，总部 ${b.hq}。通过持牌中国出口商获取 ${b.name} 的经销商与车队出口报价。`.slice(0, 300)
+  }, main, { zh: true }).replace('</head>', brandJsonLd(b) + '\n</head>')));
 }
-console.log(`✓ ${SITE_DATA.brands.length} brand pages → brands/`);
+console.log(`✓ ${SITE_DATA.brands.length} brand pages → brands/ + zh/brands/`);
 
 // ---- Model detail pages (/models/<id>) ----
 const MODELS_OUT = path.join(ROOT, 'models');
@@ -550,14 +620,19 @@ let modelCount = 0;
 for (const m of SITE_DATA.models) {
   if (!m.id) continue;
   const brand = SITE_DATA.brands.find(b => b.name === m.brand);
+  const main = modelMain(m, brand);
   const html = pageHTML(`/models/${m.id}`, {
     title: `${m.brand} ${m.name} Export — Specs, Price & Wholesale Quotes | TopChinaCar`,
     desc: `${m.tag_en} Range ${m.range}, 0-100 km/h ${m.accel}, from ${m.price}. Dealer and fleet export quotes for the ${m.brand} ${m.name} through licensed Chinese exporters.`.slice(0, 300)
-  }, modelMain(m, brand)).replace('</head>', modelJsonLd(m) + '\n</head>');
+  }, main).replace('</head>', modelJsonLd(m) + '\n</head>');
   fs.writeFileSync(path.join(MODELS_OUT, `${m.id}.html`), html);
+  writeZh(`models/${m.id}.html`, zhChrome(pageHTML(`/models/${m.id}`, {
+    title: `${m.brand} ${m.name} 出口 — 参数、价格与批发报价 | TopChinaCar`,
+    desc: `${m.tag_zh} 续航 ${m.range}，零百加速 ${m.accel}，${m.price} 起。通过持牌中国出口商获取 ${m.brand} ${m.name} 的经销商与车队出口报价。`.slice(0, 300)
+  }, main, { zh: true }).replace('</head>', modelJsonLd(m) + '\n</head>')));
   modelCount++;
 }
-console.log(`✓ ${modelCount} model pages → models/`);
+console.log(`✓ ${modelCount} model pages → models/ + zh/models/`);
 
 // ---- Feature story pages (/stories/<slug>) ----
 const STORIES_OUT = path.join(ROOT, 'stories');
@@ -575,6 +650,7 @@ function storyMain(f, s) {
   </section>
   <section style="padding-top:0;">
     <div class="container" style="max-width:820px;">
+      ${bylineHTML(new Date(s.date + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }), s.date)}
       ${f.image ? `<div style="margin:0 0 36px;border-radius:12px;overflow:hidden;position:relative;"><img src="/${f.image}" alt="${f.title_en}" style="width:100%;display:block;" />${f.imageCredit ? `<span class="img-credit">Photo: ${f.imageCredit}</span>` : ''}</div>` : ''}
       <article class="article-body" style="font-size:16px;line-height:1.8;">
         ${langBlock('en', s.html_en)}
@@ -612,23 +688,66 @@ let storyCount = 0;
 for (const s of SITE_STORIES) {
   const f = (SITE_DATA.features || []).find(x => x.slug === s.slug);
   if (!f) { console.error(`✗ story ${s.slug} has no matching features[] entry — skipped`); continue; }
+  const main = storyMain(f, s);
   const html = pageHTML(`/stories/${f.slug}`, {
     title: `${f.title_en} | TopChinaCar`,
     desc: f.desc_en.slice(0, 300),
     ogType: 'article',
     published: s.date
-  }, storyMain(f, s)).replace('</head>', storyJsonLd(f, s) + '\n</head>');
+  }, main).replace('</head>', storyJsonLd(f, s) + '\n</head>');
   fs.writeFileSync(path.join(STORIES_OUT, `${f.slug}.html`), html);
+  writeZh(`stories/${f.slug}.html`, zhChrome(pageHTML(`/stories/${f.slug}`, {
+    title: `${f.title_zh} | TopChinaCar`,
+    desc: f.desc_zh.slice(0, 300),
+    ogType: 'article',
+    published: s.date
+  }, main, { zh: true }).replace('</head>', storyJsonLd(f, s) + '\n</head>')));
   storyCount++;
 }
-if (storyCount) console.log(`✓ ${storyCount} feature stories → stories/`);
+if (storyCount) console.log(`✓ ${storyCount} feature stories → stories/ + zh/stories/`);
 
 // ---- Daily article pages (/news/<slug>) ----
 const NEWS_OUT = path.join(ROOT, 'news');
 if (!fs.existsSync(NEWS_OUT)) fs.mkdirSync(NEWS_OUT);
+// Extract unique external sources (href + label) from article HTML
+function extractSources(html) {
+  const seen = new Set(); const out = [];
+  for (const m of (html || '').matchAll(/<a href="(https?:\/\/[^"]+)">\[?([^<\]]+)\]?<\/a>/g)) {
+    if (seen.has(m[1])) continue;
+    seen.add(m[1]);
+    let host = '';
+    try { host = new URL(m[1]).hostname.replace(/^www\./, ''); } catch (e) {}
+    out.push({ url: m[1], label: m[2].trim(), host });
+  }
+  return out.slice(0, 25);
+}
+
+function sourcesBlockHTML(sources) {
+  if (!sources.length) return '';
+  return `
+      <div style="margin-top:40px;padding-top:24px;border-top:1px solid #e5e7eb;">
+        <h2 style="font-size:16px;margin:0 0 12px;">${langSpan('Sources', '信息来源')}</h2>
+        <ul style="list-style:none;padding:0;margin:0;font-size:13px;line-height:1.9;color:#6b7280;">
+          ${sources.map(s => `<li><a href="${s.url}" rel="noopener" target="_blank" style="color:inherit;">${s.label}</a> <span style="color:#9ca3af;">· ${s.host}</span></li>`).join('\n          ')}
+        </ul>
+      </div>`;
+}
+
+function bylineHTML(dateNice, dateIso) {
+  return `
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 28px;font-family:var(--mono, monospace);font-size:12px;letter-spacing:.06em;color:#6b7280;">
+        <span>${langSpan('By TopChinaCar Editorial', '作者：TopChinaCar 编辑部')}</span>
+        <span>·</span>
+        <span>${langSpan('Published ' + dateNice, '发布于 ' + dateIso)}</span>
+        <span>·</span>
+        <span>${langSpan('Compiled from the primary sources cited below', '基于文末所列一手信源编写')}</span>
+      </div>`;
+}
+
 function articleMain(a) {
   const dateNice = new Date(a.date + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
   const langBlock = (lang, html) => `<div data-lang="${lang}"${lang === 'zh' ? ' hidden' : ''}>${linkifyBrands(html, lang)}</div>`;
+  const sources = extractSources(a.html_en);
   return `
   <section class="page-header">
     <div class="container">
@@ -639,10 +758,12 @@ function articleMain(a) {
   </section>
   <section style="padding-top:0;">
     <div class="container" style="max-width:820px;">
+      ${bylineHTML(dateNice, a.date)}
       <article class="article-body" style="font-size:16px;line-height:1.8;">
         ${langBlock('en', a.html_en)}
         ${langBlock('zh', a.html_zh || a.html_en)}
       </article>
+      ${sourcesBlockHTML(sources)}
       <div style="margin:44px 0 0;padding:26px 28px;background:#f9fafb;border-left:3px solid #d4302a;">
         <h2 style="margin:0 0 8px;font-size:19px;">${langSpan('Import these vehicles', '进口这些车辆')}</h2>
         <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#4b5563;">${langSpan(
@@ -663,6 +784,7 @@ function articleJsonLd(a) {
   "headline": ${JSON.stringify(a.title_en)},
   "description": ${JSON.stringify(a.excerpt_en || a.title_en)},
   "datePublished": "${a.date}",
+  "dateModified": "${a.date}",
   "inLanguage": ["en", "zh-CN"],
   "mainEntityOfPage": "${SITE}/news/${a.slug}",
   "author": {"@type": "Organization", "name": "TopChinaCar", "url": "${SITE}/"},
@@ -673,15 +795,22 @@ function articleJsonLd(a) {
 
 for (const a of articles) {
   const route = `/news/${a.slug}`;
+  const main = articleMain(a);
   const html = pageHTML(route, {
     title: `${a.title_en} | TopChinaCar`,
     desc: (a.excerpt_en || a.title_en).slice(0, 300),
     ogType: 'article',
     published: a.date
-  }, articleMain(a)).replace('</head>', articleJsonLd(a) + '\n</head>');
+  }, main).replace('</head>', articleJsonLd(a) + '\n</head>');
   fs.writeFileSync(path.join(NEWS_OUT, `${a.slug}.html`), html);
+  writeZh(`news/${a.slug}.html`, zhChrome(pageHTML(route, {
+    title: `${a.title_zh || a.title_en} | TopChinaCar`,
+    desc: (a.excerpt_zh || a.excerpt_en || a.title_zh || a.title_en).slice(0, 300),
+    ogType: 'article',
+    published: a.date
+  }, main, { zh: true }).replace('</head>', articleJsonLd(a) + '\n</head>')));
 }
-if (articles.length) console.log(`✓ ${articles.length} article page(s) → news/`);
+if (articles.length) console.log(`✓ ${articles.length} article page(s) → news/ + zh/news/`);
 
 // ---- 404 ----
 const notFoundMain = `
@@ -693,7 +822,7 @@ const notFoundMain = `
     </div>
   </section>`;
 fs.writeFileSync(path.join(ROOT, '404.html'),
-  pageHTML('/', { title: 'Page Not Found | TopChinaCar', desc: 'The page you are looking for does not exist.' }, notFoundMain));
+  pageHTML('/', { title: 'Page Not Found | TopChinaCar', desc: 'The page you are looking for does not exist.' }, notFoundMain, { noAlt: true }));
 console.log('✓ 404.html');
 
 // ---- sitemap.xml ----
@@ -709,9 +838,14 @@ const storyUrls = SITE_STORIES
   .map(s => `  <url><loc>${SITE}/stories/${s.slug}</loc><lastmod>${s.date}</lastmod></url>`);
 const articleUrls = articles.map(a =>
   `  <url><loc>${SITE}/news/${a.slug}</loc><lastmod>${a.date}</lastmod></url>`);
+const enUrlLines = staticUrls.concat(brandUrls, modelUrls, storyUrls, articleUrls);
+const zhUrlLines = enUrlLines.map(l =>
+  l.includes(`<loc>${SITE}/</loc>`)
+    ? l.replace(`<loc>${SITE}/</loc>`, `<loc>${SITE}/zh</loc>`)
+    : l.replace(`<loc>${SITE}/`, `<loc>${SITE}/zh/`));
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticUrls.concat(brandUrls, modelUrls, storyUrls, articleUrls).join('\n')}
+${enUrlLines.concat(zhUrlLines).join('\n')}
 </urlset>
 `;
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemap);

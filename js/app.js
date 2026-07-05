@@ -19,10 +19,15 @@
     }
   }
 
+  // ---- /zh mirror: the URL is the single source of truth for language ----
+  const IS_ZH_PATH = location.pathname === '/zh' || location.pathname.startsWith('/zh/');
+
   // ---- Current route from pathname (null = static page like /news/<slug>) ----
   function currentRoute() {
     let p = location.pathname.replace(/\/+$/, '') || '/';
     p = p.replace(/\.html$/, '');
+    if (p === '/zh') p = '/';
+    else if (p.startsWith('/zh/')) p = p.slice(3);
     if (p === '/index' || p === '') p = '/';
     return PAGE_ROUTES[p] ? p : null;
   }
@@ -35,13 +40,8 @@
     });
   }
 
-  // ---- Language ----
-  const savedLang = (function () {
-    try { return localStorage.getItem('tcc-lang'); } catch (e) { return null; }
-  })();
-  if (savedLang === 'zh' || savedLang === 'en') {
-    document.documentElement.lang = savedLang;
-  }
+  // ---- Language: derived from the URL (/zh/... = Chinese), not from storage ----
+  document.documentElement.lang = IS_ZH_PATH ? 'zh' : 'en';
 
   function applyI18n() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -241,21 +241,19 @@
 
   // ---- Init ----
   function init() {
-    // If a saved language differs from the prerendered default (en), re-render.
-    if (document.documentElement.lang === 'zh') {
-      render();
-    } else {
-      initPage(currentRoute());
-    }
+    // Pages are fully prerendered in the URL's language; just wire up behaviour.
+    initPage(currentRoute());
     initNewsletter();
 
+    // Language toggle navigates to the counterpart URL (/foo ↔ /zh/foo)
     const langToggle = document.getElementById('langToggle');
     if (langToggle) {
       langToggle.addEventListener('click', () => {
-        const next = getLang() === 'en' ? 'zh' : 'en';
-        document.documentElement.lang = next;
-        try { localStorage.setItem('tcc-lang', next); } catch (e) {}
-        render();
+        try { localStorage.setItem('tcc-lang', IS_ZH_PATH ? 'en' : 'zh'); } catch (e) {}
+        const target = IS_ZH_PATH
+          ? (location.pathname.replace(/^\/zh(\/|$)/, '/').replace(/^\/\//, '/') || '/')
+          : (location.pathname === '/' ? '/zh' : '/zh' + location.pathname);
+        location.href = target + location.search;
       });
     }
 

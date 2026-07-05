@@ -39,6 +39,15 @@
 /quote
   Cache-Control: public, max-age=0, must-revalidate
 
+/privacy
+  Cache-Control: public, max-age=0, must-revalidate
+
+/zh
+  Cache-Control: public, max-age=0, must-revalidate
+
+/zh/*
+  Cache-Control: public, max-age=0, must-revalidate
+
 /robots.txt
   Cache-Control: public, max-age=0, must-revalidate
 
