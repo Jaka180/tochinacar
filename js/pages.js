@@ -205,7 +205,7 @@ function pageHome() {
         </div>
         <div class="hero-visual">
           <img src="/images/hero-xiaomi.jpg" alt="Xiaomi SU7 Ultra Prototype" loading="eager" />
-          <span class="img-credit">Photo: Xiaomi</span>
+          <span class="img-credit">Photo: Daniel Lu / CC BY-SA 4.0</span>
         </div>
       </div>
     </div>

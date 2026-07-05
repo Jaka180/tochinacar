@@ -9,7 +9,7 @@ const SITE_DATA = {
       desc_zh: '全球最大新能源车企。从电池到芯片全产业链垂直整合。已进入 96 个国家。',
       subBrands_en: 'Denza, Yangwang, Fang Cheng Bao',
       subBrands_zh: '腾势、仰望、方程豹',
-      image: 'images/byd-brand.jpg', imageCredit: 'Wikipedia'
+      image: 'images/byd-brand.jpg', imageCredit: 'Alexander-93 / CC BY-SA 4.0'
     },
     {
       id: 'nio', name: 'NIO', cn: '蔚来', founded: 2014, hq: 'Shanghai', focus: 'Premium EV',
@@ -17,7 +17,7 @@ const SITE_DATA = {
       colorA: '#1d4ed8', colorB: '#0a0a0a',
       desc_en: 'Premium EV with battery-swap network. Europe push via Norway, Germany, Netherlands. Sub-brands Onvo and Firefly target lower segments.',
       desc_zh: '高端电动车，以换电网络著称。已在挪威、德国、荷兰开拓欧洲市场。乐道与萤火虫品牌覆盖中端。',
-      image: 'images/nio-brand.jpg', imageCredit: 'InsideEVs'
+      image: 'images/nio-brand.jpg', imageCredit: 'Alexander Migl / CC BY-SA 4.0'
     },
     {
       id: 'xpeng', name: 'Xpeng', cn: '小鹏', founded: 2014, hq: 'Guangzhou', focus: 'Smart EV / ADAS',
@@ -25,7 +25,7 @@ const SITE_DATA = {
       colorA: '#22c55e', colorB: '#1a1a1a',
       desc_en: 'Tech-first EV brand with the most advanced city-level autonomous driving in China. Mona and P7+ pushed scale in 2025.',
       desc_zh: '科技优先的电动车品牌，城市智驾领先国内。MONA 与 P7+ 在 2025 年实现规模化。',
-      image: 'images/xpeng-brand.jpg', imageCredit: 'Electrek'
+      image: 'images/xpeng-brand.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
     {
       id: 'li', name: 'Li Auto', cn: '理想', founded: 2015, hq: 'Beijing', focus: 'Family EREV / EV',
@@ -33,7 +33,7 @@ const SITE_DATA = {
       colorA: '#f59e0b', colorB: '#1a1a1a',
       desc_en: 'Family SUV specialist. EREV pioneer with the L-series; MEGA and i-series push pure EV. China\'s most profitable new-energy startup.',
       desc_zh: '家庭 SUV 专家。L 系列开创增程时代，MEGA 与 i 系列拓展纯电。中国最赚钱的新势力车企。',
-      image: 'images/liauto-brand.jpg', imageCredit: 'Car News China'
+      image: 'images/liauto-brand.jpg', imageCredit: 'Matti Blume / CC BY-SA'
     },
     {
       id: 'leapmotor', name: 'Leapmotor', cn: '零跑', founded: 2015, hq: 'Hangzhou', focus: 'Value Smart EV',
@@ -49,7 +49,7 @@ const SITE_DATA = {
       colorA: '#0ea5e9', colorB: '#0a0a0a',
       desc_en: 'Geely\'s premium EV arm. Performance-focused with the 001 shooting brake, 7X SUV and 009 luxury van. Listed on NYSE 2024.',
       desc_zh: '吉利旗下高端电动品牌。001 猎装、7X SUV 与 009 豪华 MPV。2024 年于纽交所上市。',
-      image: 'images/zeekr-brand.jpg', imageCredit: 'Luxurious Magazine'
+      image: 'images/zeekr-brand.jpg', imageCredit: 'Zoerides / CC BY-SA 4.0'
     },
     {
       id: 'geely', name: 'Geely', cn: '吉利', founded: 1986, hq: 'Hangzhou', focus: 'Multi-brand group',
@@ -59,7 +59,7 @@ const SITE_DATA = {
       desc_zh: '沃尔沃、Polestar、路特斯、极氪、领克的母公司。中国最多元化、最具全球版图的汽车集团。',
       subBrands_en: 'Zeekr, Lynk & Co, Volvo, Polestar, Lotus',
       subBrands_zh: '极氪、领克、沃尔沃、Polestar、路特斯',
-      image: 'images/geely-brand.jpg', imageCredit: 'Electrek'
+      image: 'images/geely-brand.jpg', imageCredit: 'Nissangeniss / CC BY-SA 4.0'
     },
     {
       id: 'chery', name: 'Chery', cn: '奇瑞', founded: 1997, hq: 'Wuhu', focus: 'Mass-market export',
@@ -69,7 +69,7 @@ const SITE_DATA = {
       desc_zh: '中国乘用车出口冠军。在俄罗斯、中东、拉美极具优势。旗下包含 Omoda、Jaecoo、星途等品牌。',
       subBrands_en: 'Omoda, Jaecoo, Exeed, iCar',
       subBrands_zh: 'Omoda、Jaecoo、星途、iCar',
-      image: 'images/chery-brand.jpg', imageCredit: 'Car News China'
+      image: 'images/chery-brand.jpg', imageCredit: 'Alexander Migl / CC BY-SA 4.0'
     },
     {
       id: 'xiaomi', name: 'Xiaomi', cn: '小米', founded: 2021, hq: 'Beijing', focus: 'Smart EV',
@@ -87,7 +87,7 @@ const SITE_DATA = {
       desc_zh: '皮卡与越野 SUV 专家。旗下哈弗、坦克、魏牌、欧拉等品牌。澳洲、泰国、巴西重要出口商。',
       subBrands_en: 'Haval, Tank, Wey, Ora',
       subBrands_zh: '哈弗、坦克、魏牌、欧拉',
-      image: 'images/gwm-brand.jpg', imageCredit: 'Motor1'
+      image: 'images/gwm-brand.jpg', imageCredit: 'Throwawayacc222 / CC0'
     },
     {
       id: 'saic', name: 'SAIC', cn: '上汽', founded: 1955, hq: 'Shanghai', focus: 'State automaker',
@@ -97,7 +97,7 @@ const SITE_DATA = {
       desc_zh: '国有汽车巨头。旗下 MG 品牌主攻欧洲，还包括大通、荣威、智己等。',
       subBrands_en: 'MG, Maxus, Roewe, IM Motors',
       subBrands_zh: 'MG、大通、荣威、智己',
-      image: 'images/saic-brand.jpg', imageCredit: 'The Driven'
+      image: 'images/saic-brand.jpg', imageCredit: 'Oleg Yunakov / CC BY-SA 4.0'
     },
     {
       id: 'dongfeng', name: 'Dongfeng', cn: '东风', founded: 1969, hq: 'Wuhan', focus: 'State automaker',
@@ -107,7 +107,7 @@ const SITE_DATA = {
       desc_zh: '国有集团，旗下高端品牌岚图与硬派品牌猛士。2022 年后在俄罗斯市场份额激增。',
       subBrands_en: 'Voyah, M-Hero, Aeolus, Nammi',
       subBrands_zh: '岚图、猛士、风神、纳米',
-      image: 'images/dongfeng-brand.jpg', imageCredit: 'Car News China'
+      image: 'images/dongfeng-brand.jpg', imageCredit: 'Kevauto / CC BY-SA 4.0'
     },
     {
       id: 'haval', name: 'Haval', cn: '哈弗', founded: 2013, hq: 'Baoding', focus: 'SUV',
@@ -115,7 +115,7 @@ const SITE_DATA = {
       colorA: '#eab308', colorB: '#1a1a1a',
       desc_en: 'Great Wall\'s mainstream SUV brand. Best-selling Chinese SUV brand globally — H6 is a phenomenon in emerging markets.',
       desc_zh: '长城旗下主流 SUV 品牌。全球销量最高的中国 SUV 品牌——H6 在新兴市场表现现象级。',
-      image: 'images/haval-brand.jpg', imageCredit: 'Car News China'
+      image: 'images/haval-brand.jpg', imageCredit: 'Nord794ub / CC BY-SA 4.0'
     },
 
     // ===== Geely 旗下 =====
@@ -141,7 +141,7 @@ const SITE_DATA = {
       colorA: '#1e3a8a', colorB: '#0a0a0a',
       desc_en: 'Swedish heritage brand owned by Geely since 2010. Pivoting fully electric with the EX90 flagship and the EX30 compact — built in China for global markets.',
       desc_zh: '瑞典传统豪华品牌，2010 年起归属吉利。以 EX90 旗舰与 EX30 紧凑车型全面电动化，在中国生产、销往全球。',
-      image: 'images/volvo-ex90.jpg', imageCredit: 'Motor1'
+      image: 'images/volvo-ex90.jpg', imageCredit: 'Matti Blume / CC BY-SA'
     },
     {
       id: 'lotus', name: 'Lotus', cn: '路特斯', founded: 1948, hq: 'Hethel', focus: 'Sports / Hyper EV',
@@ -149,7 +149,7 @@ const SITE_DATA = {
       colorA: '#facc15', colorB: '#0a0a0a',
       desc_en: 'British sports-car legend revived by Geely. The Eletre hyper-SUV and Emeya GT mark the all-electric reinvention; the Evija remains its 2,000 hp halo.',
       desc_zh: '英国跑车传奇，由吉利复兴。Eletre 超级 SUV 与 Emeya GT 代表全电动转型，Evija 仍是 2,000 马力的品牌图腾。',
-      image: 'images/lotus-eletre.jpg', imageCredit: 'Top Gear'
+      image: 'images/lotus-eletre.jpg', imageCredit: 'Alexander Migl / CC BY-SA 4.0'
     },
 
     // ===== Great Wall 旗下 =====
@@ -159,7 +159,7 @@ const SITE_DATA = {
       colorA: '#65a30d', colorB: '#1a1a1a',
       desc_en: 'Great Wall\'s off-road sub-brand. The boxy Tank 300, 500 and 700 channel Defender and G-Wagon DNA — and dominate China\'s overlanding boom.',
       desc_zh: '长城旗下硬派越野品牌。坦克 300、500、700 方盒子造型对标卫士与大 G，主导国内越野潮流。',
-      image: 'images/tank-500.jpg', imageCredit: 'Motor1'
+      image: 'images/tank-500.jpg', imageCredit: 'Matti Blume / CC BY-SA'
     },
     {
       id: 'wey', name: 'Wey', cn: '魏牌', founded: 2016, hq: 'Baoding', focus: 'Premium PHEV',
@@ -167,7 +167,7 @@ const SITE_DATA = {
       colorA: '#b45309', colorB: '#1a1a1a',
       desc_en: 'Great Wall\'s premium PHEV brand named after founder Wei Jianjun. The Blue Mountain (Lanshan) flagship targets Li Auto\'s family-SUV territory.',
       desc_zh: '长城旗下高端插混品牌，得名于创始人魏建军。蓝山旗舰直接对标理想 L8，主攻家庭 SUV 市场。',
-      image: 'images/wey-lanshan.jpg', imageCredit: 'CarExpert'
+      image: 'images/wey-lanshan.jpg', imageCredit: 'JustAnotherCarDesigner / CC BY-SA 4.0'
     },
     {
       id: 'ora', name: 'Ora', cn: '欧拉', founded: 2018, hq: 'Baoding', focus: 'Female-focused EV',
@@ -175,7 +175,7 @@ const SITE_DATA = {
       colorA: '#ec4899', colorB: '#1a1a1a',
       desc_en: 'Retro-styled compact EV brand from Great Wall, positioned for younger and female drivers. The Good Cat became a viral success in Thailand and Australia.',
       desc_zh: '长城旗下复古风格的紧凑电动车品牌，主打年轻与女性用户。好猫在泰国、澳洲走红出圈。',
-      image: 'images/ora-good-cat.jpg', imageCredit: 'Car and Driver'
+      image: 'images/ora-good-cat.jpg', imageCredit: 'Calreyn88 / CC BY-SA 4.0'
     },
 
     // ===== BYD 旗下 =====
@@ -185,7 +185,7 @@ const SITE_DATA = {
       colorA: '#9333ea', colorB: '#0a0a0a',
       desc_en: 'Originally a BYD–Mercedes joint venture, now fully under BYD. The N7 SUV, D9 luxury MPV and Z9GT shooting brake anchor the premium NEV push.',
       desc_zh: '原为比亚迪与奔驰合资品牌，现完全归属比亚迪。N7 SUV、D9 豪华 MPV 与 Z9GT 猎装锚定高端新能源阵地。',
-      image: 'images/denza-z9gt.jpg', imageCredit: 'Top Gear'
+      image: 'images/denza-z9gt.jpg', imageCredit: 'Calreyn88 / CC BY 4.0'
     },
     {
       id: 'yangwang', name: 'Yangwang', cn: '仰望', founded: 2023, hq: 'Shenzhen', focus: 'Ultra-luxury NEV',
@@ -193,7 +193,7 @@ const SITE_DATA = {
       colorA: '#a16207', colorB: '#0a0a0a',
       desc_en: 'BYD\'s ultra-luxury halo brand. The U8 SUV can tank-turn and float on water; the U9 supercar hits 309 km/h. Quad-motor e4 platform showcases BYD\'s tech ceiling.',
       desc_zh: '比亚迪的超豪华图腾品牌。U8 SUV 可原地掉头与浮水，U9 超跑突破 309 km/h。四电机 e4 平台展示比亚迪技术天花板。',
-      image: 'images/yangwang-u8.jpg', imageCredit: 'Top Gear'
+      image: 'images/yangwang-u8.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
     {
       id: 'fangchengbao', name: 'Fang Cheng Bao', cn: '方程豹', founded: 2023, hq: 'Shenzhen', focus: 'Adventure SUV',
@@ -201,7 +201,7 @@ const SITE_DATA = {
       colorA: '#16a34a', colorB: '#1a1a1a',
       desc_en: 'BYD\'s personality-driven adventure brand. The boxy Bao 5 and Bao 8 PHEVs sit between Tank and Yangwang — built on the DMO super-hybrid off-road platform.',
       desc_zh: '比亚迪旗下个性化越野品牌。豹 5、豹 8 插混定位于坦克与仰望之间，基于 DMO 超级混动越野平台打造。',
-      image: 'images/fangchengbao-5.jpg', imageCredit: 'Top Gear'
+      image: 'images/fangchengbao-5.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
 
     // ===== SAIC 旗下 =====
@@ -211,7 +211,7 @@ const SITE_DATA = {
       colorA: '#dc2626', colorB: '#0a0a0a',
       desc_en: 'British sports-car heritage brand acquired by SAIC in 2007. Now China\'s most successful export brand in Europe — Cyberster revives the convertible roadster, electric.',
       desc_zh: '英国跑车传统品牌，2007 年被上汽收购。如今是中国在欧洲最成功的出口品牌，Cyberster 让敞篷跑车以电动形式重生。',
-      image: 'images/mg-cyberster.jpg', imageCredit: 'Top Gear'
+      image: 'images/mg-cyberster.jpg', imageCredit: 'Alexander-93 / CC BY-SA 4.0'
     },
     {
       id: 'maxus', name: 'Maxus', cn: '大通', founded: 2011, hq: 'Shanghai', focus: 'Commercial / MPV',
@@ -219,7 +219,7 @@ const SITE_DATA = {
       colorA: '#0891b2', colorB: '#0a0a0a',
       desc_en: 'SAIC\'s commercial-vehicle and MPV arm. The Mifa 9 luxury electric people-mover and electric pickups have made it a major fleet export brand.',
       desc_zh: '上汽旗下商用与 MPV 品牌。Mifa 9 豪华电动 MPV 与电动皮卡使其成为重要的商用车出口品牌。',
-      image: 'images/maxus-mifa9.jpg', imageCredit: 'Car and Driver'
+      image: 'images/maxus-mifa9.jpg', imageCredit: 'Calreyn88 / CC BY-SA 4.0'
     },
     {
       id: 'im', name: 'IM Motors', cn: '智己', founded: 2020, hq: 'Shanghai', focus: 'Smart Luxury EV',
@@ -227,7 +227,7 @@ const SITE_DATA = {
       colorA: '#0369a1', colorB: '#0a0a0a',
       desc_en: 'A SAIC + Alibaba + Zhangjiang joint venture targeting smart-luxury EVs. The LS6 SUV and L6 sedan with semi-solid-state batteries showcase next-gen tech.',
       desc_zh: '上汽、阿里巴巴与张江高科合资的高端智能电动品牌。LS6 SUV 与搭载半固态电池的 L6 轿车展示下一代技术。',
-      image: 'images/im-ls6.jpg', imageCredit: 'CnEVPost'
+      image: 'images/im-ls6.jpg', imageCredit: 'Alexander-93 / CC BY-SA 4.0'
     },
 
     // ===== Dongfeng 旗下 =====
@@ -237,7 +237,7 @@ const SITE_DATA = {
       colorA: '#7c3aed', colorB: '#0a0a0a',
       desc_en: 'Dongfeng\'s premium new-energy brand. The Free SUV, Dreamer MPV and Zhuiguang sedan compete head-on with NIO and Li Auto in the 300-500k RMB segment.',
       desc_zh: '东风旗下高端新能源品牌。FREE SUV、梦想家 MPV 与追光轿车在 30-50 万元区间与蔚来、理想正面竞争。',
-      image: 'images/voyah-free.jpg', imageCredit: 'Car News China'
+      image: 'images/voyah-free.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
     {
       id: 'mhero', name: 'M-Hero', cn: '猛士', founded: 2022, hq: 'Wuhan', focus: 'Hardcore off-road',
@@ -245,7 +245,7 @@ const SITE_DATA = {
       colorA: '#78350f', colorB: '#1a1a1a',
       desc_en: 'Dongfeng\'s ultra-luxury off-road brand rooted in military vehicle heritage. The M-Hero 917 is a 4-motor 1,088 hp electric Defender-fighter.',
       desc_zh: '东风旗下超豪华越野品牌，源自军车血统。猛士 917 为四电机 1,088 马力电动硬派越野，对标卫士。',
-      image: 'images/mhero-917.jpg', imageCredit: 'Motor1'
+      image: 'images/mhero-917.jpg', imageCredit: 'JustAnotherCarDesigner / CC BY-SA 4.0'
     },
 
     // ===== Chery 旗下 =====
@@ -255,7 +255,7 @@ const SITE_DATA = {
       colorA: '#0d9488', colorB: '#0a0a0a',
       desc_en: 'Chery\'s global-first crossover brand. The Omoda 5 and electric E5 spearhead expansion into the UK, Australia, Latin America and the Middle East.',
       desc_zh: '奇瑞旗下面向全球市场的跨界品牌。Omoda 5 与纯电 E5 主攻英国、澳洲、拉美与中东市场。',
-      image: 'images/omoda-e5.jpg', imageCredit: 'The Driven'
+      image: 'images/omoda-e5.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
     {
       id: 'jaecoo', name: 'Jaecoo', cn: '捷酷', founded: 2023, hq: 'Wuhu', focus: 'Rugged SUV',
@@ -263,7 +263,7 @@ const SITE_DATA = {
       colorA: '#365314', colorB: '#0a0a0a',
       desc_en: 'Chery\'s rugged-design SUV brand, a sister to Omoda. The Jaecoo 7 PHEV launched in the UK and Europe with 1,200 km combined range.',
       desc_zh: '奇瑞旗下硬派造型 SUV 品牌，与 Omoda 互为兄弟。Jaecoo 7 插混在英国与欧洲上市，综合续航达 1,200 公里。',
-      image: 'images/jaecoo-7.jpg', imageCredit: 'Top Gear'
+      image: 'images/jaecoo-7.jpg', imageCredit: 'Calreyn88 / CC BY-SA 4.0'
     },
     {
       id: 'exeed', name: 'Exeed', cn: '星途', founded: 2018, hq: 'Wuhu', focus: 'Premium SUV',
@@ -271,7 +271,7 @@ const SITE_DATA = {
       colorA: '#be123c', colorB: '#0a0a0a',
       desc_en: 'Chery\'s premium SUV brand. The Exeed VX flagship and Yaoguang/Lanyue line aim upmarket with E0X EV platform and Huawei smart-cabin integration.',
       desc_zh: '奇瑞旗下高端 SUV 品牌。星途 VX 旗舰与瑶光、揽月系列基于 E0X 平台、搭载华为座舱冲击高端市场。',
-      image: 'images/exeed-vx.jpg', imageCredit: 'Car News China'
+      image: 'images/exeed-vx.jpg', imageCredit: 'Retired electrician / CC0'
     }
   ],
 
@@ -291,35 +291,40 @@ const SITE_DATA = {
       tag_en: 'The world\'s most disruptive small EV — exported as the Dolphin Mini.',
       tag_zh: '全球最具颠覆性的小型电动车——海外以 Dolphin Mini 之名出口。',
       range: '405 km', accel: '~12 s', price: 'US$9,600', priceLocal: '¥69,800 China',
-      colorA: '#0ea5e9', shape: 'suv'
+      colorA: '#0ea5e9', shape: 'suv',
+      image: 'images/byd-seagull.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
     {
       id: 'byd-atto-3', brand: 'BYD', name: 'Atto 3',
       tag_en: 'BYD\'s global bestseller — the compact SUV that opened 70+ export markets.',
       tag_zh: '比亚迪全球出口主力——打开 70 多个海外市场的紧凑型 SUV。',
       range: '510 km', accel: '7.3 s', price: 'US$16,500', priceLocal: '¥119,800 China',
-      colorA: '#d4302a', shape: 'suv'
+      colorA: '#d4302a', shape: 'suv',
+      image: 'images/byd-atto-3.jpg', imageCredit: 'Calreyn88 / CC BY-SA 4.0'
     },
     {
       id: 'byd-sealion-07', brand: 'BYD', name: 'Sealion 07',
       tag_en: 'Ocean-series coupe SUV aimed squarely at the Tesla Model Y.',
       tag_zh: '海洋网轿跑 SUV，直接对标特斯拉 Model Y。',
       range: '610 km', accel: '4.5 s', price: 'US$26,200', priceLocal: '¥189,800 China',
-      colorA: '#1d4ed8', shape: 'suv'
+      colorA: '#1d4ed8', shape: 'suv',
+      image: 'images/byd-sealion-07.jpg', imageCredit: 'Alexander Migl / CC BY-SA 4.0'
     },
     {
       id: 'byd-han', brand: 'BYD', name: 'Han',
       tag_en: 'The flagship sedan that proved a Chinese brand could sell above ¥200K.',
       tag_zh: '证明中国品牌能站稳 20 万元以上市场的旗舰轿车。',
       range: '605 km', accel: '3.9 s', price: 'US$29,000', priceLocal: '¥209,800 China',
-      colorA: '#111827', shape: 'sedan-long'
+      colorA: '#111827', shape: 'sedan-long',
+      image: 'images/byd-han.jpg', imageCredit: 'Alexander-93 / CC BY-SA 4.0'
     },
     {
       id: 'byd-shark-6', brand: 'BYD', name: 'Shark 6',
       tag_en: 'PHEV pickup built for Australia and Latin America — a Hilux fighter.',
       tag_zh: '为澳洲与拉美打造的插混皮卡，直面 Hilux。',
       range: '100 km EV / 800+ km', accel: '5.7 s', price: 'US$38,200', priceLocal: 'A$57,900 AU',
-      colorA: '#374151', shape: 'suv'
+      colorA: '#374151', shape: 'suv',
+      image: 'images/byd-shark-6.jpg', imageCredit: 'Ethan Llamas / CC BY-SA 4.0'
     },
     // ---- Xiaomi ----
     {
@@ -327,7 +332,8 @@ const SITE_DATA = {
       tag_en: 'The phone-maker\'s first car — 700 km of range and a cult following overnight.',
       tag_zh: '手机厂商的第一台车——700 公里续航，一夜之间成为现象级爆款。',
       range: '700 km', accel: '5.28 s', price: 'US$29,800', priceLocal: '¥215,900 China',
-      colorA: '#f97316', shape: 'sedan'
+      colorA: '#f97316', shape: 'sedan',
+      image: 'images/xiaomi-su7.jpg', imageCredit: 'Benlisquare / CC BY-SA 4.0'
     },
     {
       id: 'xiaomi-su7-ultra', brand: 'Xiaomi', name: 'SU7 Ultra',
@@ -336,7 +342,7 @@ const SITE_DATA = {
       range: '630 km', accel: '1.98 s', price: 'US$73,100', priceLocal: '¥529,900 China',
       colorA: '#f97316', shape: 'sedan',
       image: 'images/xiaomi-su7-ultra.jpg',
-      imageCredit: 'Top Gear'
+      imageCredit: 'Daniel Lu (User:dllu) / CC BY-SA 4.0'
     },
     // ---- NIO family ----
     {
@@ -344,7 +350,8 @@ const SITE_DATA = {
       tag_en: 'The volume NIO — swap-capable compact sedan sold across Europe.',
       tag_zh: '蔚来走量担当——支持换电、已进入欧洲多国的中型轿车。',
       range: '560 km', accel: '4.0 s', price: 'US$41,100', priceLocal: '¥298,000 China',
-      colorA: '#1d4ed8', shape: 'sedan'
+      colorA: '#1d4ed8', shape: 'sedan',
+      image: 'images/nio-et5.jpg', imageCredit: 'conceptphoto.info / CC BY 2.0'
     },
     {
       id: 'nio-et9', brand: 'NIO', name: 'ET9',
@@ -352,21 +359,23 @@ const SITE_DATA = {
       tag_zh: '搭载 925V 高压平台与线控转向的旗舰轿车。',
       range: '650 km', accel: '4.3 s', price: 'US$108,700', priceLocal: '¥788,000 China',
       colorA: '#1d4ed8', shape: 'sedan-long',
-      image: 'images/nio-et9.jpg', imageCredit: 'Car and Driver'
+      image: 'images/nio-et9.jpg', imageCredit: 'S5A-0043 / CC BY 4.0'
     },
     {
       id: 'nio-onvo-l60', brand: 'NIO', name: 'Onvo L60',
       tag_en: 'NIO\'s family-SUV sub-brand debut, priced under the Model Y.',
       tag_zh: '蔚来子品牌乐道首款家用 SUV，定价低于 Model Y。',
       range: '555 km', accel: '5.9 s', price: 'US$28,600', priceLocal: '¥206,900 China',
-      colorA: '#0ea5e9', shape: 'suv'
+      colorA: '#0ea5e9', shape: 'suv',
+      image: 'images/nio-onvo-l60.jpg', imageCredit: 'Tim Wu / CC BY-SA 4.0'
     },
     {
       id: 'nio-firefly', brand: 'NIO', name: 'Firefly',
       tag_en: 'NIO\'s premium small EV for Europe-first expansion.',
       tag_zh: '蔚来面向欧洲市场的高端小车品牌萤火虫。',
       range: '420 km', accel: '~8 s', price: 'US$16,500', priceLocal: '¥119,800 China',
-      colorA: '#22c55e', shape: 'suv'
+      colorA: '#22c55e', shape: 'suv',
+      image: 'images/nio-firefly.jpg', imageCredit: 'Matti Blume / CC BY-SA'
     },
     // ---- Xpeng ----
     {
@@ -375,14 +384,15 @@ const SITE_DATA = {
       tag_zh: '搭载行业领先 800V 高压架构与 XNGP 城市智驾的轿跑 SUV。',
       range: '755 km', accel: '3.9 s', price: 'US$27,600', priceLocal: '¥199,800 China',
       colorA: '#22c55e', shape: 'suv',
-      image: 'images/xpeng-g6.jpg', imageCredit: 'Top Gear'
+      image: 'images/xpeng-g6.jpg', imageCredit: 'Alexander-93 / CC BY-SA 4.0'
     },
     {
       id: 'xpeng-mona-m03', brand: 'Xpeng', name: 'Mona M03',
       tag_en: 'The sub-¥120K smart sedan that made city-level ADAS affordable.',
       tag_zh: '不到 12 万元的智能轿车，让城市级智驾走进大众市场。',
       range: '515 km', accel: '~7.5 s', price: 'US$16,500', priceLocal: '¥119,800 China',
-      colorA: '#22c55e', shape: 'sedan'
+      colorA: '#22c55e', shape: 'sedan',
+      image: 'images/xpeng-mona-m03.jpg', imageCredit: 'S5A-0043 / CC BY 4.0'
     },
     // ---- Li Auto ----
     {
@@ -391,14 +401,15 @@ const SITE_DATA = {
       tag_zh: '高铁造型 MPV。今年最具话题性的设计宣言。',
       range: '710 km', accel: '5.5 s', price: 'US$77,300', priceLocal: '¥559,800 China',
       colorA: '#f59e0b', shape: 'mpv',
-      image: 'images/liauto-mega.jpg', imageCredit: 'Electrek'
+      image: 'images/liauto-mega.jpg', imageCredit: '4300streetcar / CC BY 4.0'
     },
     {
       id: 'li-l6', brand: 'Li Auto', name: 'L6',
       tag_en: 'The five-seat EREV SUV that made Li Auto a volume player.',
       tag_zh: '让理想真正走量的五座增程 SUV。',
       range: '1,390 km (EREV)', accel: '5.4 s', price: 'US$34,500', priceLocal: '¥249,800 China',
-      colorA: '#f59e0b', shape: 'suv'
+      colorA: '#f59e0b', shape: 'suv',
+      image: 'images/li-l6.jpg', imageCredit: 'Ethan Llamas / CC BY-SA 4.0'
     },
     // ---- Zeekr / Lynk & Co ----
     {
@@ -407,14 +418,15 @@ const SITE_DATA = {
       tag_zh: '高性能猎装车。三分之一价格的保时捷 Panamera Sport Turismo。',
       range: '750 km', accel: '3.3 s', price: 'US$37,100', priceLocal: '¥269,000 China',
       colorA: '#0ea5e9', shape: 'wagon',
-      image: 'images/zeekr-001.jpg', imageCredit: 'Top Gear'
+      image: 'images/zeekr-001.jpg', imageCredit: 'Юрий Д.К. / CC BY 4.0'
     },
     {
       id: 'zeekr-7x', brand: 'Zeekr', name: '7X',
       tag_en: 'Mid-size SUV with 800V and a 10-minute 10–80% charge — Europe-bound.',
       tag_zh: '800V 平台、10 分钟 10–80% 快充的中型 SUV，正进军欧洲。',
       range: '780 km', accel: '3.8 s', price: 'US$31,700', priceLocal: '¥229,900 China',
-      colorA: '#0ea5e9', shape: 'suv'
+      colorA: '#0ea5e9', shape: 'suv',
+      image: 'images/zeekr-7x.jpg', imageCredit: 'Ethan Llamas / CC BY-SA 4.0'
     },
     {
       id: 'lynkco-09', brand: 'Lynk & Co', name: '09',
@@ -430,14 +442,16 @@ const SITE_DATA = {
       tag_en: 'Geely\'s global compact e-SUV — sold as the EX5 in 50+ markets.',
       tag_zh: '吉利全球化紧凑纯电 SUV——海外以 EX5 之名进入 50 多国。',
       range: '530 km', accel: '~7 s', price: 'US$15,200', priceLocal: '¥109,800 China',
-      colorA: '#7c3aed', shape: 'suv'
+      colorA: '#7c3aed', shape: 'suv',
+      image: 'images/geely-galaxy-e5.jpg', imageCredit: 'JustAnotherCarDesigner / CC0'
     },
     {
       id: 'geely-starship-7', brand: 'Geely', name: 'Galaxy Starship 7',
       tag_en: 'Super-hybrid SUV rolling out across 57 countries, Brazil assembly planned.',
       tag_zh: '进入 57 国的超级混动 SUV，计划在巴西本地组装。',
       range: '120 km EV / 1,400+ km', accel: '~8 s', price: 'US$13,800', priceLocal: '¥99,800 China',
-      colorA: '#7c3aed', shape: 'suv'
+      colorA: '#7c3aed', shape: 'suv',
+      image: 'images/geely-starship-7.jpg', imageCredit: 'Ethan Llamas / CC BY-SA 4.0'
     },
     // ---- Great Wall family ----
     {
@@ -446,14 +460,15 @@ const SITE_DATA = {
       tag_zh: '海外销量第一的中国 SUV——从曼谷到巴西利亚随处可见。',
       range: 'ICE · HEV · PHEV', accel: '~8 s', price: 'US$13,600', priceLocal: '¥98,900 China',
       colorA: '#374151', shape: 'suv',
-      image: 'images/haval-brand.jpg', imageCredit: 'GWM'
+      image: 'images/haval-brand.jpg', imageCredit: 'Nord794ub / CC BY-SA 4.0'
     },
     {
       id: 'tank-300', brand: 'Tank', name: '300',
       tag_en: 'The retro off-roader that started China\'s overlanding boom.',
       tag_zh: '掀起中国越野热潮的复古硬派 SUV。',
       range: 'ICE · Hi4-T PHEV', accel: '~9 s', price: 'US$27,600', priceLocal: '¥199,800 China',
-      colorA: '#374151', shape: 'suv'
+      colorA: '#374151', shape: 'suv',
+      image: 'images/tank-300.jpg', imageCredit: 'Jengtingchen / CC BY-SA 4.0'
     },
     {
       id: 'ora-good-cat', brand: 'Ora', name: 'Good Cat',
@@ -461,7 +476,7 @@ const SITE_DATA = {
       tag_zh: '复古造型小车，在泰国与澳洲成为爆款。',
       range: '501 km', accel: '~8.5 s', price: '~US$14,300', priceLocal: '¥103,900 China',
       colorA: '#22c55e', shape: 'suv',
-      image: 'images/ora-good-cat.jpg', imageCredit: 'GWM Ora'
+      image: 'images/ora-good-cat.jpg', imageCredit: 'Calreyn88 / CC BY-SA 4.0'
     },
     {
       id: 'wey-lanshan', brand: 'Wey', name: 'Blue Mountain',
@@ -469,7 +484,7 @@ const SITE_DATA = {
       tag_zh: '长城高端插混旗舰蓝山，直指理想的家庭市场。',
       range: '180 km EV / 1,200 km', accel: '4.9 s', price: 'US$37,800', priceLocal: '¥273,800 China',
       colorA: '#111827', shape: 'suv',
-      image: 'images/wey-lanshan.jpg', imageCredit: 'GWM Wey'
+      image: 'images/wey-lanshan.jpg', imageCredit: 'JustAnotherCarDesigner / CC BY-SA 4.0'
     },
     // ---- SAIC family ----
     {
@@ -477,7 +492,8 @@ const SITE_DATA = {
       tag_en: 'Europe\'s best-selling Chinese EV — rear-drive, honest, affordable.',
       tag_zh: '欧洲最畅销的中国电动车——后驱、扎实、亲民。',
       range: '450 km (WLTP)', accel: '7.7 s', price: 'US$34,600', priceLocal: '£26,995 UK',
-      colorA: '#d4302a', shape: 'suv'
+      colorA: '#d4302a', shape: 'suv',
+      image: 'images/mg-mg4.jpg', imageCredit: 'Alexander-93 / CC BY-SA 4.0'
     },
     {
       id: 'mg-cyberster', brand: 'MG', name: 'Cyberster',
@@ -485,7 +501,7 @@ const SITE_DATA = {
       tag_zh: '复活 MG 英伦跑车之魂的电动敞篷。',
       range: '580 km', accel: '3.2 s', price: 'US$44,100', priceLocal: '¥319,800 China',
       colorA: '#d4302a', shape: 'sedan',
-      image: 'images/mg-cyberster.jpg', imageCredit: 'MG'
+      image: 'images/mg-cyberster.jpg', imageCredit: 'Alexander-93 / CC BY-SA 4.0'
     },
     {
       id: 'maxus-mifa-9', brand: 'Maxus', name: 'Mifa 9',
@@ -493,7 +509,7 @@ const SITE_DATA = {
       tag_zh: '豪华纯电 MPV——从奥斯陆到悉尼的车队宠儿。',
       range: '560 km', accel: '~8 s', price: 'US$37,200', priceLocal: '¥269,900 China',
       colorA: '#0ea5e9', shape: 'mpv',
-      image: 'images/maxus-mifa9.jpg', imageCredit: 'SAIC Maxus'
+      image: 'images/maxus-mifa9.jpg', imageCredit: 'Calreyn88 / CC BY-SA 4.0'
     },
     {
       id: 'im-ls6', brand: 'IM Motors', name: 'LS6',
@@ -501,7 +517,7 @@ const SITE_DATA = {
       tag_zh: '800V 平台 + 激光雷达城市智驾的智己主力 SUV。',
       range: '760 km', accel: '3.5 s', price: 'US$29,700', priceLocal: '¥214,900 China',
       colorA: '#7c3aed', shape: 'suv',
-      image: 'images/im-ls6.jpg', imageCredit: 'IM Motors'
+      image: 'images/im-ls6.jpg', imageCredit: 'Alexander-93 / CC BY-SA 4.0'
     },
     // ---- Dongfeng family ----
     {
@@ -510,7 +526,7 @@ const SITE_DATA = {
       tag_zh: '高端增程 SUV——东风借道 Stellantis 进军欧洲的先锋。',
       range: '106 km EV / 860 km', accel: '4.5 s', price: 'US$30,300', priceLocal: '¥219,900 China',
       colorA: '#1d4ed8', shape: 'suv',
-      image: 'images/voyah-free.jpg', imageCredit: 'Voyah'
+      image: 'images/voyah-free.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
     {
       id: 'mhero-917', brand: 'M-Hero', name: '917',
@@ -518,7 +534,7 @@ const SITE_DATA = {
       tag_zh: '1,088 马力四电机硬派越野，军车基因。',
       range: '200 km EV / 800 km', accel: '4.2 s', price: 'US$88,000', priceLocal: '¥637,700 China',
       colorA: '#374151', shape: 'suv',
-      image: 'images/mhero-917.jpg', imageCredit: 'M-Hero'
+      image: 'images/mhero-917.jpg', imageCredit: 'JustAnotherCarDesigner / CC BY-SA 4.0'
     },
     // ---- Chery family ----
     {
@@ -527,7 +543,7 @@ const SITE_DATA = {
       tag_zh: '奇瑞出口主力 7 座 SUV，横扫俄罗斯、中东与拉美。',
       range: 'ICE · PHEV', accel: '~8 s', price: '~US$17,900', priceLocal: '¥129,900 China',
       colorA: '#d4302a', shape: 'suv',
-      image: 'images/chery-brand.jpg', imageCredit: 'Chery'
+      image: 'images/chery-tiggo-8.jpg', imageCredit: 'Matti Blume / CC BY-SA 4.0'
     },
     {
       id: 'omoda-e5', brand: 'Omoda', name: 'E5',
@@ -535,7 +551,7 @@ const SITE_DATA = {
       tag_zh: '奇瑞全球化战略的纯电跨界车，主攻英国、欧盟与澳洲。',
       range: '430 km (WLTP)', accel: '~7.5 s', price: 'US$42,300', priceLocal: '£33,055 UK',
       colorA: '#22c55e', shape: 'suv',
-      image: 'images/omoda-e5.jpg', imageCredit: 'Omoda'
+      image: 'images/omoda-e5.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
     {
       id: 'jaecoo-7', brand: 'Jaecoo', name: '7 PHEV',
@@ -543,7 +559,7 @@ const SITE_DATA = {
       tag_zh: '硬派设计 + 1,200 公里综合续航,在英国一炮而红。',
       range: '90 km EV / 1,200 km', accel: '~8.5 s', price: 'US$44,900', priceLocal: '£35,065 UK',
       colorA: '#374151', shape: 'suv',
-      image: 'images/jaecoo-7.jpg', imageCredit: 'Jaecoo'
+      image: 'images/jaecoo-7.jpg', imageCredit: 'Calreyn88 / CC BY-SA 4.0'
     },
     // ---- Leapmotor ----
     {
@@ -559,7 +575,8 @@ const SITE_DATA = {
       tag_en: 'The first Chinese EV built in Spain — Stellantis\'s Zaragoza plant.',
       tag_zh: '首批在西班牙本土生产的中国电动车——Stellantis 萨拉戈萨工厂出品。',
       range: '600 km', accel: '~7 s', price: 'US$13,800', priceLocal: '¥99,800 China',
-      colorA: '#0ea5e9', shape: 'suv'
+      colorA: '#0ea5e9', shape: 'suv',
+      image: 'images/leapmotor-b10.jpg', imageCredit: 'Alexander-93 / CC BY-SA 4.0'
     },
     // ---- Geely premium brands ----
     {
@@ -575,7 +592,8 @@ const SITE_DATA = {
       tag_en: 'Volvo\'s China-built compact EV — its fastest car ever, at its lowest price.',
       tag_zh: '沃尔沃在华制造的紧凑电动车——史上最快，也最亲民。',
       range: '480 km (WLTP)', accel: '3.6 s', price: 'US$40,200', priceLocal: '€36,590 EU',
-      colorA: '#1d4ed8', shape: 'suv'
+      colorA: '#1d4ed8', shape: 'suv',
+      image: 'images/volvo-ex30.jpg', imageCredit: 'Alexander-93 / CC BY-SA 4.0'
     },
     {
       id: 'lotus-eletre', brand: 'Lotus', name: 'Eletre',
@@ -583,7 +601,7 @@ const SITE_DATA = {
       tag_zh: '905 马力的超级 SUV，查普曼血统，武汉制造。',
       range: '650 km', accel: '2.95 s', price: 'US$92,200', priceLocal: '¥668,000 China',
       colorA: '#f59e0b', shape: 'suv',
-      image: 'images/lotus-eletre.jpg', imageCredit: 'Lotus'
+      image: 'images/lotus-eletre.jpg', imageCredit: 'Alexander Migl / CC BY-SA 4.0'
     },
     // ---- BYD premium brands ----
     {
@@ -592,7 +610,7 @@ const SITE_DATA = {
       tag_zh: '三电机 + 后轮转向的猎装旗舰，腾势的技术名片。',
       range: '630 km', accel: '3.4 s', price: 'US$46,200', priceLocal: '¥334,800 China',
       colorA: '#111827', shape: 'wagon',
-      image: 'images/denza-z9gt.jpg', imageCredit: 'Denza'
+      image: 'images/denza-z9gt.jpg', imageCredit: 'Calreyn88 / CC BY 4.0'
     },
     {
       id: 'yangwang-u8', brand: 'Yangwang', name: 'U8',
@@ -600,7 +618,7 @@ const SITE_DATA = {
       tag_zh: '能原地掉头、能浮水的 SUV——比亚迪的百万级宣言。',
       range: '180 km EV / 1,000 km', accel: '3.6 s', price: 'US$151,500', priceLocal: '¥1,098,000 China',
       colorA: '#f59e0b', shape: 'suv',
-      image: 'images/yangwang-u8.jpg', imageCredit: 'BYD Yangwang'
+      image: 'images/yangwang-u8.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
     {
       id: 'fangchengbao-bao5', brand: 'Fang Cheng Bao', name: 'Bao 5',
@@ -608,7 +626,7 @@ const SITE_DATA = {
       tag_zh: '基于比亚迪 DMO 平台的超级混动越野，坦克的新对手。',
       range: '125 km EV / 1,200 km', accel: '4.8 s', price: 'US$33,100', priceLocal: '¥239,800 China',
       colorA: '#374151', shape: 'suv',
-      image: 'images/fangchengbao-5.jpg', imageCredit: 'Fang Cheng Bao'
+      image: 'images/fangchengbao-5.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     }
   ],
 
@@ -635,7 +653,7 @@ const SITE_DATA = {
       desc_zh: '三分钟满电。蔚来为何建了 3,000 座换电站——宁德时代与吉利又为何入局。',
       meta_en: 'PROFILE · 6 MIN', meta_zh: '品牌 · 6 分钟',
       shape: 'sedan-long', accent: '#1d4ed8',
-      image: 'images/nio-et9.jpg', imageCredit: 'Car and Driver'
+      image: 'images/nio-et9.jpg', imageCredit: 'S5A-0043 / CC BY 4.0'
     },
     {
       slug: 'xiaomi-su7-design',
@@ -646,7 +664,7 @@ const SITE_DATA = {
       desc_zh: '解析其向保时捷靠近的设计语言——以及它真正独立的地方。',
       meta_en: 'DESIGN · 5 MIN', meta_zh: '设计 · 5 分钟',
       shape: 'sedan', accent: '#f97316',
-      image: 'images/xiaomi-su7-ultra.jpg', imageCredit: 'Top Gear'
+      image: 'images/xiaomi-su7-ultra.jpg', imageCredit: 'Daniel Lu (User:dllu) / CC BY-SA 4.0'
     }
   ],
 
@@ -665,7 +683,7 @@ const SITE_DATA = {
       excerpt_en: 'The Szeged facility starts production of the Dolphin and Atto 3 for the European market, bypassing tariffs.',
       excerpt_zh: '塞格德工厂开始为欧洲市场生产海豚与元 Plus，绕开关税壁垒。',
       date: 'May 18, 2026', tag_en: 'Export', tag_zh: '出海', accent: '#1d4ed8',
-      image: 'images/byd-brand.jpg', imageCredit: 'BYD'
+      image: 'images/byd-brand.jpg', imageCredit: 'Alexander-93 / CC BY-SA 4.0'
     },
     {
       title_en: 'Xpeng MONA M03 Crosses 200K Deliveries in 12 Months',
@@ -673,7 +691,7 @@ const SITE_DATA = {
       excerpt_en: 'The sub-$20K smart EV reshaped the entry-level market and proved L2++ autonomy can be democratised.',
       excerpt_zh: '这台不到 13 万元的智能车重塑了入门级市场，证明 L2++ 智驾可以普及。',
       date: 'May 10, 2026', tag_en: 'Launch', tag_zh: '新车', accent: '#22c55e',
-      image: 'images/xpeng-brand.jpg', imageCredit: 'Electrek'
+      image: 'images/xpeng-brand.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
     {
       title_en: 'Solid-State Batteries: CATL and BYD Both Target 2027',
@@ -681,7 +699,7 @@ const SITE_DATA = {
       excerpt_en: 'Pilot lines are running. Energy density above 400 Wh/kg. The question is no longer "if" but "at what cost".',
       excerpt_zh: '中试线已运行，能量密度突破 400 Wh/kg。问题不再是「能否」，而是「成本」。',
       date: 'May 04, 2026', tag_en: 'Tech', tag_zh: '技术', accent: '#f59e0b',
-      image: 'images/yangwang-u8.jpg', imageCredit: 'BYD Yangwang'
+      image: 'images/yangwang-u8.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
     {
       title_en: 'NIO Power Swap Network Hits 3,000 Stations Globally',
@@ -689,7 +707,7 @@ const SITE_DATA = {
       excerpt_en: 'Including 60 stations in Europe. CATL, Geely, and Changan have joined the open swap standard.',
       excerpt_zh: '其中欧洲 60 座。宁德时代、吉利、长安已加入开放换电联盟。',
       date: 'April 28, 2026', tag_en: 'Infrastructure', tag_zh: '基建', accent: '#0ea5e9',
-      image: 'images/nio-brand.jpg', imageCredit: 'NIO'
+      image: 'images/nio-brand.jpg', imageCredit: 'Alexander Migl / CC BY-SA 4.0'
     }
   ],
 
