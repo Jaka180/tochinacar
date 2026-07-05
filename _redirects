@@ -1,0 +1,5 @@
+# Brand index & detail pages moved (2026-07-05 repositioning)
+/brands /chinese-car-brands 301
+/brands/* /chinese-car-brands/:splat 301
+/zh/brands /zh/chinese-car-brands 301
+/zh/brands/* /zh/chinese-car-brands/:splat 301

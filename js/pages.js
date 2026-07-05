@@ -156,7 +156,7 @@ function brandCardHTML(b, lang) {
       <div class="brand-card-thumb${b.image ? ' has-photo' : ''}">${b.image ? `<img src="/${b.image}" alt="${b.name}" loading="lazy" />` : brandMarkSVG(b)}</div>
       <div class="brand-card-body">
         ${parentBadge}
-        <h3 class="brand-card-name"><a href="/brands/${b.id}" style="color:inherit;text-decoration:none;">${b.name}</a></h3>
+        <h3 class="brand-card-name"><a href="/chinese-car-brands/${b.id}" style="color:inherit;text-decoration:none;">${b.name}</a></h3>
         <div class="brand-card-cn">${b.cn}</div>
         <p class="brand-card-desc">${b['desc_' + lang]}</p>
         ${subBrandsLine}
@@ -165,7 +165,7 @@ function brandCardHTML(b, lang) {
           <div class="brand-fact"><span class="spec-label">${t('brands.fact.hq')}</span><span class="spec-value">${b.hq}</span></div>
           <div class="brand-fact"><span class="spec-label">${t('brands.fact.focus')}</span><span class="spec-value" style="font-size:12px;">${b.focus}</span></div>
         </div>
-        <a href="/brands/${b.id}" style="display:inline-block;margin-top:12px;color:var(--accent, #d4302a);font-family:var(--mono, monospace);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '品牌详情 →' : 'Full profile →'}</a>
+        <a href="/chinese-car-brands/${b.id}" style="display:inline-block;margin-top:12px;color:var(--accent, #d4302a);font-family:var(--mono, monospace);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '品牌详情 →' : 'Full profile →'}</a>
       </div>
     </article>
   `;
@@ -193,8 +193,8 @@ function pageHome() {
           <h1 class="hero-title">${t('hero.title')}</h1>
           <p class="hero-deck">${t('hero.deck')}</p>
           <div class="hero-cta">
-            <a href="/stories/china-ev-battery-supply-chain" class="btn btn-primary" data-i18n="hero.cta.primary">${t('hero.cta.primary')}</a>
-            <a href="/brands" class="btn btn-ghost" data-i18n="hero.cta.secondary">${t('hero.cta.secondary')}</a>
+            <a href="/news" class="btn btn-primary" data-i18n="hero.cta.primary">${t('hero.cta.primary')}</a>
+            <a href="/chinese-car-brands" class="btn btn-ghost" data-i18n="hero.cta.secondary">${t('hero.cta.secondary')}</a>
           </div>
           <div class="hero-meta">
             <span><strong>${lang === 'zh' ? '每日简报' : 'DAILY BRIEFING'}</strong></span>
@@ -206,6 +206,66 @@ function pageHome() {
           <img src="/images/hero-xiaomi.jpg" alt="Xiaomi SU7 Ultra Prototype" loading="eager" />
           <span class="img-credit">Photo: Daniel Lu / CC BY-SA 4.0</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOP STORY + LATEST -->
+  ${typeof SITE_ARTICLES !== 'undefined' && SITE_ARTICLES.length ? (() => {
+    const top = SITE_ARTICLES[0];
+    const rest = SITE_ARTICLES.slice(1, 6);
+    return `
+  <section>
+    <div class="container">
+      <div class="news-grid">
+        <article class="news-main-article">
+          <div class="news-main-body">
+            <div class="news-meta" style="color:#dc2626;">${lang === 'zh' ? '头条' : 'Top Story'} · ${top.date}</div>
+            <h2 style="font-family:var(--serif);font-size:34px;font-weight:700;line-height:1.2;margin:10px 0 14px;"><a href="/news/${top.slug}" style="color:inherit;text-decoration:none;">${top['title_' + lang] || top.title_en}</a></h2>
+            <p class="feature-desc" style="font-size:16px;">${top['excerpt_' + lang] || top.excerpt_en || ''}</p>
+            <a href="/news/${top.slug}" style="display:inline-block;margin-top:14px;color:var(--accent, #d4302a);font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '阅读全文 →' : 'Read the story →'}</a>
+          </div>
+        </article>
+        <div class="news-side">
+          <div style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9ca3af;margin-bottom:14px;">${lang === 'zh' ? '最新新闻' : 'Latest News'}</div>
+          ${rest.length ? rest.map(a => `
+          <article class="news-item">
+            <div>
+              <h4 class="news-title"><a href="/news/${a.slug}" style="color:inherit;text-decoration:none;">${a['title_' + lang] || a.title_en}</a></h4>
+              <div class="news-date">${a.date}</div>
+            </div>
+          </article>`).join('') : `<p style="font-size:14px;color:#6b7280;">${lang === 'zh' ? '每个工作日更新。' : 'Updated every weekday.'}</p>`}
+          <a href="/news" style="display:inline-block;margin-top:10px;color:var(--accent, #d4302a);font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '全部新闻 →' : 'All news →'}</a>
+        </div>
+      </div>
+    </div>
+  </section>`;
+  })() : ''}
+
+  <!-- SECTIONS -->
+  <section style="padding-top:0;">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-eyebrow">${lang === 'zh' ? '栏目' : 'Sections'}</div>
+          <h2 class="section-title">${lang === 'zh' ? '按主题追踪' : 'Follow the Story by Topic'}</h2>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;">
+        ${[
+          ['/china-ev-news', 'EV', '新能源', 'Electric vehicles, batteries and smart cars', '电动车、电池与智能汽车'],
+          ['/china-car-export-news', 'Exports', '出口', 'Shipments, plants and overseas growth', '出口数据、海外工厂与增长'],
+          ['/chinese-car-brands', 'Brands', '品牌', '31 Chinese automakers, profiled', '31 家中国车企档案'],
+          ['/markets', 'Markets', '市场', 'Europe, Middle East, LatAm, SEA and more', '欧洲、中东、拉美、东南亚等'],
+          ['/policy', 'Policy', '政策', 'Tariffs, rules and regulation', '关税、规则与监管'],
+          ['/data', 'Data', '数据', 'Export volumes, rankings and model specs', '出口量、排名与车型数据'],
+          ['/analysis', 'Analysis', '分析', 'Longer reads on globalization strategy', '全球化战略长篇解读'],
+          ['/news', 'All News', '全部新闻', 'The daily briefing, every weekday', '每个工作日的出海简报']
+        ].map(([href, en, zh2, den, dzh]) => `
+        <a href="${href}" style="display:block;padding:20px 22px;border:1px solid #e5e7eb;border-radius:10px;color:inherit;text-decoration:none;background:#fff;">
+          <strong style="font-family:var(--serif, Georgia, serif);font-size:19px;">${lang === 'zh' ? zh2 : en}</strong>
+          <p style="margin:8px 0 0;font-size:13px;color:#6b7280;line-height:1.6;">${lang === 'zh' ? dzh : den}</p>
+        </a>`).join('')}
       </div>
     </div>
   </section>
@@ -255,7 +315,7 @@ function pageHome() {
           </div>
           <div class="home-brands-col-list">
             ${D.brands.filter(b=>b.category==='group').map(b => `
-              <a href="/brands/${b.id}" class="brand-cell">
+              <a href="/chinese-car-brands/${b.id}" class="brand-cell">
                 <div class="brand-name">${b.name}</div>
                 <div class="brand-cell-sub">${b.cn}</div>
               </a>
@@ -269,7 +329,7 @@ function pageHome() {
           </div>
           <div class="home-brands-col-list">
             ${D.brands.filter(b=>b.category==='startup').map(b => `
-              <a href="/brands/${b.id}" class="brand-cell">
+              <a href="/chinese-car-brands/${b.id}" class="brand-cell">
                 <div class="brand-name">${b.name}</div>
                 <div class="brand-cell-sub">${b.cn}</div>
               </a>
@@ -283,13 +343,13 @@ function pageHome() {
           </div>
           <div class="home-brands-col-list home-brands-col-list-compact">
             ${D.brands.filter(b=>b.category==='subbrand').map(b => `
-              <a href="/brands/${b.id}" class="brand-pill">${b.name}</a>
+              <a href="/chinese-car-brands/${b.id}" class="brand-pill">${b.name}</a>
             `).join('')}
           </div>
         </div>
       </div>
       <div class="home-brands-viewall">
-        <a href="/brands" class="home-brands-viewall-link">${t('home.brands.viewall')} →</a>
+        <a href="/chinese-car-brands" class="home-brands-viewall-link">${t('home.brands.viewall')} →</a>
       </div>
     </div>
   </section>
@@ -315,31 +375,6 @@ function pageHome() {
     <div class="container">
       <p class="pullquote-text">${t('pullquote.text')}</p>
       <div class="pullquote-attr">— ${t('pullquote.attr')}</div>
-    </div>
-  </section>
-
-  <!-- NEWS -->
-  <section>
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <div class="section-eyebrow">${t('home.news.eyebrow')}</div>
-          <h2 class="section-title">${t('home.news.title')}</h2>
-        </div>
-        <a href="/news" style="font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);">${lang === 'zh' ? '更多新闻 →' : 'More news →'}</a>
-      </div>
-      ${typeof SITE_ARTICLES !== 'undefined' && SITE_ARTICLES.length ? `
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-bottom:36px;">
-        ${SITE_ARTICLES.slice(0, 3).map(a => `
-        <article style="border:1px solid #e5e7eb;border-radius:10px;padding:22px 24px;background:#ffffff;display:flex;flex-direction:column;gap:10px;">
-          <div style="font-family:var(--mono, monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dc2626;">${a['tag_' + lang] || a.tag_en} · ${a.date}</div>
-          <h3 style="font-family:var(--serif, Georgia, serif);font-size:21px;font-weight:700;line-height:1.3;margin:0;">
-            <a href="/news/${a.slug}" style="color:inherit;text-decoration:none;">${a['title_' + lang] || a.title_en}</a>
-          </h3>
-          <p style="font-size:14px;color:#6b7280;line-height:1.65;margin:0;">${a['excerpt_' + lang] || a.excerpt_en || ''}</p>
-          <a href="/news/${a.slug}" style="margin-top:auto;color:#dc2626;font-family:var(--mono, monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '阅读全文 →' : 'Read dispatch →'}</a>
-        </article>`).join('')}
-      </div>` : ''}
     </div>
   </section>
 
@@ -835,16 +870,104 @@ function pagePrivacy() {
   `;
 }
 
+function pageEditorialPolicy() {
+  const zh = getLang() === 'zh';
+  const S = (en, zhTxt) => zh ? zhTxt : en;
+  const sec = (h, b) => `<h2 style="font-size:20px;margin:36px 0 12px;">${h}</h2><p style="margin:0 0 14px;">${b}</p>`;
+  return `
+    <section class="page-header">
+      <div class="container">
+        <div class="section-eyebrow">${S('Editorial', '编辑')}</div>
+        <h1 class="page-title">${S('Editorial Policy', '编辑方针')}</h1>
+        <p class="page-deck">${S('How TopChinaCar reports on China auto globalization.', 'TopChinaCar 如何报道中国汽车全球化。')}</p>
+      </div>
+    </section>
+    <section style="padding-top:0;">
+      <div class="container" style="max-width:820px;font-size:15px;line-height:1.8;color:#374151;">
+        ${sec(S('Mission', '使命'),
+          S('TopChinaCar helps international readers understand why, how and where Chinese automakers are going global. We are not a general car-news site: our beat is Chinese brands overseas, vehicle exports, EVs and smart cars, global markets, and the policy and data that shape them.',
+            'TopChinaCar 帮助国际读者理解中国车企为什么、如何、在哪里全球化。我们不是泛汽车新闻站：我们的报道范围是中国品牌出海、整车出口、新能源与智能汽车、全球市场，以及塑造这一切的政策与数据。'))}
+        ${sec(S('Coverage pillars', '五条内容主线'),
+          S('1) Chinese automakers overseas — brand-by-brand expansion. 2) China car exports — volumes, plants, dealer networks, logistics and certification. 3) EVs and smart cars — EV, PHEV, EREV, driving software, batteries and charging. 4) Global markets — Europe, the Middle East, Africa, Latin America, Southeast Asia, Australia, Russia/CIS and Central Asia. 5) Policy and data — tariffs, restrictions, homologation, subsidies, rankings and market share.',
+            '1）品牌出海——逐个品牌追踪扩张；2）中国汽车出口——出口量、海外工厂、经销网络、物流与认证；3）新能源与智能汽车——纯电、插混、增程、智驾、电池与补能；4）全球市场——欧洲、中东、非洲、拉美、东南亚、澳洲、俄罗斯/独联体与中亚；5）政策与数据——关税、限制、认证、补贴、排名与市场份额。'))}
+        ${sec(S('Sourcing', '信源标准'),
+          S('Every factual claim traces to a primary or reputable secondary source, linked inline and listed in the Sources block at the end of each article. We do not invent numbers. Where figures are estimates or approximations, we mark them as such.',
+            '每一个事实性表述都可追溯到一手或可信的二手信源，正文内联引用并在文末 Sources 区块列出。我们不编造数字；估算或近似值会明确标注。'))}
+        ${sec(S('How our articles are produced', '文章的生产方式'),
+          S('Daily coverage is compiled by TopChinaCar\\u2019s editorial system with AI assistance, from the primary sources cited in every story, and follows a fixed structure: what happened, why it matters, market context, impact on Chinese automakers, and what to watch next. Feature analysis is written and edited independently of any automaker.',
+            '每日报道由 TopChinaCar 的编辑系统在 AI 辅助下，基于每篇文章所引用的一手信源编写，并遵循固定结构：发生了什么、为什么重要、市场背景、对中国车企的影响、下一步看什么。深度分析独立于任何车企撰写与编辑。'))}
+        ${sec(S('Independence', '独立性'),
+          S('No automaker, exporter or supplier pays for coverage or reviews stories before publication. Commercial relationships, if any, are disclosed on the page they touch.',
+            '任何车企、出口商或供应商都不能付费获得报道，也不能在发布前审阅稿件。如存在商业合作，会在相关页面披露。'))}
+        ${sec(S('Corrections', '更正'),
+          S('When we get something wrong, we correct it in place with a note. Spotted an error? Email <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a> — we respond within 48 hours.',
+            '如有错误，我们会在原文位置更正并加注说明。发现问题请发邮件至 <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a>——我们会在 48 小时内回复。'))}
+      </div>
+    </section>
+  `;
+}
+
+function pageContact() {
+  const zh = getLang() === 'zh';
+  const S = (en, zhTxt) => zh ? zhTxt : en;
+  return `
+    <section class="page-header">
+      <div class="container">
+        <div class="section-eyebrow">${S('Contact', '联系')}</div>
+        <h1 class="page-title">${S('Contact TopChinaCar', '联系 TopChinaCar')}</h1>
+        <p class="page-deck">${S('For media, market intelligence, dealer and partnership inquiries, contact TopChinaCar.', '媒体、市场情报、经销商与合作事宜，请联系 TopChinaCar。')}</p>
+      </div>
+    </section>
+    <section style="padding-top:0;">
+      <div class="container" style="max-width:820px;font-size:15px;line-height:1.9;color:#374151;">
+        <p><strong>${S('Editorial & general', '编辑与一般事务')}</strong> — ${S('tips, corrections, story ideas, media requests:', '线索、更正、选题、媒体请求：')} <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a></p>
+        <p><strong>${S('Market intelligence & partnerships', '市场情报与合作')}</strong> — ${S('research, data, sponsorship and partnership inquiries:', '研究、数据、赞助与合作洽谈：')} <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a></p>
+        <p><strong>${S('Dealer & sourcing inquiries', '经销商与采购询价')}</strong> — ${S('if you are a dealer, fleet or importer looking to source Chinese vehicles, use the', '如果您是希望采购中国汽车的经销商、车队或进口商，请使用')} <a href="/quote" style="color:var(--accent, #d4302a);">${S('inquiry form', '询价表单')}</a>${S('. We respond within 48 hours.', '。我们将在 48 小时内回复。')}</p>
+        <p style="font-size:13px;color:#9ca3af;margin-top:28px;">${S('We read everything. Please allow up to 48 hours for a reply.', '所有来信我们都会阅读，请预留最多 48 小时的回复时间。')}</p>
+      </div>
+    </section>
+  `;
+}
+
+function pageNewsletterLanding() {
+  const zh = getLang() === 'zh';
+  const S = (en, zhTxt) => zh ? zhTxt : en;
+  return `
+    <section class="page-header">
+      <div class="container">
+        <div class="section-eyebrow">${S('Newsletter', '邮件订阅')}</div>
+        <h1 class="page-title">${S('The Daily Briefing', '每日出海简报')}</h1>
+        <p class="page-deck">${S('China auto news for global markets — in your inbox every weekday morning.', '面向全球市场的中国汽车新闻——每个工作日早晨送达您的邮箱。')}</p>
+      </div>
+    </section>
+    <section style="padding-top:0;">
+      <div class="container" style="max-width:820px;font-size:15px;line-height:1.9;color:#374151;">
+        <p>${S('Every weekday, TopChinaCar condenses the day\\u2019s most important China auto globalization news into one readable email: export figures, new market entries, plant announcements, tariff moves and model launches — with sources linked.',
+              '每个工作日，TopChinaCar 把当天最重要的中国汽车全球化新闻浓缩成一封易读的邮件：出口数据、新市场进入、工厂公告、关税动向与新车发布——全部附信源链接。')}</p>
+        <ul style="margin:20px 0;padding-left:20px;">
+          <li>${S('One email per weekday, readable in 5 minutes', '每个工作日一封，5 分钟读完')}</li>
+          <li>${S('The same coverage published at /news — plus a curated summary', '与 /news 栏目同源，外加精选摘要')}</li>
+          <li>${S('No spam, no ads inside the email, unsubscribe anytime', '无垃圾邮件、无内嵌广告，随时退订')}</li>
+        </ul>
+        <p>${S('Subscribe using the form below ↓ or browse the', '使用下方表单订阅 ↓ 或先浏览')} <a href="/news" style="color:var(--accent, #d4302a);">${S('latest dispatches', '最新简报')}</a>.</p>
+      </div>
+    </section>
+  `;
+}
+
 // Route table (shared by client router and build.js)
 const PAGE_ROUTES = {
   '/':       pageHome,
-  '/brands': pageBrands,
+  '/chinese-car-brands': pageBrands,
   '/models': pageModels,
   '/news':   pageNews,
   '/tech':   pageTech,
   '/about':  pageAbout,
   '/quote':  pageQuote,
-  '/privacy': pagePrivacy
+  '/privacy': pagePrivacy,
+  '/editorial-policy': pageEditorialPolicy,
+  '/contact': pageContact,
+  '/newsletter': pageNewsletterLanding
 };
 
 // Node (build.js) support — no effect in the browser

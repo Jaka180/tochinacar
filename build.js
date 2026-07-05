@@ -4,7 +4,7 @@
 // content at real URLs. Run after editing js/data.js or js/i18n.js:
 //   node build.js
 // Output: index.html, brands.html, models.html, news.html, tech.html,
-//         about.html, 404.html  (Vercel cleanUrls serves /brands from brands.html)
+//         about.html, 404.html  (Vercel cleanUrls serves /chinese-car-brands from brands.html)
 
 const fs = require('fs');
 const path = require('path');
@@ -86,8 +86,11 @@ function writeZh(relPath, html) {
 }
 
 const PAGES_ZH = {
-  '/': { title: 'TopChinaCar — 中国汽车新时代', desc: '面向海外读者的中国汽车编辑指南：比亚迪、小米、蔚来、小鹏、极氪、吉利——品牌、车型、技术，以及正在重塑全球汽车业的电动革命。' },
-  '/brands': { title: '中国汽车品牌大全 — 比亚迪、吉利、蔚来等 31 个品牌 | TopChinaCar', desc: '30 余家中国车企实地指南：传统集团（比亚迪、吉利、上汽、奇瑞、长城、东风）、新势力（蔚来、小鹏、理想、小米、零跑）及其子品牌——创立时间、总部、主攻方向与出口版图。' },
+  '/': { title: 'TopChinaCar | 中国汽车全球化新闻：新能源、出口与全球市场', desc: 'TopChinaCar 面向国际读者报道中国汽车品牌、电动车、出口市场、政策变化与全球扩张。' },
+  '/editorial-policy': { title: '编辑方针 | TopChinaCar', desc: 'TopChinaCar 如何报道中国汽车全球化：内容主线、信源标准、文章结构、独立性与更正政策。' },
+  '/contact': { title: '联系 TopChinaCar — 媒体、市场情报与合作', desc: '媒体、市场情报、经销商与合作事宜，请联系 TopChinaCar。48 小时内回复。' },
+  '/newsletter': { title: '每日出海简报 — 邮件订阅 | TopChinaCar', desc: '面向全球市场的中国汽车新闻，每个工作日早晨送达：出口、市场进入、工厂、关税与新车——附信源链接。' },
+  '/chinese-car-brands': { title: '中国汽车品牌大全 — 比亚迪、吉利、蔚来等 31 个品牌 | TopChinaCar', desc: '30 余家中国车企实地指南：传统集团（比亚迪、吉利、上汽、奇瑞、长城、东风）、新势力（蔚来、小鹏、理想、小米、零跑）及其子品牌——创立时间、总部、主攻方向与出口版图。' },
   '/models': { title: '中国电动车明星车型 — 续航、价格与参数 | TopChinaCar', desc: '定义新时代的中国电动车：比亚迪海豹、小米 SU7 Ultra、蔚来 ET9、小鹏 G6、理想 MEGA、极氪 001——真实续航、零百加速与美元指导价。' },
   '/news': { title: '中国汽车出海与电动车行业新闻 | TopChinaCar', desc: '中国汽车出口、新车发布、电池技术与政策动态的精选报道，以及每个工作日更新的出海简报。' },
   '/tech': { title: '中国电动车技术解读：800V、城市智驾、刀片电池 | TopChinaCar', desc: '深度解读中国汽车领先背后的技术：800V 高压平台、城市级智能驾驶、智能座舱、刀片电池与 CTB 电池车身一体化。' },
@@ -108,11 +111,11 @@ if (fs.existsSync(path.join(ROOT, 'js', 'stories-data.js'))) {
 const PAGES = {
   '/': {
     file: 'index.html',
-    title: 'TopChinaCar — The New Era of Chinese Automobiles',
-    desc: 'An editorial guide to Chinese automobiles for overseas readers: BYD, Xiaomi, NIO, Xpeng, Zeekr, Geely — brands, models, technology and the EV revolution reshaping the global auto industry.'
+    title: 'TopChinaCar | Chinese Auto News, EVs, Exports and Global Markets',
+    desc: 'TopChinaCar covers Chinese car brands, electric vehicles, export markets, policy changes, and global expansion for international readers.'
   },
-  '/brands': {
-    file: 'brands.html',
+  '/chinese-car-brands': {
+    file: 'chinese-car-brands.html',
     title: 'Chinese Car Brands: The Complete Index — BYD, Geely, NIO & 27 More | TopChinaCar',
     desc: 'A field guide to 30 Chinese automakers: legacy groups (BYD, Geely, SAIC, Chery, Great Wall, Dongfeng), EV startups (NIO, Xpeng, Li Auto, Xiaomi, Leapmotor) and their sub-brands — founding dates, HQ, focus and export footprint.'
   },
@@ -145,17 +148,33 @@ const PAGES = {
     file: 'privacy.html',
     title: 'Privacy Policy | TopChinaCar',
     desc: 'How TopChinaCar collects, uses and protects your information: quote inquiries, newsletter subscriptions and site analytics.'
+  },
+  '/editorial-policy': {
+    file: 'editorial-policy.html',
+    title: 'Editorial Policy | TopChinaCar',
+    desc: 'How TopChinaCar reports on China auto globalization: coverage pillars, sourcing standards, article structure, independence and corrections.'
+  },
+  '/contact': {
+    file: 'contact.html',
+    title: 'Contact TopChinaCar — Media, Market Intelligence & Partnerships',
+    desc: 'For media, market intelligence, dealer and partnership inquiries, contact TopChinaCar. We respond within 48 hours.'
+  },
+  '/newsletter': {
+    file: 'newsletter.html',
+    title: 'The Daily Briefing — China Auto News by Email | TopChinaCar',
+    desc: 'China auto news for global markets, in your inbox every weekday morning: exports, market entries, plants, tariffs and launches — with sources linked.'
   }
 };
 
 const NAV = [
-  ['/', 'nav.home', 'Home'],
-  ['/brands', 'nav.brands', 'Brands'],
-  ['/models', 'nav.models', 'Models'],
   ['/news', 'nav.news', 'News'],
-  ['/tech', 'nav.tech', 'Tech'],
-  ['/about', 'nav.about', 'About'],
-  ['/quote', 'nav.quote', 'Get a Quote']
+  ['/china-ev-news', 'nav.ev', 'EV'],
+  ['/china-car-export-news', 'nav.exports', 'Exports'],
+  ['/chinese-car-brands', 'nav.brands', 'Brands'],
+  ['/markets', 'nav.markets', 'Markets'],
+  ['/policy', 'nav.policy', 'Policy'],
+  ['/data', 'nav.data', 'Data'],
+  ['/analysis', 'nav.analysis', 'Analysis']
 ];
 
 function headerHTML(route) {
@@ -170,7 +189,7 @@ function headerHTML(route) {
       </svg>
       <span class="logo-text">
         <span class="logo-main">TopChinaCar</span>
-        <span class="logo-sub" data-i18n="logo.sub">The New Era of Chinese Automobiles</span>
+        <span class="logo-sub" data-i18n="logo.sub">China Auto News for Global Markets</span>
       </span>
     </a>
 
@@ -191,12 +210,12 @@ function headerHTML(route) {
   <div class="hot-strip">
     <div class="container hot-strip-inner">
       <span class="hot-strip-label" data-i18n="nav.hot">Hot brands</span>
-      <a href="/brands/byd" class="hot-pill">BYD</a>
-      <a href="/brands/xiaomi" class="hot-pill">Xiaomi</a>
-      <a href="/brands/nio" class="hot-pill">NIO</a>
-      <a href="/brands/xpeng" class="hot-pill">Xpeng</a>
-      <a href="/brands/zeekr" class="hot-pill">Zeekr</a>
-      <a href="/brands/geely" class="hot-pill">Geely</a>
+      <a href="/chinese-car-brands/byd" class="hot-pill">BYD</a>
+      <a href="/chinese-car-brands/xiaomi" class="hot-pill">Xiaomi</a>
+      <a href="/chinese-car-brands/nio" class="hot-pill">NIO</a>
+      <a href="/chinese-car-brands/xpeng" class="hot-pill">Xpeng</a>
+      <a href="/chinese-car-brands/zeekr" class="hot-pill">Zeekr</a>
+      <a href="/chinese-car-brands/geely" class="hot-pill">Geely</a>
     </div>
   </div>
 </header>`;
@@ -228,15 +247,19 @@ const FOOTER = `<footer class="site-footer">
     </div>
     <div class="footer-col">
       <h4 data-i18n="footer.explore">Explore</h4>
-      <a href="/brands" data-i18n="nav.brands">Brands</a>
-      <a href="/models" data-i18n="nav.models">Models</a>
       <a href="/news" data-i18n="nav.news">News</a>
-      <a href="/tech" data-i18n="nav.tech">Tech</a>
+      <a href="/china-ev-news" data-i18n="nav.ev">EV</a>
+      <a href="/china-car-export-news" data-i18n="nav.exports">Exports</a>
+      <a href="/chinese-car-brands" data-i18n="nav.brands">Brands</a>
+      <a href="/markets" data-i18n="nav.markets">Markets</a>
+      <a href="/models" data-i18n="nav.models">Models</a>
     </div>
     <div class="footer-col">
       <h4 data-i18n="footer.about">About</h4>
       <a href="/about" data-i18n="nav.about">Our story</a>
-      <a href="mailto:hello@topchinacar.com" data-i18n="footer.contact">Contact</a>
+      <a href="/editorial-policy" data-i18n="footer.editorial">Editorial Policy</a>
+      <a href="/newsletter" data-i18n="footer.newsletter">Newsletter</a>
+      <a href="/contact" data-i18n="footer.contact">Contact</a>
       <a href="/privacy" data-i18n="footer.privacy">Privacy Policy</a>
     </div>
     <div class="footer-col footer-meta">
@@ -257,7 +280,7 @@ const JSONLD = `<script type="application/ld+json">
       "name": "TopChinaCar",
       "url": "${SITE}/",
       "logo": "${SITE}/images/hero-xiaomi.jpg",
-      "description": "Independent editorial guide to Chinese automobiles for overseas readers.",
+      "description": "Independent news site covering Chinese automakers, EVs, exports and global market expansion.",
       "foundingDate": "2026",
       "sameAs": []
     },
@@ -363,9 +386,9 @@ for (const [route, meta] of Object.entries(PAGES)) {
   count++;
 }
 
-// ---- Brand detail pages (/brands/<id>) ----
+// ---- Brand detail pages (/chinese-car-brands/<id>) ----
 const SITE_DATA = vm.runInContext('SITE_DATA', sandbox);
-const BRANDS_OUT = path.join(ROOT, 'brands');
+const BRANDS_OUT = path.join(ROOT, 'chinese-car-brands');
 if (!fs.existsSync(BRANDS_OUT)) fs.mkdirSync(BRANDS_OUT);
 
 const CATEGORY_LABEL = {
@@ -433,7 +456,7 @@ function brandMain(b) {
       <ul style="list-style:none;padding:0;margin:0;">
         ${related.map(a => `<li style="margin-bottom:14px;"><a href="/news/${a.slug}" style="color:inherit;text-decoration:none;"><strong>${a.title_en}</strong></a><br/><span style="font-size:13px;color:#9ca3af;">${a.date}</span></li>`).join('')}
       </ul>` : ''}
-      <p style="margin-top:40px;"><a href="/brands" style="color:var(--accent, #d4302a);font-family:var(--mono);font-size:13px;">← All 31 Chinese car brands</a></p>
+      <p style="margin-top:40px;"><a href="/chinese-car-brands" style="color:var(--accent, #d4302a);font-family:var(--mono);font-size:13px;">← All 31 Chinese car brands</a></p>
     </div>
   </section>`;
 }
@@ -447,15 +470,15 @@ function brandJsonLd(b) {
       "@type": "Brand",
       "name": "${b.name}",
       "alternateName": "${b.cn}",
-      "url": "${SITE}/brands/${b.id}",
+      "url": "${SITE}/chinese-car-brands/${b.id}",
       "description": ${JSON.stringify(b.desc_en)}
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "${SITE}/"},
-        {"@type": "ListItem", "position": 2, "name": "Brands", "item": "${SITE}/brands"},
-        {"@type": "ListItem", "position": 3, "name": "${b.name}", "item": "${SITE}/brands/${b.id}"}
+        {"@type": "ListItem", "position": 2, "name": "Brands", "item": "${SITE}/chinese-car-brands"},
+        {"@type": "ListItem", "position": 3, "name": "${b.name}", "item": "${SITE}/chinese-car-brands/${b.id}"}
       ]
     }
   ]
@@ -463,7 +486,7 @@ function brandJsonLd(b) {
 </script>`;
 }
 
-// ---- Brand auto-linker: first mention of each brand in article text → /brands/<id> ----
+// ---- Brand auto-linker: first mention of each brand in article text → /chinese-car-brands/<id> ----
 // Works on HTML strings; skips text inside <a>…</a> and headings.
 function linkifyBrands(html, lang) {
   if (!html) return html;
@@ -494,7 +517,7 @@ function linkifyBrands(html, lang) {
       }
       if (idx === -1) continue;
       text = text.slice(0, idx)
-        + `<a href="/brands/${b.id}" style="color:inherit;text-decoration:underline;text-decoration-color:#d4302a;text-underline-offset:3px;">${needle}</a>`
+        + `<a href="/chinese-car-brands/${b.id}" style="color:inherit;text-decoration:underline;text-decoration-color:#d4302a;text-underline-offset:3px;">${needle}</a>`
         + text.slice(idx + needle.length);
       done.add(b.id);
     }
@@ -508,17 +531,17 @@ const modelCardHTML = vm.runInContext('modelCardHTML', sandbox);
 for (const b of SITE_DATA.brands) {
   const catEn = (CATEGORY_LABEL[b.category] || CATEGORY_LABEL.group).en;
   const main = brandMain(b);
-  const html = pageHTML(`/brands/${b.id}`, {
+  const html = pageHTML(`/chinese-car-brands/${b.id}`, {
     title: `${b.name} (${b.cn}): Models, Sub-brands & Global Footprint | TopChinaCar`,
     desc: `${b.desc_en} ${catEn}, founded ${b.founded}, HQ ${b.hq} — brand profile, featured models and the latest export news.`.slice(0, 300)
   }, main).replace('</head>', brandJsonLd(b) + '\n</head>');
   fs.writeFileSync(path.join(BRANDS_OUT, `${b.id}.html`), html);
-  writeZh(`brands/${b.id}.html`, zhChrome(pageHTML(`/brands/${b.id}`, {
+  writeZh(`chinese-car-brands/${b.id}.html`, zhChrome(pageHTML(`/chinese-car-brands/${b.id}`, {
     title: `${b.name}（${b.cn}）：车型、子品牌与全球布局 | TopChinaCar`,
     desc: `${b.desc_zh} 创立于 ${b.founded}，总部 ${b.hq}——品牌档案、明星车型与最新出海动态。`.slice(0, 300)
   }, main, { zh: true }).replace('</head>', brandJsonLd(b) + '\n</head>')));
 }
-console.log(`✓ ${SITE_DATA.brands.length} brand pages → brands/ + zh/brands/`);
+console.log(`✓ ${SITE_DATA.brands.length} brand pages → brands/ + zh/chinese-car-brands/`);
 
 // ---- Model detail pages (/models/<id>) ----
 const MODELS_OUT = path.join(ROOT, 'models');
@@ -539,7 +562,7 @@ function modelMain(m, brand) {
   return `
   <section class="page-header">
     <div class="container">
-      <div class="section-eyebrow">${brand ? `<a href="/brands/${brand.id}" style="color:inherit;text-decoration:none;">${m.brand}</a>` : m.brand} · ${langSpan(cat.en, cat.zh)}</div>
+      <div class="section-eyebrow">${brand ? `<a href="/chinese-car-brands/${brand.id}" style="color:inherit;text-decoration:none;">${m.brand}</a>` : m.brand} · ${langSpan(cat.en, cat.zh)}</div>
       <h1 class="page-title">${m.brand} ${m.name}</h1>
       <p class="page-deck">${langSpan(m.tag_en, m.tag_zh)}</p>
     </div>
@@ -569,7 +592,7 @@ function modelMain(m, brand) {
         ${related.map(a => `<li style="margin-bottom:14px;"><a href="/news/${a.slug}" style="color:inherit;text-decoration:none;"><strong>${a.title_en}</strong></a><br/><span style="font-size:13px;color:#9ca3af;">${a.date}</span></li>`).join('')}
       </ul>` : ''}
       <p style="margin-top:40px;">
-        ${brand ? `<a href="/brands/${brand.id}" style="color:var(--accent, #d4302a);font-family:var(--mono);font-size:13px;">← ${m.brand} brand profile</a> · ` : ''}
+        ${brand ? `<a href="/chinese-car-brands/${brand.id}" style="color:var(--accent, #d4302a);font-family:var(--mono);font-size:13px;">← ${m.brand} brand profile</a> · ` : ''}
         <a href="/models" style="color:var(--accent, #d4302a);font-family:var(--mono);font-size:13px;">← All featured models</a>
       </p>
     </div>
@@ -619,6 +642,222 @@ for (const m of SITE_DATA.models) {
   modelCount++;
 }
 console.log(`✓ ${modelCount} model pages → models/ + zh/models/`);
+
+// ============ SECTION PAGES (news-site taxonomy) ============
+// Articles are matched to sections by keyword — until the pipeline tags them natively.
+const SECTIONS = [
+  {
+    route: '/china-ev-news', file: 'china-ev-news.html',
+    title_en: 'China EV News — Electric Vehicles, Batteries & Smart Cars | TopChinaCar',
+    title_zh: '中国新能源车新闻 — 电动车、电池与智能汽车 | TopChinaCar',
+    h1_en: 'China EV News', h1_zh: '中国新能源车新闻',
+    deck_en: 'Electric vehicles, plug-in hybrids, EREVs, batteries, charging and smart-driving — the technology side of China’s auto globalization.',
+    deck_zh: '纯电、插混、增程、电池、补能与智能驾驶——中国汽车全球化的技术面。',
+    intro_en: 'China builds and exports more electric vehicles than any other country. This section tracks the products and technologies behind that lead: new EV, PHEV and EREV launches relevant to overseas markets, battery and charging developments, and the smart-driving and cockpit systems that increasingly differentiate Chinese cars abroad.',
+    intro_zh: '中国是全球最大的电动车生产国和出口国。本栏目追踪这一领先地位背后的产品与技术：与海外市场相关的纯电、插混、增程新车，电池与补能进展，以及日益成为中国汽车海外差异化优势的智驾与座舱系统。',
+    kw: /\bEVs?\b|electric|battery|batteries|PHEV|EREV|plug-in|hybrid|charging|swap|autonomous|smart driving|ADAS|\bNEV/i
+  },
+  {
+    route: '/china-car-export-news', file: 'china-car-export-news.html',
+    title_en: 'China Car Export News — Shipments, Plants & Overseas Growth | TopChinaCar',
+    title_zh: '中国汽车出口新闻 — 出口数据、海外工厂与增长 | TopChinaCar',
+    h1_en: 'China Car Export News', h1_zh: '中国汽车出口新闻',
+    deck_en: 'Monthly export figures, overseas plants, dealer networks, logistics and homologation — how Chinese cars reach the world.',
+    deck_zh: '月度出口数据、海外工厂、经销商网络、物流与认证——中国汽车如何走向世界。',
+    intro_en: 'China became the world’s largest car exporter by volume, and the export machine keeps evolving: from shipping fully-built vehicles to building plants in Thailand, Brazil, Hungary and Spain. This section follows the numbers, the factories, the dealer networks, and the fuel-mix of what actually gets exported — ICE, hybrid and electric.',
+    intro_zh: '中国已成为全球第一大汽车出口国，而且出海模式仍在进化：从整车出口到在泰国、巴西、匈牙利、西班牙建厂。本栏目跟踪出口数据、海外工厂、经销网络，以及实际出口的燃油/混动/纯电结构。',
+    kw: /export|overseas|shipment|ro-ro|plant|factory|localis|localiz|assembl|dealer network|knock-down/i
+  },
+  {
+    route: '/markets', file: 'markets.html',
+    title_en: 'Global Markets — Where Chinese Cars Are Expanding | TopChinaCar',
+    title_zh: '全球市场 — 中国汽车的海外扩张版图 | TopChinaCar',
+    h1_en: 'Global Markets', h1_zh: '全球市场',
+    deck_en: 'Market-by-market coverage of Chinese auto expansion — Europe, the Middle East, Africa, Latin America, Southeast Asia and Australia.',
+    deck_zh: '逐个市场追踪中国汽车的扩张——欧洲、中东、非洲、拉美、东南亚与澳洲。',
+    intro_en: 'Chinese automakers do not expand everywhere the same way: Europe means tariffs and localisation, the Gulf means rapid brand adoption, Latin America means plants and pickups, Southeast Asia means right-hand-drive EV hubs. Pick a market below to follow the coverage.',
+    intro_zh: '中国车企在不同市场的打法完全不同：欧洲是关税与本地化，海湾是品牌快速渗透，拉美是建厂与皮卡，东南亚是右舵电动车枢纽。选择下方市场查看对应报道。',
+    kw: /Europe|EU\b|Middle East|Gulf|Saudi|UAE|Dubai|Africa|Latin America|Brazil|Mexico|Chile|Thailand|Indonesia|Malaysia|Vietnam|Australia|Russia|Central Asia/i,
+    isMarketsIndex: true
+  },
+  {
+    route: '/policy', file: 'policy.html',
+    title_en: 'Policy & Tariffs — Rules Shaping China Auto Exports | TopChinaCar',
+    title_zh: '政策与关税 — 影响中国汽车出口的规则 | TopChinaCar',
+    h1_en: 'Policy & Tariffs', h1_zh: '政策与关税',
+    deck_en: 'EU tariffs, US restrictions, homologation, subsidies — the regulatory forces shaping where Chinese cars can go.',
+    deck_zh: '欧盟关税、美国限制、海外认证、补贴政策——决定中国汽车能去哪里的监管力量。',
+    intro_en: 'Trade policy is now the single biggest variable in China auto globalization. EU anti-subsidy duties pushed Chinese brands toward European plants; US rules effectively closed one market while opening questions about Mexico; certification regimes decide launch timelines everywhere. This section tracks the rules and what automakers do about them.',
+    intro_zh: '贸易政策已成为中国汽车全球化的最大变量。欧盟反补贴税把中国品牌推向欧洲建厂；美国规则实际关闭了一个市场；各国认证体系决定上市节奏。本栏目追踪规则本身，以及车企的应对。',
+    kw: /tariff|policy|regulat|subsid|homologation|sanction|trade|duty|duties|ban\b|restriction/i
+  },
+  {
+    route: '/data', file: 'data.html',
+    title_en: 'Data & Rankings — China Auto Export & Sales Data | TopChinaCar',
+    title_zh: '数据与排名 — 中国汽车出口与销量数据 | TopChinaCar',
+    h1_en: 'Data & Rankings', h1_zh: '数据与排名',
+    deck_en: 'Export volumes, brand rankings, market share and model data — the numbers behind the headlines.',
+    deck_zh: '出口量、品牌排名、市场份额与车型数据——标题背后的数字。',
+    intro_en: 'Every story on TopChinaCar is grounded in numbers: monthly export and delivery figures, brand-by-brand overseas share, and model-level specs and pricing. This section collects data-led coverage, plus our reference model database with specs and indicative prices in USD.',
+    intro_zh: 'TopChinaCar 的每篇报道都以数字为底：月度出口与交付数据、各品牌海外占比、车型级参数与价格。本栏目汇总数据向报道，并提供以美元计价的参考车型数据库。',
+    kw: /sales|deliver|units|record|ranking|market share|figure|\bH[12]\b|\bQ[1-4]\b|million|\d{2,3},\d{3}/i,
+    extra_en: '<p style="margin:18px 0 0;"><a href="/models" style="color:var(--accent, #d4302a);font-family:var(--mono, monospace);font-size:13px;">→ Model database: 42 Chinese models with specs & USD pricing</a></p>',
+    extra_zh: '<p style="margin:18px 0 0;"><a href="/models" style="color:var(--accent, #d4302a);font-family:var(--mono, monospace);font-size:13px;">→ 车型数据库：42 款中国车型的参数与美元价格</a></p>'
+  },
+  {
+    route: '/analysis', file: 'analysis.html',
+    title_en: 'Analysis — China Auto Globalization Explained | TopChinaCar',
+    title_zh: '深度分析 — 解读中国汽车全球化 | TopChinaCar',
+    h1_en: 'Analysis', h1_zh: '深度分析',
+    deck_en: 'Longer reads on why, how and where Chinese automakers are going global.',
+    deck_zh: '关于中国车企为什么出海、如何出海、去哪里的长篇解读。',
+    intro_en: 'Beyond the daily news cycle: structural pieces on supply chains, business models and strategy that explain China auto globalization to international readers.',
+    intro_zh: '跳出每日新闻循环：从供应链、商业模式与战略层面，向国际读者解释中国汽车全球化的结构性文章。',
+    kw: /strategy|why |analysis|explained|model\b.*global/i,
+    showStories: true
+  }
+];
+
+const MARKETS = [
+  { slug: 'europe', name_en: 'Europe', name_zh: '欧洲',
+    kw: /Europe|\bEU\b|Germany|France|Spain|Italy|UK\b|Britain|Norway|Netherlands|Hungary|Munich|Zaragoza|Poland|Belgium/i,
+    intro_en: 'Europe is the highest-stakes market for Chinese automakers: big EV demand, strong incumbent brands, and anti-subsidy tariffs that have pushed BYD, Chery, Leapmotor and others toward local production in Hungary, Spain and beyond. MG remains the best-selling Chinese badge; premium EV brands test the waters from Norway outward.',
+    intro_zh: '欧洲是中国车企风险与回报最高的市场：电动车需求大、本土品牌强势，反补贴关税正把比亚迪、奇瑞、零跑等推向匈牙利、西班牙等地的本地化生产。MG 仍是销量最高的中国血统品牌，高端电动品牌则从挪威开始试水。' },
+  { slug: 'middle-east', name_en: 'Middle East', name_zh: '中东',
+    kw: /Middle East|Gulf|Saudi|UAE|Dubai|Qatar|Kuwait|Oman|Bahrain|Israel|GCC/i,
+    intro_en: 'The Gulf has become one of the fastest-adopting regions for Chinese cars — ICE SUVs first, EVs increasingly. Chery, GWM, BYD and MG all run growing dealer networks, and Dubai doubles as a re-export hub for the wider region.',
+    intro_zh: '海湾地区已成为中国汽车渗透最快的区域之一——先是燃油 SUV，如今电动车加速跟进。奇瑞、长城、比亚迪、MG 的经销网络都在扩张，迪拜还是面向更大区域的转口枢纽。' },
+  { slug: 'saudi-arabia', name_en: 'Saudi Arabia', name_zh: '沙特阿拉伯',
+    kw: /Saudi|Riyadh|Jeddah|KSA/i,
+    intro_en: 'Saudi Arabia is the largest Gulf car market and a priority for Chinese brands, with rapid share gains in SUVs and growing EV ambitions tied to Vision 2030.',
+    intro_zh: '沙特是海湾最大的汽车市场，也是中国品牌的优先目标：SUV 份额快速攀升，电动化雄心与 2030 愿景绑定。' },
+  { slug: 'uae', name_en: 'UAE', name_zh: '阿联酋',
+    kw: /UAE|Dubai|Abu Dhabi|Emirates/i,
+    intro_en: 'The UAE combines a wealthy domestic market with Dubai’s role as the region’s trading hub — many Chinese brands stage their Middle East entry, flagship showrooms and regional distribution here.',
+    intro_zh: '阿联酋既有高消费本地市场，又有迪拜的区域贸易枢纽角色——许多中国品牌把中东首发、旗舰展厅与区域分销放在这里。' },
+  { slug: 'africa', name_en: 'Africa', name_zh: '非洲',
+    kw: /Africa|South Africa|Egypt|Nigeria|Morocco|Kenya|Algeria|Rosslyn/i,
+    intro_en: 'Africa is a pickup, SUV and commercial-vehicle story for Chinese automakers, with South Africa as the anchor market and local assembly beginning to take root.',
+    intro_zh: '在非洲，中国汽车的故事以皮卡、SUV 与商用车为主线，南非是锚点市场，本地组装也开始落地。' },
+  { slug: 'latin-america', name_en: 'Latin America', name_zh: '拉丁美洲',
+    kw: /Latin America|LatAm|Mexico|Chile|Colombia|Peru|Uruguay|Argentina/i,
+    intro_en: 'Latin America took Chinese brands early — Chery has deep roots here — and is now a localisation frontier, with plants and CKD assembly spreading from Brazil outward.',
+    intro_zh: '拉美很早就接纳了中国品牌——奇瑞在此根基深厚——如今正成为本地化前线，工厂与 CKD 组装从巴西向外扩散。' },
+  { slug: 'brazil', name_en: 'Brazil', name_zh: '巴西',
+    kw: /Brazil|Bahia|Camaçari|São Paulo|Horizonte|Iracemápolis|Ayrton Senna/i,
+    intro_en: 'Brazil is Latin America’s biggest market and the region’s manufacturing prize: BYD, GWM and SAIC are all investing in local production to serve the country and export across South America.',
+    intro_zh: '巴西是拉美最大市场，也是区域制造高地：比亚迪、长城、上汽都在投资本地生产，既供应巴西也辐射南美。' },
+  { slug: 'southeast-asia', name_en: 'Southeast Asia', name_zh: '东南亚',
+    kw: /Southeast Asia|Thailand|Indonesia|Malaysia|Vietnam|Philippines|Singapore|ASEAN|Melaka|Proton/i,
+    intro_en: 'Southeast Asia is China’s right-hand-drive EV workshop: Thailand and Indonesia host a cluster of Chinese plants that serve ASEAN and increasingly export onward — including to Europe.',
+    intro_zh: '东南亚是中国车企的右舵电动车工坊：泰国与印尼聚集了一批中国工厂，供应东盟并日益向外出口——包括欧洲。' },
+  { slug: 'australia', name_en: 'Australia', name_zh: '澳大利亚',
+    kw: /Australia|New Zealand|Sydney|Melbourne/i,
+    intro_en: 'Australia is one of the most open right-hand-drive markets, where GWM, MG and BYD already sit among the top-selling brands and PHEV utes are the new battleground.',
+    intro_zh: '澳大利亚是最开放的右舵市场之一，长城、MG、比亚迪已跻身畅销品牌之列，插混皮卡是新战场。' }
+];
+
+function articleListHTML(list, emptyEn, emptyZh) {
+  if (!list.length) {
+    return `<p style="color:#6b7280;font-size:15px;">${langSpan(emptyEn, emptyZh)} <a href="/news" style="color:var(--accent, #d4302a);">${langSpan('Browse all news →', '浏览全部新闻 →')}</a></p>`;
+  }
+  return `<ul style="list-style:none;padding:0;margin:0;">
+    ${list.map(a => `<li style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #f3f4f6;">
+      <div style="font-family:var(--mono, monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dc2626;margin-bottom:6px;">${a.date}</div>
+      <a href="/news/${a.slug}" style="color:inherit;text-decoration:none;"><strong style="font-family:var(--serif, Georgia, serif);font-size:19px;line-height:1.35;">${langSpan(a.title_en, a.title_zh || a.title_en)}</strong></a>
+      <p style="margin:6px 0 0;font-size:14px;color:#6b7280;line-height:1.6;">${langSpan(a.excerpt_en || '', a.excerpt_zh || a.excerpt_en || '')}</p>
+    </li>`).join('\n    ')}
+  </ul>`;
+}
+
+function sectionNavHTML(current) {
+  return `<div style="margin-top:44px;padding-top:20px;border-top:1px solid #e5e7eb;font-size:13px;font-family:var(--mono, monospace);">
+    <span style="color:#9ca3af;letter-spacing:.12em;text-transform:uppercase;">${langSpan('Sections', '栏目')}:</span>
+    ${SECTIONS.filter(s => s.route !== current).map(s => `<a href="${s.route}" style="color:var(--accent, #d4302a);text-decoration:none;margin-left:14px;">${langSpan(s.h1_en, s.h1_zh)}</a>`).join('')}
+  </div>`;
+}
+
+function sectionMain(sec) {
+  const matched = articles.filter(a => sec.kw.test(`${a.title_en} ${a.excerpt_en || ''}`)).slice(0, 20);
+  const marketsGrid = sec.isMarketsIndex ? `
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin:32px 0;">
+      ${MARKETS.map(mk => `
+      <a href="/markets/${mk.slug}" style="display:block;padding:20px 22px;border:1px solid #e5e7eb;border-radius:10px;color:inherit;text-decoration:none;background:#fff;">
+        <strong style="font-family:var(--serif, Georgia, serif);font-size:19px;">${langSpan(mk.name_en, mk.name_zh)}</strong>
+        <p style="margin:8px 0 0;font-size:13px;color:#6b7280;line-height:1.6;">${langSpan(mk.intro_en.split('. ')[0].slice(0, 110) + '…', mk.intro_zh.split('。')[0].slice(0, 60) + '…')}</p>
+      </a>`).join('')}
+    </div>` : '';
+  const storiesList = sec.showStories && SITE_STORIES.length ? `
+    <h2 style="font-size:22px;margin:36px 0 18px;">${langSpan('Feature stories', '深度故事')}</h2>
+    <ul style="list-style:none;padding:0;margin:0 0 36px;">
+      ${SITE_STORIES.map(s => {
+        const f = (SITE_DATA.features || []).find(x => x.slug === s.slug) || {};
+        return `<li style="margin-bottom:16px;"><a href="/stories/${s.slug}" style="color:inherit;text-decoration:none;"><strong style="font-family:var(--serif, Georgia, serif);font-size:19px;">${langSpan(f.title_en || s.slug, f.title_zh || f.title_en || s.slug)}</strong></a><p style="margin:4px 0 0;font-size:14px;color:#6b7280;">${langSpan(f.desc_en || '', f.desc_zh || '')}</p></li>`;
+      }).join('\n      ')}
+    </ul>` : '';
+  return `
+  <section class="page-header">
+    <div class="container">
+      <div class="section-eyebrow">${langSpan('Section', '栏目')}</div>
+      <h1 class="page-title">${langSpan(sec.h1_en, sec.h1_zh)}</h1>
+      <p class="page-deck">${langSpan(sec.deck_en, sec.deck_zh)}</p>
+    </div>
+  </section>
+  <section style="padding-top:0;">
+    <div class="container" style="max-width:880px;">
+      <p style="font-size:16px;line-height:1.8;color:#374151;margin:0 0 28px;">${langSpan(sec.intro_en, sec.intro_zh)}</p>
+      ${sec.extra_en ? langSpan(sec.extra_en, sec.extra_zh || sec.extra_en) : ''}
+      ${marketsGrid}
+      ${storiesList}
+      <h2 style="font-size:22px;margin:36px 0 18px;">${langSpan('Latest coverage', '最新报道')}</h2>
+      ${articleListHTML(matched, 'Dedicated coverage for this section is ramping up — the Daily Briefing covers these topics every weekday.', '本栏目的专题报道正在积累中——每日简报每个工作日都覆盖相关主题。')}
+      ${sectionNavHTML(sec.route)}
+    </div>
+  </section>`;
+}
+
+for (const sec of SECTIONS) {
+  const main = sectionMain(sec);
+  const meta = { title: sec.title_en, desc: sec.deck_en };
+  fs.writeFileSync(path.join(ROOT, sec.file),
+    pageHTML(sec.route, meta, main));
+  writeZh(sec.file, zhChrome(pageHTML(sec.route, { title: sec.title_zh, desc: sec.deck_zh }, main, { zh: true })));
+}
+console.log(`✓ ${SECTIONS.length} section pages (+zh)`);
+
+// ---- Market pages (/markets/<slug>) ----
+const MARKETS_OUT = path.join(ROOT, 'markets');
+if (!fs.existsSync(MARKETS_OUT)) fs.mkdirSync(MARKETS_OUT);
+for (const mk of MARKETS) {
+  const matched = articles.filter(a => mk.kw.test(`${a.title_en} ${a.excerpt_en || ''}`)).slice(0, 20);
+  const main = `
+  <section class="page-header">
+    <div class="container">
+      <div class="section-eyebrow"><a href="/markets" style="color:inherit;text-decoration:none;">${langSpan('Markets', '市场')}</a></div>
+      <h1 class="page-title">${langSpan('Chinese Cars in ' + mk.name_en, mk.name_zh + '：中国汽车市场观察')}</h1>
+      <p class="page-deck">${langSpan(mk.intro_en.split('. ')[0] + '.', mk.intro_zh.split('。')[0] + '。')}</p>
+    </div>
+  </section>
+  <section style="padding-top:0;">
+    <div class="container" style="max-width:880px;">
+      <p style="font-size:16px;line-height:1.8;color:#374151;margin:0 0 28px;">${langSpan(mk.intro_en, mk.intro_zh)}</p>
+      <h2 style="font-size:22px;margin:36px 0 18px;">${langSpan('Latest coverage', '最新报道')}</h2>
+      ${articleListHTML(matched, `Market-specific coverage of ${mk.name_en} is ramping up.`, `${mk.name_zh}市场的专题报道正在积累中。`)}
+      <p style="margin-top:36px;"><a href="/markets" style="color:var(--accent, #d4302a);font-family:var(--mono);font-size:13px;">← All markets</a></p>
+    </div>
+  </section>`;
+  const metaEn = {
+    title: `Chinese Cars in ${mk.name_en} — Brands, EVs & Market News | TopChinaCar`,
+    desc: mk.intro_en.slice(0, 300)
+  };
+  fs.writeFileSync(path.join(MARKETS_OUT, `${mk.slug}.html`),
+    pageHTML(`/markets/${mk.slug}`, metaEn, main));
+  writeZh(`markets/${mk.slug}.html`, zhChrome(pageHTML(`/markets/${mk.slug}`, {
+    title: `${mk.name_zh}中国汽车市场 — 品牌、电动车与市场动态 | TopChinaCar`,
+    desc: mk.intro_zh.slice(0, 300)
+  }, main, { zh: true })));
+}
+console.log(`✓ ${MARKETS.length} market pages (+zh)`);
 
 // ---- Feature story pages (/stories/<slug>) ----
 const STORIES_OUT = path.join(ROOT, 'stories');
@@ -790,7 +1029,7 @@ const notFoundMain = `
     <div class="container">
       <div class="section-eyebrow">404</div>
       <h1 class="page-title">Page not found</h1>
-      <p class="page-deck">The page you are looking for does not exist. <a href="/" style="color:var(--accent);">Back to the homepage</a> · <a href="/brands" style="color:var(--accent);">Brand Index</a> · <a href="/news" style="color:var(--accent);">News</a></p>
+      <p class="page-deck">The page you are looking for does not exist. <a href="/" style="color:var(--accent);">Back to the homepage</a> · <a href="/chinese-car-brands" style="color:var(--accent);">Brand Index</a> · <a href="/news" style="color:var(--accent);">News</a></p>
     </div>
   </section>`;
 fs.writeFileSync(path.join(ROOT, '404.html'),
@@ -802,7 +1041,7 @@ const today = new Date().toISOString().slice(0, 10);
 const staticUrls = Object.keys(PAGES).map(r =>
   `  <url><loc>${r === '/' ? SITE + '/' : SITE + r}</loc><lastmod>${today}</lastmod></url>`);
 const brandUrls = SITE_DATA.brands.map(b =>
-  `  <url><loc>${SITE}/brands/${b.id}</loc><lastmod>${today}</lastmod></url>`);
+  `  <url><loc>${SITE}/chinese-car-brands/${b.id}</loc><lastmod>${today}</lastmod></url>`);
 const modelUrls = SITE_DATA.models.filter(m => m.id).map(m =>
   `  <url><loc>${SITE}/models/${m.id}</loc><lastmod>${today}</lastmod></url>`);
 const storyUrls = SITE_STORIES
@@ -810,7 +1049,11 @@ const storyUrls = SITE_STORIES
   .map(s => `  <url><loc>${SITE}/stories/${s.slug}</loc><lastmod>${s.date}</lastmod></url>`);
 const articleUrls = articles.map(a =>
   `  <url><loc>${SITE}/news/${a.slug}</loc><lastmod>${a.date}</lastmod></url>`);
-const enUrlLines = staticUrls.concat(brandUrls, modelUrls, storyUrls, articleUrls);
+const sectionUrls = SECTIONS.map(s =>
+  `  <url><loc>${SITE}${s.route}</loc><lastmod>${today}</lastmod></url>`);
+const marketUrls = MARKETS.map(mk =>
+  `  <url><loc>${SITE}/markets/${mk.slug}</loc><lastmod>${today}</lastmod></url>`);
+const enUrlLines = staticUrls.concat(sectionUrls, marketUrls, brandUrls, modelUrls, storyUrls, articleUrls);
 const zhUrlLines = enUrlLines.map(l =>
   l.includes(`<loc>${SITE}/</loc>`)
     ? l.replace(`<loc>${SITE}/</loc>`, `<loc>${SITE}/zh</loc>`)

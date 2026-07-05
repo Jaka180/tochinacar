@@ -62,3 +62,39 @@
 
 /js/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+
+/china-ev-news
+  Cache-Control: public, max-age=0, must-revalidate
+
+/china-car-export-news
+  Cache-Control: public, max-age=0, must-revalidate
+
+/chinese-car-brands
+  Cache-Control: public, max-age=0, must-revalidate
+
+/chinese-car-brands/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/markets
+  Cache-Control: public, max-age=0, must-revalidate
+
+/markets/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/policy
+  Cache-Control: public, max-age=0, must-revalidate
+
+/data
+  Cache-Control: public, max-age=0, must-revalidate
+
+/analysis
+  Cache-Control: public, max-age=0, must-revalidate
+
+/editorial-policy
+  Cache-Control: public, max-age=0, must-revalidate
+
+/contact
+  Cache-Control: public, max-age=0, must-revalidate
+
+/newsletter
+  Cache-Control: public, max-age=0, must-revalidate
