@@ -13,6 +13,8 @@ const vm = require('vm');
 const ROOT = __dirname;
 const SITE = 'https://www.topchinacar.com';
 const BUILD_V = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, ''); // cache-busting version
+const TODAY = new Date().toISOString().slice(0, 10);
+const DEFAULT_OG_IMAGE = 'images/hero-xiaomi.jpg';
 
 // ---- Collect daily articles (articles/*.json, written by the GCP pipeline) ----
 const ARTICLES_DIR = path.join(ROOT, 'articles');
@@ -74,8 +76,6 @@ function zhChrome(html) {
     .replace(/data-lang="en"/g, 'data-lang="en" hidden')
     .replace(/data-lang="zh" data-zh-keep/g, 'data-lang="zh"');
   html = html.replace(/href="\/(?!zh\/|zh"|images\/|css\/|js\/|api\/|cdn-cgi\/)/g, 'href="/zh/');
-  // fix the /zh/ homepage link form: href="/zh/" → href="/zh"
-  html = html.replace(/href="\/zh\/"/g, 'href="/zh"');
   return html;
 }
 
@@ -87,16 +87,16 @@ function writeZh(relPath, html) {
 
 const PAGES_ZH = {
   '/': { title: 'TopChinaCar | 中国汽车全球化新闻：新能源、出口与全球市场', desc: 'TopChinaCar 面向国际读者报道中国汽车品牌、电动车、出口市场、政策变化与全球扩张。' },
-  '/editorial-policy': { title: '编辑方针 | TopChinaCar', desc: 'TopChinaCar 如何报道中国汽车全球化：内容主线、信源标准、文章结构、独立性与更正政策。' },
+  '/editorial-policy': { title: 'TopChinaCar 编辑方针与信源标准', desc: 'TopChinaCar 如何报道中国汽车全球化：内容主线、信源标准、文章结构、独立性与更正政策。' },
   '/contact': { title: '联系 TopChinaCar — 媒体、市场情报与合作', desc: '媒体、市场情报、经销商与合作事宜，请联系 TopChinaCar。48 小时内回复。' },
   '/newsletter': { title: '每日出海简报 — 邮件订阅 | TopChinaCar', desc: '面向全球市场的中国汽车新闻，每个工作日早晨送达：出口、市场进入、工厂、关税与新车——附信源链接。' },
-  '/chinese-car-brands': { title: '中国汽车品牌大全 — 比亚迪、吉利、蔚来等 31 个品牌 | TopChinaCar', desc: '30 余家中国车企实地指南：传统集团（比亚迪、吉利、上汽、奇瑞、长城、东风）、新势力（蔚来、小鹏、理想、小米、零跑）及其子品牌——创立时间、总部、主攻方向与出口版图。' },
+  '/chinese-car-brands': { title: '中国汽车品牌大全 | TopChinaCar', desc: '中国汽车品牌指南：比亚迪、吉利、上汽、奇瑞、长城、蔚来、小鹏、理想、小米、零跑及其子品牌。' },
   '/models': { title: '中国电动车明星车型 — 续航、价格与参数 | TopChinaCar', desc: '定义新时代的中国电动车：比亚迪海豹、小米 SU7 Ultra、蔚来 ET9、小鹏 G6、理想 MEGA、极氪 001——真实续航、零百加速与美元指导价。' },
   '/news': { title: '中国汽车出海与电动车行业新闻 | TopChinaCar', desc: '中国汽车出口、新车发布、电池技术与政策动态的精选报道，以及每个工作日更新的出海简报。' },
   '/tech': { title: '中国电动车技术解读：800V、城市智驾、刀片电池 | TopChinaCar', desc: '深度解读中国汽车领先背后的技术：800V 高压平台、城市级智能驾驶、智能座舱、刀片电池与 CTB 电池车身一体化。' },
   '/about': { title: '关于 TopChinaCar — 独立的中国汽车编辑报道', desc: 'TopChinaCar 是面向海外读者的独立双语编辑出版物，讲解中国汽车——品牌、车型、技术与人。不吹捧，不贬低。' },
-  '/quote': { title: '进口中国汽车 — 经销商出口与批发报价 | TopChinaCar', desc: '经销商、车队与进口商询价：比亚迪、奇瑞、吉利、MG 等。告诉我们市场、车型与数量——48 小时内由持牌中国出口商提供 FOB/CIF 报价。' },
-  '/privacy': { title: '隐私政策 | TopChinaCar', desc: 'TopChinaCar 如何收集、使用与保护您的信息：询价表单、邮件订阅与网站分析的数据用途说明。' }
+  '/quote': { title: '进口中国汽车 — 出口与批发报价 | TopChinaCar', desc: '经销商、车队与进口商询价：比亚迪、奇瑞、吉利、MG 等车型，48 小时内提供 FOB/CIF 报价。' },
+  '/privacy': { title: 'TopChinaCar 隐私政策与数据使用说明', desc: 'TopChinaCar 如何收集、使用与保护您的信息：询价表单、邮件订阅与网站分析的数据用途说明。' }
 };
 
 
@@ -106,6 +106,7 @@ if (fs.existsSync(path.join(ROOT, 'js', 'stories-data.js'))) {
   vm.runInContext(fs.readFileSync(path.join(ROOT, 'js', 'stories-data.js'), 'utf-8'), sandbox, { filename: 'js/stories-data.js' });
   SITE_STORIES = vm.runInContext('typeof SITE_STORIES !== "undefined" ? SITE_STORIES : []', sandbox);
 }
+const SITE_DATA = vm.runInContext('SITE_DATA', sandbox);
 
 // ---- Per-page metadata ----
 const PAGES = {
@@ -116,8 +117,8 @@ const PAGES = {
   },
   '/chinese-car-brands': {
     file: 'chinese-car-brands.html',
-    title: 'Chinese Car Brands: The Complete Index — BYD, Geely, NIO & 27 More | TopChinaCar',
-    desc: 'A field guide to 30 Chinese automakers: legacy groups (BYD, Geely, SAIC, Chery, Great Wall, Dongfeng), EV startups (NIO, Xpeng, Li Auto, Xiaomi, Leapmotor) and their sub-brands — founding dates, HQ, focus and export footprint.'
+    title: 'Chinese Car Brands: BYD, Geely, NIO & More | TopChinaCar',
+    desc: 'A field guide to 30 Chinese automakers, EV startups and sub-brands, with founding dates, headquarters, focus areas and export footprint.'
   },
   '/models': {
     file: 'models.html',
@@ -141,8 +142,8 @@ const PAGES = {
   },
   '/quote': {
     file: 'quote.html',
-    title: 'Import Chinese Cars — Export & Wholesale Quotes for Dealers | TopChinaCar',
-    desc: 'Dealer, fleet and importer inquiries for Chinese vehicles: BYD, Chery, Geely, MG and more. Tell us your market, models and volume — FOB/CIF quotes through licensed Chinese exporters within 48 hours.'
+    title: 'Import Chinese Cars — Dealer Export Quotes | TopChinaCar',
+    desc: 'Dealer, fleet and importer quote requests for Chinese vehicles including BYD, Chery, Geely and MG, with FOB/CIF pricing within 48 hours.'
   },
   '/privacy': {
     file: 'privacy.html',
@@ -193,7 +194,7 @@ function headerHTML(route) {
       </span>
     </a>
 
-    <nav class="main-nav" aria-label="Primary">
+    <nav class="main-nav" id="primaryNav" aria-label="Primary">
       ${navLinks}
     </nav>
 
@@ -201,7 +202,7 @@ function headerHTML(route) {
       <button class="lang-toggle" id="langToggle" aria-label="Switch language">
         <span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-zh">中</span>
       </button>
-      <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -304,19 +305,86 @@ const JSONLD = `<script type="application/ld+json">
 </script>`;
 
 function escAttr(s) {
-  return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+  return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+}
+
+function truncateMeta(s, max = 160) {
+  s = String(s || '').replace(/\s+/g, ' ').trim();
+  if (s.length <= max) return s;
+  const cut = s.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > 80 ? cut.slice(0, lastSpace) : cut).replace(/[,:;—-]\s*$/, '') + '…';
+}
+
+function canonicalUrl(route, isZh = false) {
+  if (route === '/') return isZh ? `${SITE}/zh/` : `${SITE}/`;
+  return isZh ? `${SITE}/zh${route}` : `${SITE}${route}`;
+}
+
+function assetUrl(asset) {
+  if (!asset) return `${SITE}/${DEFAULT_OG_IMAGE}`;
+  if (/^https?:\/\//i.test(asset)) return asset;
+  return `${SITE}/${String(asset).replace(/^\/+/, '')}`;
+}
+
+function jsonLdScript(data) {
+  return `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n</script>`;
+}
+
+function breadcrumbJsonLd(route, items) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: canonicalUrl(item.route || route, false)
+    }))
+  };
+}
+
+function collectionJsonLd(route, title, description, itemRoutes = []) {
+  return jsonLdScript({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${canonicalUrl(route, false)}#collection`,
+        url: canonicalUrl(route, false),
+        name: title,
+        description,
+        isPartOf: { '@id': `${SITE}/#website` }
+      },
+      {
+        '@type': 'ItemList',
+        itemListElement: itemRoutes.slice(0, 50).map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          url: canonicalUrl(item.route, false),
+          name: item.name
+        }))
+      },
+      breadcrumbJsonLd(route, [
+        { name: 'Home', route: '/' },
+        { name: title, route }
+      ])
+    ]
+  });
 }
 
 function pageHTML(route, meta, mainHTML, opts = {}) {
   const isZh = !!opts.zh;
-  const enUrl = route === '/' ? SITE + '/' : SITE + route;
-  const zhUrl = route === '/' ? SITE + '/zh' : SITE + '/zh' + route;
+  const enUrl = canonicalUrl(route, false);
+  const zhUrl = canonicalUrl(route, true);
   const canonical = isZh ? zhUrl : enUrl;
+  const ogImage = assetUrl(meta.image || opts.image || DEFAULT_OG_IMAGE);
   const altLinks = opts.noAlt ? '' : `<link rel="alternate" hreflang="en" href="${enUrl}" />
 <link rel="alternate" hreflang="zh-CN" href="${zhUrl}" />
 <link rel="alternate" hreflang="x-default" href="${enUrl}" />
 `;
-  meta = { ...meta, title: escAttr(meta.title), desc: escAttr(meta.desc) };
+  const extraHead = opts.extraHead || meta.extraHead || '';
+  meta = { ...meta, title: escAttr(truncateMeta(meta.title, 75)), desc: escAttr(truncateMeta(meta.desc, 165)) };
   return `<!DOCTYPE html>
 <html lang="${isZh ? 'zh' : 'en'}">
 <head>
@@ -334,7 +402,7 @@ ${altLinks}
 <meta property="og:title" content="${meta.title}" />
 <meta property="og:description" content="${meta.desc}" />
 <meta property="og:url" content="${canonical}" />
-<meta property="og:image" content="${SITE}/images/hero-xiaomi.jpg" />
+<meta property="og:image" content="${ogImage}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:locale" content="${isZh ? 'zh_CN' : 'en_US'}" />
@@ -345,9 +413,9 @@ ${meta.published ? `<meta property="article:published_time" content="${meta.publ
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${meta.title}" />
 <meta name="twitter:description" content="${meta.desc}" />
-<meta name="twitter:image" content="${SITE}/images/hero-xiaomi.jpg" />
+<meta name="twitter:image" content="${ogImage}" />
 
-${route === '/' ? JSONLD + '\n' : ''}<link rel="preconnect" href="https://fonts.googleapis.com">
+${route === '/' ? JSONLD + '\n' : ''}${extraHead ? extraHead + '\n' : ''}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css" />
@@ -373,21 +441,42 @@ ${FOOTER}
 `;
 }
 
+function staticCollectionItems(route) {
+  if (route === '/chinese-car-brands') {
+    return SITE_DATA.brands.map(b => ({ route: `/chinese-car-brands/${b.id}`, name: b.name }));
+  }
+  if (route === '/models') {
+    return SITE_DATA.models.filter(m => m.id).map(m => ({ route: `/models/${m.id}`, name: `${m.brand} ${m.name}` }));
+  }
+  if (route === '/news') {
+    return articles.map(a => ({ route: `/news/${a.slug}`, name: a.title_en }));
+  }
+  if (route === '/markets') {
+    return MARKETS.map(m => ({ route: `/markets/${m.slug}`, name: m.name_en }));
+  }
+  return [];
+}
+
+function staticExtraHead(route, meta) {
+  if (route === '/') return '';
+  return collectionJsonLd(route, meta.title.replace(/\s+\|\s+TopChinaCar$/, ''), meta.desc, staticCollectionItems(route));
+}
+
 // ---- Generate pages (EN + /zh mirror) ----
 let count = 0;
 for (const [route, meta] of Object.entries(PAGES)) {
   const mainHTML = PAGE_ROUTES[route]();
-  fs.writeFileSync(path.join(ROOT, meta.file), pageHTML(route, meta, mainHTML));
+  fs.writeFileSync(path.join(ROOT, meta.file), pageHTML(route, { ...meta, extraHead: staticExtraHead(route, meta) }, mainHTML));
   setSandboxLang('zh');
   const mainZh = PAGE_ROUTES[route]();
   setSandboxLang('en');
-  writeZh(meta.file, zhChrome(pageHTML(route, PAGES_ZH[route] || meta, mainZh, { zh: true })));
+  const zhMeta = PAGES_ZH[route] || meta;
+  writeZh(meta.file, zhChrome(pageHTML(route, { ...zhMeta, extraHead: staticExtraHead(route, meta) }, mainZh, { zh: true })));
   console.log(`✓ ${meta.file} + zh (${mainHTML.length} chars of prerendered content)`);
   count++;
 }
 
 // ---- Brand detail pages (/chinese-car-brands/<id>) ----
-const SITE_DATA = vm.runInContext('SITE_DATA', sandbox);
 const BRANDS_OUT = path.join(ROOT, 'chinese-car-brands');
 if (!fs.existsSync(BRANDS_OUT)) fs.mkdirSync(BRANDS_OUT);
 
@@ -471,6 +560,7 @@ function brandJsonLd(b) {
       "name": "${b.name}",
       "alternateName": "${b.cn}",
       "url": "${SITE}/chinese-car-brands/${b.id}",
+      "image": "${assetUrl(b.image)}",
       "description": ${JSON.stringify(b.desc_en)}
     },
     {
@@ -533,12 +623,14 @@ for (const b of SITE_DATA.brands) {
   const main = brandMain(b);
   const html = pageHTML(`/chinese-car-brands/${b.id}`, {
     title: `${b.name} (${b.cn}): Models, Sub-brands & Global Footprint | TopChinaCar`,
-    desc: `${b.desc_en} ${catEn}, founded ${b.founded}, HQ ${b.hq} — brand profile, featured models and the latest export news.`.slice(0, 300)
+    desc: `${b.desc_en} ${catEn}, founded ${b.founded}, HQ ${b.hq} — brand profile, featured models and export news.`,
+    image: b.image
   }, main).replace('</head>', brandJsonLd(b) + '\n</head>');
   fs.writeFileSync(path.join(BRANDS_OUT, `${b.id}.html`), html);
   writeZh(`chinese-car-brands/${b.id}.html`, zhChrome(pageHTML(`/chinese-car-brands/${b.id}`, {
     title: `${b.name}（${b.cn}）：车型、子品牌与全球布局 | TopChinaCar`,
-    desc: `${b.desc_zh} 创立于 ${b.founded}，总部 ${b.hq}——品牌档案、明星车型与最新出海动态。`.slice(0, 300)
+    desc: `${b.desc_zh} 创立于 ${b.founded}，总部 ${b.hq}——品牌档案、明星车型与最新出海动态。`,
+    image: b.image
   }, main, { zh: true }).replace('</head>', brandJsonLd(b) + '\n</head>')));
 }
 console.log(`✓ ${SITE_DATA.brands.length} brand pages → brands/ + zh/chinese-car-brands/`);
@@ -609,6 +701,7 @@ function modelJsonLd(m) {
       "name": "${m.brand} ${m.name}",
       "brand": {"@type": "Brand", "name": "${m.brand}"},
       "url": "${SITE}/models/${m.id}",
+      "image": "${assetUrl(m.image)}",
       "description": ${JSON.stringify(m.tag_en)},
       "category": "Vehicle"
     },
@@ -632,12 +725,14 @@ for (const m of SITE_DATA.models) {
   const main = modelMain(m, brand);
   const html = pageHTML(`/models/${m.id}`, {
     title: `${m.brand} ${m.name}: Specs, Range & Price | TopChinaCar`,
-    desc: `${m.tag_en} Range ${m.range}, 0-100 km/h ${m.accel}, from ${m.price} — full specs, pricing and export-market context.`.slice(0, 300)
+    desc: `${m.tag_en} Range ${m.range}, 0-100 km/h ${m.accel}, from ${m.price} — specs, pricing and export-market context.`,
+    image: m.image
   }, main).replace('</head>', modelJsonLd(m) + '\n</head>');
   fs.writeFileSync(path.join(MODELS_OUT, `${m.id}.html`), html);
   writeZh(`models/${m.id}.html`, zhChrome(pageHTML(`/models/${m.id}`, {
     title: `${m.brand} ${m.name} 参数、续航与价格 | TopChinaCar`,
-    desc: `${m.tag_zh} 续航 ${m.range}，零百加速 ${m.accel}，${m.price} 起——完整参数、价格与出口市场背景。`.slice(0, 300)
+    desc: `${m.tag_zh} 续航 ${m.range}，零百加速 ${m.accel}，${m.price} 起——参数、价格与出口市场背景。`,
+    image: m.image
   }, main, { zh: true }).replace('</head>', modelJsonLd(m) + '\n</head>')));
   modelCount++;
 }
@@ -652,7 +747,7 @@ const SECTIONS = [
     title_zh: '中国新能源车新闻 — 电动车、电池与智能汽车 | TopChinaCar',
     h1_en: 'China EV News', h1_zh: '中国新能源车新闻',
     deck_en: 'Electric vehicles, plug-in hybrids, EREVs, batteries, charging and smart-driving — the technology side of China’s auto globalization.',
-    deck_zh: '纯电、插混、增程、电池、补能与智能驾驶——中国汽车全球化的技术面。',
+    deck_zh: '追踪中国纯电、插混、增程、电池、补能与智能驾驶进展，解释这些技术如何影响中国汽车全球化。',
     intro_en: 'China builds and exports more electric vehicles than any other country. This section tracks the products and technologies behind that lead: new EV, PHEV and EREV launches relevant to overseas markets, battery and charging developments, and the smart-driving and cockpit systems that increasingly differentiate Chinese cars abroad.',
     intro_zh: '中国是全球最大的电动车生产国和出口国。本栏目追踪这一领先地位背后的产品与技术：与海外市场相关的纯电、插混、增程新车，电池与补能进展，以及日益成为中国汽车海外差异化优势的智驾与座舱系统。',
     kw: /\bEVs?\b|electric|battery|batteries|PHEV|EREV|plug-in|hybrid|charging|swap|autonomous|smart driving|ADAS|\bNEV/i
@@ -663,7 +758,7 @@ const SECTIONS = [
     title_zh: '中国汽车出口新闻 — 出口数据、海外工厂与增长 | TopChinaCar',
     h1_en: 'China Car Export News', h1_zh: '中国汽车出口新闻',
     deck_en: 'Monthly export figures, overseas plants, dealer networks, logistics and homologation — how Chinese cars reach the world.',
-    deck_zh: '月度出口数据、海外工厂、经销商网络、物流与认证——中国汽车如何走向世界。',
+    deck_zh: '追踪中国汽车月度出口数据、海外工厂、经销商网络、物流与认证，解释中国汽车如何进入全球市场。',
     intro_en: 'China became the world’s largest car exporter by volume, and the export machine keeps evolving: from shipping fully-built vehicles to building plants in Thailand, Brazil, Hungary and Spain. This section follows the numbers, the factories, the dealer networks, and the fuel-mix of what actually gets exported — ICE, hybrid and electric.',
     intro_zh: '中国已成为全球第一大汽车出口国，而且出海模式仍在进化：从整车出口到在泰国、巴西、匈牙利、西班牙建厂。本栏目跟踪出口数据、海外工厂、经销网络，以及实际出口的燃油/混动/纯电结构。',
     kw: /export|overseas|shipment|ro-ro|plant|factory|localis|localiz|assembl|dealer network|knock-down/i
@@ -674,7 +769,7 @@ const SECTIONS = [
     title_zh: '全球市场 — 中国汽车的海外扩张版图 | TopChinaCar',
     h1_en: 'Global Markets', h1_zh: '全球市场',
     deck_en: 'Market-by-market coverage of Chinese auto expansion — Europe, the Middle East, Africa, Latin America, Southeast Asia and Australia.',
-    deck_zh: '逐个市场追踪中国汽车的扩张——欧洲、中东、非洲、拉美、东南亚与澳洲。',
+    deck_zh: '逐个市场追踪中国汽车的海外扩张路径，覆盖欧洲、中东、非洲、拉美、东南亚与澳洲等重点区域。',
     intro_en: 'Chinese automakers do not expand everywhere the same way: Europe means tariffs and localisation, the Gulf means rapid brand adoption, Latin America means plants and pickups, Southeast Asia means right-hand-drive EV hubs. Pick a market below to follow the coverage.',
     intro_zh: '中国车企在不同市场的打法完全不同：欧洲是关税与本地化，海湾是品牌快速渗透，拉美是建厂与皮卡，东南亚是右舵电动车枢纽。选择下方市场查看对应报道。',
     kw: /Europe|EU\b|Middle East|Gulf|Saudi|UAE|Dubai|Africa|Latin America|Brazil|Mexico|Chile|Thailand|Indonesia|Malaysia|Vietnam|Australia|Russia|Central Asia/i,
@@ -686,7 +781,7 @@ const SECTIONS = [
     title_zh: '政策与关税 — 影响中国汽车出口的规则 | TopChinaCar',
     h1_en: 'Policy & Tariffs', h1_zh: '政策与关税',
     deck_en: 'EU tariffs, US restrictions, homologation, subsidies — the regulatory forces shaping where Chinese cars can go.',
-    deck_zh: '欧盟关税、美国限制、海外认证、补贴政策——决定中国汽车能去哪里的监管力量。',
+    deck_zh: '解读欧盟关税、美国限制、海外认证与补贴政策，追踪决定中国汽车能去哪里的监管力量。',
     intro_en: 'Trade policy is now the single biggest variable in China auto globalization. EU anti-subsidy duties pushed Chinese brands toward European plants; US rules effectively closed one market while opening questions about Mexico; certification regimes decide launch timelines everywhere. This section tracks the rules and what automakers do about them.',
     intro_zh: '贸易政策已成为中国汽车全球化的最大变量。欧盟反补贴税把中国品牌推向欧洲建厂；美国规则实际关闭了一个市场；各国认证体系决定上市节奏。本栏目追踪规则本身，以及车企的应对。',
     kw: /tariff|policy|regulat|subsid|homologation|sanction|trade|duty|duties|ban\b|restriction/i
@@ -697,7 +792,7 @@ const SECTIONS = [
     title_zh: '数据与排名 — 中国汽车出口与销量数据 | TopChinaCar',
     h1_en: 'Data & Rankings', h1_zh: '数据与排名',
     deck_en: 'Export volumes, brand rankings, market share and model data — the numbers behind the headlines.',
-    deck_zh: '出口量、品牌排名、市场份额与车型数据——标题背后的数字。',
+    deck_zh: '汇总中国汽车出口量、品牌排名、市场份额与车型参数数据，用数字解释行业新闻背后的真实趋势。',
     intro_en: 'Every story on TopChinaCar is grounded in numbers: monthly export and delivery figures, brand-by-brand overseas share, and model-level specs and pricing. This section collects data-led coverage, plus our reference model database with specs and indicative prices in USD.',
     intro_zh: 'TopChinaCar 的每篇报道都以数字为底：月度出口与交付数据、各品牌海外占比、车型级参数与价格。本栏目汇总数据向报道，并提供以美元计价的参考车型数据库。',
     kw: /sales|deliver|units|record|ranking|market share|figure|\bH[12]\b|\bQ[1-4]\b|million|\d{2,3},\d{3}/i,
@@ -710,7 +805,7 @@ const SECTIONS = [
     title_zh: '深度分析 — 解读中国汽车全球化 | TopChinaCar',
     h1_en: 'Analysis', h1_zh: '深度分析',
     deck_en: 'Longer reads on why, how and where Chinese automakers are going global.',
-    deck_zh: '关于中国车企为什么出海、如何出海、去哪里的长篇解读。',
+    deck_zh: '提供中国车企为什么出海、如何出海、去哪里的长篇解读，关注战略、供应链、商业模式与全球竞争。',
     intro_en: 'Beyond the daily news cycle: structural pieces on supply chains, business models and strategy that explain China auto globalization to international readers.',
     intro_zh: '跳出每日新闻循环：从供应链、商业模式与战略层面，向国际读者解释中国汽车全球化的结构性文章。',
     kw: /strategy|why |analysis|explained|model\b.*global/i,
@@ -818,10 +913,19 @@ function sectionMain(sec) {
 
 for (const sec of SECTIONS) {
   const main = sectionMain(sec);
-  const meta = { title: sec.title_en, desc: sec.deck_en };
+  const sectionItems = articles
+    .filter(a => sec.kw.test(`${a.title_en} ${a.excerpt_en || ''}`))
+    .map(a => ({ route: `/news/${a.slug}`, name: a.title_en }));
+  const meta = {
+    title: sec.title_en,
+    desc: sec.deck_en,
+    extraHead: collectionJsonLd(sec.route, sec.h1_en, sec.deck_en, sec.isMarketsIndex
+      ? MARKETS.map(m => ({ route: `/markets/${m.slug}`, name: m.name_en }))
+      : sectionItems)
+  };
   fs.writeFileSync(path.join(ROOT, sec.file),
     pageHTML(sec.route, meta, main));
-  writeZh(sec.file, zhChrome(pageHTML(sec.route, { title: sec.title_zh, desc: sec.deck_zh }, main, { zh: true })));
+  writeZh(sec.file, zhChrome(pageHTML(sec.route, { title: sec.title_zh, desc: sec.deck_zh, extraHead: meta.extraHead }, main, { zh: true })));
 }
 console.log(`✓ ${SECTIONS.length} section pages (+zh)`);
 
@@ -848,13 +952,16 @@ for (const mk of MARKETS) {
   </section>`;
   const metaEn = {
     title: `Chinese Cars in ${mk.name_en} — Brands, EVs & Market News | TopChinaCar`,
-    desc: mk.intro_en.slice(0, 300)
+    desc: mk.intro_en,
+    extraHead: collectionJsonLd(`/markets/${mk.slug}`, `Chinese Cars in ${mk.name_en}`, mk.intro_en,
+      matched.map(a => ({ route: `/news/${a.slug}`, name: a.title_en })))
   };
   fs.writeFileSync(path.join(MARKETS_OUT, `${mk.slug}.html`),
     pageHTML(`/markets/${mk.slug}`, metaEn, main));
   writeZh(`markets/${mk.slug}.html`, zhChrome(pageHTML(`/markets/${mk.slug}`, {
     title: `${mk.name_zh}中国汽车市场 — 品牌、电动车与市场动态 | TopChinaCar`,
-    desc: mk.intro_zh.slice(0, 300)
+    desc: mk.intro_zh,
+    extraHead: metaEn.extraHead
   }, main, { zh: true })));
 }
 console.log(`✓ ${MARKETS.length} market pages (+zh)`);
@@ -894,6 +1001,8 @@ function storyJsonLd(f, s) {
   "headline": ${JSON.stringify(f.title_en)},
   "description": ${JSON.stringify(f.desc_en)},
   "datePublished": "${s.date}",
+  "dateModified": "${s.date}",
+  "image": "${assetUrl(f.image)}",
   "inLanguage": ["en", "zh-CN"],
   "mainEntityOfPage": "${SITE}/stories/${f.slug}",
   "author": {"@type": "Organization", "name": "TopChinaCar", "url": "${SITE}/"},
@@ -909,14 +1018,16 @@ for (const s of SITE_STORIES) {
   const main = storyMain(f, s);
   const html = pageHTML(`/stories/${f.slug}`, {
     title: `${f.title_en} | TopChinaCar`,
-    desc: f.desc_en.slice(0, 300),
+    desc: f.desc_en,
+    image: f.image,
     ogType: 'article',
     published: s.date
   }, main).replace('</head>', storyJsonLd(f, s) + '\n</head>');
   fs.writeFileSync(path.join(STORIES_OUT, `${f.slug}.html`), html);
   writeZh(`stories/${f.slug}.html`, zhChrome(pageHTML(`/stories/${f.slug}`, {
     title: `${f.title_zh} | TopChinaCar`,
-    desc: f.desc_zh.slice(0, 300),
+    desc: f.desc_zh,
+    image: f.image,
     ogType: 'article',
     published: s.date
   }, main, { zh: true }).replace('</head>', storyJsonLd(f, s) + '\n</head>')));
@@ -987,7 +1098,20 @@ function articleMain(a) {
   </section>`;
 }
 
+function articleImage(a) {
+  const text = `${a.title_en || ''} ${a.excerpt_en || ''} ${a.title_zh || ''} ${a.excerpt_zh || ''}`.toLowerCase();
+  const brand = SITE_DATA.brands.find(b =>
+    text.includes(String(b.name).toLowerCase()) || (b.cn && text.includes(String(b.cn).toLowerCase())));
+  if (brand && brand.image) return brand.image;
+  if (/\bev\b|electric|battery|batteries|phev|hybrid/i.test(text)) return 'images/byd-seal.jpg';
+  if (/africa|pickup|commercial/i.test(text)) return 'images/chery-brand.jpg';
+  if (/middle east|gulf|saudi|uae|dubai/i.test(text)) return 'images/yangwang-u8.jpg';
+  if (/europe|tariff/i.test(text)) return 'images/mg-mg4.jpg';
+  return DEFAULT_OG_IMAGE;
+}
+
 function articleJsonLd(a) {
+  const image = articleImage(a);
   return `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -996,6 +1120,7 @@ function articleJsonLd(a) {
   "description": ${JSON.stringify(a.excerpt_en || a.title_en)},
   "datePublished": "${a.date}",
   "dateModified": "${a.date}",
+  "image": "${assetUrl(image)}",
   "inLanguage": ["en", "zh-CN"],
   "mainEntityOfPage": "${SITE}/news/${a.slug}",
   "author": {"@type": "Organization", "name": "TopChinaCar", "url": "${SITE}/"},
@@ -1009,14 +1134,16 @@ for (const a of articles) {
   const main = articleMain(a);
   const html = pageHTML(route, {
     title: `${a.title_en} | TopChinaCar`,
-    desc: (a.excerpt_en || a.title_en).slice(0, 300),
+    desc: (a.excerpt_en || a.title_en),
+    image: articleImage(a),
     ogType: 'article',
     published: a.date
   }, main).replace('</head>', articleJsonLd(a) + '\n</head>');
   fs.writeFileSync(path.join(NEWS_OUT, `${a.slug}.html`), html);
   writeZh(`news/${a.slug}.html`, zhChrome(pageHTML(route, {
     title: `${a.title_zh || a.title_en} | TopChinaCar`,
-    desc: (a.excerpt_zh || a.excerpt_en || a.title_zh || a.title_en).slice(0, 300),
+    desc: (a.excerpt_zh || a.excerpt_en || a.title_zh || a.title_en),
+    image: articleImage(a),
     ogType: 'article',
     published: a.date
   }, main, { zh: true }).replace('</head>', articleJsonLd(a) + '\n</head>')));
@@ -1037,26 +1164,30 @@ fs.writeFileSync(path.join(ROOT, '404.html'),
 console.log('✓ 404.html');
 
 // ---- sitemap.xml ----
-const today = new Date().toISOString().slice(0, 10);
+function safeDate(date) {
+  if (!date) return TODAY;
+  return date > TODAY ? TODAY : date;
+}
+
 const staticUrls = Object.keys(PAGES).map(r =>
-  `  <url><loc>${r === '/' ? SITE + '/' : SITE + r}</loc><lastmod>${today}</lastmod></url>`);
+  `  <url><loc>${r === '/' ? SITE + '/' : SITE + r}</loc><lastmod>${TODAY}</lastmod></url>`);
 const brandUrls = SITE_DATA.brands.map(b =>
-  `  <url><loc>${SITE}/chinese-car-brands/${b.id}</loc><lastmod>${today}</lastmod></url>`);
+  `  <url><loc>${SITE}/chinese-car-brands/${b.id}</loc><lastmod>${TODAY}</lastmod></url>`);
 const modelUrls = SITE_DATA.models.filter(m => m.id).map(m =>
-  `  <url><loc>${SITE}/models/${m.id}</loc><lastmod>${today}</lastmod></url>`);
+  `  <url><loc>${SITE}/models/${m.id}</loc><lastmod>${TODAY}</lastmod></url>`);
 const storyUrls = SITE_STORIES
   .filter(s => (SITE_DATA.features || []).some(f => f.slug === s.slug))
-  .map(s => `  <url><loc>${SITE}/stories/${s.slug}</loc><lastmod>${s.date}</lastmod></url>`);
+  .map(s => `  <url><loc>${SITE}/stories/${s.slug}</loc><lastmod>${safeDate(s.date)}</lastmod></url>`);
 const articleUrls = articles.map(a =>
-  `  <url><loc>${SITE}/news/${a.slug}</loc><lastmod>${a.date}</lastmod></url>`);
+  `  <url><loc>${SITE}/news/${a.slug}</loc><lastmod>${safeDate(a.date)}</lastmod></url>`);
 const sectionUrls = SECTIONS.map(s =>
-  `  <url><loc>${SITE}${s.route}</loc><lastmod>${today}</lastmod></url>`);
+  `  <url><loc>${SITE}${s.route}</loc><lastmod>${TODAY}</lastmod></url>`);
 const marketUrls = MARKETS.map(mk =>
-  `  <url><loc>${SITE}/markets/${mk.slug}</loc><lastmod>${today}</lastmod></url>`);
+  `  <url><loc>${SITE}/markets/${mk.slug}</loc><lastmod>${TODAY}</lastmod></url>`);
 const enUrlLines = staticUrls.concat(sectionUrls, marketUrls, brandUrls, modelUrls, storyUrls, articleUrls);
 const zhUrlLines = enUrlLines.map(l =>
   l.includes(`<loc>${SITE}/</loc>`)
-    ? l.replace(`<loc>${SITE}/</loc>`, `<loc>${SITE}/zh</loc>`)
+    ? l.replace(`<loc>${SITE}/</loc>`, `<loc>${SITE}/zh/</loc>`)
     : l.replace(`<loc>${SITE}/`, `<loc>${SITE}/zh/`));
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1065,5 +1196,27 @@ ${enUrlLines.concat(zhUrlLines).join('\n')}
 `;
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemap);
 console.log('✓ sitemap.xml');
+
+const recentNews = articles
+  .filter(a => safeDate(a.date) >= new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10))
+  .slice(0, 1000);
+const newsSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+${recentNews.map(a => `  <url>
+    <loc>${SITE}/news/${a.slug}</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>${safeDate(a.date)}</news:publication_date>
+      <news:title>${escAttr(a.title_en)}</news:title>
+    </news:news>
+  </url>`).join('\n')}
+</urlset>
+`;
+fs.writeFileSync(path.join(ROOT, 'news-sitemap.xml'), newsSitemap);
+console.log('✓ news-sitemap.xml');
 
 console.log(`\nDone — ${count} pages + 404 + sitemap.`);

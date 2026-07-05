@@ -650,7 +650,7 @@ const SITE_DATA = {
       title_en: 'NIO\'s Battery Swap Bet',
       title_zh: '蔚来的换电豪赌',
       desc_en: 'Three minutes, full charge. Why NIO built 3,000 stations — and why CATL and Geely joined in.',
-      desc_zh: '三分钟满电。蔚来为何建了 3,000 座换电站——宁德时代与吉利又为何入局。',
+      desc_zh: '三分钟满电。解析蔚来为何投入建设 3,000 座换电站，以及宁德时代、吉利等玩家为何也开始加入换电生态。',
       meta_en: 'PROFILE · 6 MIN', meta_zh: '品牌 · 6 分钟',
       shape: 'sedan-long', accent: '#1d4ed8',
       image: 'images/nio-et9.jpg', imageCredit: 'S5A-0043 / CC BY 4.0'
@@ -661,7 +661,7 @@ const SITE_DATA = {
       title_en: 'Why Xiaomi\'s SU7 Looks Familiar',
       title_zh: '为什么小米 SU7 看起来眼熟',
       desc_en: 'Inside the design language borrowing from Porsche — and where it diverges.',
-      desc_zh: '解析其向保时捷靠近的设计语言——以及它真正独立的地方。',
+      desc_zh: '解析小米 SU7 为何看起来像保时捷：它借鉴了哪些跑车比例，又在哪些智能化与产品定位上形成自己的差异。',
       meta_en: 'DESIGN · 5 MIN', meta_zh: '设计 · 5 分钟',
       shape: 'sedan', accent: '#f97316',
       image: 'images/xiaomi-su7-ultra.jpg', imageCredit: 'Daniel Lu (User:dllu) / CC BY-SA 4.0'

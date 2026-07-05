@@ -259,8 +259,17 @@
 
     const menuBtn = document.getElementById('menuBtn');
     if (menuBtn) {
+      const nav = document.querySelector('.main-nav');
+      const setMenuOpen = (open) => {
+        nav?.classList.toggle('open', open);
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      };
       menuBtn.addEventListener('click', () => {
-        document.querySelector('.main-nav')?.classList.toggle('open');
+        setMenuOpen(!nav?.classList.contains('open'));
+      });
+      nav?.addEventListener('click', (e) => {
+        if (e.target.closest('a')) setMenuOpen(false);
       });
     }
 

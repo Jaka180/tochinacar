@@ -31,6 +31,100 @@
 <meta name="twitter:description" content="Market-by-market coverage of Chinese auto expansion — Europe, the Middle East, Africa, Latin America, Southeast Asia and Australia." />
 <meta name="twitter:image" content="https://www.topchinacar.com/images/hero-xiaomi.jpg" />
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://www.topchinacar.com/markets#collection",
+      "url": "https://www.topchinacar.com/markets",
+      "name": "Global Markets",
+      "description": "Market-by-market coverage of Chinese auto expansion — Europe, the Middle East, Africa, Latin America, Southeast Asia and Australia.",
+      "isPartOf": {
+        "@id": "https://www.topchinacar.com/#website"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "url": "https://www.topchinacar.com/markets/europe",
+          "name": "Europe"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "url": "https://www.topchinacar.com/markets/middle-east",
+          "name": "Middle East"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "url": "https://www.topchinacar.com/markets/saudi-arabia",
+          "name": "Saudi Arabia"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "url": "https://www.topchinacar.com/markets/uae",
+          "name": "UAE"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "url": "https://www.topchinacar.com/markets/africa",
+          "name": "Africa"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "url": "https://www.topchinacar.com/markets/latin-america",
+          "name": "Latin America"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "url": "https://www.topchinacar.com/markets/brazil",
+          "name": "Brazil"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "url": "https://www.topchinacar.com/markets/southeast-asia",
+          "name": "Southeast Asia"
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "url": "https://www.topchinacar.com/markets/australia",
+          "name": "Australia"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.topchinacar.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Global Markets",
+          "item": "https://www.topchinacar.com/markets"
+        }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -52,7 +146,7 @@
       </span>
     </a>
 
-    <nav class="main-nav" aria-label="Primary">
+    <nav class="main-nav" id="primaryNav" aria-label="Primary">
       <a href="/news" data-i18n="nav.news">News</a>
       <a href="/china-ev-news" data-i18n="nav.ev">EV</a>
       <a href="/china-car-export-news" data-i18n="nav.exports">Exports</a>
@@ -67,7 +161,7 @@
       <button class="lang-toggle" id="langToggle" aria-label="Switch language">
         <span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-zh">中</span>
       </button>
-      <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -91,7 +185,7 @@
     <div class="container">
       <div class="section-eyebrow"><span data-lang="en">Section</span><span data-lang="zh" hidden>栏目</span></div>
       <h1 class="page-title"><span data-lang="en">Global Markets</span><span data-lang="zh" hidden>全球市场</span></h1>
-      <p class="page-deck"><span data-lang="en">Market-by-market coverage of Chinese auto expansion — Europe, the Middle East, Africa, Latin America, Southeast Asia and Australia.</span><span data-lang="zh" hidden>逐个市场追踪中国汽车的扩张——欧洲、中东、非洲、拉美、东南亚与澳洲。</span></p>
+      <p class="page-deck"><span data-lang="en">Market-by-market coverage of Chinese auto expansion — Europe, the Middle East, Africa, Latin America, Southeast Asia and Australia.</span><span data-lang="zh" hidden>逐个市场追踪中国汽车的海外扩张路径，覆盖欧洲、中东、非洲、拉美、东南亚与澳洲等重点区域。</span></p>
     </div>
   </section>
   <section style="padding-top:0;">
@@ -142,21 +236,6 @@
       <h2 style="font-size:22px;margin:36px 0 18px;"><span data-lang="en">Latest coverage</span><span data-lang="zh" hidden>最新报道</span></h2>
       <ul style="list-style:none;padding:0;margin:0;">
     <li style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #f3f4f6;">
-      <div style="font-family:var(--mono, monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dc2626;margin-bottom:6px;">2026-07-06</div>
-      <a href="/news/chinese-cars-in-the-middle-east-why-demand-is-rising" style="color:inherit;text-decoration:none;"><strong style="font-family:var(--serif, Georgia, serif);font-size:19px;line-height:1.35;"><span data-lang="en">Chinese Cars in the Middle East: Why Demand Is Rising</span><span data-lang="zh" hidden>中国汽车在中东：需求为什么在上升</span></strong></a>
-      <p style="margin:6px 0 0;font-size:14px;color:#6b7280;line-height:1.6;"><span data-lang="en">The Gulf went from skeptical to one of the fastest-adopting regions for Chinese cars in five years. Petrol SUVs opened the door; EVs and flagship showrooms are walking through it.</span><span data-lang="zh" hidden>五年之间，海湾从怀疑者变成中国汽车渗透最快的区域之一。燃油 SUV 敲开了门，电动车和旗舰展厅正鱼贯而入。</span></p>
-    </li>
-    <li style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #f3f4f6;">
-      <div style="font-family:var(--mono, monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dc2626;margin-bottom:6px;">2026-07-06</div>
-      <a href="/news/chinese-cars-in-africa-suvs-pickups-and-commercial-vehicles" style="color:inherit;text-decoration:none;"><strong style="font-family:var(--serif, Georgia, serif);font-size:19px;line-height:1.35;"><span data-lang="en">Chinese Cars in Africa: SUVs, Pickups and Commercial Vehicles</span><span data-lang="zh" hidden>中国汽车在非洲：SUV、皮卡与商用车</span></strong></a>
-      <p style="margin:6px 0 0;font-size:14px;color:#6b7280;line-height:1.6;"><span data-lang="en">Africa is the quietest front of China auto globalization — and possibly the most durable. The wedge is not EVs but affordable SUVs, working pickups and commercial vehicles, with local assembly starting to take root.</span><span data-lang="zh" hidden>非洲是中国汽车全球化最安静的战线,也可能是最持久的一条。楔子不是电动车,而是平价 SUV、能干活的皮卡和商用车——本地组装也开始扎根。</span></p>
-    </li>
-    <li style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #f3f4f6;">
-      <div style="font-family:var(--mono, monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dc2626;margin-bottom:6px;">2026-07-06</div>
-      <a href="/news/chery-overseas-growth-why-emerging-markets-matter" style="color:inherit;text-decoration:none;"><strong style="font-family:var(--serif, Georgia, serif);font-size:19px;line-height:1.35;"><span data-lang="en">Chery's Overseas Growth: Why Emerging Markets Matter</span><span data-lang="zh" hidden>奇瑞的海外增长：新兴市场为什么是胜负手</span></strong></a>
-      <p style="margin:6px 0 0;font-size:14px;color:#6b7280;line-height:1.6;"><span data-lang="en">China's export champion for 23 straight years built its lead the unfashionable way: petrol SUVs, emerging markets, and local assembly — long before the EV wave. Now that base is funding a push into Europe.</span><span data-lang="zh" hidden>连续 23 年的中国出口冠军用最不时髦的方式建立领先：燃油 SUV、新兴市场、本地组装——远早于电动车浪潮。如今这个基本盘正在为进军欧洲输血。</span></p>
-    </li>
-    <li style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #f3f4f6;">
       <div style="font-family:var(--mono, monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dc2626;margin-bottom:6px;">2026-07-05</div>
       <a href="/news/why-chinese-automakers-are-building-overseas-plants" style="color:inherit;text-decoration:none;"><strong style="font-family:var(--serif, Georgia, serif);font-size:19px;line-height:1.35;"><span data-lang="en">Why Chinese Automakers Are Building Overseas Plants</span><span data-lang="zh" hidden>中国车企为什么在海外建厂</span></strong></a>
       <p style="margin:6px 0 0;font-size:14px;color:#6b7280;line-height:1.6;"><span data-lang="en">From Thailand to Hungary to Brazil, Chinese automakers are racing to manufacture where they sell. The logic: get inside the tariff wall before it rises further.</span><span data-lang="zh" hidden>从泰国到匈牙利再到巴西，中国车企正在赶工"销地制造"。逻辑只有一条：赶在关税墙进一步抬高前进到墙内。</span></p>
@@ -165,6 +244,21 @@
       <div style="font-family:var(--mono, monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dc2626;margin-bottom:6px;">2026-07-05</div>
       <a href="/news/chinese-evs-in-europe-opportunity-tariffs-and-competition" style="color:inherit;text-decoration:none;"><strong style="font-family:var(--serif, Georgia, serif);font-size:19px;line-height:1.35;"><span data-lang="en">Chinese EVs in Europe: Opportunity, Tariffs and Competition</span><span data-lang="zh" hidden>中国电动车在欧洲：机会、关税与竞争</span></strong></a>
       <p style="margin:6px 0 0;font-size:14px;color:#6b7280;line-height:1.6;"><span data-lang="en">Europe is the hardest market Chinese EV makers have entered — and the one they refuse to give up. Tariffs reshaped the strategy from exporting cars to building them inside the wall.</span><span data-lang="zh" hidden>欧洲是中国电动车企进入过的最难市场，也是它们拒绝放弃的市场。关税把战略从"出口整车"改写为"墙内造车"。</span></p>
+    </li>
+    <li style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #f3f4f6;">
+      <div style="font-family:var(--mono, monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dc2626;margin-bottom:6px;">2026-07-05</div>
+      <a href="/news/chinese-cars-in-the-middle-east-why-demand-is-rising" style="color:inherit;text-decoration:none;"><strong style="font-family:var(--serif, Georgia, serif);font-size:19px;line-height:1.35;"><span data-lang="en">Chinese Cars in the Middle East: Why Demand Is Rising</span><span data-lang="zh" hidden>中国汽车在中东：需求为什么在上升</span></strong></a>
+      <p style="margin:6px 0 0;font-size:14px;color:#6b7280;line-height:1.6;"><span data-lang="en">The Gulf went from skeptical to one of the fastest-adopting regions for Chinese cars in five years. Petrol SUVs opened the door; EVs and flagship showrooms are walking through it.</span><span data-lang="zh" hidden>五年之间，海湾从怀疑者变成中国汽车渗透最快的区域之一。燃油 SUV 敲开了门，电动车和旗舰展厅正鱼贯而入。</span></p>
+    </li>
+    <li style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #f3f4f6;">
+      <div style="font-family:var(--mono, monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dc2626;margin-bottom:6px;">2026-07-05</div>
+      <a href="/news/chinese-cars-in-africa-suvs-pickups-and-commercial-vehicles" style="color:inherit;text-decoration:none;"><strong style="font-family:var(--serif, Georgia, serif);font-size:19px;line-height:1.35;"><span data-lang="en">Chinese Cars in Africa: SUVs, Pickups and Commercial Vehicles</span><span data-lang="zh" hidden>中国汽车在非洲：SUV、皮卡与商用车</span></strong></a>
+      <p style="margin:6px 0 0;font-size:14px;color:#6b7280;line-height:1.6;"><span data-lang="en">Africa is the quietest front of China auto globalization — and possibly the most durable. The wedge is not EVs but affordable SUVs, working pickups and commercial vehicles, with local assembly starting to take root.</span><span data-lang="zh" hidden>非洲是中国汽车全球化最安静的战线,也可能是最持久的一条。楔子不是电动车,而是平价 SUV、能干活的皮卡和商用车——本地组装也开始扎根。</span></p>
+    </li>
+    <li style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #f3f4f6;">
+      <div style="font-family:var(--mono, monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dc2626;margin-bottom:6px;">2026-07-05</div>
+      <a href="/news/chery-overseas-growth-why-emerging-markets-matter" style="color:inherit;text-decoration:none;"><strong style="font-family:var(--serif, Georgia, serif);font-size:19px;line-height:1.35;"><span data-lang="en">Chery's Overseas Growth: Why Emerging Markets Matter</span><span data-lang="zh" hidden>奇瑞的海外增长：新兴市场为什么是胜负手</span></strong></a>
+      <p style="margin:6px 0 0;font-size:14px;color:#6b7280;line-height:1.6;"><span data-lang="en">China's export champion for 23 straight years built its lead the unfashionable way: petrol SUVs, emerging markets, and local assembly — long before the EV wave. Now that base is funding a push into Europe.</span><span data-lang="zh" hidden>连续 23 年的中国出口冠军用最不时髦的方式建立领先：燃油 SUV、新兴市场、本地组装——远早于电动车浪潮。如今这个基本盘正在为进军欧洲输血。</span></p>
     </li>
   </ul>
       <div style="margin-top:44px;padding-top:20px;border-top:1px solid #e5e7eb;font-size:13px;font-family:var(--mono, monospace);">
@@ -223,10 +317,10 @@
   </div>
 </footer>
 
-<script src="/js/data.js?v=202607050928"></script>
-<script src="/js/i18n.js?v=202607050928"></script>
-<script src="/js/articles-data.js?v=202607050928"></script>
-<script src="/js/pages.js?v=202607050928"></script>
-<script src="/js/app.js?v=202607050928"></script>
+<script src="/js/data.js?v=202607051053"></script>
+<script src="/js/i18n.js?v=202607051053"></script>
+<script src="/js/articles-data.js?v=202607051053"></script>
+<script src="/js/pages.js?v=202607051053"></script>
+<script src="/js/app.js?v=202607051053"></script>
 </body>
 </html>
