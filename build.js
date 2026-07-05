@@ -423,13 +423,6 @@ function brandMain(b) {
       <div style="font-size:16px;line-height:1.8;color:#374151;">
         <p>${langSpan(ctx.en, ctx.zh)}</p>
       </div>
-      <div style="margin:32px 0;padding:24px;background:#f9fafb;border-left:3px solid #d4302a;">
-        <h2 style="margin:0 0 8px;font-size:18px;">${langSpan(`Import ${b.name} vehicles`, `进口 ${b.name} 车辆`)}</h2>
-        <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#4b5563;">${langSpan(
-          `Dealer or fleet buyer? Tell us your market and volume — we respond within 48 hours with availability and FOB/CIF quotes for ${b.name} models through licensed Chinese exporters.`,
-          `经销商或车队买家？告诉我们目标市场与数量——48 小时内回复 ${b.name} 车型的货源与 FOB/CIF 报价，由持牌中国出口商执行。`)}</p>
-        <a href="/quote?model=${encodeURIComponent(b.name)}" class="btn btn-primary">${langSpan('Request a quote', '提交询价')}</a>
-      </div>
       ${models.length ? `
       <h2 style="font-size:22px;margin:40px 0 20px;">${langSpan('Featured ' + b.name + ' models', b.name + ' 明星车型')}</h2>
       <div class="models-grid">
@@ -516,13 +509,13 @@ for (const b of SITE_DATA.brands) {
   const catEn = (CATEGORY_LABEL[b.category] || CATEGORY_LABEL.group).en;
   const main = brandMain(b);
   const html = pageHTML(`/brands/${b.id}`, {
-    title: `${b.name} (${b.cn}) Export — Models, Markets & Wholesale Quotes | TopChinaCar`,
-    desc: `${b.desc_en} ${catEn}, founded ${b.founded}, HQ ${b.hq}. Dealer and fleet export quotes for ${b.name} vehicles through licensed Chinese exporters.`.slice(0, 300)
+    title: `${b.name} (${b.cn}): Models, Sub-brands & Global Footprint | TopChinaCar`,
+    desc: `${b.desc_en} ${catEn}, founded ${b.founded}, HQ ${b.hq} — brand profile, featured models and the latest export news.`.slice(0, 300)
   }, main).replace('</head>', brandJsonLd(b) + '\n</head>');
   fs.writeFileSync(path.join(BRANDS_OUT, `${b.id}.html`), html);
   writeZh(`brands/${b.id}.html`, zhChrome(pageHTML(`/brands/${b.id}`, {
-    title: `${b.name}（${b.cn}）出口 — 车型、市场与批发报价 | TopChinaCar`,
-    desc: `${b.desc_zh} 创立于 ${b.founded}，总部 ${b.hq}。通过持牌中国出口商获取 ${b.name} 的经销商与车队出口报价。`.slice(0, 300)
+    title: `${b.name}（${b.cn}）：车型、子品牌与全球布局 | TopChinaCar`,
+    desc: `${b.desc_zh} 创立于 ${b.founded}，总部 ${b.hq}——品牌档案、明星车型与最新出海动态。`.slice(0, 300)
   }, main, { zh: true }).replace('</head>', brandJsonLd(b) + '\n</head>')));
 }
 console.log(`✓ ${SITE_DATA.brands.length} brand pages → brands/ + zh/brands/`);
@@ -562,15 +555,8 @@ function modelMain(m, brand) {
       <div style="font-size:16px;line-height:1.8;color:#374151;">
         <p>${langSpan(ctx.en, ctx.zh)}</p>
         <p style="font-size:13px;color:#9ca3af;">${langSpan(
-          'USD figures are approximate conversions of the local list price shown in brackets, and change with exchange rates — confirm current export pricing via a quote request.',
-          '美元价格为括号内当地指导价的近似换算，随汇率波动——实际出口价格以询价回复为准。')}</p>
-      </div>
-      <div style="margin:32px 0;padding:24px;background:#f9fafb;border-left:3px solid #d4302a;">
-        <h2 style="margin:0 0 8px;font-size:18px;">${langSpan(`Import the ${m.brand} ${m.name}`, `进口 ${m.brand} ${m.name}`)}</h2>
-        <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#4b5563;">${langSpan(
-          `Dealer or fleet buyer? Tell us your market and volume — we respond within 48 hours with availability and FOB/CIF quotes for the ${m.name} through licensed Chinese exporters.`,
-          `经销商或车队买家？告诉我们目标市场与数量——48 小时内回复 ${m.name} 的货源与 FOB/CIF 报价，由持牌中国出口商执行。`)}</p>
-        <a href="/quote?model=${encodeURIComponent(m.brand + ' ' + m.name)}" class="btn btn-primary">${langSpan('Request a quote', '提交询价')}</a>
+          'USD figures are approximate conversions of the local list price shown in brackets, and move with exchange rates and market promotions.',
+          '美元价格为括号内当地指导价的近似换算，随汇率与市场优惠波动。')}</p>
       </div>
       ${siblings.length ? `
       <h2 style="font-size:22px;margin:40px 0 20px;">${langSpan('More ' + m.brand + ' models', m.brand + ' 其他车型')}</h2>
@@ -622,13 +608,13 @@ for (const m of SITE_DATA.models) {
   const brand = SITE_DATA.brands.find(b => b.name === m.brand);
   const main = modelMain(m, brand);
   const html = pageHTML(`/models/${m.id}`, {
-    title: `${m.brand} ${m.name} Export — Specs, Price & Wholesale Quotes | TopChinaCar`,
-    desc: `${m.tag_en} Range ${m.range}, 0-100 km/h ${m.accel}, from ${m.price}. Dealer and fleet export quotes for the ${m.brand} ${m.name} through licensed Chinese exporters.`.slice(0, 300)
+    title: `${m.brand} ${m.name}: Specs, Range & Price | TopChinaCar`,
+    desc: `${m.tag_en} Range ${m.range}, 0-100 km/h ${m.accel}, from ${m.price} — full specs, pricing and export-market context.`.slice(0, 300)
   }, main).replace('</head>', modelJsonLd(m) + '\n</head>');
   fs.writeFileSync(path.join(MODELS_OUT, `${m.id}.html`), html);
   writeZh(`models/${m.id}.html`, zhChrome(pageHTML(`/models/${m.id}`, {
-    title: `${m.brand} ${m.name} 出口 — 参数、价格与批发报价 | TopChinaCar`,
-    desc: `${m.tag_zh} 续航 ${m.range}，零百加速 ${m.accel}，${m.price} 起。通过持牌中国出口商获取 ${m.brand} ${m.name} 的经销商与车队出口报价。`.slice(0, 300)
+    title: `${m.brand} ${m.name} 参数、续航与价格 | TopChinaCar`,
+    desc: `${m.tag_zh} 续航 ${m.range}，零百加速 ${m.accel}，${m.price} 起——完整参数、价格与出口市场背景。`.slice(0, 300)
   }, main, { zh: true }).replace('</head>', modelJsonLd(m) + '\n</head>')));
   modelCount++;
 }
@@ -656,13 +642,6 @@ function storyMain(f, s) {
         ${langBlock('en', s.html_en)}
         ${langBlock('zh', s.html_zh || s.html_en)}
       </article>
-      <div style="margin:44px 0 0;padding:26px 28px;background:#f9fafb;border-left:3px solid #d4302a;">
-        <h2 style="margin:0 0 8px;font-size:19px;">${langSpan('Import these vehicles', '进口这些车辆')}</h2>
-        <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#4b5563;">${langSpan(
-          'Dealer, fleet or importer? We source availability and FOB/CIF quotes for any Chinese brand through licensed exporters — response within 48 hours.',
-          '经销商、车队或进口商？我们通过持牌出口商为任意中国品牌匹配货源与 FOB/CIF 报价——48 小时内回复。')}</p>
-        <a href="/quote" class="btn btn-primary">${langSpan('Request a quote', '提交询价')}</a>
-      </div>
       <p style="margin-top:32px;"><a href="/news" style="color:var(--accent);font-family:var(--mono);font-size:13px;">← All news & features</a></p>
     </div>
   </section>`;
@@ -764,13 +743,6 @@ function articleMain(a) {
         ${langBlock('zh', a.html_zh || a.html_en)}
       </article>
       ${sourcesBlockHTML(sources)}
-      <div style="margin:44px 0 0;padding:26px 28px;background:#f9fafb;border-left:3px solid #d4302a;">
-        <h2 style="margin:0 0 8px;font-size:19px;">${langSpan('Import these vehicles', '进口这些车辆')}</h2>
-        <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#4b5563;">${langSpan(
-          'Dealer, fleet or importer? We source availability and FOB/CIF quotes for any Chinese brand through licensed exporters — response within 48 hours.',
-          '经销商、车队或进口商？我们通过持牌出口商为任意中国品牌匹配货源与 FOB/CIF 报价——48 小时内回复。')}</p>
-        <a href="/quote" class="btn btn-primary">${langSpan('Request a quote', '提交询价')}</a>
-      </div>
       <p style="margin-top:32px;"><a href="/news" style="color:var(--accent);font-family:var(--mono);font-size:13px;">← All news</a></p>
     </div>
   </section>`;

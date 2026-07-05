@@ -137,8 +137,7 @@ function modelCardHTML(m, lang) {
           <div><span class="spec-label">${t('models.spec.accel')}</span><span class="spec-value">${m.accel}</span></div>
           <div class="spec-price-row"><span class="spec-label">${t('models.spec.price')}</span><span class="spec-value">${m.price}</span>${dual}</div>
         </div>
-        <a href="/quote?model=${encodeURIComponent(m.brand + ' ' + m.name)}" class="btn btn-primary" style="display:inline-block;margin-top:14px;font-size:13px;padding:9px 18px;">${t('models.cta.quote')}</a>
-        ${detailHref ? `<a href="${detailHref}" style="display:inline-block;margin-top:14px;margin-left:14px;color:var(--accent, #d4302a);font-family:var(--mono, monospace);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '详情 →' : 'Full profile →'}</a>` : ''}
+        ${detailHref ? `<a href="${detailHref}" style="display:inline-block;margin-top:14px;color:var(--accent, #d4302a);font-family:var(--mono, monospace);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '详情 →' : 'Full profile →'}</a>` : ''}
       </div>
     </article>
   `;
