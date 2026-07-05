@@ -89,15 +89,15 @@ function writeZh(relPath, html) {
 const PAGES_ZH = {
   '/': { title: 'TopChinaCar | 中国汽车全球化新闻：新能源、出口与全球市场', desc: 'TopChinaCar 面向国际读者报道中国汽车品牌、电动车、出口市场、政策变化与全球扩张。' },
   '/editorial-policy': { title: 'TopChinaCar 编辑方针与信源标准', desc: 'TopChinaCar 如何报道中国汽车全球化：内容主线、信源标准、文章结构、独立性与更正政策。' },
-  '/contact': { title: '联系 TopChinaCar — 媒体、市场情报与合作', desc: '媒体、市场情报、经销商与合作事宜，请联系 TopChinaCar。48 小时内回复。' },
+  '/contact': { title: '联系 TopChinaCar — 媒体、市场情报与合作', desc: '报道线索、勘误、媒体、市场情报与合作事宜，请联系 TopChinaCar。48 小时内回复。' },
   '/newsletter': { title: '每日出海简报 — 邮件订阅 | TopChinaCar', desc: '面向全球市场的中国汽车新闻，每个工作日早晨送达：出口、市场进入、工厂、关税与新车——附信源链接。' },
   '/chinese-car-brands': { title: '中国汽车品牌大全 | TopChinaCar', desc: '中国汽车品牌指南：比亚迪、吉利、上汽、奇瑞、长城、蔚来、小鹏、理想、小米、零跑及其子品牌。' },
   '/models': { title: '中国电动车明星车型 — 续航、价格与参数 | TopChinaCar', desc: '定义新时代的中国电动车：比亚迪海豹、小米 SU7 Ultra、蔚来 ET9、小鹏 G6、理想 MEGA、极氪 001——真实续航、零百加速与美元指导价。' },
   '/news': { title: '中国汽车出海与电动车行业新闻 | TopChinaCar', desc: '中国汽车出口、新车发布、电池技术与政策动态的精选报道，以及每个工作日更新的出海简报。' },
   '/tech': { title: '中国电动车技术解读：800V、城市智驾、刀片电池 | TopChinaCar', desc: '深度解读中国汽车领先背后的技术：800V 高压平台、城市级智能驾驶、智能座舱、刀片电池与 CTB 电池车身一体化。' },
   '/about': { title: '关于 TopChinaCar — 独立的中国汽车编辑报道', desc: 'TopChinaCar 是面向海外读者的独立双语编辑出版物，讲解中国汽车——品牌、车型、技术与人。不吹捧，不贬低。' },
-  '/quote': { title: '商业联系与合作咨询 | TopChinaCar', desc: '面向合作、市场情报和商业咨询的联系页面。TopChinaCar 的核心定位仍是独立新闻与信息报道。', robots: 'noindex,follow' },
-  '/privacy': { title: 'TopChinaCar 隐私政策与数据使用说明', desc: 'TopChinaCar 如何收集、使用与保护您的信息：询价表单、邮件订阅与网站分析的数据用途说明。' }
+  '/quote': { title: '商业与合作联系 | TopChinaCar', desc: '面向合作、市场情报、赞助与研究需求的联系页面。TopChinaCar 的核心定位仍是独立新闻与信息报道。', robots: 'noindex,follow' },
+  '/privacy': { title: 'TopChinaCar 隐私政策与数据使用说明', desc: 'TopChinaCar 如何收集、使用与保护您的信息：联系表单、邮件订阅与网站分析的数据用途说明。' }
 };
 
 
@@ -143,14 +143,14 @@ const PAGES = {
   },
   '/quote': {
     file: 'quote.html',
-    title: 'Commercial Inquiries | TopChinaCar',
-    desc: 'Contact page for partnerships, market intelligence and commercial inquiries. TopChinaCar remains an independent news and information site.',
+    title: 'Commercial & Partnership Contact | TopChinaCar',
+    desc: 'Contact page for partnerships, market intelligence, sponsorship and research requests. TopChinaCar remains an independent news and information site.',
     robots: 'noindex,follow'
   },
   '/privacy': {
     file: 'privacy.html',
     title: 'Privacy Policy | TopChinaCar',
-    desc: 'How TopChinaCar collects, uses and protects your information: quote inquiries, newsletter subscriptions and site analytics.'
+    desc: 'How TopChinaCar collects, uses and protects your information: contact forms, newsletter subscriptions and site analytics.'
   },
   '/editorial-policy': {
     file: 'editorial-policy.html',
@@ -160,7 +160,7 @@ const PAGES = {
   '/contact': {
     file: 'contact.html',
     title: 'Contact TopChinaCar — Media, Market Intelligence & Partnerships',
-    desc: 'For media, market intelligence, dealer and partnership inquiries, contact TopChinaCar. We respond within 48 hours.'
+    desc: 'For editorial tips, corrections, media, market intelligence and partnerships, contact TopChinaCar. We respond within 48 hours.'
   },
   '/newsletter': {
     file: 'newsletter.html',
@@ -432,8 +432,8 @@ const STATIC_FAQS = {
     ['Which Chinese brands are strongest for export markets?', 'BYD, Chery, SAIC/MG, Geely and Great Wall have the broadest overseas footprints today, while NIO, Xpeng, Zeekr and Leapmotor are expanding selectively by region.']
   ],
   '/models': [
-    ['Which Chinese EV models are most relevant for export markets?', 'BYD Seal, BYD Atto 3, MG4, Xiaomi SU7, Xpeng G6, Zeekr 001, NIO ET5 and Leapmotor C10 are among the models international buyers and dealers most often track.'],
-    ['Are the prices listed on TopChinaCar export prices?', 'Model pages use indicative local list prices and approximate USD conversions. Actual export quotes depend on market, trim, homologation, logistics, taxes and exporter availability.'],
+    ['Which Chinese EV models are most relevant internationally?', 'BYD Seal, BYD Atto 3, MG4, Xiaomi SU7, Xpeng G6, Zeekr 001, NIO ET5 and Leapmotor C10 are among the models international readers often track.'],
+    ['Are the prices listed on TopChinaCar transaction prices?', 'No. Model pages use indicative local list prices and approximate USD conversions for editorial context. Actual market prices vary by country, trim, taxes, logistics and local incentives.'],
     ['Do Chinese EV specs differ by country?', 'Yes. Battery size, charging standard, safety equipment, software, warranty and homologation package can differ between China-market vehicles and export-market versions.']
   ],
   '/news': [
@@ -450,8 +450,8 @@ const STATIC_FAQS_ZH = {
     ['哪些中国品牌的出口能力最强？', '比亚迪、奇瑞、上汽/MG、吉利和长城目前海外版图最广；蔚来、小鹏、极氪和零跑则按区域选择性扩张。']
   ],
   '/models': [
-    ['哪些中国电动车最值得海外市场关注？', '比亚迪海豹、BYD Atto 3、MG4、小米 SU7、小鹏 G6、极氪 001、蔚来 ET5 和零跑 C10 是海外买家和经销商常关注的车型。'],
-    ['TopChinaCar 上的价格是出口价吗？', '不是。车型页使用本地指导价和近似美元换算。实际出口报价取决于目的市场、配置、认证、物流、税费和出口商供货情况。'],
+    ['哪些中国电动车最值得国际读者关注？', '比亚迪海豹、BYD Atto 3、MG4、小米 SU7、小鹏 G6、极氪 001、蔚来 ET5 和零跑 C10 是国际读者常关注的车型。'],
+    ['TopChinaCar 上的价格是成交价吗？', '不是。车型页使用本地指导价和近似美元换算，仅作为编辑背景信息。实际市场价格会因国家、配置、税费、物流和本地激励而变化。'],
     ['中国电动车在不同国家的配置会不同吗？', '会。电池容量、充电标准、安全配置、软件、质保和认证包可能因中国版与出口版不同而变化。']
   ],
   '/news': [

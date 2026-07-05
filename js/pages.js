@@ -129,16 +129,16 @@ const PAGE_FAQS = {
   ],
   models: [
     {
-      q_en: 'Which Chinese EV models are most relevant for export markets?',
-      q_zh: '哪些中国电动车最值得海外市场关注？',
-      a_en: 'BYD Seal, BYD Atto 3, MG4, Xiaomi SU7, Xpeng G6, Zeekr 001, NIO ET5 and Leapmotor C10 are among the models international buyers and dealers often track.',
-      a_zh: '比亚迪海豹、BYD Atto 3、MG4、小米 SU7、小鹏 G6、极氪 001、蔚来 ET5 和零跑 C10 是海外买家和经销商常关注的车型。'
+      q_en: 'Which Chinese EV models are most relevant internationally?',
+      q_zh: '哪些中国电动车最值得国际读者关注？',
+      a_en: 'BYD Seal, BYD Atto 3, MG4, Xiaomi SU7, Xpeng G6, Zeekr 001, NIO ET5 and Leapmotor C10 are among the models international readers often track.',
+      a_zh: '比亚迪海豹、BYD Atto 3、MG4、小米 SU7、小鹏 G6、极氪 001、蔚来 ET5 和零跑 C10 是国际读者常关注的车型。'
     },
     {
-      q_en: 'Are the prices listed on TopChinaCar export prices?',
-      q_zh: 'TopChinaCar 上的价格是出口价吗？',
-      a_en: 'No. Model pages use indicative local list prices and approximate USD conversions. Export quotes depend on market, trim, homologation, logistics, taxes and exporter availability.',
-      a_zh: '不是。车型页使用本地指导价和近似美元换算。实际出口报价取决于目的市场、配置、认证、物流、税费和出口商供货情况。'
+      q_en: 'Are the prices listed on TopChinaCar transaction prices?',
+      q_zh: 'TopChinaCar 上的价格是成交价吗？',
+      a_en: 'No. Model pages use indicative local list prices and approximate USD conversions for editorial context. Actual market prices vary by country, trim, taxes, logistics and local incentives.',
+      a_zh: '不是。车型页使用本地指导价和近似美元换算，仅作为编辑背景信息。实际市场价格会因国家、配置、税费、物流和本地激励而变化。'
     },
     {
       q_en: 'Do Chinese EV specs differ by country?',
@@ -918,12 +918,12 @@ function pagePrivacy() {
     </section>
     <section style="padding-top:0;">
       <div class="container" style="max-width:820px;font-size:15px;line-height:1.8;color:#374151;">
-        ${p(S('TopChinaCar ("we") is an independent editorial publication about Chinese automobiles that also connects dealers, fleets and importers with licensed Chinese vehicle exporters. This policy explains what information we collect through this website, why, and the choices you have. Contact: <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a>.',
-                'TopChinaCar（下称"我们"）是一家关于中国汽车的独立编辑出版物，同时为经销商、车队与进口商对接持牌中国汽车出口商。本政策说明我们通过本网站收集哪些信息、原因，以及您可行使的选择。联系方式：<a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a>。'))}
+        ${p(S('TopChinaCar ("we") is an independent editorial publication about Chinese automobiles. This policy explains what information we collect through this website, why, and the choices you have. Contact: <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a>.',
+                'TopChinaCar（下称"我们"）是一家关于中国汽车的独立编辑出版物。本政策说明我们通过本网站收集哪些信息、原因，以及您可行使的选择。联系方式：<a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a>。'))}
 
         ${sec(S('What we collect', '我们收集的信息'),
-          p(S('<strong>Quote inquiries</strong> (the "Get a Quote" form): name, company (optional), email, WhatsApp/phone (optional), destination market, quantity, models of interest and your message.',
-              '<strong>询价表单</strong>（"Get a Quote"）：姓名、公司（选填）、邮箱、WhatsApp/电话（选填）、目的市场、数量、意向车型及留言。'))
+          p(S('<strong>Contact forms</strong>: name, company (optional), email, phone or messaging contact (optional), region or market, topic, scope and your message.',
+              '<strong>联系表单</strong>：姓名、公司（选填）、邮箱、电话或即时通讯联系方式（选填）、地区或市场、主题、范围及留言。'))
         + p(S('<strong>Newsletter</strong>: your email address only.',
               '<strong>邮件订阅</strong>：仅收集您的邮箱地址。'))
         + p(S('<strong>Analytics</strong>: we use Cloudflare Web Analytics, which is cookie-less and aggregates anonymous performance data (page views, country, browser). We do not run advertising trackers and we do not build visitor profiles.',
@@ -932,8 +932,8 @@ function pagePrivacy() {
               '<strong>本地存储</strong>：您的语言偏好（EN/中文）仅保存在您自己的浏览器中。')))}
 
         ${sec(S('How we use it', '信息的用途'),
-          p(S('Quote details are used solely to source availability and pricing for your request. To do that, we share them with the licensed Chinese exporter(s) needed to prepare your quote — and with no one else. We never sell your data.',
-              '询价信息仅用于为您匹配货源与报价。为此，我们会将其共享给准备报价所必需的持牌中国出口商——不会提供给任何其他方。我们绝不出售您的数据。'))
+          p(S('Contact-form details are used only to review and respond to your message, route it to the right editorial or commercial contact, and maintain a record of the conversation. We never sell your data.',
+              '联系表单信息仅用于审核并回复您的留言、转交给合适的编辑或商业联系人，并保留沟通记录。我们绝不出售您的数据。'))
         + p(S('Newsletter addresses are used only to send the briefing you subscribed to. Every email includes an unsubscribe link.',
               '订阅邮箱仅用于发送您订阅的简报。每封邮件都附退订链接。')))}
 
@@ -942,8 +942,8 @@ function pagePrivacy() {
               '本站托管于 Cloudflare Pages；表单与邮件经由 Resend 处理。两者均作为受托处理方运作。您的数据可能被传输至您所在国家/地区之外处理，并受上述服务商的标准保障条款保护。')))}
 
         ${sec(S('Retention', '保存期限'),
-          p(S('Quote inquiries are kept for up to 24 months so we can follow up on your request, then deleted. Newsletter addresses are kept until you unsubscribe.',
-              '询价信息最长保存 24 个月以便跟进，到期删除。订阅邮箱保存至您退订为止。')))}
+          p(S('Contact-form messages are kept for up to 24 months so we can follow up on your request, then deleted. Newsletter addresses are kept until you unsubscribe.',
+              '联系表单信息最长保存 24 个月以便跟进，到期删除。订阅邮箱保存至您退订为止。')))}
 
         ${sec(S('Your rights', '您的权利'),
           p(S('You may request a copy of the personal data we hold about you, ask us to correct or delete it, or withdraw consent at any time by emailing <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a>. We respond within 30 days. Depending on where you live (e.g. the EU/EEA or UK under GDPR), you may also have the right to lodge a complaint with your local data protection authority.',
@@ -1006,14 +1006,13 @@ function pageContact() {
       <div class="container">
         <div class="section-eyebrow">${S('Contact', '联系')}</div>
         <h1 class="page-title">${S('Contact TopChinaCar', '联系 TopChinaCar')}</h1>
-        <p class="page-deck">${S('For media, market intelligence, dealer and partnership inquiries, contact TopChinaCar.', '媒体、市场情报、经销商与合作事宜，请联系 TopChinaCar。')}</p>
+        <p class="page-deck">${S('For editorial tips, corrections, media, market intelligence and partnerships, contact TopChinaCar.', '如有报道线索、勘误、媒体、市场情报与合作事宜，请联系 TopChinaCar。')}</p>
       </div>
     </section>
     <section style="padding-top:0;">
       <div class="container" style="max-width:820px;font-size:15px;line-height:1.9;color:#374151;">
         <p><strong>${S('Editorial & general', '编辑与一般事务')}</strong> — ${S('tips, corrections, story ideas, media requests:', '线索、更正、选题、媒体请求：')} <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a></p>
-        <p><strong>${S('Market intelligence & partnerships', '市场情报与合作')}</strong> — ${S('research, data, sponsorship and partnership inquiries:', '研究、数据、赞助与合作洽谈：')} <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a></p>
-        <p><strong>${S('Dealer & sourcing inquiries', '经销商与采购询价')}</strong> — ${S('if you are a dealer, fleet or importer looking to source Chinese vehicles, use the', '如果您是希望采购中国汽车的经销商、车队或进口商，请使用')} <a href="/quote" style="color:var(--accent, #d4302a);">${S('inquiry form', '询价表单')}</a>${S('. We respond within 48 hours.', '。我们将在 48 小时内回复。')}</p>
+        <p><strong>${S('Market intelligence & partnerships', '市场情报与合作')}</strong> — ${S('research, data, sponsorship and partnership conversations:', '研究、数据、赞助与合作洽谈：')} <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a></p>
         <p style="font-size:13px;color:#9ca3af;margin-top:28px;">${S('We read everything. Please allow up to 48 hours for a reply.', '所有来信我们都会阅读，请预留最多 48 小时的回复时间。')}</p>
       </div>
     </section>
