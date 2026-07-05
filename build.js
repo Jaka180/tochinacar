@@ -322,6 +322,24 @@ function escAttr(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 }
 
+function xmlEscape(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function plainText(html) {
+  return String(html || '')
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function truncateMeta(s, max = 160) {
   s = String(s || '').replace(/\s+/g, ' ').trim();
   if (s.length <= max) return s;
@@ -345,7 +363,7 @@ function jsonLdScript(data) {
   return `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n</script>`;
 }
 
-function breadcrumbJsonLd(route, items) {
+function breadcrumbJsonLd(route, items, isZh = false) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -353,21 +371,23 @@ function breadcrumbJsonLd(route, items) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: canonicalUrl(item.route || route, false)
+      item: canonicalUrl(item.route || route, isZh)
     }))
   };
 }
 
-function collectionJsonLd(route, title, description, itemRoutes = []) {
+function collectionJsonLd(route, title, description, itemRoutes = [], isZh = false) {
+  const pageUrl = canonicalUrl(route, isZh);
   return jsonLdScript({
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'CollectionPage',
-        '@id': `${canonicalUrl(route, false)}#collection`,
-        url: canonicalUrl(route, false),
+        '@id': `${pageUrl}#collection`,
+        url: pageUrl,
         name: title,
         description,
+        inLanguage: isZh ? 'zh-CN' : 'en',
         isPartOf: { '@id': `${SITE}/#website` }
       },
       {
@@ -375,15 +395,33 @@ function collectionJsonLd(route, title, description, itemRoutes = []) {
         itemListElement: itemRoutes.slice(0, 50).map((item, index) => ({
           '@type': 'ListItem',
           position: index + 1,
-          url: canonicalUrl(item.route, false),
+          url: canonicalUrl(item.route, isZh),
           name: item.name
         }))
       },
       breadcrumbJsonLd(route, [
         { name: 'Home', route: '/' },
         { name: title, route }
-      ])
+      ], isZh)
     ]
+  });
+}
+
+function webPageJsonLd(route, title, description, type = 'WebPage', isZh = false) {
+  return jsonLdScript({
+    '@context': 'https://schema.org',
+    '@type': type,
+    '@id': `${canonicalUrl(route, isZh)}#webpage`,
+    url: canonicalUrl(route, isZh),
+    name: title,
+    description,
+    inLanguage: isZh ? 'zh-CN' : 'en',
+    isPartOf: { '@id': `${SITE}/#website` },
+    publisher: { '@id': `${SITE}/#organization` },
+    breadcrumb: breadcrumbJsonLd(route, [
+      { name: 'Home', route: '/' },
+      { name: title, route }
+    ], isZh)
   });
 }
 
@@ -453,6 +491,7 @@ function pageHTML(route, meta, mainHTML, opts = {}) {
 `;
   const extraHead = opts.extraHead || meta.extraHead || '';
   meta = { ...meta, title: escAttr(truncateMeta(meta.title, 75)), desc: escAttr(truncateMeta(meta.desc, 165)) };
+  const modified = meta.modified || meta.published;
   return `<!DOCTYPE html>
 <html lang="${isZh ? 'zh' : 'en'}">
 <head>
@@ -475,13 +514,14 @@ ${altLinks}
 <meta property="og:image:height" content="630" />
 <meta property="og:locale" content="${isZh ? 'zh_CN' : 'en_US'}" />
 <meta property="og:locale:alternate" content="${isZh ? 'en_US' : 'zh_CN'}" />
-${meta.published ? `<meta property="article:published_time" content="${meta.published}" />\n<meta property="article:section" content="China Auto Export" />` : ''}
+${meta.published ? `<meta property="article:published_time" content="${meta.published}" />\n<meta property="article:modified_time" content="${modified}" />\n<meta property="article:section" content="China Auto Export" />` : ''}
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${meta.title}" />
 <meta name="twitter:description" content="${meta.desc}" />
 <meta name="twitter:image" content="${ogImage}" />
+<link rel="alternate" type="application/rss+xml" title="TopChinaCar News" href="${SITE}/feed.xml" />
 
 ${route === '/' ? JSONLD + '\n' : ''}${extraHead ? extraHead + '\n' : ''}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -519,17 +559,44 @@ function staticCollectionItems(route) {
   if (route === '/news') {
     return articles.map(a => ({ route: `/news/${a.slug}`, name: a.title_en }));
   }
+  if (route === '/tech') {
+    const techArticles = articles
+      .filter(a => /EV|electric|battery|charging|swap|autonomous|smart|ADAS|software|800V|PHEV|EREV/i.test(`${a.title_en} ${a.excerpt_en || ''}`))
+      .map(a => ({ route: `/news/${a.slug}`, name: a.title_en }));
+    const techStories = SITE_STORIES
+      .map(s => {
+        const f = (SITE_DATA.features || []).find(x => x.slug === s.slug);
+        return f ? { route: `/stories/${s.slug}`, name: f.title_en || s.slug } : null;
+      })
+      .filter(Boolean);
+    return techArticles.concat(techStories);
+  }
   if (route === '/markets') {
     return MARKETS.map(m => ({ route: `/markets/${m.slug}`, name: m.name_en }));
   }
   return [];
 }
 
+const STATIC_COLLECTION_ROUTES = new Set(['/chinese-car-brands', '/models', '/news', '/tech']);
+const STATIC_WEBPAGE_TYPES = {
+  '/about': 'AboutPage',
+  '/editorial-policy': 'WebPage',
+  '/contact': 'ContactPage',
+  '/newsletter': 'WebPage',
+  '/privacy': 'WebPage'
+};
+
 function staticExtraHead(route, meta, lang = 'en') {
   if (meta.robots && meta.robots.includes('noindex')) return '';
   if (route === '/') return '';
+  const title = meta.title.replace(/\s+\|\s+TopChinaCar$/, '');
+  const isZh = lang === 'zh';
+  if (STATIC_WEBPAGE_TYPES[route]) {
+    return webPageJsonLd(route, title, meta.desc, STATIC_WEBPAGE_TYPES[route], isZh);
+  }
+  if (!STATIC_COLLECTION_ROUTES.has(route)) return '';
   return [
-    collectionJsonLd(route, meta.title.replace(/\s+\|\s+TopChinaCar$/, ''), meta.desc, staticCollectionItems(route)),
+    collectionJsonLd(route, title, meta.desc, staticCollectionItems(route), isZh),
     faqJsonLd(route, lang),
     serviceJsonLd(route)
   ].filter(Boolean).join('\n');
@@ -544,7 +611,7 @@ for (const [route, meta] of Object.entries(PAGES)) {
   const mainZh = PAGE_ROUTES[route]();
   setSandboxLang('en');
   const zhMeta = PAGES_ZH[route] || meta;
-  writeZh(meta.file, zhChrome(pageHTML(route, { ...zhMeta, extraHead: staticExtraHead(route, meta, 'zh') }, mainZh, { zh: true })));
+  writeZh(meta.file, zhChrome(pageHTML(route, { ...zhMeta, extraHead: staticExtraHead(route, zhMeta, 'zh') }, mainZh, { zh: true })));
   console.log(`✓ ${meta.file} + zh (${mainHTML.length} chars of prerendered content)`);
   count++;
 }
@@ -623,7 +690,8 @@ function brandMain(b) {
   </section>`;
 }
 
-function brandJsonLd(b) {
+function brandJsonLd(b, isZh = false) {
+  const route = `/chinese-car-brands/${b.id}`;
   return `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -632,16 +700,16 @@ function brandJsonLd(b) {
       "@type": "Brand",
       "name": "${b.name}",
       "alternateName": "${b.cn}",
-      "url": "${SITE}/chinese-car-brands/${b.id}",
+      "url": "${canonicalUrl(route, isZh)}",
       "image": "${assetUrl(b.image)}",
       "description": ${JSON.stringify(b.desc_en)}
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "${SITE}/"},
-        {"@type": "ListItem", "position": 2, "name": "Brands", "item": "${SITE}/chinese-car-brands"},
-        {"@type": "ListItem", "position": 3, "name": "${b.name}", "item": "${SITE}/chinese-car-brands/${b.id}"}
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "${canonicalUrl('/', isZh)}"},
+        {"@type": "ListItem", "position": 2, "name": "Brands", "item": "${canonicalUrl('/chinese-car-brands', isZh)}"},
+        {"@type": "ListItem", "position": 3, "name": "${b.name}", "item": "${canonicalUrl(route, isZh)}"}
       ]
     }
   ]
@@ -704,7 +772,7 @@ for (const b of SITE_DATA.brands) {
     title: `${b.name}（${b.cn}）：车型、子品牌与全球布局 | TopChinaCar`,
     desc: `${b.desc_zh} 创立于 ${b.founded}，总部 ${b.hq}——品牌档案、明星车型与最新出海动态。`,
     image: b.image
-  }, main, { zh: true }).replace('</head>', brandJsonLd(b) + '\n</head>')));
+  }, main, { zh: true }).replace('</head>', brandJsonLd(b, true) + '\n</head>')));
 }
 console.log(`✓ ${SITE_DATA.brands.length} brand pages → brands/ + zh/chinese-car-brands/`);
 
@@ -764,7 +832,8 @@ function modelMain(m, brand) {
   </section>`;
 }
 
-function modelJsonLd(m) {
+function modelJsonLd(m, isZh = false) {
+  const route = `/models/${m.id}`;
   return `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -773,7 +842,7 @@ function modelJsonLd(m) {
       "@type": "Product",
       "name": "${m.brand} ${m.name}",
       "brand": {"@type": "Brand", "name": "${m.brand}"},
-      "url": "${SITE}/models/${m.id}",
+      "url": "${canonicalUrl(route, isZh)}",
       "image": "${assetUrl(m.image)}",
       "description": ${JSON.stringify(m.tag_en)},
       "category": "Vehicle"
@@ -781,9 +850,9 @@ function modelJsonLd(m) {
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "${SITE}/"},
-        {"@type": "ListItem", "position": 2, "name": "Models", "item": "${SITE}/models"},
-        {"@type": "ListItem", "position": 3, "name": "${m.brand} ${m.name}", "item": "${SITE}/models/${m.id}"}
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "${canonicalUrl('/', isZh)}"},
+        {"@type": "ListItem", "position": 2, "name": "Models", "item": "${canonicalUrl('/models', isZh)}"},
+        {"@type": "ListItem", "position": 3, "name": "${m.brand} ${m.name}", "item": "${canonicalUrl(route, isZh)}"}
       ]
     }
   ]
@@ -806,7 +875,7 @@ for (const m of SITE_DATA.models) {
     title: `${m.brand} ${m.name} 参数、续航与价格 | TopChinaCar`,
     desc: `${m.tag_zh} 续航 ${m.range}，零百加速 ${m.accel}，${m.price} 起——参数、价格与出口市场背景。`,
     image: m.image
-  }, main, { zh: true }).replace('</head>', modelJsonLd(m) + '\n</head>')));
+  }, main, { zh: true }).replace('</head>', modelJsonLd(m, true) + '\n</head>')));
   modelCount++;
 }
 console.log(`✓ ${modelCount} model pages → models/ + zh/models/`);
@@ -998,7 +1067,16 @@ for (const sec of SECTIONS) {
   };
   fs.writeFileSync(path.join(ROOT, sec.file),
     pageHTML(sec.route, meta, main));
-  writeZh(sec.file, zhChrome(pageHTML(sec.route, { title: sec.title_zh, desc: sec.deck_zh, extraHead: meta.extraHead }, main, { zh: true })));
+  writeZh(sec.file, zhChrome(pageHTML(sec.route, {
+    title: sec.title_zh,
+    desc: sec.deck_zh,
+    extraHead: collectionJsonLd(sec.route, sec.h1_zh, sec.deck_zh, sec.isMarketsIndex
+      ? MARKETS.map(m => ({ route: `/markets/${m.slug}`, name: m.name_zh }))
+      : sectionItems.map(item => {
+        const found = articles.find(a => `/news/${a.slug}` === item.route);
+        return { route: item.route, name: found ? (found.title_zh || found.title_en) : item.name };
+      }), true)
+  }, main, { zh: true })));
 }
 console.log(`✓ ${SECTIONS.length} section pages (+zh)`);
 
@@ -1034,7 +1112,8 @@ for (const mk of MARKETS) {
   writeZh(`markets/${mk.slug}.html`, zhChrome(pageHTML(`/markets/${mk.slug}`, {
     title: `${mk.name_zh}中国汽车市场 — 品牌、电动车与市场动态 | TopChinaCar`,
     desc: mk.intro_zh,
-    extraHead: metaEn.extraHead
+    extraHead: collectionJsonLd(`/markets/${mk.slug}`, `${mk.name_zh}中国汽车市场`, mk.intro_zh,
+      matched.map(a => ({ route: `/news/${a.slug}`, name: a.title_zh || a.title_en })), true)
   }, main, { zh: true })));
 }
 console.log(`✓ ${MARKETS.length} market pages (+zh)`);
@@ -1066,18 +1145,18 @@ function storyMain(f, s) {
   </section>`;
 }
 
-function storyJsonLd(f, s) {
+function storyJsonLd(f, s, isZh = false) {
   return `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": ${JSON.stringify(f.title_en)},
-  "description": ${JSON.stringify(f.desc_en)},
+  "headline": ${JSON.stringify(isZh ? (f.title_zh || f.title_en) : f.title_en)},
+  "description": ${JSON.stringify(isZh ? (f.desc_zh || f.desc_en) : f.desc_en)},
   "datePublished": "${s.date}",
   "dateModified": "${s.date}",
   "image": "${assetUrl(f.image)}",
-  "inLanguage": ["en", "zh-CN"],
-  "mainEntityOfPage": "${SITE}/stories/${f.slug}",
+  "inLanguage": "${isZh ? 'zh-CN' : 'en'}",
+  "mainEntityOfPage": "${canonicalUrl(`/stories/${f.slug}`, isZh)}",
   "author": {"@type": "Organization", "name": "TopChinaCar", "url": "${SITE}/"},
   "publisher": {"@id": "${SITE}/#organization"}
 }
@@ -1103,7 +1182,7 @@ for (const s of SITE_STORIES) {
     image: f.image,
     ogType: 'article',
     published: s.date
-  }, main, { zh: true }).replace('</head>', storyJsonLd(f, s) + '\n</head>')));
+  }, main, { zh: true }).replace('</head>', storyJsonLd(f, s, true) + '\n</head>')));
   storyCount++;
 }
 if (storyCount) console.log(`✓ ${storyCount} feature stories → stories/ + zh/stories/`);
@@ -1131,6 +1210,51 @@ function sourcesBlockHTML(sources) {
         <h2 style="font-size:16px;margin:0 0 12px;">${langSpan('Sources', '信息来源')}</h2>
         <ul style="list-style:none;padding:0;margin:0;font-size:13px;line-height:1.9;color:#6b7280;">
           ${sources.map(s => `<li><a href="${s.url}" rel="noopener" target="_blank" style="color:inherit;">${s.label}</a> <span style="color:#9ca3af;">· ${s.host}</span></li>`).join('\n          ')}
+        </ul>
+      </div>`;
+}
+
+function articleSearchText(a) {
+  return `${a.title_en || ''} ${a.title_zh || ''} ${a.excerpt_en || ''} ${a.excerpt_zh || ''} ${a.tag_en || ''} ${a.tag_zh || ''}`.toLowerCase();
+}
+
+function articleKeywords(a) {
+  const text = articleSearchText(a);
+  const brandNames = SITE_DATA.brands
+    .filter(b => text.includes(String(b.name).toLowerCase()) || (b.cn && text.includes(String(b.cn).toLowerCase())))
+    .map(b => b.name.toLowerCase());
+  const topicWords = (text.match(/\b(export|exports|overseas|europe|tariff|policy|battery|ev|electric|plant|factory|africa|middle east|brazil|southeast asia|dealer|sales|market|strategy)\b/g) || []);
+  return new Set(brandNames.concat(topicWords));
+}
+
+function relatedArticles(current, limit = 3) {
+  const currentKeys = articleKeywords(current);
+  const currentTag = String(current.tag_en || '').toLowerCase();
+  return articles
+    .filter(a => a.slug !== current.slug)
+    .map(a => {
+      const keys = articleKeywords(a);
+      let score = 0;
+      if (currentTag && String(a.tag_en || '').toLowerCase() === currentTag) score += 3;
+      for (const key of currentKeys) if (keys.has(key)) score += key.length > 3 ? 2 : 1;
+      return { article: a, score };
+    })
+    .sort((a, b) => b.score - a.score || b.article.date.localeCompare(a.article.date))
+    .slice(0, limit)
+    .map(x => x.article);
+}
+
+function relatedCoverageHTML(current) {
+  const related = relatedArticles(current);
+  if (!related.length) return '';
+  return `
+      <div style="margin-top:40px;padding-top:24px;border-top:1px solid #e5e7eb;">
+        <h2 style="font-size:18px;margin:0 0 16px;">${langSpan('Related coverage', '相关阅读')}</h2>
+        <ul style="list-style:none;padding:0;margin:0;">
+          ${related.map(a => `<li style="margin-bottom:16px;">
+            <a href="/news/${a.slug}" style="color:inherit;text-decoration:none;"><strong style="font-family:var(--serif, Georgia, serif);font-size:17px;line-height:1.35;">${langSpan(a.title_en, a.title_zh || a.title_en)}</strong></a>
+            <p style="margin:5px 0 0;font-size:13px;color:#6b7280;line-height:1.55;">${langSpan(a.excerpt_en || '', a.excerpt_zh || a.excerpt_en || '')}</p>
+          </li>`).join('\n          ')}
         </ul>
       </div>`;
 }
@@ -1166,6 +1290,7 @@ function articleMain(a) {
         ${langBlock('zh', a.html_zh || a.html_en)}
       </article>
       ${sourcesBlockHTML(sources)}
+      ${relatedCoverageHTML(a)}
       <p style="margin-top:32px;"><a href="/news" style="color:var(--accent);font-family:var(--mono);font-size:13px;">← All news</a></p>
     </div>
   </section>`;
@@ -1183,19 +1308,19 @@ function articleImage(a) {
   return DEFAULT_OG_IMAGE;
 }
 
-function articleJsonLd(a) {
+function articleJsonLd(a, isZh = false) {
   const image = articleImage(a);
   return `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "NewsArticle",
-  "headline": ${JSON.stringify(a.title_en)},
-  "description": ${JSON.stringify(a.excerpt_en || a.title_en)},
+  "headline": ${JSON.stringify(isZh ? (a.title_zh || a.title_en) : a.title_en)},
+  "description": ${JSON.stringify(isZh ? (a.excerpt_zh || a.excerpt_en || a.title_zh || a.title_en) : (a.excerpt_en || a.title_en))},
   "datePublished": "${a.date}",
   "dateModified": "${a.date}",
   "image": "${assetUrl(image)}",
-  "inLanguage": ["en", "zh-CN"],
-  "mainEntityOfPage": "${SITE}/news/${a.slug}",
+  "inLanguage": "${isZh ? 'zh-CN' : 'en'}",
+  "mainEntityOfPage": "${canonicalUrl(`/news/${a.slug}`, isZh)}",
   "author": {"@type": "Organization", "name": "TopChinaCar", "url": "${SITE}/"},
   "publisher": {"@id": "${SITE}/#organization"}
 }
@@ -1219,7 +1344,7 @@ for (const a of articles) {
     image: articleImage(a),
     ogType: 'article',
     published: a.date
-  }, main, { zh: true }).replace('</head>', articleJsonLd(a) + '\n</head>')));
+  }, main, { zh: true }).replace('</head>', articleJsonLd(a, true) + '\n</head>')));
 }
 if (articles.length) console.log(`✓ ${articles.length} article page(s) → news/ + zh/news/`);
 
@@ -1287,7 +1412,7 @@ ${recentNews.map(a => `  <url>
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>${safeDate(a.date)}</news:publication_date>
-      <news:title>${escAttr(a.title_en)}</news:title>
+      <news:title>${xmlEscape(a.title_en)}</news:title>
     </news:news>
   </url>`).join('\n')}
 </urlset>
@@ -1295,4 +1420,31 @@ ${recentNews.map(a => `  <url>
 fs.writeFileSync(path.join(ROOT, 'news-sitemap.xml'), newsSitemap);
 console.log('✓ news-sitemap.xml');
 
-console.log(`\nDone — ${count} pages + 404 + sitemap.`);
+function rssDate(date) {
+  return new Date(`${safeDate(date)}T00:00:00Z`).toUTCString();
+}
+
+const feed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TopChinaCar News</title>
+    <link>${SITE}/news</link>
+    <description>Chinese auto news, EVs, exports, policy and global market coverage from TopChinaCar.</description>
+    <language>en</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <atom:link href="${SITE}/feed.xml" rel="self" type="application/rss+xml" />
+${articles.slice(0, 50).map(a => `    <item>
+      <title>${xmlEscape(a.title_en)}</title>
+      <link>${SITE}/news/${xmlEscape(a.slug)}</link>
+      <guid isPermaLink="true">${SITE}/news/${xmlEscape(a.slug)}</guid>
+      <pubDate>${rssDate(a.date)}</pubDate>
+      <description>${xmlEscape(a.excerpt_en || plainText(a.html_en).slice(0, 240))}</description>
+      <category>${xmlEscape(a.tag_en || 'Daily Briefing')}</category>
+    </item>`).join('\n')}
+  </channel>
+</rss>
+`;
+fs.writeFileSync(path.join(ROOT, 'feed.xml'), feed);
+console.log('✓ feed.xml');
+
+console.log(`\nDone — ${count} pages + 404 + sitemap + feed.`);
