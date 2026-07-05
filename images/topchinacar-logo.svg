@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">TopChinaCar logo</title>
+  <rect width="512" height="512" fill="#1a1a1a"/>
+  <rect x="42" y="42" width="428" height="428" fill="none" stroke="#d4302a" stroke-width="18"/>
+  <text x="256" y="334" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="228" font-weight="700" fill="#d4302a">T</text>
+</svg>

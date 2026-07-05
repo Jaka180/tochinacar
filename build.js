@@ -15,6 +15,7 @@ const SITE = 'https://www.topchinacar.com';
 const BUILD_V = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, ''); // cache-busting version
 const TODAY = new Date().toISOString().slice(0, 10);
 const DEFAULT_OG_IMAGE = 'images/hero-xiaomi.jpg';
+const SITE_LOGO = 'images/topchinacar-logo.svg';
 
 // ---- Collect daily articles (articles/*.json, written by the GCP pipeline) ----
 const ARTICLES_DIR = path.join(ROOT, 'articles');
@@ -95,7 +96,7 @@ const PAGES_ZH = {
   '/news': { title: '中国汽车出海与电动车行业新闻 | TopChinaCar', desc: '中国汽车出口、新车发布、电池技术与政策动态的精选报道，以及每个工作日更新的出海简报。' },
   '/tech': { title: '中国电动车技术解读：800V、城市智驾、刀片电池 | TopChinaCar', desc: '深度解读中国汽车领先背后的技术：800V 高压平台、城市级智能驾驶、智能座舱、刀片电池与 CTB 电池车身一体化。' },
   '/about': { title: '关于 TopChinaCar — 独立的中国汽车编辑报道', desc: 'TopChinaCar 是面向海外读者的独立双语编辑出版物，讲解中国汽车——品牌、车型、技术与人。不吹捧，不贬低。' },
-  '/quote': { title: '进口中国汽车 — 出口与批发报价 | TopChinaCar', desc: '经销商、车队与进口商询价：比亚迪、奇瑞、吉利、MG 等车型，48 小时内提供 FOB/CIF 报价。' },
+  '/quote': { title: '商业联系与合作咨询 | TopChinaCar', desc: '面向合作、市场情报和商业咨询的联系页面。TopChinaCar 的核心定位仍是独立新闻与信息报道。', robots: 'noindex,follow' },
   '/privacy': { title: 'TopChinaCar 隐私政策与数据使用说明', desc: 'TopChinaCar 如何收集、使用与保护您的信息：询价表单、邮件订阅与网站分析的数据用途说明。' }
 };
 
@@ -142,8 +143,9 @@ const PAGES = {
   },
   '/quote': {
     file: 'quote.html',
-    title: 'Import Chinese Cars — Dealer Export Quotes | TopChinaCar',
-    desc: 'Dealer, fleet and importer quote requests for Chinese vehicles including BYD, Chery, Geely and MG, with FOB/CIF pricing within 48 hours.'
+    title: 'Commercial Inquiries | TopChinaCar',
+    desc: 'Contact page for partnerships, market intelligence and commercial inquiries. TopChinaCar remains an independent news and information site.',
+    robots: 'noindex,follow'
   },
   '/privacy': {
     file: 'privacy.html',
@@ -280,7 +282,12 @@ const JSONLD = `<script type="application/ld+json">
       "@id": "${SITE}/#organization",
       "name": "TopChinaCar",
       "url": "${SITE}/",
-      "logo": "${SITE}/images/hero-xiaomi.jpg",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "${SITE}/${SITE_LOGO}",
+        "width": 512,
+        "height": 512
+      },
       "description": "Independent news site covering Chinese automakers, EVs, exports and global market expansion.",
       "foundingDate": "2026",
       "sameAs": []
@@ -295,8 +302,15 @@ const JSONLD = `<script type="application/ld+json">
     },
     {
       "@type": "NewsMediaOrganization",
+      "@id": "${SITE}/#newsmedia",
       "name": "TopChinaCar",
       "url": "${SITE}/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "${SITE}/${SITE_LOGO}",
+        "width": 512,
+        "height": 512
+      },
       "diversityPolicy": "${SITE}/about",
       "ethicsPolicy": "${SITE}/about"
     }
@@ -389,11 +403,6 @@ const STATIC_FAQS = {
     ['Are TopChinaCar articles sourced?', 'Articles cite primary or reputable secondary sources inline and list source links where available, especially for data, policy and company announcements.'],
     ['Why focus on Chinese auto exports?', 'China has become the world’s largest car exporter, and export growth now shapes automaker strategy, global pricing, supply chains and policy debates.']
   ],
-  '/quote': [
-    ['Can I import Chinese cars through TopChinaCar?', 'TopChinaCar connects dealer, fleet and importer inquiries with licensed Chinese vehicle exporters. Availability depends on destination market, model, trim and compliance requirements.'],
-    ['What information is needed for a Chinese car export quote?', 'A useful quote request should include destination market, model, trim if known, quantity, preferred shipping terms such as FOB or CIF, and contact details.'],
-    ['Are FOB and CIF prices final landed prices?', 'No. FOB and CIF quotes do not include all destination-market costs. Import duties, VAT, registration, homologation, inland transport and dealer margins may still apply.']
-  ]
 };
 
 const STATIC_FAQS_ZH = {
@@ -412,11 +421,6 @@ const STATIC_FAQS_ZH = {
     ['TopChinaCar 的文章有信源吗？', '文章会在正文内引用一手或可信二手信源，尤其是涉及数据、政策和企业公告时，会尽量列出可核查链接。'],
     ['为什么重点关注中国汽车出口？', '中国已经成为全球第一大汽车出口国，出口增长正在影响车企战略、全球定价、供应链和政策讨论。']
   ],
-  '/quote': [
-    ['可以通过 TopChinaCar 进口中国汽车吗？', 'TopChinaCar 会把经销商、车队和进口商询价对接给持牌中国汽车出口商。能否供应取决于目的市场、车型、配置和合规要求。'],
-    ['询价中国汽车出口需要提供哪些信息？', '有效询价应包含目的市场、车型、已知配置、数量、偏好的贸易条款（如 FOB/CIF）以及联系方式。'],
-    ['FOB 和 CIF 是最终落地价吗？', '不是。FOB 和 CIF 不包含所有目的地成本，进口关税、增值税、注册、认证、内陆运输和经销商利润仍可能另计。']
-  ]
 };
 
 function faqJsonLd(route, lang = 'en') {
@@ -434,17 +438,7 @@ function faqJsonLd(route, lang = 'en') {
 }
 
 function serviceJsonLd(route) {
-  if (route !== '/quote') return '';
-  return jsonLdScript({
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Chinese vehicle export quote request',
-    serviceType: 'Vehicle export sourcing',
-    provider: { '@id': `${SITE}/#organization` },
-    areaServed: 'Worldwide',
-    url: canonicalUrl('/quote', false),
-    description: 'Dealer, fleet and importer quote requests for Chinese vehicles including BYD, Chery, Geely and MG.'
-  });
+  return '';
 }
 
 function pageHTML(route, meta, mainHTML, opts = {}) {
@@ -466,7 +460,7 @@ function pageHTML(route, meta, mainHTML, opts = {}) {
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>${meta.title}</title>
 <meta name="description" content="${meta.desc}" />
-<meta name="author" content="TopChinaCar Editorial" />
+${meta.robots ? `<meta name="robots" content="${escAttr(meta.robots)}" />\n` : ''}<meta name="author" content="TopChinaCar Editorial" />
 <meta name="theme-color" content="#1a1a1a" />
 <link rel="canonical" href="${canonical}" />
 ${altLinks}
@@ -532,6 +526,7 @@ function staticCollectionItems(route) {
 }
 
 function staticExtraHead(route, meta, lang = 'en') {
+  if (meta.robots && meta.robots.includes('noindex')) return '';
   if (route === '/') return '';
   return [
     collectionJsonLd(route, meta.title.replace(/\s+\|\s+TopChinaCar$/, ''), meta.desc, staticCollectionItems(route)),
@@ -1248,7 +1243,10 @@ function safeDate(date) {
 }
 
 const staticUrls = Object.keys(PAGES).map(r =>
-  `  <url><loc>${r === '/' ? SITE + '/' : SITE + r}</loc><lastmod>${TODAY}</lastmod></url>`);
+  PAGES[r].robots && PAGES[r].robots.includes('noindex')
+    ? null
+    : `  <url><loc>${r === '/' ? SITE + '/' : SITE + r}</loc><lastmod>${TODAY}</lastmod></url>`
+).filter(Boolean);
 const brandUrls = SITE_DATA.brands.map(b =>
   `  <url><loc>${SITE}/chinese-car-brands/${b.id}</loc><lastmod>${TODAY}</lastmod></url>`);
 const modelUrls = SITE_DATA.models.filter(m => m.id).map(m =>

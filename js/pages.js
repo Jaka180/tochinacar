@@ -167,26 +167,6 @@ const PAGE_FAQS = {
       a_zh: '中国已经成为全球第一大汽车出口国，出口增长正在影响车企战略、全球定价、供应链和政策讨论。'
     }
   ],
-  quote: [
-    {
-      q_en: 'Can I import Chinese cars through TopChinaCar?',
-      q_zh: '可以通过 TopChinaCar 进口中国汽车吗？',
-      a_en: 'TopChinaCar connects dealer, fleet and importer inquiries with licensed Chinese vehicle exporters. Availability depends on destination market, model, trim and compliance requirements.',
-      a_zh: 'TopChinaCar 会把经销商、车队和进口商询价对接给持牌中国汽车出口商。能否供应取决于目的市场、车型、配置和合规要求。'
-    },
-    {
-      q_en: 'What information is needed for a Chinese car export quote?',
-      q_zh: '询价中国汽车出口需要提供哪些信息？',
-      a_en: 'A useful quote request should include destination market, model, trim if known, quantity, preferred shipping terms such as FOB or CIF, and contact details.',
-      a_zh: '有效询价应包含目的市场、车型、已知配置、数量、偏好的贸易条款（如 FOB/CIF）以及联系方式。'
-    },
-    {
-      q_en: 'Are FOB and CIF prices final landed prices?',
-      q_zh: 'FOB 和 CIF 是最终落地价吗？',
-      a_en: 'No. FOB and CIF quotes do not include all destination-market costs. Import duties, VAT, registration, homologation, inland transport and dealer margins may still apply.',
-      a_zh: '不是。FOB 和 CIF 不包含所有目的地成本，进口关税、增值税、注册、认证、内陆运输和经销商利润仍可能另计。'
-    }
-  ]
 };
 
 function faqSectionHTML(key) {
@@ -919,7 +899,6 @@ function pageQuote() {
         </div>
       </div>
     </section>
-    ${faqSectionHTML('quote')}
   `;
 }
 

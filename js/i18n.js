@@ -126,9 +126,9 @@ const I18N = {
     'about.contact.body': 'Email the editor at hello@topchinacar.com. We read every message; we reply to most. Press inquiries within 48 hours.',
     'about.contact.cta': 'Email the editor',
 
-    'nav.quote': 'Get a Quote',
-    'quote.page.title': 'Export & Wholesale Inquiries',
-    'quote.page.deck': 'For dealers, fleets and importers. Tell us the market, the models and the volume — we respond within 48 hours with availability and FOB/CIF quotes through licensed Chinese exporters.',
+    'nav.quote': 'Commercial Contact',
+    'quote.page.title': 'Commercial & Partnership Inquiries',
+    'quote.page.deck': 'For partnerships, market intelligence and limited commercial requests. TopChinaCar remains an independent news and information publication.',
     'quote.form.name': 'Your name',
     'quote.form.company': 'Company',
     'quote.form.email': 'Email',
@@ -137,12 +137,12 @@ const I18N = {
     'quote.form.model': 'Model(s) of interest',
     'quote.form.qty': 'Quantity',
     'quote.form.message': 'Anything else — spec, budget, timeline',
-    'quote.form.submit': 'Request quote',
+    'quote.form.submit': 'Send inquiry',
     'quote.form.success': 'Received — expect a reply from hello@topchinacar.com within 48 hours. No automated confirmation email is sent, so please watch your inbox (and spam folder).',
     'quote.form.privacy': 'By submitting this form you agree to our <a href="/privacy" style="color:var(--accent, #d4302a);">Privacy Policy</a>. Your details are used only to source your quote and are shared only with the licensed exporter(s) needed to prepare it. We reply from hello@topchinacar.com within 48 hours.',
     'quote.form.error': 'Something went wrong — please email hello@topchinacar.com instead.',
-    'quote.note.title': 'How it works',
-    'quote.note.body': 'TopChinaCar works with licensed Chinese vehicle exporters. We scope your requirement, source quotes, and coordinate the deal — homologation, shipping and payment terms are confirmed per market before any commitment.',
+    'quote.note.title': 'Editorial independence',
+    'quote.note.body': 'Commercial messages are handled separately from editorial coverage. No automaker, exporter or supplier can pay for news coverage or review editorial stories before publication.',
     'models.cta.quote': 'Request export quote'
   },
   zh: {
@@ -271,9 +271,9 @@ const I18N = {
     'about.contact.body': '请发邮件至 hello@topchinacar.com。我们阅读每一封，回复大多数。媒体查询 48 小时内回复。',
     'about.contact.cta': '发邮件给编辑',
 
-    'nav.quote': '询价',
-    'quote.page.title': '出口与批发询价',
-    'quote.page.deck': '面向经销商、车队与进口商。告诉我们目标市场、车型与数量——48 小时内回复货源与 FOB/CIF 报价，通过持牌中国出口商执行。',
+    'nav.quote': '商业联系',
+    'quote.page.title': '商业与合作咨询',
+    'quote.page.deck': '用于合作、市场情报与少量商业咨询。TopChinaCar 的核心定位仍是独立新闻与信息出版物。',
     'quote.form.name': '姓名',
     'quote.form.company': '公司',
     'quote.form.email': '邮箱',
@@ -282,12 +282,12 @@ const I18N = {
     'quote.form.model': '意向车型',
     'quote.form.qty': '数量',
     'quote.form.message': '其他需求——配置、预算、时间',
-    'quote.form.submit': '提交询价',
+    'quote.form.submit': '发送咨询',
     'quote.form.success': '已收到——我们将在 48 小时内通过 hello@topchinacar.com 回复。表单不发送自动确认邮件，请留意收件箱（及垃圾邮件夹）。',
     'quote.form.privacy': '提交本表单即表示您同意我们的<a href="/privacy" style="color:var(--accent, #d4302a);">隐私政策</a>。所填信息仅用于匹配报价，并仅共享给完成报价所需的持牌出口商。我们将在 48 小时内通过 hello@topchinacar.com 回复。',
     'quote.form.error': '提交失败——请直接发邮件至 hello@topchinacar.com。',
-    'quote.note.title': '流程说明',
-    'quote.note.body': 'TopChinaCar 与持牌中国整车出口商合作。我们确认需求、匹配货源与报价，并协调交易——认证、海运与付款条件在承诺前按市场逐项确认。',
+    'quote.note.title': '编辑独立性',
+    'quote.note.body': '商业信息与编辑报道分开处理。任何车企、出口商或供应商都不能付费获得新闻报道，也不能在发布前审阅编辑内容。',
     'models.cta.quote': '获取出口报价'
   }
 };
