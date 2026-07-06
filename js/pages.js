@@ -318,7 +318,7 @@ function pageHome() {
         <div class="news-side">
           <div style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9ca3af;margin-bottom:14px;">${lang === 'zh' ? '最新新闻' : 'Latest News'}</div>
           ${rest.length ? rest.map(a => `
-          <article class="news-item">
+          <article class="news-item" style="grid-template-columns:1fr;">
             <div>
               <h4 class="news-title"><a href="/news/${a.slug}" style="color:inherit;text-decoration:none;">${a['title_' + lang] || a.title_en}</a></h4>
               <div class="news-date">${a.date}</div>
