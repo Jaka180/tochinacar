@@ -121,6 +121,26 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 700; letter-spacing: -0
   background: var(--accent);
 }
 .header-tools { display: flex; align-items: center; gap: 16px; }
+.admin-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all .2s var(--ease);
+}
+.admin-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
 .lang-toggle {
   font-size: 13px;
   font-weight: 600;

@@ -2,6 +2,61 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://www.topchinacar.com/news/what-eu-tariffs-mean-for-chinese-ev-makers</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-06</news:publication_date>
+      <news:title>What EU Tariffs Mean for Chinese EV Makers</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.topchinacar.com/news/chinese-plug-in-hybrids-why-phevs-are-gaining-attention</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-06</news:publication_date>
+      <news:title>Chinese Plug-in Hybrids: Why PHEVs Are Gaining Attention</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.topchinacar.com/news/chinese-pickup-trucks-a-growing-export-segment</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-06</news:publication_date>
+      <news:title>Chinese Pickup Trucks: A Growing Export Segment</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.topchinacar.com/news/changan-overseas-strategy-from-suvs-to-smart-evs</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-06</news:publication_date>
+      <news:title>Changan&apos;s Overseas Strategy: From SUVs to Smart EVs</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.topchinacar.com/news/byd-vs-chery-overseas-two-different-globalization-models</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-06</news:publication_date>
+      <news:title>BYD vs Chery Overseas: Two Different Globalization Models</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://www.topchinacar.com/news/2026-07-06-china-auto-daily</loc>
     <news:news>
       <news:publication>
