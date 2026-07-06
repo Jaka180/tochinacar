@@ -1052,61 +1052,105 @@ function pageIntelligence() {
   const S = (en, zhTxt) => zh ? zhTxt : en;
   const liveUrl = zh ? `${EVENT_INTELLIGENCE_URL}/news?lang=zh` : `${EVENT_INTELLIGENCE_URL}/news`;
   return `
-    <section class="page-header page-header--data">
+    <section class="system-intel-hero">
       <div class="container">
-        <div class="section-eyebrow">${S('System Layer', '系统层')}</div>
-        <h1 class="page-title">${S('TopChinaCar Intelligence System', 'TopChinaCar 情报系统')}</h1>
-        <p class="page-deck">${S('Live event intelligence connected to TopChinaCar data, company, market and model layers.', '连接 TopChinaCar 数据、公司、市场与车型层的实时事件情报系统。')}</p>
+        <div class="system-intel-hero-grid">
+          <div>
+            <div class="section-eyebrow">${S('System Intelligence Layer', '系统情报层')}</div>
+            <h1 class="system-intel-title">${S('TopChinaCar Intelligence System', 'TopChinaCar 情报系统')}</h1>
+            <p class="system-intel-deck">${S('A structured intelligence entry point connecting live event streams, signal sources, data entities and market interpretation.', '连接实时事件流、信号源、数据实体与市场解读的结构化情报入口。')}</p>
+            <div class="system-intel-actions">
+              <a class="btn btn-primary" href="${liveUrl}">${S('Open Live Feed', '打开实时情报流')}</a>
+              <a class="btn btn-ghost" href="/data">${S('View Data Layer', '查看数据层')}</a>
+            </div>
+          </div>
+          <aside class="system-intel-status" aria-label="${S('System status', '系统状态')}">
+            <div class="system-status-row">
+              <span>${S('Live Feed', '实时流')}</span>
+              <strong>${S('Active', '运行中')}</strong>
+            </div>
+            <div class="system-status-row">
+              <span>${S('Signal Model', '信号模型')}</span>
+              <strong>${S('OEM / Policy / Media / Macro', '车企 / 政策 / 媒体 / 宏观')}</strong>
+            </div>
+            <div class="system-status-row">
+              <span>${S('Event Rule', '事件规则')}</span>
+              <strong>${S('Clustered from multiple signals', '由多信号聚类生成')}</strong>
+            </div>
+            <div class="system-status-row">
+              <span>${S('Language', '语言')}</span>
+              <strong>${S('English + Chinese', '中英文双语')}</strong>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
-    <section style="padding-top:0;">
-      <div class="container" style="max-width:980px;">
-        <div class="intel-stack data-intel-stack">
-          <section class="intel-panel intel-panel--dark">
-            <div class="intel-eyebrow">${S('INTEGRATED EVENT INTELLIGENCE', '已整合事件情报')}</div>
-            <h2>${S('The live system converts industry sources into ranked, structured events.', '实时系统将行业信息源转化为可排序的结构化事件。')}</h2>
-            <div class="intel-signals">
-              <div class="intel-signal"><span>${S('Events', '事件')}</span><p>${S('RSS and source items are normalized into traceable event records.', 'RSS 与信源内容被规范化为可追溯事件记录。')}</p></div>
-              <div class="intel-signal"><span>${S('Ranking', '排序')}</span><p>${S('Events are scored by impact, confidence and source priority.', '事件按影响力、置信度与信源权重评分。')}</p></div>
-              <div class="intel-signal"><span>${S('Interpretation', '解释')}</span><p>${S('Top ranked events feed the system interpretation layer.', '高排序事件进入系统解读层。')}</p></div>
-              <div class="intel-signal"><span>${S('Data Layer', '数据层')}</span><p>${S('Company, market and model entities connect live events back to the main site.', '公司、市场与车型实体把实时事件连接回主站。')}</p></div>
+
+    <section class="system-intel-main">
+      <div class="container">
+        <div class="system-intel-grid">
+          <section class="system-intel-card system-intel-card--primary">
+            <div class="system-intel-kicker">${S('OPERATING MODEL', '运行模型')}</div>
+            <h2>${S('Signal first. Event second. Insight third.', '先有信号，再有事件，最后形成洞察。')}</h2>
+            <p>${S('The system separates raw information, normalized signals, synthesized events and interpretation so users can see what the intelligence layer is doing.', '系统把原始信息、规范化信号、合成事件与系统解读拆开，让用户能看清情报层的工作方式。')}</p>
+            <div class="system-intel-flow">
+              <div><span>01</span><strong>${S('Source Network', '信源网络')}</strong><p>${S('OEM, policy, global media, China media and macro sources.', '车企、政策、全球媒体、中国媒体与宏观数据源。')}</p></div>
+              <div><span>02</span><strong>${S('Signal Normalization', '信号规范化')}</strong><p>${S('Each item is classified by source type, entity, market and signal strength.', '每条信息按来源类型、实体、市场与信号强度分类。')}</p></div>
+              <div><span>03</span><strong>${S('Event Synthesis', '事件合成')}</strong><p>${S('Events are generated from clustered signals, not from one isolated feed item.', '事件来自聚类信号，而不是单条信息源。')}</p></div>
+              <div><span>04</span><strong>${S('Insight Layer', '洞察层')}</strong><p>${S('Ranked events support the system interpretation shown in the live feed.', '排序事件支撑实时情报流中的系统解读。')}</p></div>
             </div>
-            <div class="intel-basis">${S('Runtime app:', '运行系统：')} ${EVENT_INTELLIGENCE_URL}</div>
+            <div class="system-runtime">${S('Runtime app:', '运行系统：')} <a href="${liveUrl}">${EVENT_INTELLIGENCE_URL}</a></div>
           </section>
 
-          <section class="intel-layer data-layer-section">
-            <div class="intel-layer-head">
-              <h2>${S('SYSTEM ENTRY POINTS', '系统入口')}</h2>
-              <p>${S('Use the live app for event stream operations; use the main site for data and editorial context.', '实时应用用于事件流操作；主站用于数据层与编辑上下文。')}</p>
-            </div>
-            <div class="data-layer-grid">
-              <a class="data-layer-card" href="${liveUrl}">
-                <h3>${S('Live Intelligence Feed', '实时情报流')}</h3>
-                <div class="data-layer-rows">
-                  <div><span>${S('Route', '路径')}</span><strong>${S('Event ranking and system interpretation', '事件排序与系统解读')}</strong></div>
-                  <div><span>${S('Source', '来源')}</span><strong>${S('RSS / API ingestion', 'RSS / API 摄取')}</strong></div>
-                  <div><span>${S('Output', '输出')}</span><strong>${S('Ranked events and SEO event pages', '排序事件与 SEO 事件页')}</strong></div>
-                </div>
-              </a>
-              <a class="data-layer-card" href="/data">
-                <h3>${S('Data Intelligence Layer', '数据情报层')}</h3>
-                <div class="data-layer-rows">
-                  <div><span>${S('Route', '路径')}</span><strong>${S('Macro, company, market and model data', '宏观、企业、市场与车型数据')}</strong></div>
-                  <div><span>${S('Role', '角色')}</span><strong>${S('Entity structure and system context', '实体结构与系统上下文')}</strong></div>
-                  <div><span>${S('Connection', '连接')}</span><strong>${S('Events -> companies -> markets -> models', '事件 -> 公司 -> 市场 -> 车型')}</strong></div>
-                </div>
-              </a>
-              <a class="data-layer-card" href="/news">
-                <h3>${S('Editorial News Layer', '编辑新闻层')}</h3>
-                <div class="data-layer-rows">
-                  <div><span>${S('Route', '路径')}</span><strong>${S('Daily briefing and explainers', '每日简报与解释性报道')}</strong></div>
-                  <div><span>${S('Role', '角色')}</span><strong>${S('Human-readable context', '面向读者的上下文')}</strong></div>
-                  <div><span>${S('Connection', '连接')}</span><strong>${S('Source context for intelligence records', '情报记录的信源上下文')}</strong></div>
-                </div>
-              </a>
-            </div>
-          </section>
+          <aside class="system-intel-panel">
+            <div class="system-intel-kicker">${S('SOURCE COVERAGE', '信源覆盖')}</div>
+            <h2>${S('Five-layer signal architecture', '五层信号架构')}</h2>
+            <ul class="system-intel-list">
+              <li><span>${S('OEM Signals', '车企信号')}</span><strong>1.0</strong></li>
+              <li><span>${S('Policy Signals', '政策信号')}</span><strong>0.9</strong></li>
+              <li><span>${S('Global Media', '全球媒体')}</span><strong>0.8</strong></li>
+              <li><span>${S('China EV Media', '中国汽车媒体')}</span><strong>0.7</strong></li>
+              <li><span>${S('Macro Data', '宏观数据')}</span><strong>0.6</strong></li>
+            </ul>
+          </aside>
         </div>
+
+        <section class="system-intel-section">
+          <div class="system-intel-section-head">
+            <div class="system-intel-kicker">${S('SYSTEM ENTRY POINTS', '系统入口')}</div>
+            <h2>${S('Enter the system through the layer you need.', '按需要进入对应系统层。')}</h2>
+          </div>
+          <div class="system-intel-entry-grid">
+            <a class="system-intel-entry" href="${liveUrl}">
+              <span>${S('Live Layer', '实时层')}</span>
+              <h3>${S('Live Intelligence Feed', '实时情报流')}</h3>
+              <p>${S('Ranked events, signal labels, system interpretation and source traceability.', '排序事件、信号标签、系统解读与信源追溯。')}</p>
+            </a>
+            <a class="system-intel-entry" href="/data">
+              <span>${S('Data Layer', '数据层')}</span>
+              <h3>${S('Data Intelligence Layer', '数据情报层')}</h3>
+              <p>${S('Macro, company, market and model records that structure the system.', '支撑系统结构的宏观、企业、市场与车型记录。')}</p>
+            </a>
+            <a class="system-intel-entry" href="/news">
+              <span>${S('Editorial Layer', '编辑层')}</span>
+              <h3>${S('Editorial News Layer', '编辑新闻层')}</h3>
+              <p>${S('Human-readable reporting connected back to events and source context.', '与事件和信源上下文连接的可读报道。')}</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="system-intel-section">
+          <div class="system-intel-section-head">
+            <div class="system-intel-kicker">${S('TRACEABLE ARCHITECTURE', '可追溯架构')}</div>
+            <h2>${S('From source signals to market interpretation.', '从信源信号到市场解读。')}</h2>
+          </div>
+          <div class="system-intel-pipeline">
+            <div><span>${S('Signals', '信号')}</span><strong>${S('Raw source layer', '原始信源层')}</strong><p>${S('All incoming source items are stored before event creation.', '所有输入信息先存入信号层，再进入事件生成。')}</p></div>
+            <div><span>${S('Events', '事件')}</span><strong>${S('Clustered facts', '聚类事实')}</strong><p>${S('Events require multiple supporting signals and keep source references.', '事件需要多个支持信号，并保留来源引用。')}</p></div>
+            <div><span>${S('Insights', '洞察')}</span><strong>${S('System interpretation', '系统解读')}</strong><p>${S('Top ranked events create the live interpretation layer.', '高排序事件生成实时系统解读层。')}</p></div>
+            <div><span>${S('SEO Pages', 'SEO 页面')}</span><strong>${S('Indexable outputs', '可索引输出')}</strong><p>${S('Events, companies and markets remain accessible as structured pages.', '事件、公司与市场以结构化页面对外可访问。')}</p></div>
+          </div>
+        </section>
       </div>
     </section>
   `;

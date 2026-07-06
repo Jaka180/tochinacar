@@ -124,61 +124,105 @@
 </header>
 
 <main id="app">
-    <section class="page-header page-header--data">
+    <section class="system-intel-hero">
       <div class="container">
-        <div class="section-eyebrow">系统层</div>
-        <h1 class="page-title">TopChinaCar 情报系统</h1>
-        <p class="page-deck">连接 TopChinaCar 数据、公司、市场与车型层的实时事件情报系统。</p>
+        <div class="system-intel-hero-grid">
+          <div>
+            <div class="section-eyebrow">系统情报层</div>
+            <h1 class="system-intel-title">TopChinaCar 情报系统</h1>
+            <p class="system-intel-deck">连接实时事件流、信号源、数据实体与市场解读的结构化情报入口。</p>
+            <div class="system-intel-actions">
+              <a class="btn btn-primary" href="https://topchinacar-event-intelligence.vercel.app/news?lang=zh">打开实时情报流</a>
+              <a class="btn btn-ghost" href="/zh/data">查看数据层</a>
+            </div>
+          </div>
+          <aside class="system-intel-status" aria-label="系统状态">
+            <div class="system-status-row">
+              <span>实时流</span>
+              <strong>运行中</strong>
+            </div>
+            <div class="system-status-row">
+              <span>信号模型</span>
+              <strong>车企 / 政策 / 媒体 / 宏观</strong>
+            </div>
+            <div class="system-status-row">
+              <span>事件规则</span>
+              <strong>由多信号聚类生成</strong>
+            </div>
+            <div class="system-status-row">
+              <span>语言</span>
+              <strong>中英文双语</strong>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
-    <section style="padding-top:0;">
-      <div class="container" style="max-width:980px;">
-        <div class="intel-stack data-intel-stack">
-          <section class="intel-panel intel-panel--dark">
-            <div class="intel-eyebrow">已整合事件情报</div>
-            <h2>实时系统将行业信息源转化为可排序的结构化事件。</h2>
-            <div class="intel-signals">
-              <div class="intel-signal"><span>事件</span><p>RSS 与信源内容被规范化为可追溯事件记录。</p></div>
-              <div class="intel-signal"><span>排序</span><p>事件按影响力、置信度与信源权重评分。</p></div>
-              <div class="intel-signal"><span>解释</span><p>高排序事件进入系统解读层。</p></div>
-              <div class="intel-signal"><span>数据层</span><p>公司、市场与车型实体把实时事件连接回主站。</p></div>
+
+    <section class="system-intel-main">
+      <div class="container">
+        <div class="system-intel-grid">
+          <section class="system-intel-card system-intel-card--primary">
+            <div class="system-intel-kicker">运行模型</div>
+            <h2>先有信号，再有事件，最后形成洞察。</h2>
+            <p>系统把原始信息、规范化信号、合成事件与系统解读拆开，让用户能看清情报层的工作方式。</p>
+            <div class="system-intel-flow">
+              <div><span>01</span><strong>信源网络</strong><p>车企、政策、全球媒体、中国媒体与宏观数据源。</p></div>
+              <div><span>02</span><strong>信号规范化</strong><p>每条信息按来源类型、实体、市场与信号强度分类。</p></div>
+              <div><span>03</span><strong>事件合成</strong><p>事件来自聚类信号，而不是单条信息源。</p></div>
+              <div><span>04</span><strong>洞察层</strong><p>排序事件支撑实时情报流中的系统解读。</p></div>
             </div>
-            <div class="intel-basis">运行系统： https://topchinacar-event-intelligence.vercel.app</div>
+            <div class="system-runtime">运行系统： <a href="https://topchinacar-event-intelligence.vercel.app/news?lang=zh">https://topchinacar-event-intelligence.vercel.app</a></div>
           </section>
 
-          <section class="intel-layer data-layer-section">
-            <div class="intel-layer-head">
-              <h2>系统入口</h2>
-              <p>实时应用用于事件流操作；主站用于数据层与编辑上下文。</p>
-            </div>
-            <div class="data-layer-grid">
-              <a class="data-layer-card" href="https://topchinacar-event-intelligence.vercel.app/news?lang=zh">
-                <h3>实时情报流</h3>
-                <div class="data-layer-rows">
-                  <div><span>路径</span><strong>事件排序与系统解读</strong></div>
-                  <div><span>来源</span><strong>RSS / API 摄取</strong></div>
-                  <div><span>输出</span><strong>排序事件与 SEO 事件页</strong></div>
-                </div>
-              </a>
-              <a class="data-layer-card" href="/zh/data">
-                <h3>数据情报层</h3>
-                <div class="data-layer-rows">
-                  <div><span>路径</span><strong>宏观、企业、市场与车型数据</strong></div>
-                  <div><span>角色</span><strong>实体结构与系统上下文</strong></div>
-                  <div><span>连接</span><strong>事件 -> 公司 -> 市场 -> 车型</strong></div>
-                </div>
-              </a>
-              <a class="data-layer-card" href="/zh/news">
-                <h3>编辑新闻层</h3>
-                <div class="data-layer-rows">
-                  <div><span>路径</span><strong>每日简报与解释性报道</strong></div>
-                  <div><span>角色</span><strong>面向读者的上下文</strong></div>
-                  <div><span>连接</span><strong>情报记录的信源上下文</strong></div>
-                </div>
-              </a>
-            </div>
-          </section>
+          <aside class="system-intel-panel">
+            <div class="system-intel-kicker">信源覆盖</div>
+            <h2>五层信号架构</h2>
+            <ul class="system-intel-list">
+              <li><span>车企信号</span><strong>1.0</strong></li>
+              <li><span>政策信号</span><strong>0.9</strong></li>
+              <li><span>全球媒体</span><strong>0.8</strong></li>
+              <li><span>中国汽车媒体</span><strong>0.7</strong></li>
+              <li><span>宏观数据</span><strong>0.6</strong></li>
+            </ul>
+          </aside>
         </div>
+
+        <section class="system-intel-section">
+          <div class="system-intel-section-head">
+            <div class="system-intel-kicker">系统入口</div>
+            <h2>按需要进入对应系统层。</h2>
+          </div>
+          <div class="system-intel-entry-grid">
+            <a class="system-intel-entry" href="https://topchinacar-event-intelligence.vercel.app/news?lang=zh">
+              <span>实时层</span>
+              <h3>实时情报流</h3>
+              <p>排序事件、信号标签、系统解读与信源追溯。</p>
+            </a>
+            <a class="system-intel-entry" href="/zh/data">
+              <span>数据层</span>
+              <h3>数据情报层</h3>
+              <p>支撑系统结构的宏观、企业、市场与车型记录。</p>
+            </a>
+            <a class="system-intel-entry" href="/zh/news">
+              <span>编辑层</span>
+              <h3>编辑新闻层</h3>
+              <p>与事件和信源上下文连接的可读报道。</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="system-intel-section">
+          <div class="system-intel-section-head">
+            <div class="system-intel-kicker">可追溯架构</div>
+            <h2>从信源信号到市场解读。</h2>
+          </div>
+          <div class="system-intel-pipeline">
+            <div><span>信号</span><strong>原始信源层</strong><p>所有输入信息先存入信号层，再进入事件生成。</p></div>
+            <div><span>事件</span><strong>聚类事实</strong><p>事件需要多个支持信号，并保留来源引用。</p></div>
+            <div><span>洞察</span><strong>系统解读</strong><p>高排序事件生成实时系统解读层。</p></div>
+            <div><span>SEO 页面</span><strong>可索引输出</strong><p>事件、公司与市场以结构化页面对外可访问。</p></div>
+          </div>
+        </section>
       </div>
     </section>
   </main>
@@ -233,10 +277,10 @@
   </div>
 </footer>
 
-<script src="/js/data.js?v=202607060343"></script>
-<script src="/js/i18n.js?v=202607060343"></script>
-<script src="/js/articles-data.js?v=202607060343"></script>
-<script src="/js/pages.js?v=202607060343"></script>
-<script src="/js/app.js?v=202607060343"></script>
+<script src="/js/data.js?v=202607060531"></script>
+<script src="/js/i18n.js?v=202607060531"></script>
+<script src="/js/articles-data.js?v=202607060531"></script>
+<script src="/js/pages.js?v=202607060531"></script>
+<script src="/js/app.js?v=202607060531"></script>
 </body>
 </html>
