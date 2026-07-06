@@ -1096,36 +1096,44 @@ function intelReaderAssessment(item) {
   const sourceMedium = item.source_priority >= 7;
 
   let signal = {
-    en: 'Context signal',
-    zh: '背景信号',
+    en: 'Why it matters',
+    zh: '为何重要',
     deck_en: 'Useful for context, but not yet a leading market signal.',
     deck_zh: '可作为背景观察，但暂未构成主导市场信号。'
   };
   if (impactHigh && confidenceMedium) {
     signal = {
-      en: 'High-impact signal',
-      zh: '高影响信号',
-      deck_en: 'This item matters because it may affect policy, capacity, exports or market entry.',
-      deck_zh: '该事件值得关注，因为它可能影响政策、产能、出口或市场进入。'
+      en: 'Why it matters',
+      zh: '为何重要',
+      deck_en: 'This may affect policy, production capacity, exports or overseas market entry.',
+      deck_zh: '这可能影响政策、产能、出口或海外市场进入。'
     };
   } else if (finalHigh) {
     signal = {
-      en: 'Important market signal',
-      zh: '重要市场信号',
-      deck_en: 'The system ranks this item above routine updates in the current feed.',
-      deck_zh: '系统将该事件排在常规更新之上，说明它具备较强市场信号。'
+      en: 'Why it matters',
+      zh: '为何重要',
+      deck_en: 'This is more relevant than a routine company update because it points to market or strategy movement.',
+      deck_zh: '这不只是常规企业动态，而是指向市场或战略层面的变化。'
     };
   } else if (item.final_score >= 4.8) {
     signal = {
-      en: 'Market movement',
-      zh: '市场动向',
-      deck_en: 'Relevant movement for company, region or channel tracking.',
-      deck_zh: '适合用于跟踪企业、区域或渠道层面的变化。'
+      en: 'Why it matters',
+      zh: '为何重要',
+      deck_en: 'This helps track how a company, region or distribution channel is changing.',
+      deck_zh: '这有助于观察企业、区域或渠道层面的变化。'
     };
   }
 
   return {
     signal,
+    tags: [
+      impactHigh
+        ? { en: 'Major industry move', zh: '行业重要变化' }
+        : item.impact_score >= 5 ? { en: 'Market movement', zh: '市场动向' } : { en: 'Background update', zh: '背景更新' },
+      confidenceMedium
+        ? { en: 'Source-backed', zh: '有来源支撑' }
+        : { en: 'Needs follow-up', zh: '仍需跟踪' }
+    ],
     impact: {
       en: impactHigh ? 'Industry impact: high' : item.impact_score >= 5 ? 'Industry impact: medium' : 'Industry impact: low',
       zh: impactHigh ? '行业影响：高' : item.impact_score >= 5 ? '行业影响：中' : '行业影响：低',
@@ -1293,33 +1301,12 @@ function intelligenceCardHTML(item) {
           </div>
           <div class="intel-reader-panel">
             <div class="intel-reader-main">
-              <span>${langSpan('System reading', '系统判断')}</span>
               <strong>${langSpan(assessment.signal.en, assessment.signal.zh)}</strong>
               <p>${langSpan(assessment.signal.deck_en, assessment.signal.deck_zh)}</p>
             </div>
-            <div class="intel-reader-grid">
-              <div>
-                <strong>${langSpan(assessment.impact.en, assessment.impact.zh)}</strong>
-                <p>${langSpan(assessment.impact.detail_en, assessment.impact.detail_zh)}</p>
-              </div>
-              <div>
-                <strong>${langSpan(assessment.confidence.en, assessment.confidence.zh)}</strong>
-                <p>${langSpan(assessment.confidence.detail_en, assessment.confidence.detail_zh)}</p>
-              </div>
-              <div>
-                <strong>${langSpan(assessment.source.en, assessment.source.zh)}</strong>
-                <p>${langSpan(assessment.source.detail_en, assessment.source.detail_zh)}</p>
-              </div>
+            <div class="intel-reader-tags">
+              ${assessment.tags.map(tag => `<span>${langSpan(tag.en, tag.zh)}</span>`).join('')}
             </div>
-            <details class="intel-score-details">
-              <summary>${langSpan('View system score details', '查看系统评分明细')}</summary>
-              <div class="intel-score-grid">
-                <div><span>${langSpan('Overall signal index', '综合信号指数')}</span><strong>${item.final_score.toFixed(1)}</strong></div>
-                <div><span>${langSpan('Industry impact input', '行业影响输入')}</span><strong>${item.impact_score.toFixed(1)}</strong></div>
-                <div><span>${langSpan('Evidence confidence', '证据置信度')}</span><strong>${Math.round(item.confidence_score * 100)}%</strong></div>
-                <div><span>${langSpan('Source weight', '信源权重')}</span><strong>${item.source_priority.toFixed(1)}</strong></div>
-              </div>
-            </details>
           </div>
         </article>`;
 }
@@ -1363,7 +1350,7 @@ function intelligenceFeedHTML(items) {
         </section>
         ${intelligenceSectionHTML('HIGH IMPACT EVENTS', '高影响事件', 'Events likely to affect policy, capacity, exports or market entry.', '可能影响政策、产能、出口或市场进入的核心信号。', 'high', high, 'No high-impact cluster in this section yet.', '本栏目暂未形成高影响事件簇。')}
         ${intelligenceSectionHTML('MARKET MOVEMENTS', '市场动向', 'Mid-tier ranked items showing expansion, channel, sales or market-access movement.', '中层排序条目，反映扩张、渠道、销量或市场进入变化。', 'market', movement, 'No mid-tier market movement cluster yet.', '暂未形成中层市场动向簇。')}
-        ${intelligenceSectionHTML('ALL EVENTS', '全部事件', 'Full ranked stream with reader-facing signal labels and optional scoring details.', '完整排序流，优先展示读者可理解的信号判断，评分细节可展开查看。', 'all', all.length ? all : low, 'No events available for this section.', '本栏目暂无可展示事件。')}
+        ${intelligenceSectionHTML('ALL EVENTS', '全部事件', 'Full stream with reader-facing context and source links.', '完整事件流，优先展示读者可理解的背景说明与来源链接。', 'all', all.length ? all : low, 'No events available for this section.', '本栏目暂无可展示事件。')}
       </div>`;
 }
 
