@@ -1015,6 +1015,7 @@ function pageContact() {
       <div class="container" style="max-width:820px;font-size:15px;line-height:1.9;color:#374151;">
         <p><strong>${S('Editorial & general', '编辑与一般事务')}</strong> — ${S('tips, corrections, story ideas, media requests:', '线索、更正、选题、媒体请求：')} <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a></p>
         <p><strong>${S('Market intelligence & partnerships', '市场情报与合作')}</strong> — ${S('research, data, sponsorship and partnership conversations:', '研究、数据、赞助与合作洽谈：')} <a href="mailto:hello@topchinacar.com">hello@topchinacar.com</a></p>
+        <p><strong>${S('Structured commercial requests', '结构化商务请求')}</strong> — ${S('for detailed commercial or partnership briefs, you can also use the', '需要提交详细商务或合作需求，也可使用')} <a href="/quote" style="color:var(--accent, #d4302a);">${S('commercial contact form', '商务联系表单')}</a>${S('.', '。')}</p>
         <p style="font-size:13px;color:#9ca3af;margin-top:28px;">${S('We read everything. Please allow up to 48 hours for a reply.', '所有来信我们都会阅读，请预留最多 48 小时的回复时间。')}</p>
       </div>
     </section>
