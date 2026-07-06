@@ -94,6 +94,7 @@ const PAGES_ZH = {
   '/chinese-car-brands': { title: '中国汽车品牌大全 | TopChinaCar', desc: '中国汽车品牌指南：比亚迪、吉利、上汽、奇瑞、长城、蔚来、小鹏、理想、小米、零跑及其子品牌。' },
   '/models': { title: '中国电动车明星车型 — 续航、价格与参数 | TopChinaCar', desc: '定义新时代的中国电动车：比亚迪海豹、小米 SU7 Ultra、蔚来 ET9、小鹏 G6、理想 MEGA、极氪 001——真实续航、零百加速与美元指导价。' },
   '/news': { title: '中国汽车出海与电动车行业新闻 | TopChinaCar', desc: '中国汽车出口、新车发布、电池技术与政策动态的精选报道，以及每个工作日更新的出海简报。' },
+  '/intelligence': { title: 'TopChinaCar 情报系统 | 事件流、数据层与市场解读', desc: 'TopChinaCar 情报系统入口：连接实时事件流、数据情报层、公司、市场和车型结构。' },
   '/tech': { title: '中国电动车技术解读：800V、城市智驾、刀片电池 | TopChinaCar', desc: '深度解读中国汽车领先背后的技术：800V 高压平台、城市级智能驾驶、智能座舱、刀片电池与 CTB 电池车身一体化。' },
   '/about': { title: '关于 TopChinaCar — 独立的中国汽车编辑报道', desc: 'TopChinaCar 是面向海外读者的独立双语编辑出版物，讲解中国汽车——品牌、车型、技术与人。不吹捧，不贬低。' },
   '/quote': { title: '商业与合作联系 | TopChinaCar', desc: '面向合作、市场情报、赞助与研究需求的联系页面。TopChinaCar 的核心定位仍是独立新闻与信息报道。', robots: 'noindex,follow' },
@@ -130,6 +131,11 @@ const PAGES = {
     file: 'news.html',
     title: 'China Auto Export & EV Industry News | TopChinaCar',
     desc: 'Curated reporting on Chinese car exports, new model launches, battery technology and policy — plus the weekly China Export Watch column.'
+  },
+  '/intelligence': {
+    file: 'intelligence.html',
+    title: 'TopChinaCar Intelligence System | Events, Data and Market Signals',
+    desc: 'TopChinaCar Intelligence System connects the live event feed, structured data layer, companies, markets and model records.'
   },
   '/tech': {
     file: 'tech.html',
@@ -171,6 +177,7 @@ const PAGES = {
 
 const NAV = [
   ['/news', 'nav.news', 'News'],
+  ['/intelligence', 'nav.intelligence', 'Intelligence'],
   ['/china-ev-news', 'nav.ev', 'EV'],
   ['/china-car-export-news', 'nav.exports', 'Exports'],
   ['/chinese-car-brands', 'nav.brands', 'Brands'],
@@ -251,6 +258,7 @@ const FOOTER = `<footer class="site-footer">
     <div class="footer-col">
       <h4 data-i18n="footer.explore">Explore</h4>
       <a href="/news" data-i18n="nav.news">News</a>
+      <a href="/intelligence" data-i18n="nav.intelligence">Intelligence</a>
       <a href="/china-ev-news" data-i18n="nav.ev">EV</a>
       <a href="/china-car-export-news" data-i18n="nav.exports">Exports</a>
       <a href="/chinese-car-brands" data-i18n="nav.brands">Brands</a>
@@ -580,6 +588,7 @@ function staticCollectionItems(route) {
 const STATIC_COLLECTION_ROUTES = new Set(['/chinese-car-brands', '/models', '/news', '/tech']);
 const STATIC_WEBPAGE_TYPES = {
   '/about': 'AboutPage',
+  '/intelligence': 'WebPage',
   '/editorial-policy': 'WebPage',
   '/contact': 'ContactPage',
   '/newsletter': 'WebPage',
@@ -1354,7 +1363,7 @@ function dataLayerMain(sec) {
   ];
 
   const linkItems = [
-    ['Events', '事件', 'Ranked intelligence feed', '排序情报流', '/news'],
+    ['Events', '事件', 'Live event intelligence', '实时事件情报', '/intelligence'],
     ['Companies', '公司', 'OEM entity database', '车企实体库', '/chinese-car-brands'],
     ['Markets', '市场', 'Regional market layer', '区域市场层', '/markets'],
     ['Models', '车型', 'Structured specs database', '结构化参数数据库', '/models']

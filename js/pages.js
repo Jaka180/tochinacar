@@ -1,4 +1,5 @@
 // ============ PAGE RENDERERS (pure functions — also used by build.js for prerendering) ============
+const EVENT_INTELLIGENCE_URL = 'https://topchinacar-event-intelligence.vercel.app';
 
 // SVG car illustrations (stylised silhouettes)
 function carSVG(shape, colorA = '#d4302a', colorB = '#1a1a1a') {
@@ -341,6 +342,7 @@ function pageHome() {
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;">
         ${[
+          ['/intelligence', 'Intelligence', '情报', 'Live event ranking and system interpretation', '实时事件排序与系统解读'],
           ['/china-ev-news', 'EV', '新能源', 'Electric vehicles, batteries and smart cars', '电动车、电池与智能汽车'],
           ['/china-car-export-news', 'Exports', '出口', 'Shipments, plants and overseas growth', '出口数据、海外工厂与增长'],
           ['/chinese-car-brands', 'Brands', '品牌', '31 Chinese automakers, profiled', '31 家中国车企档案'],
@@ -1045,6 +1047,71 @@ function pageNewsletterLanding() {
   `;
 }
 
+function pageIntelligence() {
+  const zh = getLang() === 'zh';
+  const S = (en, zhTxt) => zh ? zhTxt : en;
+  const liveUrl = zh ? `${EVENT_INTELLIGENCE_URL}/news?lang=zh` : `${EVENT_INTELLIGENCE_URL}/news`;
+  return `
+    <section class="page-header page-header--data">
+      <div class="container">
+        <div class="section-eyebrow">${S('System Layer', '系统层')}</div>
+        <h1 class="page-title">${S('TopChinaCar Intelligence System', 'TopChinaCar 情报系统')}</h1>
+        <p class="page-deck">${S('Live event intelligence connected to TopChinaCar data, company, market and model layers.', '连接 TopChinaCar 数据、公司、市场与车型层的实时事件情报系统。')}</p>
+      </div>
+    </section>
+    <section style="padding-top:0;">
+      <div class="container" style="max-width:980px;">
+        <div class="intel-stack data-intel-stack">
+          <section class="intel-panel intel-panel--dark">
+            <div class="intel-eyebrow">${S('INTEGRATED EVENT INTELLIGENCE', '已整合事件情报')}</div>
+            <h2>${S('The live system converts industry sources into ranked, structured events.', '实时系统将行业信息源转化为可排序的结构化事件。')}</h2>
+            <div class="intel-signals">
+              <div class="intel-signal"><span>${S('Events', '事件')}</span><p>${S('RSS and source items are normalized into traceable event records.', 'RSS 与信源内容被规范化为可追溯事件记录。')}</p></div>
+              <div class="intel-signal"><span>${S('Ranking', '排序')}</span><p>${S('Events are scored by impact, confidence and source priority.', '事件按影响力、置信度与信源权重评分。')}</p></div>
+              <div class="intel-signal"><span>${S('Interpretation', '解释')}</span><p>${S('Top ranked events feed the system interpretation layer.', '高排序事件进入系统解读层。')}</p></div>
+              <div class="intel-signal"><span>${S('Data Layer', '数据层')}</span><p>${S('Company, market and model entities connect live events back to the main site.', '公司、市场与车型实体把实时事件连接回主站。')}</p></div>
+            </div>
+            <div class="intel-basis">${S('Runtime app:', '运行系统：')} ${EVENT_INTELLIGENCE_URL}</div>
+          </section>
+
+          <section class="intel-layer data-layer-section">
+            <div class="intel-layer-head">
+              <h2>${S('SYSTEM ENTRY POINTS', '系统入口')}</h2>
+              <p>${S('Use the live app for event stream operations; use the main site for data and editorial context.', '实时应用用于事件流操作；主站用于数据层与编辑上下文。')}</p>
+            </div>
+            <div class="data-layer-grid">
+              <a class="data-layer-card" href="${liveUrl}">
+                <h3>${S('Live Intelligence Feed', '实时情报流')}</h3>
+                <div class="data-layer-rows">
+                  <div><span>${S('Route', '路径')}</span><strong>${S('Event ranking and system interpretation', '事件排序与系统解读')}</strong></div>
+                  <div><span>${S('Source', '来源')}</span><strong>${S('RSS / API ingestion', 'RSS / API 摄取')}</strong></div>
+                  <div><span>${S('Output', '输出')}</span><strong>${S('Ranked events and SEO event pages', '排序事件与 SEO 事件页')}</strong></div>
+                </div>
+              </a>
+              <a class="data-layer-card" href="/data">
+                <h3>${S('Data Intelligence Layer', '数据情报层')}</h3>
+                <div class="data-layer-rows">
+                  <div><span>${S('Route', '路径')}</span><strong>${S('Macro, company, market and model data', '宏观、企业、市场与车型数据')}</strong></div>
+                  <div><span>${S('Role', '角色')}</span><strong>${S('Entity structure and system context', '实体结构与系统上下文')}</strong></div>
+                  <div><span>${S('Connection', '连接')}</span><strong>${S('Events -> companies -> markets -> models', '事件 -> 公司 -> 市场 -> 车型')}</strong></div>
+                </div>
+              </a>
+              <a class="data-layer-card" href="/news">
+                <h3>${S('Editorial News Layer', '编辑新闻层')}</h3>
+                <div class="data-layer-rows">
+                  <div><span>${S('Route', '路径')}</span><strong>${S('Daily briefing and explainers', '每日简报与解释性报道')}</strong></div>
+                  <div><span>${S('Role', '角色')}</span><strong>${S('Human-readable context', '面向读者的上下文')}</strong></div>
+                  <div><span>${S('Connection', '连接')}</span><strong>${S('Source context for intelligence records', '情报记录的信源上下文')}</strong></div>
+                </div>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 // Route table (shared by client router and build.js)
 const PAGE_ROUTES = {
   '/':       pageHome,
@@ -1057,7 +1124,8 @@ const PAGE_ROUTES = {
   '/privacy': pagePrivacy,
   '/editorial-policy': pageEditorialPolicy,
   '/contact': pageContact,
-  '/newsletter': pageNewsletterLanding
+  '/newsletter': pageNewsletterLanding,
+  '/intelligence': pageIntelligence
 };
 
 // Node (build.js) support — no effect in the browser
