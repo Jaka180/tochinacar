@@ -1007,6 +1007,269 @@ function articleListHTML(list, emptyEn, emptyZh) {
   </ul>`;
 }
 
+function sectionArticleText(a) {
+  return `${a.title_en || ''} ${a.title_zh || ''} ${a.excerpt_en || ''} ${a.excerpt_zh || ''} ${a.tag_en || ''} ${a.tag_zh || ''} ${a.html_en || ''}`.toLowerCase();
+}
+
+function intelSignalText(a) {
+  return `${a.title_en || ''} ${a.title_zh || ''} ${a.excerpt_en || ''} ${a.excerpt_zh || ''} ${a.tag_en || ''} ${a.tag_zh || ''}`.toLowerCase();
+}
+
+function articleMatchesSection(a, sec) {
+  return sec.kw.test(sectionArticleText(a));
+}
+
+const INTEL_EVENT_RULES = [
+  { type: 'tariff', label_en: 'Tariff', label_zh: '关税', impact: 8.8, re: /tariff|duties|anti-subsidy|minimum-price|trade wall/i },
+  { type: 'policy', label_en: 'Policy', label_zh: '政策', impact: 8.2, re: /policy|regulat|restriction|subsid|homologation|sanction|rules?/i },
+  { type: 'factory', label_en: 'Factory', label_zh: '工厂', impact: 8.4, re: /plant|factory|production|assembly|locali[sz]ation|locali[sz]e|built at/i },
+  { type: 'export', label_en: 'Export', label_zh: '出口', impact: 7.7, re: /export|shipment|overseas|ro-ro|global expansion|global markets/i },
+  { type: 'sales_update', label_en: 'Sales update', label_zh: '销量更新', impact: 6.7, re: /sales|deliver|units|market share|ranking|volume|record/i },
+  { type: 'investment', label_en: 'Investment', label_zh: '投资', impact: 7.2, re: /invest|investment|funding|capital|stake/i },
+  { type: 'partnership', label_en: 'Partnership', label_zh: '合作', impact: 6.6, re: /partnership|joint venture|\bJV\b|alliance|with stellantis/i },
+  { type: 'dealer_expansion', label_en: 'Dealer expansion', label_zh: '渠道扩张', impact: 6.1, re: /dealer|showroom|retail|distribution|network/i },
+  { type: 'pricing', label_en: 'Pricing', label_zh: '定价', impact: 5.8, re: /price|pricing|discount|minimum-price/i },
+  { type: 'technology', label_en: 'Technology', label_zh: '技术', impact: 5.6, re: /battery|charging|smart driving|adas|software|800v|cockpit|autonomous/i },
+  { type: 'launch', label_en: 'Launch', label_zh: '新车发布', impact: 5.4, re: /launch|premiere|debut|new model|unveil/i }
+];
+
+const INTEL_MARKET_RULES = [
+  { market_en: 'Europe', market_zh: '欧洲', re: /europe|\beu\b|germany|france|spain|italy|uk\b|britain|norway|netherlands|hungary|munich|zaragoza|poland/i },
+  { market_en: 'Middle East', market_zh: '中东', re: /middle east|gulf|saudi|uae|dubai|qatar|kuwait|oman|bahrain|gcc/i },
+  { market_en: 'Africa', market_zh: '非洲', re: /africa|south africa|egypt|nigeria|morocco|kenya|algeria/i },
+  { market_en: 'Latin America', market_zh: '拉丁美洲', re: /latin america|latam|brazil|mexico|chile|colombia|peru|uruguay|argentina/i },
+  { market_en: 'Southeast Asia', market_zh: '东南亚', re: /southeast asia|thailand|indonesia|malaysia|vietnam|philippines|singapore|asean/i },
+  { market_en: 'China', market_zh: '中国', re: /china|chinese market|domestic/i }
+];
+
+const INTEL_COMPANIES = ['BYD', 'Geely', 'Chery', 'SAIC', 'MG', 'GWM', 'Great Wall', 'XPeng', 'Xpeng', 'NIO', 'Li Auto', 'Leapmotor', 'Zeekr', 'Tesla', 'CATL'];
+
+function intelEventRule(a) {
+  const text = intelSignalText(a);
+  return INTEL_EVENT_RULES.find(rule => rule.re.test(text)) || { type: 'market_movement', label_en: 'Market movement', label_zh: '市场动向', impact: 4.8 };
+}
+
+function intelMarket(a) {
+  const text = intelSignalText(a);
+  return INTEL_MARKET_RULES.find(rule => rule.re.test(text)) || { market_en: 'Global markets', market_zh: '全球市场' };
+}
+
+function intelCompany(a) {
+  const text = intelSignalText(a);
+  const found = INTEL_COMPANIES.find(name => text.includes(name.toLowerCase()));
+  return found || 'Chinese OEMs';
+}
+
+function intelConfidence(a, rule, market) {
+  let confidence = 0.58;
+  if (rule.type !== 'market_movement') confidence += 0.08;
+  if (market.market_en !== 'Global markets') confidence += 0.06;
+  if ((a.excerpt_en || '').length > 80) confidence += 0.04;
+  if ((a.html_en || '').includes('href="http')) confidence += 0.06;
+  return Math.min(0.9, Number(confidence.toFixed(2)));
+}
+
+function intelPriorityLabel(rank) {
+  if (rank <= 3) return { key: 'high', en: 'HIGH PRIORITY', zh: '高优先级' };
+  if (rank <= 10) return { key: 'medium', en: 'MEDIUM', zh: '中等优先级' };
+  return { key: 'low', en: 'LOW IMPACT', zh: '低影响' };
+}
+
+function intelCompanyHTML(company) {
+  return langSpan(company, company === 'Chinese OEMs' ? '中国车企' : company);
+}
+
+function enrichIntelligenceArticles(list) {
+  return list.map((a, index) => {
+    const eventRule = intelEventRule(a);
+    const market = intelMarket(a);
+    const confidence = intelConfidence(a, eventRule, market);
+    const sourcePriority = 7.5;
+    const impact = Math.max(1, Math.min(10, eventRule.impact - Math.min(index, 6) * 0.08));
+    const finalScore = Number((impact * 0.5 + confidence * 0.3 + sourcePriority * 0.2).toFixed(1));
+    return {
+      article: a,
+      company: intelCompany(a),
+      event_type: eventRule.type,
+      event_label_en: eventRule.label_en,
+      event_label_zh: eventRule.label_zh,
+      market_en: market.market_en,
+      market_zh: market.market_zh,
+      impact_score: Number(impact.toFixed(1)),
+      confidence_score: confidence,
+      source_priority: sourcePriority,
+      final_score: finalScore
+    };
+  }).sort((a, b) =>
+    b.final_score - a.final_score ||
+    b.impact_score - a.impact_score ||
+    b.article.date.localeCompare(a.article.date)
+  ).map((item, index) => {
+    const rank = index + 1;
+    const tier = item.impact_score >= 7 && item.confidence_score >= 0.7
+      ? 'high'
+      : item.final_score >= 4.8 ? 'market' : 'low';
+    return { ...item, rank, tier, priority: intelPriorityLabel(rank) };
+  });
+}
+
+function topCluster(items, key) {
+  const counts = new Map();
+  for (const item of items) {
+    const value = item[key];
+    if (!value) continue;
+    counts.set(value, (counts.get(value) || 0) + 1);
+  }
+  return [...counts.entries()].sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0])))[0] || [null, 0];
+}
+
+function intelligenceInsight(items) {
+  const support = items.slice(0, 10);
+  if (support.length < 3) {
+    return {
+      confidence: 0,
+      core_en: 'Insufficient event density for a system-level interpretation.',
+      core_zh: '事件密度不足，暂不生成系统级解读。',
+      trend_en: 'The feed needs at least three ranked items before drawing a current trend.',
+      trend_zh: '情报流至少需要三个已排序条目，才生成当前趋势判断。',
+      risk_en: 'No risk signal is published without enough supporting events.',
+      risk_zh: '没有足够事件支撑时，不发布风险信号。',
+      basis_en: 'Waiting for more coverage.',
+      basis_zh: '等待更多报道进入系统。'
+    };
+  }
+
+  const [market, marketCount] = topCluster(support, 'market_en');
+  const [eventType, eventTypeCount] = topCluster(support, 'event_type');
+  const [company, companyCount] = topCluster(support, 'company');
+  const marketZh = support.find(item => item.market_en === market)?.market_zh || market;
+  const eventLabelZh = support.find(item => item.event_type === eventType)?.event_label_zh || eventType;
+  const companyZh = company === 'Chinese OEMs' ? '中国车企' : company;
+  const riskCount = support.filter(item => /tariff|policy|pricing|regulation/.test(item.event_type)).length;
+  const localizationCount = support.filter(item => /factory|export|dealer_expansion|partnership/.test(item.event_type)).length;
+  const avgConfidence = support.reduce((sum, item) => sum + item.confidence_score, 0) / support.length;
+  const confidence = Math.min(0.91, Number((0.46 + avgConfidence * 0.28 + Math.min(marketCount, 4) * 0.035 + Math.min(eventTypeCount, 4) * 0.035).toFixed(2)));
+
+  let core_en = `The current strongest signal is ${eventType.replace('_', ' ')} activity around ${market}.`;
+  let core_zh = `当前最强信号是围绕${marketZh || '全球市场'}的${eventLabelZh}活动。`;
+  if (localizationCount >= 3) {
+    core_en = `Chinese automakers are shifting from pure export coverage toward localized production and market-entry structures.`;
+    core_zh = `中国车企的出海叙事正在从单纯出口，转向本地化生产与市场进入结构。`;
+  }
+  if (riskCount >= 2) {
+    core_en = `Policy and tariff pressure is a repeated signal in the current China auto feed.`;
+    core_zh = `政策与关税压力是当前中国汽车情报流中的重复信号。`;
+  }
+
+  const trend_en = `${market} appears in ${marketCount} of the top ${support.length} ranked items, with ${company} present in ${companyCount}.`;
+  const companyTrendZh = companyZh === '中国车企' ? `${companyZh}出现` : `${companyZh} 出现`;
+  const trend_zh = `${marketZh || '全球市场'}出现在前 ${support.length} 个排序条目中的 ${marketCount} 个，${companyTrendZh} ${companyCount} 次。`;
+  const risk_en = riskCount
+    ? `Risk is concentrated in tariff, policy or pricing references across ${riskCount} top-ranked items.`
+    : `No dominant tariff or pricing risk cluster is visible in the top-ranked items.`;
+  const risk_zh = riskCount
+    ? `风险集中在 ${riskCount} 个高排序条目中的关税、政策或定价压力。`
+    : `高排序条目中暂未出现占主导的关税或定价风险簇。`;
+
+  return {
+    confidence,
+    core_en,
+    core_zh,
+    trend_en,
+    trend_zh,
+    risk_en,
+    risk_zh,
+    basis_en: `Cluster basis: market=${market} (${marketCount}), event_type=${eventType} (${eventTypeCount}), company=${company} (${companyCount}).`,
+    basis_zh: `聚类依据：市场=${marketZh || '全球市场'}（${marketCount}），事件类型=${eventLabelZh}（${eventTypeCount}），公司=${companyZh}（${companyCount}）。`
+  };
+}
+
+function intelligenceStatusHTML(items) {
+  const latestDate = items[0]?.article?.date || articles[0]?.date || TODAY;
+  const eventsToday = items.filter(item => item.article.date === latestDate).length || items.length;
+  const sourceActiveEn = [...new Set(items.slice(0, 10).map(item => item.event_label_en))].slice(0, 4).join(' / ') || 'Editorial stream';
+  const sourceActiveZh = [...new Set(items.slice(0, 10).map(item => item.event_label_zh))].slice(0, 4).join(' / ') || '编辑流';
+  return `
+      <div class="intel-status">
+        <div class="intel-status-cell"><span>${langSpan('Feed channels', '情报通道')}</span><strong>${items.length ? Math.min(12, Math.max(4, items.length)) : 0} ${langSpan('active', '运行中')}</strong></div>
+        <div class="intel-status-cell"><span>${langSpan('Ingestion status', '采集状态')}</span><strong>${langSpan('Daily briefing active', '日报管线运行中')}</strong></div>
+        <div class="intel-status-cell"><span>${langSpan('Last update', '最后更新')}</span><strong>${latestDate}</strong></div>
+        <div class="intel-status-cell"><span>${langSpan('Events in latest batch', '最新批次事件')}</span><strong>${eventsToday}</strong></div>
+        <div class="intel-status-cell"><span>${langSpan('Sources active', '活跃信号')}</span><strong>${langSpan(sourceActiveEn, sourceActiveZh)}</strong></div>
+      </div>`;
+}
+
+function intelligenceCardHTML(item) {
+  const a = item.article;
+  return `
+        <article class="intel-event-card">
+          <div class="intel-card-top">
+            <div class="intel-rank">${langSpan('Rank #' + item.rank, '排名 #' + item.rank)}</div>
+            <div class="intel-card-tags">
+              <span class="intel-chip intel-chip--${item.priority.key}">${langSpan(item.priority.en, item.priority.zh)}</span>
+              <span class="intel-chip">${langSpan('LIVE INTELLIGENCE STREAM', '实时情报流')}</span>
+            </div>
+          </div>
+          <h3 class="intel-card-title"><a href="/news/${a.slug}">${langSpan(a.title_en, a.title_zh || a.title_en)}</a></h3>
+          <p class="intel-card-summary">${langSpan(a.excerpt_en || '', a.excerpt_zh || a.excerpt_en || '')}</p>
+          <div class="intel-card-meta">
+            <span>${langSpan('Company', '公司')}: ${intelCompanyHTML(item.company)}</span>
+            <span>${langSpan('Market', '市场')}: ${langSpan(item.market_en, item.market_zh)}</span>
+            <span>${langSpan('Event Type', '事件类型')}: ${langSpan(item.event_label_en, item.event_label_zh)}</span>
+            <span>${a.date}</span>
+          </div>
+          <div class="intel-score-grid">
+            <div><span>${langSpan('Final Score', '综合分')}</span><strong>${item.final_score.toFixed(1)}</strong></div>
+            <div><span>${langSpan('Impact Score', '影响分')}</span><strong>${item.impact_score.toFixed(1)}</strong></div>
+            <div><span>${langSpan('Confidence', '置信度')}</span><strong>${item.confidence_score.toFixed(2)}</strong></div>
+            <div><span>${langSpan('Source Priority', '信源权重')}</span><strong>${item.source_priority.toFixed(1)}</strong></div>
+          </div>
+        </article>`;
+}
+
+function intelligenceSectionHTML(titleEn, titleZh, deckEn, deckZh, className, items, emptyEn, emptyZh) {
+  return `
+      <div class="intel-layer">
+        <div class="intel-layer-head intel-layer-head--${className}">
+          <h2>${langSpan(titleEn, titleZh)}</h2>
+          <p>${langSpan(deckEn, deckZh)}</p>
+        </div>
+        ${items.length ? items.map(intelligenceCardHTML).join('\n') : `<p class="intel-empty">${langSpan(emptyEn, emptyZh)}</p>`}
+      </div>`;
+}
+
+function intelligenceFeedHTML(items) {
+  const ranked = enrichIntelligenceArticles(items);
+  const insight = intelligenceInsight(ranked);
+  const high = ranked.filter(item => item.impact_score >= 7 && item.confidence_score >= 0.7).slice(0, 3);
+  const highSlugs = new Set(high.map(item => item.article.slug));
+  const movement = ranked.filter(item => !highSlugs.has(item.article.slug) && item.final_score >= 5 && item.final_score < 7).slice(0, 8);
+  const low = ranked.filter(item => item.tier === 'low');
+  const all = ranked.slice(0, 20);
+
+  return `
+      <div class="intel-stack">
+        <section class="intel-panel intel-panel--dark" aria-label="TopChinaCar Intelligence">
+          <div class="intel-eyebrow">${langSpan('TOP CHINA AUTO INTELLIGENCE', '中国汽车全球化情报')}</div>
+          <h2>${langSpan('System Interpretation', '系统解读')}</h2>
+          <div class="intel-signals">
+            <div class="intel-signal"><span>${langSpan('Core Signal', '核心信号')}</span><p>${langSpan(insight.core_en, insight.core_zh)}</p></div>
+            <div class="intel-signal"><span>${langSpan('Market Trend', '市场趋势')}</span><p>${langSpan(insight.trend_en, insight.trend_zh)}</p></div>
+            <div class="intel-signal"><span>${langSpan('Risk Signal', '风险信号')}</span><p>${langSpan(insight.risk_en, insight.risk_zh)}</p></div>
+            <div class="intel-signal"><span>${langSpan('System Confidence', '系统置信度')}</span><p>${insight.confidence.toFixed(2)}</p></div>
+          </div>
+          <div class="intel-basis">${langSpan(insight.basis_en, insight.basis_zh)}</div>
+        </section>
+        <section class="intel-panel">
+          <div class="intel-eyebrow">${langSpan('SYSTEM STATUS', '系统状态')}</div>
+          ${intelligenceStatusHTML(ranked)}
+        </section>
+        ${intelligenceSectionHTML('HIGH IMPACT EVENTS', '高影响事件', 'Impact score >= 7 and confidence >= 0.70. These items define the strongest signal layer.', '影响分 >= 7 且置信度 >= 0.70。这一层代表当前最强信号。', 'high', high, 'No high-impact cluster in this section yet.', '本栏目暂未形成高影响事件簇。')}
+        ${intelligenceSectionHTML('MARKET MOVEMENTS', '市场动向', 'Mid-tier ranked items showing expansion, channel, sales or market-access movement.', '中层排序条目，反映扩张、渠道、销量或市场进入变化。', 'market', movement, 'No mid-tier market movement cluster yet.', '暂未形成中层市场动向簇。')}
+        ${intelligenceSectionHTML('ALL EVENTS', '全部事件', 'Full ranked stream with visible score breakdown and source-mode labels.', '完整排序流，展示评分拆解与数据来源标签。', 'all', all.length ? all : low, 'No events available for this section.', '本栏目暂无可展示事件。')}
+      </div>`;
+}
+
 function sectionNavHTML(current) {
   return `<div style="margin-top:44px;padding-top:20px;border-top:1px solid #e5e7eb;font-size:13px;font-family:var(--mono, monospace);">
     <span style="color:#9ca3af;letter-spacing:.12em;text-transform:uppercase;">${langSpan('Sections', '栏目')}:</span>
@@ -1015,7 +1278,7 @@ function sectionNavHTML(current) {
 }
 
 function sectionMain(sec) {
-  const matched = articles.filter(a => sec.kw.test(`${a.title_en} ${a.excerpt_en || ''}`)).slice(0, 20);
+  const matched = articles.filter(a => articleMatchesSection(a, sec)).slice(0, 20);
   const marketsGrid = sec.isMarketsIndex ? `
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin:32px 0;">
       ${MARKETS.map(mk => `
@@ -1046,8 +1309,9 @@ function sectionMain(sec) {
       ${sec.extra_en ? langSpan(sec.extra_en, sec.extra_zh || sec.extra_en) : ''}
       ${marketsGrid}
       ${storiesList}
+      ${matched.length ? intelligenceFeedHTML(matched) : `
       <h2 style="font-size:22px;margin:36px 0 18px;">${langSpan('Latest coverage', '最新报道')}</h2>
-      ${articleListHTML(matched, 'Dedicated coverage for this section is ramping up — the Daily Briefing covers these topics every weekday.', '本栏目的专题报道正在积累中——每日简报每个工作日都覆盖相关主题。')}
+      ${articleListHTML(matched, 'Dedicated coverage for this section is ramping up — the Daily Briefing covers these topics every weekday.', '本栏目的专题报道正在积累中——每日简报每个工作日都覆盖相关主题。')}`}
       ${sectionNavHTML(sec.route)}
     </div>
   </section>`;
@@ -1056,7 +1320,7 @@ function sectionMain(sec) {
 for (const sec of SECTIONS) {
   const main = sectionMain(sec);
   const sectionItems = articles
-    .filter(a => sec.kw.test(`${a.title_en} ${a.excerpt_en || ''}`))
+    .filter(a => articleMatchesSection(a, sec))
     .map(a => ({ route: `/news/${a.slug}`, name: a.title_en }));
   const meta = {
     title: sec.title_en,
