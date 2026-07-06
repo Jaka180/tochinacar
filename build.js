@@ -94,7 +94,7 @@ const PAGES_ZH = {
   '/chinese-car-brands': { title: '中国汽车品牌大全 | TopChinaCar', desc: '中国汽车品牌指南：比亚迪、吉利、上汽、奇瑞、长城、蔚来、小鹏、理想、小米、零跑及其子品牌。' },
   '/models': { title: '中国电动车明星车型 — 续航、价格与参数 | TopChinaCar', desc: '定义新时代的中国电动车：比亚迪海豹、小米 SU7 Ultra、蔚来 ET9、小鹏 G6、理想 MEGA、极氪 001——真实续航、零百加速与美元指导价。' },
   '/news': { title: '中国汽车出海与电动车行业新闻 | TopChinaCar', desc: '中国汽车出口、新车发布、电池技术与政策动态的精选报道，以及每个工作日更新的出海简报。' },
-  '/intelligence': { title: 'TopChinaCar 情报系统 | 事件流、数据层与市场解读', desc: 'TopChinaCar 情报系统入口：连接实时事件流、数据情报层、公司、市场和车型结构。' },
+  '/intelligence': { title: 'TopChinaCar 情报系统 | 看懂中国汽车全球化', desc: 'TopChinaCar 追踪中国车企出海、海外工厂、出口、价格、政策风险与市场变化，把分散新闻转化为结构化市场信号。' },
   '/tech': { title: '中国电动车技术解读：800V、城市智驾、刀片电池 | TopChinaCar', desc: '深度解读中国汽车领先背后的技术：800V 高压平台、城市级智能驾驶、智能座舱、刀片电池与 CTB 电池车身一体化。' },
   '/about': { title: '关于 TopChinaCar — 独立的中国汽车编辑报道', desc: 'TopChinaCar 是面向海外读者的独立双语编辑出版物，讲解中国汽车——品牌、车型、技术与人。不吹捧，不贬低。' },
   '/quote': { title: '商业与合作联系 | TopChinaCar', desc: '面向合作、市场情报、赞助与研究需求的联系页面。TopChinaCar 的核心定位仍是独立新闻与信息报道。', robots: 'noindex,follow' },
@@ -134,8 +134,8 @@ const PAGES = {
   },
   '/intelligence': {
     file: 'intelligence.html',
-    title: 'TopChinaCar Intelligence System | Events, Data and Market Signals',
-    desc: 'TopChinaCar Intelligence System connects the live event feed, structured data layer, companies, markets and model records.'
+    title: 'TopChinaCar Intelligence System | China Auto Globalization Signals',
+    desc: 'TopChinaCar tracks Chinese automakers, overseas markets, factories, exports, pricing and policy risk, then turns fragmented news into structured market signals.'
   },
   '/tech': {
     file: 'tech.html',
