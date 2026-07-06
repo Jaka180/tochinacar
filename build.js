@@ -930,16 +930,15 @@ const SECTIONS = [
   },
   {
     route: '/data', file: 'data.html',
-    title_en: 'Data & Rankings — China Auto Export & Sales Data | TopChinaCar',
-    title_zh: '数据与排名 — 中国汽车出口与销量数据 | TopChinaCar',
-    h1_en: 'Data & Rankings', h1_zh: '数据与排名',
-    deck_en: 'Export volumes, brand rankings, market share and model data — the numbers behind the headlines.',
-    deck_zh: '汇总中国汽车出口量、品牌排名、市场份额与车型参数数据，用数字解释行业新闻背后的真实趋势。',
-    intro_en: 'Every story on TopChinaCar is grounded in numbers: monthly export and delivery figures, brand-by-brand overseas share, and model-level specs and pricing. This section collects data-led coverage, plus our reference model database with specs and indicative prices in USD.',
-    intro_zh: 'TopChinaCar 的每篇报道都以数字为底：月度出口与交付数据、各品牌海外占比、车型级参数与价格。本栏目汇总数据向报道，并提供以美元计价的参考车型数据库。',
+    title_en: 'China Auto Data Intelligence Layer | TopChinaCar',
+    title_zh: '中国汽车数据情报层 | TopChinaCar',
+    h1_en: 'China Auto Data Intelligence Layer', h1_zh: '中国汽车数据情报层',
+    deck_en: 'Structured data layer connecting events, companies, markets and models for China auto globalization analysis.',
+    deck_zh: '连接事件、公司、市场与车型的结构化数据层，用于中国汽车全球化分析。',
+    intro_en: 'Structured data layer for event ranking, entity linking and market analysis.',
+    intro_zh: '用于事件排序、实体关联与市场分析的结构化数据层。',
     kw: /sales|deliver|units|record|ranking|market share|figure|\bH[12]\b|\bQ[1-4]\b|million|\d{2,3},\d{3}/i,
-    extra_en: '<p style="margin:18px 0 0;"><a href="/models" style="color:var(--accent, #d4302a);font-family:var(--mono, monospace);font-size:13px;">→ Model database: 42 Chinese models with specs & USD pricing</a></p>',
-    extra_zh: '<p style="margin:18px 0 0;"><a href="/models" style="color:var(--accent, #d4302a);font-family:var(--mono, monospace);font-size:13px;">→ 车型数据库：42 款中国车型的参数与美元价格</a></p>'
+    isDataLayer: true
   },
   {
     route: '/analysis', file: 'analysis.html',
@@ -1270,6 +1269,131 @@ function intelligenceFeedHTML(items) {
       </div>`;
 }
 
+function dataLayerCardHTML(titleEn, titleZh, rows, href) {
+  return `
+        <a class="data-layer-card" href="${href}">
+          <h3>${langSpan(titleEn, titleZh)}</h3>
+          <div class="data-layer-rows">
+            ${rows.map(([labelEn, labelZh, valueEn, valueZh]) => `
+            <div>
+              <span>${langSpan(labelEn, labelZh)}</span>
+              <strong>${langSpan(valueEn, valueZh)}</strong>
+            </div>`).join('')}
+          </div>
+        </a>`;
+}
+
+function dataEntityListHTML(items) {
+  return `<div class="data-entity-list">
+    ${items.map(item => `<a href="${item.href}"><span>${langSpan(item.labelEn, item.labelZh)}</span><strong>${langSpan(item.valueEn, item.valueZh)}</strong></a>`).join('\n    ')}
+  </div>`;
+}
+
+function dataLayerBlockHTML(titleEn, titleZh, deckEn, deckZh, body) {
+  return `
+      <section class="intel-layer data-layer-section">
+        <div class="intel-layer-head">
+          <h2>${langSpan(titleEn, titleZh)}</h2>
+          <p>${langSpan(deckEn, deckZh)}</p>
+        </div>
+        ${body}
+      </section>`;
+}
+
+function dataLayerMain(sec) {
+  const macroCards = [
+    dataLayerCardHTML('China EV Export Volume', '中国新能源车出口量', [
+      ['Entity', '实体', 'Export volume', '出口量'],
+      ['Granularity', '粒度', 'Monthly / annual', '月度 / 年度'],
+      ['System use', '系统用途', 'Trend and ranking inputs', '趋势与排序输入']
+    ], '/china-car-export-news'),
+    dataLayerCardHTML('Global Export Ranking', '全球出口排名', [
+      ['Entity', '实体', 'Country / OEM rank', '国家 / 车企排名'],
+      ['Granularity', '粒度', 'Market and company level', '市场与公司层级'],
+      ['System use', '系统用途', 'Impact score context', '影响分上下文']
+    ], '/data'),
+    dataLayerCardHTML('Market Share Overview', '市场份额概览', [
+      ['Entity', '实体', 'Brand and regional share', '品牌与区域份额'],
+      ['Granularity', '粒度', 'Market level', '市场层级'],
+      ['System use', '系统用途', 'Market movement detection', '市场动向识别']
+    ], '/markets')
+  ];
+
+  const companyItems = [
+    ['BYD', 'BYD', 'OEM / NEV export anchor', '整车集团 / 新能源出口锚点', '/chinese-car-brands/byd'],
+    ['Geely', 'Geely', 'Multi-brand global portfolio', '多品牌全球组合', '/chinese-car-brands/geely'],
+    ['Chery', 'Chery', 'Export-led OEM', '出口驱动型车企', '/chinese-car-brands/chery'],
+    ['SAIC', 'SAIC', 'MG and overseas volume base', 'MG 与海外销量基础', '/chinese-car-brands/saic'],
+    ['XPeng', 'XPeng', 'Smart EV expansion signal', '智能电动车扩张信号', '/chinese-car-brands/xpeng'],
+    ['NIO', 'NIO', 'Premium EV and service network', '高端电动车与服务网络', '/chinese-car-brands/nio']
+  ].map(([labelEn, labelZh, valueEn, valueZh, href]) => ({ labelEn, labelZh, valueEn, valueZh, href }));
+
+  const marketItems = [
+    ['Europe', '欧洲', 'Tariff, localization, pricing pressure', '关税、本地化、定价压力', '/markets/europe'],
+    ['Southeast Asia', '东南亚', 'Right-hand-drive EV and assembly base', '右舵电动车与组装基地', '/markets/southeast-asia'],
+    ['Middle East', '中东', 'Dealer expansion and brand adoption', '渠道扩张与品牌接受度', '/markets/middle-east'],
+    ['Latin America', '拉丁美洲', 'Localization and emerging-market demand', '本地化与新兴市场需求', '/markets/latin-america']
+  ].map(([labelEn, labelZh, valueEn, valueZh, href]) => ({ labelEn, labelZh, valueEn, valueZh, href }));
+
+  const modelCards = [
+    dataLayerCardHTML('42 Chinese EV Models Database', '42 款中国新能源车型数据库', [
+      ['Entity', '实体', 'Model records', '车型记录'],
+      ['Coverage', '覆盖', 'EV / PHEV / EREV', '纯电 / 插混 / 增程'],
+      ['System use', '系统用途', 'Model linking and comparison', '车型关联与对比']
+    ], '/models'),
+    dataLayerCardHTML('Specs', '参数', [
+      ['Fields', '字段', 'Range, acceleration, dimensions', '续航、加速、尺寸'],
+      ['Format', '格式', 'Structured model attributes', '结构化车型属性'],
+      ['System use', '系统用途', 'Model-level context', '车型级上下文']
+    ], '/models'),
+    dataLayerCardHTML('Pricing and Segment', '价格与级别', [
+      ['Pricing', '价格', 'USD reference', '美元参考价'],
+      ['Classification', '分类', 'Segment and body type', '级别与车身形式'],
+      ['System use', '系统用途', 'Market positioning analysis', '市场定位分析']
+    ], '/models')
+  ];
+
+  const linkItems = [
+    ['Events', '事件', 'Ranked intelligence feed', '排序情报流', '/news'],
+    ['Companies', '公司', 'OEM entity database', '车企实体库', '/chinese-car-brands'],
+    ['Markets', '市场', 'Regional market layer', '区域市场层', '/markets'],
+    ['Models', '车型', 'Structured specs database', '结构化参数数据库', '/models']
+  ].map(([labelEn, labelZh, valueEn, valueZh, href]) => ({ labelEn, labelZh, valueEn, valueZh, href }));
+
+  return `
+  <section class="page-header page-header--data">
+    <div class="container">
+      <div class="section-eyebrow">${langSpan('Data Layer', '数据层')}</div>
+      <h1 class="page-title">${langSpan(sec.h1_en, sec.h1_zh)}</h1>
+      <p class="page-deck">${langSpan(sec.deck_en, sec.deck_zh)}</p>
+    </div>
+  </section>
+  <section style="padding-top:0;">
+    <div class="container" style="max-width:980px;">
+      <div class="intel-stack data-intel-stack">
+        <section class="intel-panel intel-panel--dark" aria-label="China Auto Data Intelligence Layer">
+          <div class="intel-eyebrow">${langSpan('CHINA AUTO DATA INTELLIGENCE LAYER', '中国汽车数据情报层')}</div>
+          <h2>${langSpan('This section powers the entire intelligence system.', '本页支撑整个情报系统。')}</h2>
+          <div class="intel-signals">
+            <div class="intel-signal"><span>${langSpan('Events', '事件')}</span><p>${langSpan('Structured event records for ranking and interpretation.', '用于排序与系统解读的结构化事件记录。')}</p></div>
+            <div class="intel-signal"><span>${langSpan('Companies', '公司')}</span><p>${langSpan('OEM entities used for company-level timelines and filtering.', '用于公司时间线与筛选的车企实体。')}</p></div>
+            <div class="intel-signal"><span>${langSpan('Markets', '市场')}</span><p>${langSpan('Regional entities used for market clustering and comparisons.', '用于市场聚类与对比的区域实体。')}</p></div>
+            <div class="intel-signal"><span>${langSpan('Models', '车型')}</span><p>${langSpan('Model records used for specs, pricing and segment context.', '用于参数、价格与级别上下文的车型记录。')}</p></div>
+          </div>
+          <div class="intel-basis">${langSpan('All data is structured for real-time analysis.', '所有数据以实时分析为目标进行结构化。')}</div>
+        </section>
+
+        ${dataLayerBlockHTML('MACRO DATA', '宏观数据', 'Export, ranking and market-share structures used as system-level context.', '作为系统级上下文的出口、排名与市场份额结构。', `<div class="data-layer-grid">${macroCards.join('\n')}</div>`)}
+        ${dataLayerBlockHTML('COMPANY DATA', '企业数据', 'OEM entities linked to events, markets and model records.', '与事件、市场和车型记录关联的车企实体。', dataEntityListHTML(companyItems))}
+        ${dataLayerBlockHTML('MARKET DATA', '市场数据', 'Regional entities used for clustering, comparison and event filtering.', '用于聚类、对比与事件筛选的区域实体。', dataEntityListHTML(marketItems))}
+        ${dataLayerBlockHTML('MODEL DATABASE', '车型数据库', 'Structured model records covering specs, USD reference pricing and segment classification.', '覆盖参数、美元参考价与级别分类的结构化车型记录。', `<div class="data-layer-grid">${modelCards.join('\n')}</div>`)}
+        ${dataLayerBlockHTML('DATA TO SYSTEM LINKS', '数据到系统链接', 'Navigation paths from the data layer into events, companies, markets and models.', '从数据层进入事件、公司、市场与车型的系统路径。', dataEntityListHTML(linkItems))}
+      </div>
+      ${sectionNavHTML(sec.route)}
+    </div>
+  </section>`;
+}
+
 function sectionNavHTML(current) {
   return `<div style="margin-top:44px;padding-top:20px;border-top:1px solid #e5e7eb;font-size:13px;font-family:var(--mono, monospace);">
     <span style="color:#9ca3af;letter-spacing:.12em;text-transform:uppercase;">${langSpan('Sections', '栏目')}:</span>
@@ -1278,6 +1402,7 @@ function sectionNavHTML(current) {
 }
 
 function sectionMain(sec) {
+  if (sec.isDataLayer) return dataLayerMain(sec);
   const matched = articles.filter(a => articleMatchesSection(a, sec)).slice(0, 20);
   const marketsGrid = sec.isMarketsIndex ? `
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin:32px 0;">
