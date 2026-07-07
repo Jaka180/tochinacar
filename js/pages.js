@@ -286,7 +286,7 @@ function pageHome() {
             <a href="/chinese-car-brands" class="btn btn-ghost" data-i18n="hero.cta.secondary">${t('hero.cta.secondary')}</a>
           </div>
           <div class="hero-meta">
-            <span><strong>${lang === 'zh' ? '每日简报' : 'DAILY BRIEFING'}</strong></span>
+            <span><strong>${lang === 'zh' ? '中国车企出海日报' : 'CHINA AUTO OVERSEAS DAILY'}</strong></span>
             <span>${lang === 'zh' ? '追踪 31 个品牌' : '31 BRANDS TRACKED'}</span>
             <span>${lang === 'zh' ? '中英双语' : 'EN · 中文'}</span>
           </div>
@@ -680,7 +680,7 @@ function dailyArticlesHTML(lang) {
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="section-eyebrow">${lang === 'zh' ? '每日简报' : 'The Daily Briefing'}</div>
+            <div class="section-eyebrow">${lang === 'zh' ? '中国车企出海日报' : 'China Auto Overseas Daily'}</div>
             <h2 class="section-title">${lang === 'zh' ? '最新出海动态' : 'Latest Dispatches'}</h2>
           </div>
         </div>
