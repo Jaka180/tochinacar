@@ -11,6 +11,16 @@ const SITE_ARTICLES = [
     "tag_zh": "深度研究"
   },
   {
+    "slug": "2026-07-08-china-auto-daily",
+    "date": "2026-07-08",
+    "title_en": "Leapmotor Lands in Mexico, BYD Posts 792K H1 Overseas, XPeng L03 Eyes 64 Markets",
+    "title_zh": "零跑登陆墨西哥、比亚迪上半年出海79.2万辆、小鹏L03瞄准64国市场",
+    "excerpt_en": "Leapmotor becomes first Chinese EV startup in North America via Stellantis, as BYD hits 792,256 overseas units in H1 2026 (+70.7%) and XPeng prepares a 64-market L03 global launch.",
+    "excerpt_zh": "零跑借道Stellantis成为首家进入北美的中国新势力，比亚迪上半年海外累计79.2万辆（+70.7%），小鹏L03即将在64个国家及地区全球发布。",
+    "tag_en": "Daily Briefing",
+    "tag_zh": "每日简报"
+  },
+  {
     "slug": "delivan-chery-commercial-vehicle-europe-strategy",
     "date": "2026-07-07",
     "title_en": "DELIVAN Deep Research: Chery Commercial Vehicle's Electric Van Export Playbook",
