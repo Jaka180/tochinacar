@@ -31,6 +31,16 @@ const SITE_ARTICLES = [
     "tag_zh": "预测"
   },
   {
+    "slug": "byd-vs-tesla-global-ev-comparison-2026",
+    "date": "2026-07-07",
+    "title_en": "BYD vs Tesla: Global EV Leaders Deep Comparison Report (2026)",
+    "title_zh": "比亚迪 vs 特斯拉：全球电动车双雄深度对比研究报告（2026）",
+    "excerpt_en": "A full original research report comparing BYD and Tesla across sales, financials, batteries, autonomous driving, charging infrastructure, product portfolios, globalization, AI strategy, valuation and risks.",
+    "excerpt_zh": "本报告完整对比比亚迪与特斯拉，覆盖销量、财务、核心技术、电池与智驾、补能网络、产品矩阵、全球化路径、未来战略、投资估值和竞争变量。",
+    "tag_en": "Research",
+    "tag_zh": "深度研究"
+  },
+  {
     "slug": "byd-overseas-full-value-chain-layout-2026",
     "date": "2026-07-07",
     "title_en": "BYD Overseas Full Value Chain Layout: Deep Research Report (2026)",
