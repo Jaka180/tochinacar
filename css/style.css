@@ -2239,3 +2239,28 @@ html[lang="zh"] .hero-title { letter-spacing: 0; }
 .brand-strip .brand-cell:hover .brand-name { color: var(--accent); }
 .brand-strip .brand-name { font-size: 18px; transition: color 0.2s; }
 .brand-strip .brand-cell-sub { color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+/* Long-form article tables */
+.article-body table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+}
+
+.article-body th,
+.article-body td {
+  vertical-align: top;
+}
+
+@media (max-width: 720px) {
+  .article-body table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .article-body th,
+  .article-body td {
+    min-width: 140px;
+  }
+}

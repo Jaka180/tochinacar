@@ -11,6 +11,16 @@ const SITE_ARTICLES = [
     "tag_zh": "深度研究"
   },
   {
+    "slug": "chery-cv-overseas-sales-forecast-2025-2030",
+    "date": "2026-07-07",
+    "title_en": "Chery Commercial Vehicle Overseas Sales Forecast: 2025-2030",
+    "title_zh": "奇瑞商用车海外销量规划研究与预测（2025-2030）",
+    "excerpt_en": "A bilingual forecast model for Chery Commercial Vehicle's overseas sales path from roughly 40,000 units in 2026 to a 400,000-unit overseas target by 2030.",
+    "excerpt_zh": "本报告基于奇瑞商用车公开目标与当前销量轨迹，构建 2025-2030 年海外销量预测模型，核心路径为 2026 年约 4 万辆海外销量提升至 2030 年约 40 万辆。",
+    "tag_en": "Forecast",
+    "tag_zh": "预测"
+  },
+  {
     "slug": "2026-07-07-china-auto-daily",
     "date": "2026-07-07",
     "title_en": "BYD Hits 175K Overseas in June, Korea Cuts Subsidies; XPeng Launches Mona L03 in Munich July 16",
