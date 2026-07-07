@@ -2,13 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://www.topchinacar.com/news/delivan-chery-commercial-vehicle-europe-strategy</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-07</news:publication_date>
+      <news:title>DELIVAN Deep Research: Chery Commercial Vehicle&apos;s Electric Van Export Playbook</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://www.topchinacar.com/news/2026-07-07-china-auto-daily</loc>
     <news:news>
       <news:publication>
         <news:name>TopChinaCar</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-07-06</news:publication_date>
+      <news:publication_date>2026-07-07</news:publication_date>
       <news:title>BYD Hits 175K Overseas in June, Korea Cuts Subsidies; XPeng Launches Mona L03 in Munich July 16</news:title>
     </news:news>
   </url>
@@ -197,17 +208,6 @@
       </news:publication>
       <news:publication_date>2026-07-05</news:publication_date>
       <news:title>BYD Hits 792K Overseas in H1, Geely Breaks 100K Monthly, XPeng Goes to Munich</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/2026-07-04-china-auto-daily</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-04</news:publication_date>
-      <news:title>BYD, Geely Hit Export Records in June as XPeng Takes Mona L03 to 64 Markets</news:title>
     </news:news>
   </url>
 </urlset>
