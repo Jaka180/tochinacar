@@ -31,6 +31,16 @@ const SITE_ARTICLES = [
     "tag_zh": "预测"
   },
   {
+    "slug": "byd-overseas-full-value-chain-layout-2026",
+    "date": "2026-07-07",
+    "title_en": "BYD Overseas Full Value Chain Layout: Deep Research Report (2026)",
+    "title_zh": "比亚迪海外全产业链布局深度研究报告（2026）",
+    "excerpt_en": "A full original research report on BYD’s overseas value-chain strategy, covering manufacturing, vertical integration, logistics, charging infrastructure, brands, key markets, R&D, supply chain and risks.",
+    "excerpt_zh": "本报告完整梳理比亚迪海外全产业链布局，覆盖全球制造网络、垂直整合、自有船队、闪充网络、品牌矩阵、关键市场、研发体系、供应链出海与风险研判。",
+    "tag_en": "Research",
+    "tag_zh": "深度研究"
+  },
+  {
     "slug": "2026-07-07-china-auto-daily",
     "date": "2026-07-07",
     "title_en": "BYD Hits 175K Overseas in June, Korea Cuts Subsidies; XPeng Launches Mona L03 in Munich July 16",
