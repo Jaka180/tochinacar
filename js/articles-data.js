@@ -11,6 +11,16 @@ const SITE_ARTICLES = [
     "tag_zh": "深度研究"
   },
   {
+    "slug": "chery-overseas-full-value-chain-layout-2026",
+    "date": "2026-07-07",
+    "title_en": "Chery Overseas Full Value Chain Layout: Deep Research Report (2026)",
+    "title_zh": "奇瑞汽车海外全产业链布局深度研究报告（2026）",
+    "excerpt_en": "A structured research report on Chery Automobile’s overseas value-chain layout, covering R&D, manufacturing, brands, supply chain, channels, local talent, ESG, capital markets and strategic risks.",
+    "excerpt_zh": "本报告系统梳理奇瑞汽车海外全产业链布局，覆盖研发、制造、品牌矩阵、供应链出海、渠道服务、人才本地化、ESG、港股 IPO 与风险研判。",
+    "tag_en": "Research",
+    "tag_zh": "深度研究"
+  },
+  {
     "slug": "chery-cv-overseas-sales-forecast-2025-2030",
     "date": "2026-07-07",
     "title_en": "Chery Commercial Vehicle Overseas Sales Forecast: 2025-2030",
