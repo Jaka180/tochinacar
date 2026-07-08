@@ -1053,10 +1053,10 @@ function pageNewsletterLanding() {
         <div class="newsletter-hero-grid">
           <div>
             <div class="section-eyebrow">${S('Newsletter', '邮件简报')}</div>
-            <h1 class="page-title">${S('China EV Global Brief', 'China EV Global Brief')}</h1>
-            <p class="page-deck">${S('Weekly intelligence on Chinese EV expansion, smart mobility, ADAS, connected services and Europe compliance.', '每周提供中国电动车出海、智能汽车、ADAS、车联网与欧洲合规洞察。')}</p>
+            <h1 class="page-title">${S('China Auto Overseas Daily', '中国车企出海日报')}</h1>
+            <p class="page-deck">${S('Daily intelligence on Chinese automakers overseas, EV exports, smart mobility, policy risk and market-entry signals.', '每天提供中国车企出海、新能源出口、智能汽车、政策风险与市场进入信号。')}</p>
             <div class="newsletter-hero-meta">
-              <span>${S('Every Friday', '每周五')}</span>
+              <span>${S('Every morning', '每天早晨')}</span>
               <span>${S('5-minute read', '5 分钟读完')}</span>
               <span>${S('Bilingual coverage', '中英文内容')}</span>
             </div>
@@ -1064,12 +1064,12 @@ function pageNewsletterLanding() {
           <aside class="newsletter-signup-card">
             <div class="newsletter-card-label">${S('Subscribe', '订阅')}</div>
             <h2>${S('Get the next issue', '接收下一期')}</h2>
-            <p>${S('No generic updates. One focused brief on the China EV signals global operators need to understand.', '不是泛泛更新，而是一封聚焦全球从业者需要理解的中国新能源信号简报。')}</p>
+            <p>${S('No generic updates. One focused daily brief on the China auto globalization signals global operators need to understand.', '不是泛泛更新，而是一封聚焦全球从业者需要理解的中国汽车全球化信号日报。')}</p>
             <form class="newsletter-form" id="newsletterForm">
               <input type="email" class="newsletter-input" id="newsletterEmail" required placeholder="${S('your@email.com', '你的邮箱')}" aria-label="Email address" />
               <button type="submit" class="newsletter-btn">${S('Subscribe', '订阅')}</button>
             </form>
-            <div class="newsletter-ok" id="newsletterOk" hidden>${S('Thanks — you are on the list for the next China EV Global Brief.', '谢谢——你已加入 China EV Global Brief 订阅名单。')}</div>
+            <div class="newsletter-ok" id="newsletterOk" hidden>${S('Thanks — you are on the list for the next China Auto Overseas Daily.', '谢谢——你已加入中国车企出海日报订阅名单。')}</div>
             <p class="newsletter-privacy">${S('By subscribing you agree to the', '订阅即表示您同意')} <a href="${zh ? '/zh/privacy' : '/privacy'}">${S('Privacy Policy', '隐私政策')}</a>${S('.', '。')}</p>
           </aside>
         </div>
@@ -1089,10 +1089,10 @@ function pageNewsletterLanding() {
         <div class="newsletter-issue-layout">
           <section class="newsletter-issue-block">
             <div class="section-eyebrow">${S('What you get', '你会收到什么')}</div>
-            <h2>${S('A focused weekly read, not an inbox dump.', '一封有主题的周报，不是信息堆砌。')}</h2>
+            <h2>${S('A focused daily read, not an inbox dump.', '一封有主题的日报，不是信息堆砌。')}</h2>
             <ul>
-              <li>${S('The week\\u2019s most important China EV globalization signals', '本周最重要的中国新能源全球化信号')}</li>
-              <li>${S('One market or policy shift explained in plain language', '一个市场或政策变化的清晰解释')}</li>
+              <li>${S('The day\\u2019s most important China auto globalization signals', '当天最重要的中国汽车全球化信号')}</li>
+              <li>${S('One market or policy shift explained in plain language when it matters', '重要市场或政策变化会用清晰语言解释')}</li>
               <li>${S('Company moves from BYD, Geely, Chery, SAIC, Changan, GWM, NIO, Xpeng, Li Auto and others', '覆盖比亚迪、吉利、奇瑞、上汽、长安、长城、蔚来、小鹏、理想等公司的关键动作')}</li>
               <li>${S('Source links for numbers, policies and company announcements', '涉及数据、政策与企业公告时附信源链接')}</li>
             </ul>
@@ -1108,7 +1108,7 @@ function pageNewsletterLanding() {
 
         <div class="newsletter-sample">
           <div class="section-eyebrow">${S('Sample issue structure', '样例结构')}</div>
-          <h2>${S('China EV Global Brief', 'China EV Global Brief')}</h2>
+          <h2>${S('China Auto Overseas Daily', '中国车企出海日报')}</h2>
           <ol>
             <li>${S('Core signal of the week', '本周核心信号')}</li>
             <li>${S('Market movement: Europe, Southeast Asia, Middle East or Latin America', '市场变化：欧洲、东南亚、中东或拉美')}</li>
@@ -1116,7 +1116,7 @@ function pageNewsletterLanding() {
             <li>${S('Smart mobility: ADAS, cockpit, maps, connected services', '智能汽车：ADAS、座舱、地图、车联网')}</li>
             <li>${S('What to watch next', '下一步看什么')}</li>
           </ol>
-          <p>${S('Daily dispatches remain available on', '每日出海简报仍会发布在')} <a href="/news">${S('/news', '/news')}</a>${S('; the newsletter is the weekly edited brief for readers who want a cleaner signal.', '；Newsletter 是面向希望获得更清晰信号的读者整理的每周编辑简报。')}</p>
+          <p>${S('The same daily dispatch is published on', '同一份日报也会发布在')} <a href="/news">${S('/news', '/news')}</a>${S('; email subscription is the delivery mechanism for readers who want it sent directly to their inbox.', '；邮箱订阅是把这份日报直接送到读者邮箱的触达机制。')}</p>
         </div>
       </div>
     </section>

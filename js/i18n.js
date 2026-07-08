@@ -52,12 +52,12 @@ const I18N = {
 
     'nav.hot': 'Hot brands',
 
-    'newsletter.eyebrow': 'China EV Global Brief',
-    'newsletter.title': 'Weekly intelligence on Chinese EVs going global.',
-    'newsletter.deck': 'Every Friday: Chinese automakers overseas, EV exports, Europe policy, ADAS, connected services and market-entry signals. Curated for global readers. No spam. Unsubscribe anytime.',
+    'newsletter.eyebrow': 'China Auto Overseas Daily',
+    'newsletter.title': 'Daily intelligence on Chinese automakers going global.',
+    'newsletter.deck': 'Every morning: Chinese automakers overseas, EV exports, plants, dealers, policy, ADAS and market-entry signals. Curated for global readers. No spam. Unsubscribe anytime.',
     'newsletter.placeholder': 'your@email.com',
     'newsletter.cta': 'Subscribe',
-    'newsletter.success': 'Thanks — you are on the list for the next China EV Global Brief.',
+    'newsletter.success': 'Thanks — you are on the list for the next China Auto Overseas Daily.',
 
     'news.column.eyebrow': 'Daily Briefing',
     'news.column.title': 'China Auto Overseas Daily',
@@ -200,12 +200,12 @@ const I18N = {
 
     'nav.hot': '热门品牌',
 
-    'newsletter.eyebrow': 'China EV Global Brief',
-    'newsletter.title': '每周读懂中国电动车全球化',
-    'newsletter.deck': '每周五发送：聚焦中国车企出海、新能源出口、欧洲政策、ADAS、车联网与市场进入信号。面向全球读者筛选整理。不打扰，随时取消。',
+    'newsletter.eyebrow': '中国车企出海日报',
+    'newsletter.title': '每天读懂中国汽车全球化',
+    'newsletter.deck': '每天早晨发送：聚焦中国车企出海、新能源出口、海外工厂、经销网络、政策、ADAS 与市场进入信号。面向全球读者筛选整理。不打扰，随时取消。',
     'newsletter.placeholder': '你的邮箱',
     'newsletter.cta': '订阅',
-    'newsletter.success': '谢谢——你已加入 China EV Global Brief 订阅名单。',
+    'newsletter.success': '谢谢——你已加入中国车企出海日报订阅名单。',
 
     'news.column.eyebrow': '每日简报',
     'news.column.title': '中国车企出海日报',

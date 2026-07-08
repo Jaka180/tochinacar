@@ -232,8 +232,8 @@
         if (ok) {
           ok.hidden = false;
           ok.textContent = getLang() === 'zh'
-            ? '订阅暂时不可用，请直接发邮件到 hello@topchinacar.com，标题写 China EV Global Brief'
-            : 'Subscription is temporarily unavailable — email hello@topchinacar.com with “China EV Global Brief” in the subject.';
+            ? '订阅暂时不可用，请直接发邮件到 hello@topchinacar.com，标题写中国车企出海日报'
+            : 'Subscription is temporarily unavailable — email hello@topchinacar.com with “China Auto Overseas Daily” in the subject.';
         }
       }
     });

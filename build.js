@@ -92,7 +92,7 @@ const PAGES_ZH = {
   '/': { title: 'TopChinaCar | 中国汽车全球化新闻：新能源、出口与全球市场', desc: 'TopChinaCar 面向国际读者报道中国汽车品牌、电动车、出口市场、政策变化与全球扩张。' },
   '/editorial-policy': { title: 'TopChinaCar 编辑方针与信源标准', desc: 'TopChinaCar 如何报道中国汽车全球化：内容主线、信源标准、文章结构、独立性与更正政策。' },
   '/contact': { title: '联系 TopChinaCar — 媒体、市场情报与合作', desc: '报道线索、勘误、媒体、市场情报与合作事宜，请联系 TopChinaCar。48 小时内回复。' },
-  '/newsletter': { title: 'China EV Global Brief — 邮件简报 | TopChinaCar', desc: '每周五发送的中国电动车全球化简报：车企出海、智能汽车、ADAS、车联网、欧洲政策与合规洞察。' },
+  '/newsletter': { title: '中国车企出海日报 — 邮件订阅 | TopChinaCar', desc: '每天早晨发送的中国车企出海日报：新能源出口、海外工厂、经销网络、政策、ADAS 与市场进入信号。' },
   '/chinese-car-brands': { title: '中国汽车品牌大全 | TopChinaCar', desc: '中国汽车品牌指南：比亚迪、吉利、奇瑞、长安、上汽、一汽、长城、广汽、东风、北汽，以及蔚来、小鹏、理想、小米、零跑等新势力。' },
   '/models': { title: '中国电动车明星车型 — 续航、价格与参数 | TopChinaCar', desc: '定义新时代的中国电动车：比亚迪海豹、小米 SU7 Ultra、蔚来 ET9、小鹏 G6、理想 MEGA、极氪 001——真实续航、零百加速与美元指导价。' },
   '/news': { title: '中国汽车出海与电动车行业新闻 | TopChinaCar', desc: '中国汽车出口、新车发布、电池技术与政策动态的精选报道，以及每个工作日更新的出海简报。' },
@@ -132,7 +132,7 @@ const PAGES = {
   '/news': {
     file: 'news.html',
     title: 'China Auto Export & EV Industry News | TopChinaCar',
-    desc: 'Curated reporting on Chinese car exports, new model launches, battery technology and policy — plus the weekly China Export Watch column.'
+    desc: 'Curated reporting on Chinese car exports, new model launches, battery technology and policy — plus the daily China Auto Overseas Daily.'
   },
   '/intelligence': {
     file: 'intelligence.html',
@@ -172,8 +172,8 @@ const PAGES = {
   },
   '/newsletter': {
     file: 'newsletter.html',
-    title: 'China EV Global Brief — Weekly Newsletter | TopChinaCar',
-    desc: 'Weekly intelligence on Chinese EV expansion, smart mobility, ADAS, connected services and Europe compliance, curated for global readers.'
+    title: 'China Auto Overseas Daily — Email Newsletter | TopChinaCar',
+    desc: 'Daily intelligence on Chinese automakers overseas, EV exports, plants, dealers, policy, ADAS and market-entry signals, curated for global readers.'
   }
 };
 
@@ -238,16 +238,16 @@ function headerHTML(route) {
 const NEWSLETTER = `<section class="newsletter" aria-label="Newsletter subscription">
   <div class="container newsletter-inner">
     <div class="newsletter-text">
-      <div class="newsletter-eyebrow" data-i18n="newsletter.eyebrow">China EV Global Brief</div>
-      <h2 class="newsletter-title" data-i18n="newsletter.title">Weekly intelligence on Chinese EVs going global.</h2>
-      <p class="newsletter-deck" data-i18n="newsletter.deck">Every Friday: Chinese automakers overseas, EV exports, Europe policy, ADAS, connected services and market-entry signals. Curated for global readers. No spam. Unsubscribe anytime.</p>
+      <div class="newsletter-eyebrow" data-i18n="newsletter.eyebrow">China Auto Overseas Daily</div>
+      <h2 class="newsletter-title" data-i18n="newsletter.title">Daily intelligence on Chinese automakers going global.</h2>
+      <p class="newsletter-deck" data-i18n="newsletter.deck">Every morning: Chinese automakers overseas, EV exports, plants, dealers, policy, ADAS and market-entry signals. Curated for global readers. No spam. Unsubscribe anytime.</p>
     </div>
     <div class="newsletter-form-wrap">
       <form class="newsletter-form" id="newsletterForm">
         <input type="email" class="newsletter-input" id="newsletterEmail" required placeholder="your@email.com" data-i18n-attr="placeholder:newsletter.placeholder" aria-label="Email address" />
         <button type="submit" class="newsletter-btn" data-i18n="newsletter.cta">Subscribe</button>
       </form>
-      <div class="newsletter-ok" id="newsletterOk" hidden data-i18n="newsletter.success">Thanks — you are on the list for the next China EV Global Brief.</div>
+      <div class="newsletter-ok" id="newsletterOk" hidden data-i18n="newsletter.success">Thanks — you are on the list for the next China Auto Overseas Daily.</div>
       <p style="margin:10px 0 0;font-size:12px;color:#9ca3af;"><span data-i18n="newsletter.privacy1">By subscribing you agree to the</span> <a href="/privacy" data-i18n="footer.privacy" style="color:inherit;text-decoration:underline;">Privacy Policy</a><span data-i18n="newsletter.privacy2">.</span></p>
     </div>
   </div>
