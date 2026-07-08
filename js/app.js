@@ -3,7 +3,7 @@
 //  1. redirects legacy hash URLs (#/brands) to real paths (/brands)
 //  2. re-renders the current page client-side when the language is toggled
 //  3. wires up the models filter, brand focus scroll, sticky nav, mobile menu
-//  4. submits the newsletter form to /api/subscribe (Resend Audiences)
+//  4. submits the newsletter form to /api/subscribe (Cloudflare Pages Function → Resend Audiences)
 
 (function () {
   'use strict';
@@ -202,7 +202,7 @@
     });
   }
 
-  // ---- Newsletter → /api/subscribe (Vercel serverless → Resend Audiences) ----
+  // ---- Newsletter → /api/subscribe (Cloudflare Pages Function → Resend Audiences) ----
   function initNewsletter() {
     const form = document.getElementById('newsletterForm');
     if (!form) return;
@@ -232,8 +232,8 @@
         if (ok) {
           ok.hidden = false;
           ok.textContent = getLang() === 'zh'
-            ? '订阅暂时不可用，请直接发邮件到 hello@topchinacar.com'
-            : 'Subscription is temporarily unavailable — email hello@topchinacar.com instead.';
+            ? '订阅暂时不可用，请直接发邮件到 hello@topchinacar.com，标题写 China EV Global Brief'
+            : 'Subscription is temporarily unavailable — email hello@topchinacar.com with “China EV Global Brief” in the subject.';
         }
       }
     });

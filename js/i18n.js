@@ -15,6 +15,7 @@ const I18N = {
     'nav.policy': 'Policy',
     'nav.data': 'Data',
     'nav.analysis': 'Analysis',
+    'nav.newsletter': 'Newsletter',
     'nav.admin': 'Admin',
     'footer.editorial': 'Editorial Policy',
     'footer.newsletter': 'Newsletter',
@@ -51,12 +52,12 @@ const I18N = {
 
     'nav.hot': 'Hot brands',
 
-    'newsletter.eyebrow': 'The Daily',
-    'newsletter.title': 'The best China car stories, curated weekday mornings.',
-    'newsletter.deck': 'Every weekday morning. New model launches, overseas expansion, and the sales numbers that matter — in your inbox before the day starts. No spam. Unsubscribe anytime.',
+    'newsletter.eyebrow': 'China EV Global Brief',
+    'newsletter.title': 'Weekly intelligence on Chinese EVs going global.',
+    'newsletter.deck': 'Every Friday: Chinese automakers overseas, EV exports, Europe policy, ADAS, connected services and market-entry signals. Curated for global readers. No spam. Unsubscribe anytime.',
     'newsletter.placeholder': 'your@email.com',
     'newsletter.cta': 'Subscribe',
-    'newsletter.success': 'Thanks — first issue lands tomorrow at 7am.',
+    'newsletter.success': 'Thanks — you are on the list for the next China EV Global Brief.',
 
     'news.column.eyebrow': 'Daily Briefing',
     'news.column.title': 'China Auto Overseas Daily',
@@ -162,6 +163,7 @@ const I18N = {
     'nav.policy': '政策',
     'nav.data': '数据',
     'nav.analysis': '分析',
+    'nav.newsletter': '邮件简报',
     'nav.admin': '后台',
     'footer.editorial': '编辑方针',
     'footer.newsletter': '邮件订阅',
@@ -198,12 +200,12 @@ const I18N = {
 
     'nav.hot': '热门品牌',
 
-    'newsletter.eyebrow': '每日送达',
-    'newsletter.title': '工作日早晨送达，只送中国汽车里最值得看的事',
-    'newsletter.deck': '工作日每天早晨一封邮件。新车发布、海外拓展、销量关键数据——一天开始前送到你邮箱。不打扰，随时取消。',
+    'newsletter.eyebrow': 'China EV Global Brief',
+    'newsletter.title': '每周读懂中国电动车全球化',
+    'newsletter.deck': '每周五发送：聚焦中国车企出海、新能源出口、欧洲政策、ADAS、车联网与市场进入信号。面向全球读者筛选整理。不打扰，随时取消。',
     'newsletter.placeholder': '你的邮箱',
     'newsletter.cta': '订阅',
-    'newsletter.success': '谢谢——首期明天早上 7 点送达。',
+    'newsletter.success': '谢谢——你已加入 China EV Global Brief 订阅名单。',
 
     'news.column.eyebrow': '每日简报',
     'news.column.title': '中国车企出海日报',

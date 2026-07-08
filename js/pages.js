@@ -1035,24 +1035,89 @@ function pageContact() {
 function pageNewsletterLanding() {
   const zh = getLang() === 'zh';
   const S = (en, zhTxt) => zh ? zhTxt : en;
+  const issueItems = [
+    [S('Overseas Expansion', '车企出海'), S('Factories, export volume, dealer networks and market entry moves.', '海外工厂、出口量、经销网络与市场进入动作。')],
+    [S('Europe Policy', '欧洲政策'), S('Tariffs, incentives, homologation, cybersecurity and compliance signals.', '关税、补贴、认证、网络安全与合规信号。')],
+    [S('Smart Mobility', '智能汽车'), S('ADAS, connected services, cockpit software, maps and data partnerships.', 'ADAS、车联网、智能座舱、地图与数据合作。')],
+    [S('Market Watch', '市场观察'), S('One concise read on what changed, why it matters and what to watch next.', '一封邮件讲清发生了什么、为什么重要、下一步看什么。')]
+  ];
+  const audienceItems = [
+    S('Automotive executives tracking Chinese OEMs overseas', '关注中国车企出海的汽车行业管理者'),
+    S('Dealers, importers and mobility operators evaluating Chinese EV brands', '评估中国新能源品牌的经销商、进口商与出行运营商'),
+    S('Analysts, investors and policy teams watching Europe-China auto flows', '跟踪中欧汽车产业流动的分析师、投资人与政策团队'),
+    S('Product, ADAS, mapping and connected-service teams working on smart mobility', '从事智能驾驶、地图、车联网与智能出行业务的产品团队')
+  ];
   return `
-    <section class="page-header">
+    <section class="newsletter-hero">
       <div class="container">
-        <div class="section-eyebrow">${S('Newsletter', '邮件订阅')}</div>
-        <h1 class="page-title">${S('The Daily Briefing', '每日出海简报')}</h1>
-        <p class="page-deck">${S('China auto news for global markets — in your inbox every weekday morning.', '面向全球市场的中国汽车新闻——每个工作日早晨送达您的邮箱。')}</p>
+        <div class="newsletter-hero-grid">
+          <div>
+            <div class="section-eyebrow">${S('Newsletter', '邮件简报')}</div>
+            <h1 class="page-title">${S('China EV Global Brief', 'China EV Global Brief')}</h1>
+            <p class="page-deck">${S('Weekly intelligence on Chinese EV expansion, smart mobility, ADAS, connected services and Europe compliance.', '每周提供中国电动车出海、智能汽车、ADAS、车联网与欧洲合规洞察。')}</p>
+            <div class="newsletter-hero-meta">
+              <span>${S('Every Friday', '每周五')}</span>
+              <span>${S('5-minute read', '5 分钟读完')}</span>
+              <span>${S('Bilingual coverage', '中英文内容')}</span>
+            </div>
+          </div>
+          <aside class="newsletter-signup-card">
+            <div class="newsletter-card-label">${S('Subscribe', '订阅')}</div>
+            <h2>${S('Get the next issue', '接收下一期')}</h2>
+            <p>${S('No generic updates. One focused brief on the China EV signals global operators need to understand.', '不是泛泛更新，而是一封聚焦全球从业者需要理解的中国新能源信号简报。')}</p>
+            <form class="newsletter-form" id="newsletterForm">
+              <input type="email" class="newsletter-input" id="newsletterEmail" required placeholder="${S('your@email.com', '你的邮箱')}" aria-label="Email address" />
+              <button type="submit" class="newsletter-btn">${S('Subscribe', '订阅')}</button>
+            </form>
+            <div class="newsletter-ok" id="newsletterOk" hidden>${S('Thanks — you are on the list for the next China EV Global Brief.', '谢谢——你已加入 China EV Global Brief 订阅名单。')}</div>
+            <p class="newsletter-privacy">${S('By subscribing you agree to the', '订阅即表示您同意')} <a href="${zh ? '/zh/privacy' : '/privacy'}">${S('Privacy Policy', '隐私政策')}</a>${S('.', '。')}</p>
+          </aside>
+        </div>
       </div>
     </section>
     <section style="padding-top:0;">
-      <div class="container" style="max-width:820px;font-size:15px;line-height:1.9;color:#374151;">
-        <p>${S('Every weekday, TopChinaCar condenses the day\\u2019s most important China auto globalization news into one readable email: export figures, new market entries, plant announcements, tariff moves and model launches — with sources linked.',
-              '每个工作日，TopChinaCar 把当天最重要的中国汽车全球化新闻浓缩成一封易读的邮件：出口数据、新市场进入、工厂公告、关税动向与新车发布——全部附信源链接。')}</p>
-        <ul style="margin:20px 0;padding-left:20px;">
-          <li>${S('One email per weekday, readable in 5 minutes', '每个工作日一封，5 分钟读完')}</li>
-          <li>${S('The same coverage published at /news — plus a curated summary', '与 /news 栏目同源，外加精选摘要')}</li>
-          <li>${S('No spam, no ads inside the email, unsubscribe anytime', '无垃圾邮件、无内嵌广告，随时退订')}</li>
-        </ul>
-        <p>${S('Subscribe using the form below ↓ or browse the', '使用下方表单订阅 ↓ 或先浏览')} <a href="/news" style="color:var(--accent, #d4302a);">${S('latest dispatches', '最新简报')}</a>.</p>
+      <div class="container">
+        <div class="newsletter-product-grid">
+          ${issueItems.map(([title, body]) => `
+            <article class="newsletter-product-card">
+              <h2>${title}</h2>
+              <p>${body}</p>
+            </article>
+          `).join('')}
+        </div>
+
+        <div class="newsletter-issue-layout">
+          <section class="newsletter-issue-block">
+            <div class="section-eyebrow">${S('What you get', '你会收到什么')}</div>
+            <h2>${S('A focused weekly read, not an inbox dump.', '一封有主题的周报，不是信息堆砌。')}</h2>
+            <ul>
+              <li>${S('The week\\u2019s most important China EV globalization signals', '本周最重要的中国新能源全球化信号')}</li>
+              <li>${S('One market or policy shift explained in plain language', '一个市场或政策变化的清晰解释')}</li>
+              <li>${S('Company moves from BYD, Geely, Chery, SAIC, Changan, GWM, NIO, Xpeng, Li Auto and others', '覆盖比亚迪、吉利、奇瑞、上汽、长安、长城、蔚来、小鹏、理想等公司的关键动作')}</li>
+              <li>${S('Source links for numbers, policies and company announcements', '涉及数据、政策与企业公告时附信源链接')}</li>
+            </ul>
+          </section>
+          <section class="newsletter-issue-block">
+            <div class="section-eyebrow">${S('Who it is for', '适合谁订阅')}</div>
+            <h2>${S('Built for people who need signal, not noise.', '为需要信号而不是噪音的人准备。')}</h2>
+            <ul>
+              ${audienceItems.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+          </section>
+        </div>
+
+        <div class="newsletter-sample">
+          <div class="section-eyebrow">${S('Sample issue structure', '样例结构')}</div>
+          <h2>${S('China EV Global Brief', 'China EV Global Brief')}</h2>
+          <ol>
+            <li>${S('Core signal of the week', '本周核心信号')}</li>
+            <li>${S('Market movement: Europe, Southeast Asia, Middle East or Latin America', '市场变化：欧洲、东南亚、中东或拉美')}</li>
+            <li>${S('Company moves: launches, plants, exports, partnerships', '企业动作：上市、建厂、出口、合作')}</li>
+            <li>${S('Smart mobility: ADAS, cockpit, maps, connected services', '智能汽车：ADAS、座舱、地图、车联网')}</li>
+            <li>${S('What to watch next', '下一步看什么')}</li>
+          </ol>
+          <p>${S('Daily dispatches remain available on', '每日出海简报仍会发布在')} <a href="/news">${S('/news', '/news')}</a>${S('; the newsletter is the weekly edited brief for readers who want a cleaner signal.', '；Newsletter 是面向希望获得更清晰信号的读者整理的每周编辑简报。')}</p>
+        </div>
       </div>
     </section>
   `;

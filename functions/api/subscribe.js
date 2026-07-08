@@ -5,8 +5,8 @@
 // tochinacar → Settings → Variables and Secrets → Production):
 //   RESEND_API_KEY      — resend.com → API Keys (needs full access /
 //                         audience write permission); add as Secret
-//   RESEND_AUDIENCE_ID  — resend.com → Audiences → create one ("TopChinaCar
-//                         Daily") → copy its ID
+//   RESEND_AUDIENCE_ID  — resend.com → Audiences → create one
+//                         ("China EV Global Brief") → copy its ID
 //
 // Until both are set, the endpoint returns 503 and the site's form shows a
 // graceful fallback message instead of pretending to succeed.
