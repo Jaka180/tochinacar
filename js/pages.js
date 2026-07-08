@@ -112,20 +112,20 @@ const PAGE_FAQS = {
     {
       q_en: 'Which Chinese car brands sell internationally?',
       q_zh: '哪些中国汽车品牌正在海外销售？',
-      a_en: 'BYD, MG, Geely, Chery, Great Wall, NIO, Xpeng, Zeekr, Leapmotor and several sub-brands sell or prepare vehicles outside China, with availability varying by market.',
-      a_zh: '比亚迪、MG、吉利、奇瑞、长城、蔚来、小鹏、极氪、零跑及多个子品牌都在海外销售或准备进入海外市场，具体可售情况因地区而异。'
+      a_en: 'BYD, Geely, Chery, Changan, SAIC/MG, FAW/Hongqi, Great Wall, GAC, Dongfeng, BAIC and newer EV brands such as NIO, Xpeng, Li Auto, Xiaomi and Leapmotor all sell or prepare vehicles outside China.',
+      a_zh: '比亚迪、吉利、奇瑞、长安、上汽/MG、一汽/红旗、长城、广汽、东风、北汽，以及蔚来、小鹏、理想、小米、零跑等新势力，都在海外销售或准备进入海外市场。'
     },
     {
       q_en: 'What is the difference between Chinese legacy groups and EV startups?',
       q_zh: '传统车企集团和造车新势力有什么区别？',
-      a_en: 'Legacy groups have broad manufacturing and export networks; EV startups usually focus on newer electric, extended-range and smart-car platforms with faster software cycles.',
-      a_zh: '传统车企集团通常拥有更完整的制造和出口网络；新势力更多聚焦纯电、增程和智能化平台，软件迭代速度更快。'
+      a_en: 'Legacy groups such as BYD, Geely, Chery, Changan, SAIC, FAW, Great Wall, GAC, Dongfeng and BAIC have complete manufacturing systems and export networks. EV startups usually focus on newer electric, extended-range and smart-car platforms with faster software cycles.',
+      a_zh: '传统整车集团包括比亚迪、吉利、奇瑞、长安、上汽、一汽、长城、广汽、东风、北汽，通常拥有完整制造体系和出口网络；新势力更多聚焦纯电、增程和智能化平台，软件迭代速度更快。'
     },
     {
       q_en: 'Which Chinese brands are strongest for export markets?',
       q_zh: '哪些中国品牌的出口能力最强？',
-      a_en: 'BYD, Chery, SAIC/MG, Geely and Great Wall currently have the broadest overseas footprints, while NIO, Xpeng, Zeekr and Leapmotor are expanding more selectively by region.',
-      a_zh: '比亚迪、奇瑞、上汽/MG、吉利和长城目前海外版图最广；蔚来、小鹏、极氪和零跑则按区域选择性扩张。'
+      a_en: 'BYD, Chery, Geely, SAIC/MG and Great Wall currently have the broadest overseas footprints. Changan, GAC, Dongfeng, FAW and BAIC remain important state-group systems to track as the export mix shifts toward new energy vehicles.',
+      a_zh: '比亚迪、奇瑞、吉利、上汽/MG 和长城目前海外版图最广。随着出口结构转向新能源，长安、广汽、东风、一汽、北汽等国有集团体系也需要持续跟踪。'
     }
   ],
   models: [
@@ -193,6 +193,16 @@ function faqSectionHTML(key) {
         </div>
       </div>
     </section>`;
+}
+
+const LEGACY_GROUP_ORDER = ['byd', 'geely', 'chery', 'changan', 'saic', 'faw', 'gwm', 'gac', 'dongfeng', 'baic'];
+
+function sortBrandsForSection(items) {
+  const rank = id => {
+    const i = LEGACY_GROUP_ORDER.indexOf(id);
+    return i === -1 ? 999 : i;
+  };
+  return [...items].sort((a, b) => rank(a.id) - rank(b.id) || a.name.localeCompare(b.name));
 }
 
 // News 缩图统一渲染：有 image 用真实照片，否则 fallback 到 carSVG
@@ -287,7 +297,7 @@ function pageHome() {
           </div>
           <div class="hero-meta">
             <span><strong>${lang === 'zh' ? '中国车企出海日报' : 'CHINA AUTO OVERSEAS DAILY'}</strong></span>
-            <span>${lang === 'zh' ? '追踪 31 个品牌' : '31 BRANDS TRACKED'}</span>
+            <span>${lang === 'zh' ? `追踪 ${D.brands.length} 个品牌` : `${D.brands.length} BRANDS TRACKED`}</span>
             <span>${lang === 'zh' ? '中英双语' : 'EN · 中文'}</span>
           </div>
         </div>
@@ -345,7 +355,7 @@ function pageHome() {
           ['/intelligence', 'Intelligence', '情报', 'Live event ranking and system interpretation', '实时事件排序与系统解读'],
           ['/china-ev-news', 'EV', '新能源', 'Electric vehicles, batteries and smart cars', '电动车、电池与智能汽车'],
           ['/china-car-export-news', 'Exports', '出口', 'Shipments, plants and overseas growth', '出口数据、海外工厂与增长'],
-          ['/chinese-car-brands', 'Brands', '品牌', '31 Chinese automakers, profiled', '31 家中国车企档案'],
+          ['/chinese-car-brands', 'Brands', '品牌', 'Chinese automakers, profiled', '中国车企档案'],
           ['/markets', 'Markets', '市场', 'Europe, Middle East, LatAm, SEA and more', '欧洲、中东、拉美、东南亚等'],
           ['/policy', 'Policy', '政策', 'Tariffs, rules and regulation', '关税、规则与监管'],
           ['/data', 'Data', '数据', 'Export volumes, rankings and model specs', '出口量、排名与车型数据'],
@@ -404,7 +414,7 @@ function pageHome() {
             <span class="home-brands-col-count">${D.brands.filter(b=>b.category==='group').length}</span>
           </div>
           <div class="home-brands-col-list">
-            ${D.brands.filter(b=>b.category==='group').map(b => `
+            ${sortBrandsForSection(D.brands.filter(b=>b.category==='group')).map(b => `
               <a href="/chinese-car-brands/${b.id}" class="brand-cell">
                 <div class="brand-name">${b.name}</div>
                 <div class="brand-cell-sub">${b.cn}</div>
@@ -498,7 +508,7 @@ function pageHome() {
 function pageBrands() {
   const lang = getLang();
   const all = SITE_DATA.brands;
-  const groups = all.filter(b => b.category === 'group');
+  const groups = sortBrandsForSection(all.filter(b => b.category === 'group'));
   const startups = all.filter(b => b.category === 'startup');
   const subs = all.filter(b => b.category === 'subbrand');
 

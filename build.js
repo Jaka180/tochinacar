@@ -93,7 +93,7 @@ const PAGES_ZH = {
   '/editorial-policy': { title: 'TopChinaCar 编辑方针与信源标准', desc: 'TopChinaCar 如何报道中国汽车全球化：内容主线、信源标准、文章结构、独立性与更正政策。' },
   '/contact': { title: '联系 TopChinaCar — 媒体、市场情报与合作', desc: '报道线索、勘误、媒体、市场情报与合作事宜，请联系 TopChinaCar。48 小时内回复。' },
   '/newsletter': { title: '每日出海简报 — 邮件订阅 | TopChinaCar', desc: '面向全球市场的中国汽车新闻，每个工作日早晨送达：出口、市场进入、工厂、关税与新车——附信源链接。' },
-  '/chinese-car-brands': { title: '中国汽车品牌大全 | TopChinaCar', desc: '中国汽车品牌指南：比亚迪、吉利、上汽、奇瑞、长城、蔚来、小鹏、理想、小米、零跑及其子品牌。' },
+  '/chinese-car-brands': { title: '中国汽车品牌大全 | TopChinaCar', desc: '中国汽车品牌指南：比亚迪、吉利、奇瑞、长安、上汽、一汽、长城、广汽、东风、北汽，以及蔚来、小鹏、理想、小米、零跑等新势力。' },
   '/models': { title: '中国电动车明星车型 — 续航、价格与参数 | TopChinaCar', desc: '定义新时代的中国电动车：比亚迪海豹、小米 SU7 Ultra、蔚来 ET9、小鹏 G6、理想 MEGA、极氪 001——真实续航、零百加速与美元指导价。' },
   '/news': { title: '中国汽车出海与电动车行业新闻 | TopChinaCar', desc: '中国汽车出口、新车发布、电池技术与政策动态的精选报道，以及每个工作日更新的出海简报。' },
   '/intelligence': { title: 'TopChinaCar 情报系统 | 看懂中国汽车全球化', desc: 'TopChinaCar 追踪中国车企出海、海外工厂、出口、价格、政策风险与市场变化，把分散新闻转化为结构化市场信号。' },
@@ -122,7 +122,7 @@ const PAGES = {
   '/chinese-car-brands': {
     file: 'chinese-car-brands.html',
     title: 'Chinese Car Brands: BYD, Geely, NIO & More | TopChinaCar',
-    desc: 'A field guide to 30 Chinese automakers, EV startups and sub-brands, with founding dates, headquarters, focus areas and export footprint.'
+    desc: 'A field guide to Chinese legacy auto groups, EV startups and sub-brands, with founding dates, headquarters, focus areas and export footprint.'
   },
   '/models': {
     file: 'models.html',
@@ -439,9 +439,9 @@ function webPageJsonLd(route, title, description, type = 'WebPage', isZh = false
 
 const STATIC_FAQS = {
   '/chinese-car-brands': [
-    ['Which Chinese car brands sell internationally?', 'BYD, MG, Geely, Chery, Great Wall, NIO, Xpeng, Zeekr, Leapmotor and several sub-brands sell or prepare vehicles outside China, with coverage varying by market.'],
-    ['What is the difference between Chinese legacy groups and EV startups?', 'Legacy groups such as BYD, Geely, SAIC, Chery and Great Wall have broad manufacturing and export networks, while startups such as NIO, Xpeng, Li Auto, Xiaomi and Leapmotor focus on newer EV, EREV and smart-car platforms.'],
-    ['Which Chinese brands are strongest for export markets?', 'BYD, Chery, SAIC/MG, Geely and Great Wall have the broadest overseas footprints today, while NIO, Xpeng, Zeekr and Leapmotor are expanding selectively by region.']
+    ['Which Chinese car brands sell internationally?', 'BYD, Geely, Chery, Changan, SAIC/MG, FAW/Hongqi, Great Wall, GAC, Dongfeng, BAIC and newer EV brands such as NIO, Xpeng, Li Auto, Xiaomi and Leapmotor all sell or prepare vehicles outside China.'],
+    ['What is the difference between Chinese legacy groups and EV startups?', 'Legacy groups such as BYD, Geely, Chery, Changan, SAIC, FAW, Great Wall, GAC, Dongfeng and BAIC have complete manufacturing systems and export networks. EV startups usually focus on newer EV, EREV and smart-car platforms.'],
+    ['Which Chinese brands are strongest for export markets?', 'BYD, Chery, Geely, SAIC/MG and Great Wall have broad overseas footprints today, while Changan, GAC, Dongfeng, FAW and BAIC remain important state-group systems to track.']
   ],
   '/models': [
     ['Which Chinese EV models are most relevant internationally?', 'BYD Seal, BYD Atto 3, MG4, Xiaomi SU7, Xpeng G6, Zeekr 001, NIO ET5 and Leapmotor C10 are among the models international readers often track.'],
@@ -457,9 +457,9 @@ const STATIC_FAQS = {
 
 const STATIC_FAQS_ZH = {
   '/chinese-car-brands': [
-    ['哪些中国汽车品牌正在海外销售？', '比亚迪、MG、吉利、奇瑞、长城、蔚来、小鹏、极氪、零跑及多个子品牌都在海外销售或准备进入海外市场，具体可售情况因地区而异。'],
-    ['传统车企集团和造车新势力有什么区别？', '传统车企集团通常拥有更完整的制造和出口网络；新势力更多聚焦纯电、增程和智能化平台，软件迭代速度更快。'],
-    ['哪些中国品牌的出口能力最强？', '比亚迪、奇瑞、上汽/MG、吉利和长城目前海外版图最广；蔚来、小鹏、极氪和零跑则按区域选择性扩张。']
+    ['哪些中国汽车品牌正在海外销售？', '比亚迪、吉利、奇瑞、长安、上汽/MG、一汽/红旗、长城、广汽、东风、北汽，以及蔚来、小鹏、理想、小米、零跑等新势力，都在海外销售或准备进入海外市场。'],
+    ['传统车企集团和造车新势力有什么区别？', '传统整车集团包括比亚迪、吉利、奇瑞、长安、上汽、一汽、长城、广汽、东风、北汽，通常拥有完整制造体系和出口网络；新势力更多聚焦纯电、增程和智能化平台。'],
+    ['哪些中国品牌的出口能力最强？', '比亚迪、奇瑞、吉利、上汽/MG 和长城目前海外版图较广；长安、广汽、东风、一汽、北汽等国有集团体系也需要持续跟踪。']
   ],
   '/models': [
     ['哪些中国电动车最值得国际读者关注？', '比亚迪海豹、BYD Atto 3、MG4、小米 SU7、小鹏 G6、极氪 001、蔚来 ET5 和零跑 C10 是国际读者常关注的车型。'],
@@ -698,7 +698,7 @@ function brandMain(b) {
       <ul style="list-style:none;padding:0;margin:0;">
         ${related.map(a => `<li style="margin-bottom:14px;"><a href="/news/${a.slug}" style="color:inherit;text-decoration:none;"><strong>${a.title_en}</strong></a><br/><span style="font-size:13px;color:#9ca3af;">${a.date}</span></li>`).join('')}
       </ul>` : ''}
-      <p style="margin-top:40px;"><a href="/chinese-car-brands" style="color:var(--accent, #d4302a);font-family:var(--mono);font-size:13px;">← All 31 Chinese car brands</a></p>
+      <p style="margin-top:40px;"><a href="/chinese-car-brands" style="color:var(--accent, #d4302a);font-family:var(--mono);font-size:13px;">← All Chinese car brands</a></p>
     </div>
   </section>`;
 }
@@ -1054,7 +1054,7 @@ const INTEL_MARKET_RULES = [
   { market_en: 'China', market_zh: '中国', re: /china|chinese market|domestic/i }
 ];
 
-const INTEL_COMPANIES = ['BYD', 'Geely', 'Chery', 'SAIC', 'MG', 'GWM', 'Great Wall', 'XPeng', 'Xpeng', 'NIO', 'Li Auto', 'Leapmotor', 'Zeekr', 'Tesla', 'CATL'];
+const INTEL_COMPANIES = ['BYD', 'Geely', 'Chery', 'Changan', 'SAIC', 'MG', 'FAW', 'Hongqi', 'GWM', 'Great Wall', 'GAC', 'Dongfeng', 'BAIC', 'XPeng', 'Xpeng', 'NIO', 'Li Auto', 'Leapmotor', 'Xiaomi', 'Zeekr', 'Tesla', 'CATL'];
 
 function intelEventRule(a) {
   const text = intelSignalText(a);
@@ -1405,12 +1405,16 @@ function dataLayerMain(sec) {
   ];
 
   const companyItems = [
-    ['BYD', 'BYD', 'OEM / NEV export anchor', '整车集团 / 新能源出口锚点', '/chinese-car-brands/byd'],
-    ['Geely', 'Geely', 'Multi-brand global portfolio', '多品牌全球组合', '/chinese-car-brands/geely'],
-    ['Chery', 'Chery', 'Export-led OEM', '出口驱动型车企', '/chinese-car-brands/chery'],
-    ['SAIC', 'SAIC', 'MG and overseas volume base', 'MG 与海外销量基础', '/chinese-car-brands/saic'],
-    ['XPeng', 'XPeng', 'Smart EV expansion signal', '智能电动车扩张信号', '/chinese-car-brands/xpeng'],
-    ['NIO', 'NIO', 'Premium EV and service network', '高端电动车与服务网络', '/chinese-car-brands/nio']
+    ['BYD', '比亚迪', 'OEM / NEV export anchor', '整车集团 / 新能源出口锚点', '/chinese-car-brands/byd'],
+    ['Geely', '吉利', 'Multi-brand global portfolio', '多品牌全球组合', '/chinese-car-brands/geely'],
+    ['Chery', '奇瑞', 'Export-led OEM', '出口驱动型车企', '/chinese-car-brands/chery'],
+    ['Changan', '长安', 'State group NEV transition', '国有集团新能源转型', '/chinese-car-brands/changan'],
+    ['SAIC', '上汽', 'MG and overseas volume base', 'MG 与海外销量基础', '/chinese-car-brands/saic'],
+    ['FAW', '一汽', 'Hongqi and joint-venture system', '红旗与合资体系', '/chinese-car-brands/faw'],
+    ['Great Wall', '长城', 'SUV, pickup and off-road export base', 'SUV、皮卡与越野出口基础', '/chinese-car-brands/gwm'],
+    ['GAC', '广汽', 'Aion and state-group EV platform', '埃安与国有集团电动平台', '/chinese-car-brands/gac'],
+    ['Dongfeng', '东风', 'Voyah, M-Hero and joint-venture system', '岚图、猛士与合资体系', '/chinese-car-brands/dongfeng'],
+    ['BAIC', '北汽', 'Beijing Auto, Arcfox and commercial export', '北京汽车、极狐与商用车出口', '/chinese-car-brands/baic']
   ].map(([labelEn, labelZh, valueEn, valueZh, href]) => ({ labelEn, labelZh, valueEn, valueZh, href }));
 
   const marketItems = [
