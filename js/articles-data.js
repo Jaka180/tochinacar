@@ -3,12 +3,12 @@ const SITE_ARTICLES = [
   {
     "slug": "2026-07-09-china-auto-daily",
     "date": "2026-07-09",
-    "title_en": "BYD's 792K Overseas H1 Leads a Wave of Chinese OEM Localization Bets",
-    "title_zh": "比亚迪上半年海外79.2万辆领跑，中国车企本地化制造全面提速",
-    "excerpt_en": "BYD hit 792,256 overseas units in H1 2026 (+71% YoY) while Chery's OMODA & JAECOO surged 178% in June and three separate factory localisation moves signal a structural shift from export to local manufacturing.",
-    "excerpt_zh": "比亚迪2026年上半年海外累计交付79.2万辆（同比+71%），奇瑞OMODA & JAECOO 6月同比大增178%，三起本地化建厂举措同步推进，中国车企出海模式正从纯出口向本土制造转型。",
-    "tag_en": "Daily Briefing",
-    "tag_zh": "每日简报"
+    "title_en": "China Auto Overseas Daily | 2026-07-09: Exports Carry June, UK Shows Chinese Model Pull",
+    "title_zh": "中国车企出海日报 | 7月9日：6月出口继续托底，英国市场验证中国车型拉力",
+    "excerpt_en": "China exported 877,000 vehicles in June as domestic demand stayed weak; in the UK, MG HS and Jaecoo 7 entered June's top-10 registrations while Finland showed BYD's trust barrier.",
+    "excerpt_zh": "6月中国汽车出口达87.7万辆，继续对冲国内需求疲弱；英国6月榜单中MG HS与Jaecoo 7进入前十，芬兰则暴露比亚迪在西欧面临的信任门槛。",
+    "tag_en": "China Auto Overseas Daily",
+    "tag_zh": "中国车企出海日报"
   },
   {
     "slug": "mazda-ez60-cx6e-global-sales-market-strategy-2026",
