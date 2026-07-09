@@ -11,6 +11,16 @@ const SITE_ARTICLES = [
     "tag_zh": "深度研究"
   },
   {
+    "slug": "automotive-cybersecurity-regulation-unece-r155-china-export-implications-2026",
+    "date": "2026-07-09",
+    "title_en": "Automotive Cybersecurity Regulation Deep Dive: UNECE R155, Global Landscape and China Export Implications",
+    "title_zh": "汽车网络安全法规深度研究：UNECE R155、全球格局与中国出海影响",
+    "excerpt_en": "A full regulatory deep dive on UNECE R155, ISO/SAE 21434, China's GB 44495/44496 framework, US connected-vehicle restrictions and cybersecurity implications for Chinese automakers overseas.",
+    "excerpt_zh": "本报告完整梳理 UNECE R155、ISO/SAE 21434、中国 GB 44495/44496、美国互联汽车限制，以及中国车企出海面临的网络安全合规影响。",
+    "tag_en": "Research",
+    "tag_zh": "深度研究"
+  },
+  {
     "slug": "2026-07-09-china-auto-daily",
     "date": "2026-07-09",
     "title_en": "China Auto Overseas Daily | 2026-07-09: Exports Carry June, UK Shows Chinese Model Pull",
