@@ -3,7 +3,7 @@
 //  1. redirects legacy hash URLs (#/brands) to real paths (/brands)
 //  2. re-renders the current page client-side when the language is toggled
 //  3. wires up the models filter, brand focus scroll, sticky nav, mobile menu
-//  4. submits the newsletter form to /api/subscribe (Cloudflare Pages Function → Resend Audiences)
+//  4. keeps legacy newsletter forms functional if old cached pages are loaded
 
 (function () {
   'use strict';
@@ -202,7 +202,7 @@
     });
   }
 
-  // ---- Newsletter → /api/subscribe (Cloudflare Pages Function → Resend Audiences) ----
+  // ---- Legacy Newsletter → /api/subscribe (current pages link to Substack) ----
   function initNewsletter() {
     const form = document.getElementById('newsletterForm');
     if (!form) return;

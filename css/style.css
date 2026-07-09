@@ -2174,6 +2174,9 @@ html[lang="zh"] .hero-title { letter-spacing: 0; }
 }
 .newsletter-input-error { border-color: var(--accent); }
 .newsletter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 14px 24px;
   background: var(--accent);
   color: #fff;
@@ -2185,6 +2188,8 @@ html[lang="zh"] .hero-title { letter-spacing: 0; }
   letter-spacing: 0.15em;
   text-transform: uppercase;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
   transition: background 0.18s ease, transform 0.18s ease;
 }
 .newsletter-btn:hover { background: #b8261f; transform: translateY(-1px); }
