@@ -8,11 +8,7 @@
 //   RESEND_SEGMENT_ID   — resend.com → Contacts → Segments → create one
 //                         ("China Auto Overseas Daily") → copy its ID
 //
-// Backward compatibility:
-//   RESEND_AUDIENCE_ID  — legacy Audiences ID. Audiences are deprecated by
-//                         Resend, but this fallback keeps old deployments alive.
-//
-// Until both are set, the endpoint returns 503 and the site's form shows a
+// Until both RESEND_API_KEY and RESEND_SEGMENT_ID are set, the endpoint returns 503 and the site's form shows a
 // graceful fallback message instead of pretending to succeed.
 
 export async function onRequestPost(context) {
@@ -20,8 +16,7 @@ export async function onRequestPost(context) {
 
   const apiKey = env.RESEND_API_KEY;
   const segmentId = env.RESEND_SEGMENT_ID;
-  const audienceId = env.RESEND_AUDIENCE_ID;
-  if (!apiKey || (!segmentId && !audienceId)) {
+  if (!apiKey || !segmentId) {
     return json({ error: 'Subscription not configured yet' }, 503);
   }
 
@@ -38,21 +33,15 @@ export async function onRequestPost(context) {
   }
 
   try {
-    const url = segmentId
-      ? 'https://api.resend.com/contacts'
-      : `https://api.resend.com/audiences/${audienceId}/contacts`;
-    const payload = segmentId
-      ? { email, unsubscribed: false, segments: [{ id: segmentId }] }
-      : { email, unsubscribed: false };
-    const r = await fetch(url, {
+    const r = await fetch('https://api.resend.com/contacts', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({ email, unsubscribed: false, segments: [{ id: segmentId }] })
     });
-    if (segmentId && r.status === 409) {
+    if (r.status === 409) {
       const add = await fetch(`https://api.resend.com/contacts/${encodeURIComponent(email)}/segments/${segmentId}`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${apiKey}` }
