@@ -1863,43 +1863,61 @@ fs.writeFileSync(path.join(ROOT, '404.html'),
   pageHTML('/', { title: 'Page Not Found | TopChinaCar', desc: 'The page you are looking for does not exist.' }, notFoundMain, { noAlt: true }));
 console.log('✓ 404.html');
 
-// ---- sitemap.xml ----
+// ---- sitemaps: sitemap.xml (index) → sitemap-pages / sitemap-posts / sitemap-news ----
 function safeDate(date) {
   if (!date) return TODAY;
   return date > TODAY ? TODAY : date;
 }
 
+// lastmod 策略：
+//  - 文章/故事：真实发布日期
+//  - 栏目页 / 市场页 / 首页 / News 索引：随最新文章变化（列表内容确实更新了）
+//  - 其余静态页、品牌页、车型页：固定的内容修改日 STATIC_LASTMOD——
+//    只有真正改动这些页面的内容时才手动更新，避免"天天都是今天"让 Google 不信任 lastmod
+const STATIC_LASTMOD = '2026-07-06';
+const latestArticleDate = articles.length ? safeDate(articles[0].date) : STATIC_LASTMOD;
+const FRESH_ROUTES = new Set(['/', '/news']);
+
 const staticUrls = Object.keys(PAGES).map(r =>
   PAGES[r].robots && PAGES[r].robots.includes('noindex')
     ? null
-    : `  <url><loc>${r === '/' ? SITE + '/' : SITE + r}</loc><lastmod>${TODAY}</lastmod></url>`
+    : `  <url><loc>${r === '/' ? SITE + '/' : SITE + r}</loc><lastmod>${FRESH_ROUTES.has(r) ? latestArticleDate : STATIC_LASTMOD}</lastmod></url>`
 ).filter(Boolean);
 const brandUrls = SITE_DATA.brands.map(b =>
-  `  <url><loc>${SITE}/chinese-car-brands/${b.id}</loc><lastmod>${TODAY}</lastmod></url>`);
+  `  <url><loc>${SITE}/chinese-car-brands/${b.id}</loc><lastmod>${STATIC_LASTMOD}</lastmod></url>`);
 const modelUrls = SITE_DATA.models.filter(m => m.id).map(m =>
-  `  <url><loc>${SITE}/models/${m.id}</loc><lastmod>${TODAY}</lastmod></url>`);
+  `  <url><loc>${SITE}/models/${m.id}</loc><lastmod>${STATIC_LASTMOD}</lastmod></url>`);
+const sectionUrls = SECTIONS.map(s =>
+  `  <url><loc>${SITE}${s.route}</loc><lastmod>${latestArticleDate}</lastmod></url>`);
+const marketUrls = MARKETS.map(mk =>
+  `  <url><loc>${SITE}/markets/${mk.slug}</loc><lastmod>${latestArticleDate}</lastmod></url>`);
 const storyUrls = SITE_STORIES
   .filter(s => (SITE_DATA.features || []).some(f => f.slug === s.slug))
   .map(s => `  <url><loc>${SITE}/stories/${s.slug}</loc><lastmod>${safeDate(s.date)}</lastmod></url>`);
 const articleUrls = articles.map(a =>
   `  <url><loc>${SITE}/news/${a.slug}</loc><lastmod>${safeDate(a.date)}</lastmod></url>`);
-const sectionUrls = SECTIONS.map(s =>
-  `  <url><loc>${SITE}${s.route}</loc><lastmod>${TODAY}</lastmod></url>`);
-const marketUrls = MARKETS.map(mk =>
-  `  <url><loc>${SITE}/markets/${mk.slug}</loc><lastmod>${TODAY}</lastmod></url>`);
-const enUrlLines = staticUrls.concat(sectionUrls, marketUrls, brandUrls, modelUrls, storyUrls, articleUrls);
-const zhUrlLines = enUrlLines.map(l =>
+
+const zhMirror = lines => lines.map(l =>
   l.includes(`<loc>${SITE}/</loc>`)
-    ? l.replace(`<loc>${SITE}/</loc>`, `<loc>${SITE}/zh/</loc>`)
+    ? l.replace(`<loc>${SITE}/</loc>`, `<loc>${SITE}/zh</loc>`)
     : l.replace(`<loc>${SITE}/`, `<loc>${SITE}/zh/`));
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+
+const urlset = lines => `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${enUrlLines.concat(zhUrlLines).join('\n')}
+${lines.join('\n')}
 </urlset>
 `;
-fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemap);
-console.log('✓ sitemap.xml');
 
+// 子 sitemap 1：栏目/品牌/车型/市场等"页面"
+const pageLines = staticUrls.concat(sectionUrls, marketUrls, brandUrls, modelUrls);
+fs.writeFileSync(path.join(ROOT, 'sitemap-pages.xml'), urlset(pageLines.concat(zhMirror(pageLines))));
+
+// 子 sitemap 2：全部文章 + 深度故事（发布即随构建自动更新）
+const postLines = storyUrls.concat(articleUrls);
+fs.writeFileSync(path.join(ROOT, 'sitemap-posts.xml'), urlset(postLines.concat(zhMirror(postLines))));
+
+// 子 sitemap 3：Google News（仅最近 48 小时，含时间戳）
+const newsPubDate = a => a.published_at || `${safeDate(a.date)}T08:00:00+08:00`;
 const recentNews = articles
   .filter(a => safeDate(a.date) >= new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10))
   .slice(0, 1000);
@@ -1913,14 +1931,24 @@ ${recentNews.map(a => `  <url>
         <news:name>TopChinaCar</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>${safeDate(a.date)}</news:publication_date>
+      <news:publication_date>${newsPubDate(a)}</news:publication_date>
       <news:title>${xmlEscape(a.title_en)}</news:title>
     </news:news>
   </url>`).join('\n')}
 </urlset>
 `;
-fs.writeFileSync(path.join(ROOT, 'news-sitemap.xml'), newsSitemap);
-console.log('✓ news-sitemap.xml');
+fs.writeFileSync(path.join(ROOT, 'sitemap-news.xml'), newsSitemap);
+
+// 索引：GSC 只需提交这一个
+const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap><loc>${SITE}/sitemap-pages.xml</loc><lastmod>${STATIC_LASTMOD > latestArticleDate ? STATIC_LASTMOD : latestArticleDate}</lastmod></sitemap>
+  <sitemap><loc>${SITE}/sitemap-posts.xml</loc><lastmod>${latestArticleDate}</lastmod></sitemap>
+  <sitemap><loc>${SITE}/sitemap-news.xml</loc><lastmod>${latestArticleDate}</lastmod></sitemap>
+</sitemapindex>
+`;
+fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemapIndex);
+console.log(`✓ sitemap.xml (index) + pages(${pageLines.length * 2}) + posts(${postLines.length * 2}) + news(${recentNews.length})`);
 
 function rssDate(date) {
   return new Date(`${safeDate(date)}T00:00:00Z`).toUTCString();

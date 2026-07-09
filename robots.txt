@@ -2,4 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.topchinacar.com/sitemap.xml
-Sitemap: https://www.topchinacar.com/news-sitemap.xml
