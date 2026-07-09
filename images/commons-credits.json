@@ -356,11 +356,39 @@
     "commons_title": "File:2024 Jaecoo J7 4.jpg",
     "size": "14656x10702"
   },
-  "exeed-vx.jpg": {
-    "author": "Retired electrician",
-    "license": "CC0",
-    "source": "https://commons.wikimedia.org/wiki/File:Moscow,_Exeed_VX_taxi,_June_2026_01.jpg",
-    "commons_title": "File:Moscow, Exeed VX taxi, June 2026 01.jpg",
-    "size": "5184x3456"
-  }
+    "exeed-vx.jpg": {
+        "author": "Retired electrician",
+        "license": "CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Moscow,_Exeed_VX_taxi,_June_2026_01.jpg",
+        "commons_title": "File:Moscow, Exeed VX taxi, June 2026 01.jpg",
+        "size": "5184x3456"
+    },
+    "changan-brand.jpg": {
+        "author": "User3204",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2023_Chang%27an_Shenlan_S7.jpg",
+        "commons_title": "File:2023 Chang'an Shenlan S7.jpg",
+        "size": "6651x3807"
+    },
+    "faw-brand.jpg": {
+        "author": "Benlisquare",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hongqi_H9_with_Shandong_plates.jpg",
+        "commons_title": "File:Hongqi H9 with Shandong plates.jpg",
+        "size": "5829x3747"
+    },
+    "gac-brand.jpg": {
+        "author": "Alexander Migl",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:GAC_Aion_V_(second_generation)_IAA_2025_DSC_1406.jpg",
+        "commons_title": "File:GAC Aion V (second generation) IAA 2025 DSC 1406.jpg",
+        "size": "5166x3203"
+    },
+    "baic-brand.jpg": {
+        "author": "User3204",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2021_Arcfox_%CE%B1-S.jpg",
+        "commons_title": "File:2021 Arcfox α-S.jpg",
+        "size": "6598x3877"
+    }
 }

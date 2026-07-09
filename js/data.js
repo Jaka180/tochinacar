@@ -78,7 +78,8 @@ const SITE_DATA = {
       desc_en: 'Major state-owned auto group with Changan, Deepal, Avatr and Nevo/Qiyuan. Its transition is built around NEV platforms, smart EVs and selective overseas expansion.',
       desc_zh: '大型国有整车集团，覆盖长安、深蓝、阿维塔与启源等体系。新能源转型围绕 NEV 平台、智能电动车与重点海外市场展开。',
       subBrands_en: 'Changan, Deepal, Avatr, Nevo/Qiyuan, Changan Ford, Changan Mazda',
-      subBrands_zh: '长安、深蓝、阿维塔、启源、长安福特、长安马自达'
+      subBrands_zh: '长安、深蓝、阿维塔、启源、长安福特、长安马自达',
+      image: 'images/changan-brand.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
     {
       id: 'xiaomi', name: 'Xiaomi', cn: '小米', founded: 2021, hq: 'Beijing', focus: 'Smart EV',
@@ -115,7 +116,8 @@ const SITE_DATA = {
       desc_en: 'China\'s original state auto group. Its main systems include Hongqi, Bestune and Jiefang, plus FAW-Volkswagen and FAW-Toyota joint ventures.',
       desc_zh: '中国最早的国有整车集团之一，核心体系包括红旗、奔腾、解放，以及一汽大众、一汽丰田等合资体系。',
       subBrands_en: 'Hongqi, Bestune, Jiefang, FAW-Volkswagen, FAW-Toyota',
-      subBrands_zh: '红旗、奔腾、解放、一汽大众、一汽丰田'
+      subBrands_zh: '红旗、奔腾、解放、一汽大众、一汽丰田',
+      image: 'images/faw-brand.jpg', imageCredit: 'Benlisquare / CC BY-SA 4.0'
     },
     {
       id: 'gac', name: 'GAC', cn: '广汽', founded: 1997, hq: 'Guangzhou', focus: 'State automaker / EV',
@@ -124,7 +126,8 @@ const SITE_DATA = {
       desc_en: 'Guangzhou-based state auto group with Trumpchi, Aion and Hyptec. Its NEV strategy is centered on Aion volume and Hyptec premium positioning.',
       desc_zh: '总部位于广州的国有整车集团，覆盖广汽传祺、埃安与昊铂。新能源战略以埃安规模化和昊铂高端化为核心。',
       subBrands_en: 'Trumpchi, Aion, Hyptec, GAC Toyota, GAC Honda',
-      subBrands_zh: '广汽传祺、埃安、昊铂、广汽丰田、广汽本田'
+      subBrands_zh: '广汽传祺、埃安、昊铂、广汽丰田、广汽本田',
+      image: 'images/gac-brand.jpg', imageCredit: 'Alexander Migl / CC BY-SA 4.0'
     },
     {
       id: 'dongfeng', name: 'Dongfeng', cn: '东风', founded: 1969, hq: 'Wuhan', focus: 'State automaker',
@@ -143,7 +146,8 @@ const SITE_DATA = {
       desc_en: 'Beijing state-owned auto group with Beijing Auto, Arcfox, Beijing Benz and Beijing Hyundai. Its overseas relevance is split between commercial vehicles, EVs and joint-venture capacity.',
       desc_zh: '北京国有整车集团，覆盖北京汽车、极狐、北京奔驰与北京现代。海外相关度主要来自商用车、新能源与合资产能体系。',
       subBrands_en: 'Beijing Auto, Arcfox, Beijing Benz, Beijing Hyundai, Foton',
-      subBrands_zh: '北京汽车、极狐、北京奔驰、北京现代、福田'
+      subBrands_zh: '北京汽车、极狐、北京奔驰、北京现代、福田',
+      image: 'images/baic-brand.jpg', imageCredit: 'User3204 / CC BY-SA 4.0'
     },
     {
       id: 'haval', name: 'Haval', cn: '哈弗', founded: 2013, hq: 'Baoding', focus: 'SUV',
