@@ -1,5 +1,5 @@
 // ============ PAGE RENDERERS (pure functions — also used by build.js for prerendering) ============
-const EVENT_INTELLIGENCE_URL = 'https://topchinacar-event-intelligence.vercel.app';
+const LIVE_INTELLIGENCE_PATH = '/news';
 
 // SVG car illustrations (stylised silhouettes)
 function carSVG(shape, colorA = '#d4302a', colorB = '#1a1a1a') {
@@ -223,6 +223,7 @@ function modelCardHTML(m, lang) {
   const dual = m.priceLocal
     ? `<span class="spec-price-dual">${m.priceLocal}</span>`
     : priceDualLine(m.price);
+  const specNote = m['specNote_' + lang] || m.specNote_en || '';
   const detailHref = m.id ? `/models/${m.id}` : null;
   return `
     <article class="model-card">
@@ -236,6 +237,7 @@ function modelCardHTML(m, lang) {
           <div><span class="spec-label">${t('models.spec.accel')}</span><span class="spec-value">${m.accel}</span></div>
           <div class="spec-price-row"><span class="spec-label">${t('models.spec.price')}</span><span class="spec-value">${m.price}</span>${dual}</div>
         </div>
+        ${specNote ? `<p class="model-spec-note">${specNote}</p>` : ''}
         ${detailHref ? `<a href="${detailHref}" style="display:inline-block;margin-top:14px;color:var(--accent, #d4302a);font-family:var(--mono, monospace);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '详情 →' : 'Full profile →'}</a>` : ''}
       </div>
     </article>
@@ -276,6 +278,10 @@ function pageHome() {
   const D = SITE_DATA;
   const lang = getLang();
   const features = SITE_DATA.features;
+  const homeModelIds = ['byd-seal', 'xiaomi-su7', 'xpeng-g6', 'zeekr-001', 'mg-mg4', 'leapmotor-c10'];
+  const homeModels = homeModelIds
+    .map(id => D.models.find(m => m.id === id))
+    .filter(Boolean);
 
   return `
   <!-- HERO -->
@@ -465,7 +471,7 @@ function pageHome() {
         <a href="/models" class="section-link" style="font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);">${lang === 'zh' ? '查看全部 →' : 'View all →'}</a>
       </div>
       <div class="models-grid">
-        ${D.models.slice(0, 4).map(m => modelCardHTML(m, lang)).join('')}
+        ${homeModels.map(m => modelCardHTML(m, lang)).join('')}
       </div>
     </div>
   </section>
@@ -1126,7 +1132,7 @@ function pageNewsletterLanding() {
 function pageIntelligence() {
   const zh = getLang() === 'zh';
   const S = (en, zhTxt) => zh ? zhTxt : en;
-  const liveUrl = zh ? `${EVENT_INTELLIGENCE_URL}/news?lang=zh` : `${EVENT_INTELLIGENCE_URL}/news`;
+  const liveUrl = LIVE_INTELLIGENCE_PATH;
   return `
     <section class="system-intel-hero">
       <div class="container">
@@ -1175,7 +1181,7 @@ function pageIntelligence() {
               <div><span>03</span><strong>${S('Policy Pressure', '政策压力')}</strong><p>${S('Tariffs, regulation, subsidies and trade restrictions.', '关税、监管、补贴与贸易限制。')}</p></div>
               <div><span>04</span><strong>${S('Company Strategy', '企业策略')}</strong><p>${S('Launches, partnerships, investment and technology direction.', '新车、合作、投资与技术方向。')}</p></div>
             </div>
-            <div class="system-runtime">${S('Live intelligence feed:', '实时情报流：')} <a href="${liveUrl}">${EVENT_INTELLIGENCE_URL}</a></div>
+            <div class="system-runtime">${S('Live intelligence feed:', '实时情报流：')} <a href="${liveUrl}">${S('TopChinaCar News', 'TopChinaCar 新闻')}</a></div>
           </section>
 
           <aside class="system-intel-panel">

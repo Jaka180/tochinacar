@@ -12,8 +12,6 @@ const vm = require('vm');
 
 const ROOT = __dirname;
 const SITE = 'https://www.topchinacar.com';
-const EVENT_INTELLIGENCE_URL = 'https://topchinacar-event-intelligence.vercel.app';
-const ADMIN_URL = `${EVENT_INTELLIGENCE_URL}/admin/login`;
 const BUILD_V = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, ''); // cache-busting version
 const TODAY = new Date().toISOString().slice(0, 10);
 const DEFAULT_OG_IMAGE = 'images/hero-xiaomi.jpg';
@@ -231,7 +229,6 @@ function headerHTML(route) {
 
     <div class="header-tools">
       <a class="admin-link" href="/newsletter" data-i18n="nav.newsletter">Newsletter</a>
-      <a class="admin-link" href="${ADMIN_URL}" target="_blank" rel="nofollow noopener" data-i18n="nav.admin">Admin</a>
       <button class="lang-toggle" id="langToggle" aria-label="Switch language">
         <span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-zh">中</span>
       </button>
@@ -296,10 +293,9 @@ const FOOTER = `<footer class="site-footer">
       <a href="/newsletter" data-i18n="footer.newsletter">Newsletter</a>
       <a href="/contact" data-i18n="footer.contact">Contact</a>
       <a href="/privacy" data-i18n="footer.privacy">Privacy Policy</a>
-      <a href="${ADMIN_URL}" target="_blank" rel="nofollow noopener" data-i18n="nav.admin">Admin</a>
     </div>
     <div class="footer-col footer-meta">
-      <h4 data-i18n="footer.follow">Follow</h4>
+      <h4 data-i18n="footer.status">Status</h4>
       <p>© 2026 TopChinaCar</p>
       <p data-i18n="footer.rights">Editorial, independent, worldwide.</p>
     </div>
@@ -817,7 +813,10 @@ if (!fs.existsSync(MODELS_OUT)) fs.mkdirSync(MODELS_OUT);
 
 function modelMain(m, brand) {
   const cat = brand ? (CATEGORY_LABEL[brand.category] || CATEGORY_LABEL.group) : CATEGORY_LABEL.group;
-  const ctx = brand ? (CATEGORY_CONTEXT[brand.category] || CATEGORY_CONTEXT.group) : CATEGORY_CONTEXT.group;
+  const modelBodyEn = m.body_en || `${m.brand} ${m.name} is tracked as part of TopChinaCar's model database because it is relevant to Chinese automakers' overseas product strategy. Specifications can vary by trim, market, homologation package and launch timing, so the figures below should be treated as editorial reference data rather than transaction quotes.`;
+  const modelBodyZh = m.body_zh || `${m.brand} ${m.name} 被纳入 TopChinaCar 车型数据库，是因为它与中国车企海外产品策略相关。不同配置、市场、认证包与上市时间会导致参数差异，因此下方数据应作为编辑参考，而不是成交报价。`;
+  const specNote = m.specNote_en ? `
+        <p class="model-spec-note model-detail-spec-note" style="background:#f9fafb;border-left:3px solid #d4302a;padding:10px 12px;margin:18px 0 0;">${langSpan(m.specNote_en, m.specNote_zh || m.specNote_en)}</p>` : '';
   const related = articles.filter(a =>
     (a.title_en + ' ' + (a.excerpt_en || '')).toLowerCase().includes(m.brand.toLowerCase())
     || (a.title_en + ' ' + (a.excerpt_en || '')).toLowerCase().includes(m.name.toLowerCase())).slice(0, 5);
@@ -844,10 +843,11 @@ function modelMain(m, brand) {
         ${fact('From', '起价', `${m.price}${m.priceLocal ? ` <span style="font-size:12px;color:#9ca3af;font-weight:400;">(${m.priceLocal})</span>` : ''}`)}
       </div>
       <div style="font-size:16px;line-height:1.8;color:#374151;">
-        <p>${langSpan(ctx.en, ctx.zh)}</p>
+        <p>${langSpan(modelBodyEn, modelBodyZh)}</p>
+        ${specNote}
         <p style="font-size:13px;color:#9ca3af;">${langSpan(
-          'USD figures are approximate conversions of the local list price shown in brackets, and move with exchange rates and market promotions.',
-          '美元价格为括号内当地指导价的近似换算，随汇率与市场优惠波动。')}</p>
+          'USD figures are approximate conversions of the local list price shown in brackets. Range, acceleration and pricing can refer to different trims unless explicitly marked as a single configuration.',
+          '美元价格为括号内当地指导价的近似换算。除非明确标为同一配置，否则续航、加速与价格可能对应不同配置区间。')}</p>
       </div>
       ${siblings.length ? `
       <h2 style="font-size:22px;margin:40px 0 20px;">${langSpan('More ' + m.brand + ' models', m.brand + ' 其他车型')}</h2>
@@ -902,14 +902,16 @@ for (const m of SITE_DATA.models) {
   const main = modelMain(m, brand);
   const html = pageHTML(`/models/${m.id}`, {
     title: `${m.brand} ${m.name}: Specs, Range & Price | TopChinaCar`,
-    desc: `${m.tag_en} Range ${m.range}, 0-100 km/h ${m.accel}, from ${m.price} — specs, pricing and export-market context.`,
-    image: m.image
+    desc: `${m.brand} ${m.name} specs: ${m.range} range, ${m.accel} 0-100 km/h and ${m.price} reference price, with trim and export-market notes.`,
+    image: m.image,
+    ogType: 'product'
   }, main).replace('</head>', modelJsonLd(m) + '\n</head>');
   fs.writeFileSync(path.join(MODELS_OUT, `${m.id}.html`), html);
   writeZh(`models/${m.id}.html`, zhChrome(pageHTML(`/models/${m.id}`, {
     title: `${m.brand} ${m.name} 参数、续航与价格 | TopChinaCar`,
-    desc: `${m.tag_zh} 续航 ${m.range}，零百加速 ${m.accel}，${m.price} 起——参数、价格与出口市场背景。`,
-    image: m.image
+    desc: `${m.brand} ${m.name} 参数：续航 ${m.range}，零百加速 ${m.accel}，参考价 ${m.price}，并标注配置与出口市场口径。`,
+    image: m.image,
+    ogType: 'product'
   }, main, { zh: true }).replace('</head>', modelJsonLd(m, true) + '\n</head>')));
   modelCount++;
 }

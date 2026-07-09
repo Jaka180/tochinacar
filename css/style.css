@@ -549,6 +549,12 @@ section { padding: clamp(64px, 8vw, 120px) 0; }
   font-weight: 700;
   color: var(--ink);
 }
+.model-spec-note {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
 
 /* ============ NEWS LIST ============ */
 .news-grid {
