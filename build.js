@@ -14,7 +14,6 @@ const ROOT = __dirname;
 const SITE = 'https://www.topchinacar.com';
 const EVENT_INTELLIGENCE_URL = 'https://topchinacar-event-intelligence.vercel.app';
 const ADMIN_URL = `${EVENT_INTELLIGENCE_URL}/admin/login`;
-const SUBSTACK_URL = 'https://topchinacar.substack.com';
 const BUILD_V = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, ''); // cache-busting version
 const TODAY = new Date().toISOString().slice(0, 10);
 const DEFAULT_OG_IMAGE = 'images/hero-xiaomi.jpg';
@@ -231,7 +230,7 @@ function headerHTML(route) {
     </nav>
 
     <div class="header-tools">
-      <a class="admin-link" href="${SUBSTACK_URL}" target="_blank" rel="noopener" data-i18n="nav.newsletter">Newsletter</a>
+      <a class="admin-link" href="/newsletter" data-i18n="nav.newsletter">Newsletter</a>
       <a class="admin-link" href="${ADMIN_URL}" target="_blank" rel="nofollow noopener" data-i18n="nav.admin">Admin</a>
       <button class="lang-toggle" id="langToggle" aria-label="Switch language">
         <span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-zh">中</span>
@@ -264,8 +263,12 @@ const NEWSLETTER = `<section class="newsletter" aria-label="Newsletter subscript
       <p class="newsletter-deck" data-i18n="newsletter.deck">Every morning: Chinese automakers overseas, EV exports, plants, dealers, policy, ADAS and market-entry signals. Curated for global readers. No spam. Unsubscribe anytime.</p>
     </div>
     <div class="newsletter-form-wrap">
-      <a class="newsletter-btn" href="${SUBSTACK_URL}" target="_blank" rel="noopener" data-i18n="newsletter.cta">Subscribe on Substack</a>
-      <p class="newsletter-note" data-i18n="newsletter.substackNote">Free subscription via topchinacar.substack.com.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input class="newsletter-input" id="newsletterEmail" type="email" name="email" placeholder="your@email.com" required data-i18n-attr="placeholder:newsletter.placeholder" />
+        <button class="newsletter-btn" type="submit" data-i18n="newsletter.cta">Subscribe</button>
+      </form>
+      <div class="newsletter-ok" id="newsletterOk" hidden data-i18n="newsletter.success">Thanks — you are on the list for the next China Auto Overseas Daily.</div>
+      <p class="newsletter-note"><span data-i18n="newsletter.resendNote">Delivered by Resend. Unsubscribe anytime.</span></p>
     </div>
   </div>
 </section>`;
@@ -290,7 +293,7 @@ const FOOTER = `<footer class="site-footer">
       <h4 data-i18n="footer.about">About</h4>
       <a href="/about" data-i18n="nav.about">Our story</a>
       <a href="/editorial-policy" data-i18n="footer.editorial">Editorial Policy</a>
-      <a href="${SUBSTACK_URL}" target="_blank" rel="noopener" data-i18n="footer.newsletter">Newsletter</a>
+      <a href="/newsletter" data-i18n="footer.newsletter">Newsletter</a>
       <a href="/contact" data-i18n="footer.contact">Contact</a>
       <a href="/privacy" data-i18n="footer.privacy">Privacy Policy</a>
       <a href="${ADMIN_URL}" target="_blank" rel="nofollow noopener" data-i18n="nav.admin">Admin</a>

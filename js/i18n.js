@@ -56,8 +56,8 @@ const I18N = {
     'newsletter.title': 'Daily intelligence on Chinese automakers going global.',
     'newsletter.deck': 'Every morning: Chinese automakers overseas, EV exports, plants, dealers, policy, ADAS and market-entry signals. Curated for global readers. No spam. Unsubscribe anytime.',
     'newsletter.placeholder': 'your@email.com',
-    'newsletter.cta': 'Subscribe on Substack',
-    'newsletter.substackNote': 'Free subscription via topchinacar.substack.com.',
+    'newsletter.cta': 'Subscribe',
+    'newsletter.resendNote': 'Delivered by Resend. Unsubscribe anytime.',
     'newsletter.success': 'Thanks — you are on the list for the next China Auto Overseas Daily.',
 
     'news.column.eyebrow': 'Daily Briefing',
@@ -205,8 +205,8 @@ const I18N = {
     'newsletter.title': '每天读懂中国汽车全球化',
     'newsletter.deck': '每天早晨发送：聚焦中国车企出海、新能源出口、海外工厂、经销网络、政策、ADAS 与市场进入信号。面向全球读者筛选整理。不打扰，随时取消。',
     'newsletter.placeholder': '你的邮箱',
-    'newsletter.cta': '在 Substack 订阅',
-    'newsletter.substackNote': '通过 topchinacar.substack.com 免费订阅。',
+    'newsletter.cta': '订阅日报',
+    'newsletter.resendNote': '由 Resend 自动发送，可随时退订。',
     'newsletter.success': '谢谢——你已加入中国车企出海日报订阅名单。',
 
     'news.column.eyebrow': '每日简报',

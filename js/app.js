@@ -202,7 +202,7 @@
     });
   }
 
-  // ---- Legacy Newsletter → /api/subscribe (current pages link to Substack) ----
+  // ---- Newsletter → /api/subscribe → Resend Contacts/Segments ----
   function initNewsletter() {
     const form = document.getElementById('newsletterForm');
     if (!form) return;

@@ -1,12 +1,16 @@
-// Cloudflare Pages Function: newsletter signup → Resend Audiences.
+// Cloudflare Pages Function: newsletter signup → Resend Contacts/Segments.
 // Route: POST /api/subscribe  (file path functions/api/subscribe.js)
 //
 // Required environment variables (Cloudflare dashboard → Workers & Pages →
 // tochinacar → Settings → Variables and Secrets → Production):
 //   RESEND_API_KEY      — resend.com → API Keys (needs full access /
-//                         audience write permission); add as Secret
-//   RESEND_AUDIENCE_ID  — resend.com → Audiences → create one
+//                         contacts write permission); add as Secret
+//   RESEND_SEGMENT_ID   — resend.com → Contacts → Segments → create one
 //                         ("China Auto Overseas Daily") → copy its ID
+//
+// Backward compatibility:
+//   RESEND_AUDIENCE_ID  — legacy Audiences ID. Audiences are deprecated by
+//                         Resend, but this fallback keeps old deployments alive.
 //
 // Until both are set, the endpoint returns 503 and the site's form shows a
 // graceful fallback message instead of pretending to succeed.
@@ -15,8 +19,9 @@ export async function onRequestPost(context) {
   const { env, request } = context;
 
   const apiKey = env.RESEND_API_KEY;
+  const segmentId = env.RESEND_SEGMENT_ID;
   const audienceId = env.RESEND_AUDIENCE_ID;
-  if (!apiKey || !audienceId) {
+  if (!apiKey || (!segmentId && !audienceId)) {
     return json({ error: 'Subscription not configured yet' }, 503);
   }
 
@@ -33,16 +38,32 @@ export async function onRequestPost(context) {
   }
 
   try {
-    const r = await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
+    const url = segmentId
+      ? 'https://api.resend.com/contacts'
+      : `https://api.resend.com/audiences/${audienceId}/contacts`;
+    const payload = segmentId
+      ? { email, unsubscribed: false, segments: [{ id: segmentId }] }
+      : { email, unsubscribed: false };
+    const r = await fetch(url, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, unsubscribed: false })
+      body: JSON.stringify(payload)
     });
+    if (segmentId && r.status === 409) {
+      const add = await fetch(`https://api.resend.com/contacts/${encodeURIComponent(email)}/segments/${segmentId}`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${apiKey}` }
+      });
+      if (add.ok || add.status === 409) return json({ ok: true }, 200);
+      console.error('Resend segment add error:', add.status, await add.text());
+      return json({ error: 'Subscription service error' }, 502);
+    }
     if (!r.ok) {
-      console.error('Resend error:', r.status, await r.text());
+      const detail = await r.text();
+      console.error('Resend error:', r.status, detail);
       return json({ error: 'Subscription service error' }, 502);
     }
     return json({ ok: true }, 200);

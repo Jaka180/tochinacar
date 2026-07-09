@@ -360,7 +360,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=202607090237" />
+<link rel="stylesheet" href="/css/style.css?v=202607090252" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231a1a1a'/><text x='16' y='22' font-family='Playfair Display,serif' font-size='20' font-weight='900' text-anchor='middle' fill='%23d4302a'>T</text></svg>">
 </head>
 <body>
@@ -391,7 +391,7 @@
     </nav>
 
     <div class="header-tools">
-      <a class="admin-link" href="https://topchinacar.substack.com" target="_blank" rel="noopener" data-i18n="nav.newsletter">Newsletter</a>
+      <a class="admin-link" href="/newsletter" data-i18n="nav.newsletter">Newsletter</a>
       <a class="admin-link" href="https://topchinacar-event-intelligence.vercel.app/admin/login" target="_blank" rel="nofollow noopener" data-i18n="nav.admin">Admin</a>
       <button class="lang-toggle" id="langToggle" aria-label="Switch language">
         <span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-zh">中</span>
@@ -1109,8 +1109,12 @@
       <p class="newsletter-deck" data-i18n="newsletter.deck">Every morning: Chinese automakers overseas, EV exports, plants, dealers, policy, ADAS and market-entry signals. Curated for global readers. No spam. Unsubscribe anytime.</p>
     </div>
     <div class="newsletter-form-wrap">
-      <a class="newsletter-btn" href="https://topchinacar.substack.com" target="_blank" rel="noopener" data-i18n="newsletter.cta">Subscribe on Substack</a>
-      <p class="newsletter-note" data-i18n="newsletter.substackNote">Free subscription via topchinacar.substack.com.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input class="newsletter-input" id="newsletterEmail" type="email" name="email" placeholder="your@email.com" required data-i18n-attr="placeholder:newsletter.placeholder" />
+        <button class="newsletter-btn" type="submit" data-i18n="newsletter.cta">Subscribe</button>
+      </form>
+      <div class="newsletter-ok" id="newsletterOk" hidden data-i18n="newsletter.success">Thanks — you are on the list for the next China Auto Overseas Daily.</div>
+      <p class="newsletter-note"><span data-i18n="newsletter.resendNote">Delivered by Resend. Unsubscribe anytime.</span></p>
     </div>
   </div>
 </section>
@@ -1135,7 +1139,7 @@
       <h4 data-i18n="footer.about">About</h4>
       <a href="/about" data-i18n="nav.about">Our story</a>
       <a href="/editorial-policy" data-i18n="footer.editorial">Editorial Policy</a>
-      <a href="https://topchinacar.substack.com" target="_blank" rel="noopener" data-i18n="footer.newsletter">Newsletter</a>
+      <a href="/newsletter" data-i18n="footer.newsletter">Newsletter</a>
       <a href="/contact" data-i18n="footer.contact">Contact</a>
       <a href="/privacy" data-i18n="footer.privacy">Privacy Policy</a>
       <a href="https://topchinacar-event-intelligence.vercel.app/admin/login" target="_blank" rel="nofollow noopener" data-i18n="nav.admin">Admin</a>
@@ -1148,10 +1152,10 @@
   </div>
 </footer>
 
-<script src="/js/data.js?v=202607090237"></script>
-<script src="/js/i18n.js?v=202607090237"></script>
-<script src="/js/articles-data.js?v=202607090237"></script>
-<script src="/js/pages.js?v=202607090237"></script>
-<script src="/js/app.js?v=202607090237"></script>
+<script src="/js/data.js?v=202607090252"></script>
+<script src="/js/i18n.js?v=202607090252"></script>
+<script src="/js/articles-data.js?v=202607090252"></script>
+<script src="/js/pages.js?v=202607090252"></script>
+<script src="/js/app.js?v=202607090252"></script>
 </body>
 </html>

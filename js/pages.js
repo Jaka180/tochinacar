@@ -1,6 +1,5 @@
 // ============ PAGE RENDERERS (pure functions — also used by build.js for prerendering) ============
 const EVENT_INTELLIGENCE_URL = 'https://topchinacar-event-intelligence.vercel.app';
-const SUBSTACK_URL = 'https://topchinacar.substack.com';
 
 // SVG car illustrations (stylised silhouettes)
 function carSVG(shape, colorA = '#d4302a', colorB = '#1a1a1a') {
@@ -1063,11 +1062,15 @@ function pageNewsletterLanding() {
             </div>
           </div>
           <aside class="newsletter-signup-card">
-            <div class="newsletter-card-label">Substack</div>
-            <h2>${S('Subscribe on Substack', '在 Substack 订阅')}</h2>
+            <div class="newsletter-card-label">Resend</div>
+            <h2>${S('Subscribe by email', '邮箱订阅日报')}</h2>
             <p>${S('No generic updates. One focused daily brief on the China auto globalization signals global operators need to understand.', '不是泛泛更新，而是一封聚焦全球从业者需要理解的中国汽车全球化信号日报。')}</p>
-            <a class="newsletter-btn" href="${SUBSTACK_URL}" target="_blank" rel="noopener">${S('Open topchinacar.substack.com', '打开 topchinacar.substack.com')}</a>
-            <p class="newsletter-privacy">${S('Subscription is handled by Substack. TopChinaCar.com remains the research archive and SEO home.', '订阅关系由 Substack 处理；TopChinaCar.com 继续作为研究报告归档与 SEO 主站。')}</p>
+            <form class="newsletter-form" id="newsletterForm">
+              <input class="newsletter-input" id="newsletterEmail" type="email" name="email" placeholder="${S('your@email.com', '你的邮箱')}" required />
+              <button class="newsletter-btn" type="submit">${S('Subscribe', '订阅日报')}</button>
+            </form>
+            <div class="newsletter-ok" id="newsletterOk" hidden>${S('Thanks — you are on the list for the next China Auto Overseas Daily.', '谢谢——你已加入中国车企出海日报订阅名单。')}</div>
+            <p class="newsletter-privacy">${S('Subscription is stored in Resend Contacts and every daily email includes an unsubscribe link.', '订阅邮箱将存入 Resend 联系人列表；每封日报都会包含退订链接。')}</p>
           </aside>
         </div>
       </div>
@@ -1113,7 +1116,7 @@ function pageNewsletterLanding() {
             <li>${S('Smart mobility: ADAS, cockpit, maps, connected services', '智能汽车：ADAS、座舱、地图、车联网')}</li>
             <li>${S('What to watch next', '下一步看什么')}</li>
           </ol>
-          <p>${S('The same daily dispatch is published on', '同一份日报也会发布在')} <a href="/news">${S('/news', '/news')}</a>${S('; Substack is the delivery mechanism for readers who want it sent directly to their inbox.', '；Substack 是把这份日报直接送到读者邮箱的触达机制。')}</p>
+          <p>${S('The same daily dispatch is published on', '同一份日报也会发布在')} <a href="/news">${S('/news', '/news')}</a>${S('; Resend is the delivery mechanism for readers who want it sent directly to their inbox.', '；Resend 是把这份日报直接送到读者邮箱的触达机制。')}</p>
         </div>
       </div>
     </section>
