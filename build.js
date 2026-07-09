@@ -33,6 +33,26 @@ if (fs.existsSync(ARTICLES_DIR)) {
     .sort((a, b) => b.date.localeCompare(a.date) || b.slug.localeCompare(a.slug));
 }
 
+function assertNoMarkdownResidue(article, field) {
+  const html = String(article[field] || '');
+  const checks = [
+    { name: 'raw markdown heading', re: /(^|[\n>])\s*#{1,6}\s+\S/ },
+    { name: 'raw markdown table separator', re: /\|\s*:?[—–-]{3,}:?\s*\|/ },
+    { name: 'raw markdown table paragraph', re: /<p>[^<]{0,240}\|[^<]{0,240}\|[^<]{0,240}<\/p>/ }
+  ];
+  const failed = checks.find(check => check.re.test(html));
+  if (!failed) return;
+  throw new Error(
+    `Article "${article.slug}" ${field} contains ${failed.name}. ` +
+    'Convert Markdown to HTML before publishing.'
+  );
+}
+
+for (const article of articles) {
+  assertNoMarkdownResidue(article, 'html_en');
+  assertNoMarkdownResidue(article, 'html_zh');
+}
+
 // Lightweight index (no article bodies) shared with the client for the News page
 const articlesIndex = articles.map(a => ({
   slug: a.slug, date: a.date,

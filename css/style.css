@@ -2386,11 +2386,40 @@ html[lang="zh"] .hero-title { letter-spacing: 0; }
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
+  margin: 24px 0 28px;
+  font-size: 14px;
+  line-height: 1.55;
+  border: 1px solid #e5e7eb;
+  background: #fff;
 }
 
 .article-body th,
 .article-body td {
   vertical-align: top;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.article-body th {
+  background: #f8fafc;
+  color: #111827;
+  font-weight: 750;
+}
+
+.article-body tbody tr:nth-child(even) td {
+  background: #fafafa;
+}
+
+.article-body sup.article-cite {
+  font-size: 0.72em;
+  line-height: 0;
+  margin-left: 1px;
+}
+
+.article-body sup.article-cite a {
+  color: #b91c1c;
+  text-decoration: none;
 }
 
 @media (max-width: 720px) {
@@ -2398,6 +2427,7 @@ html[lang="zh"] .hero-title { letter-spacing: 0; }
     display: block;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
   }
 
   .article-body th,
