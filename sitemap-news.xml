@@ -2,13 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://www.topchinacar.com/news/2026-07-11-china-auto-daily</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-10T08:00:00+08:00</news:publication_date>
+      <news:title>China&apos;s Auto Exporters Post Blowout H1 2026: Chery at 944K, BYD at 792K, Geely Tops 100K in a Month</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://www.topchinacar.com/news/2026-07-10-china-auto-daily</loc>
     <news:news>
       <news:publication>
         <news:name>TopChinaCar</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-07-09T08:00:00+08:00</news:publication_date>
+      <news:publication_date>2026-07-10T08:00:00+08:00</news:publication_date>
       <news:title>China Auto Exports Hit New Highs in H1 2026: BYD, Chery, Geely All Surpass 100k Monthly</news:title>
     </news:news>
   </url>
@@ -87,72 +98,6 @@
       </news:publication>
       <news:publication_date>2026-07-08T08:00:00+08:00</news:publication_date>
       <news:title>Leapmotor Lands in Mexico, BYD Posts 792K H1 Overseas, XPeng L03 Eyes 64 Markets</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/delivan-chery-commercial-vehicle-europe-strategy</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-07T08:00:00+08:00</news:publication_date>
-      <news:title>DELIVAN Deep Research: Chery Commercial Vehicle&apos;s Electric Van Export Playbook</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/chery-overseas-full-value-chain-layout-2026</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-07T08:00:00+08:00</news:publication_date>
-      <news:title>Chery Overseas Full Value Chain Layout: Deep Research Report (2026)</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/chery-cv-overseas-sales-forecast-2025-2030</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-07T08:00:00+08:00</news:publication_date>
-      <news:title>Chery Commercial Vehicle Overseas Sales Forecast: 2025-2030</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/byd-vs-tesla-global-ev-comparison-2026</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-07T08:00:00+08:00</news:publication_date>
-      <news:title>BYD vs Tesla: Global EV Leaders Deep Comparison Report (2026)</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/byd-overseas-full-value-chain-layout-2026</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-07T08:00:00+08:00</news:publication_date>
-      <news:title>BYD Overseas Full Value Chain Layout: Deep Research Report (2026)</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/2026-07-07-china-auto-daily</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-07T08:00:00+08:00</news:publication_date>
-      <news:title>BYD Hits 175K Overseas in June, Korea Cuts Subsidies; XPeng Launches Mona L03 in Munich July 16</news:title>
     </news:news>
   </url>
 </urlset>
