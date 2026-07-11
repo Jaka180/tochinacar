@@ -2,13 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://www.topchinacar.com/news/2026-07-12-china-auto-daily</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-11T08:00:00+08:00</news:publication_date>
+      <news:title>China&apos;s Auto Exports Cross 1M Units in June as BYD, Geely and XPeng Push Global Offensive</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://www.topchinacar.com/news/2026-07-11-china-auto-daily</loc>
     <news:news>
       <news:publication>
         <news:name>TopChinaCar</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-07-10T08:00:00+08:00</news:publication_date>
+      <news:publication_date>2026-07-11T08:00:00+08:00</news:publication_date>
       <news:title>China&apos;s Auto Exporters Post Blowout H1 2026: Chery at 944K, BYD at 792K, Geely Tops 100K in a Month</news:title>
     </news:news>
   </url>
@@ -65,39 +76,6 @@
       </news:publication>
       <news:publication_date>2026-07-09T08:00:00+08:00</news:publication_date>
       <news:title>China Auto Overseas Daily | 2026-07-09: Exports Carry June, UK Shows Chinese Model Pull</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/mazda-ez60-cx6e-global-sales-market-strategy-2026</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-08T08:00:00+08:00</news:publication_date>
-      <news:title>Mazda EZ-60 / CX-6e Global Sales and Market Strategy Report (2026)</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/mazda-ev-strategy-deep-research-report-2026</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-08T08:00:00+08:00</news:publication_date>
-      <news:title>Mazda EV Strategy Deep Research Report (2026)</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/2026-07-08-china-auto-daily</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-08T08:00:00+08:00</news:publication_date>
-      <news:title>Leapmotor Lands in Mexico, BYD Posts 792K H1 Overseas, XPeng L03 Eyes 64 Markets</news:title>
     </news:news>
   </url>
 </urlset>
