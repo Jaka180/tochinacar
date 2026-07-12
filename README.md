@@ -75,6 +75,7 @@ cd ~/tochinacar && git config user.name briefing-bot && git config user.email bo
 
 ```bash
 node build.js   # 重新生成 6 个 HTML + sitemap
+node --test tests/build-output.test.js  # 日期边界、无障碍与图片尺寸回归
 ```
 
 再 commit + push 即可。

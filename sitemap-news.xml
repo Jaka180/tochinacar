@@ -8,7 +8,7 @@
         <news:name>TopChinaCar</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-07-11T08:00:00+08:00</news:publication_date>
+      <news:publication_date>2026-07-12T06:28:44+08:00</news:publication_date>
       <news:title>China&apos;s Auto Exports Cross 1M Units in June as BYD, Geely and XPeng Push Global Offensive</news:title>
     </news:news>
   </url>
@@ -19,7 +19,7 @@
         <news:name>TopChinaCar</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-07-11T08:00:00+08:00</news:publication_date>
+      <news:publication_date>2026-07-11</news:publication_date>
       <news:title>China&apos;s Auto Exporters Post Blowout H1 2026: Chery at 944K, BYD at 792K, Geely Tops 100K in a Month</news:title>
     </news:news>
   </url>
@@ -30,52 +30,8 @@
         <news:name>TopChinaCar</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-07-10T08:00:00+08:00</news:publication_date>
+      <news:publication_date>2026-07-10</news:publication_date>
       <news:title>China Auto Exports Hit New Highs in H1 2026: BYD, Chery, Geely All Surpass 100k Monthly</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/twenty-points-euro-ncap-2026-speed-assistance</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-09T08:00:00+08:00</news:publication_date>
-      <news:title>Twenty Points That Redefine Whether Your Car Should Know the Speed Limit</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/momenta-deep-dive-technology-global-clients-china-overseas-adas-2026</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-09T08:00:00+08:00</news:publication_date>
-      <news:title>Momenta Deep Dive: Technology, Global Clients and China&apos;s Overseas Advanced ADAS</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/automotive-cybersecurity-regulation-unece-r155-china-export-implications-2026</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-09T08:00:00+08:00</news:publication_date>
-      <news:title>Automotive Cybersecurity Regulation Deep Dive: UNECE R155, Global Landscape and China Export Implications</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/2026-07-09-china-auto-daily</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-09T08:00:00+08:00</news:publication_date>
-      <news:title>China Auto Overseas Daily | 2026-07-09: Exports Carry June, UK Shows Chinese Model Pull</news:title>
     </news:news>
   </url>
 </urlset>

@@ -317,15 +317,17 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=202607112228" />
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&amp;family=Inter:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@500;700;900&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=optional" as="style">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&amp;family=Inter:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@500;700;900&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=optional" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&amp;family=Inter:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@500;700;900&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=optional" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="/css/style.css?v=202607120431" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231a1a1a'/><text x='16' y='22' font-family='Playfair Display,serif' font-size='20' font-weight='900' text-anchor='middle' fill='%23d4302a'>T</text></svg>">
 </head>
 <body>
 
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
-    <a href="/zh/" class="logo" aria-label="TopChinaCar home">
+    <a href="/zh/" class="logo">
       <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <rect width="32" height="32" rx="2" fill="currentColor"/>
         <text x="16" y="23" font-family="Playfair Display,serif" font-size="22" font-weight="900" text-anchor="middle" fill="#d4302a">T</text>
@@ -350,7 +352,7 @@
 
     <div class="header-tools">
       <a class="admin-link" href="/zh/newsletter" data-i18n="nav.newsletter">邮件简报</a>
-      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language (EN/中)" title="Switch language">
         <span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-zh">中</span>
       </button>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false">
@@ -422,7 +424,7 @@
           </div>
           <div class="brands-grid">
     <article class="brand-card" id="brand-byd" data-brand-id="byd">
-      <div class="brand-card-thumb has-photo"><img src="/images/byd-brand.jpg" alt="BYD" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="934" src="/images/byd-brand.jpg" alt="BYD" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/byd" style="color:inherit;text-decoration:none;">BYD</a></h3>
@@ -439,7 +441,7 @@
     </article>
   
     <article class="brand-card" id="brand-geely" data-brand-id="geely">
-      <div class="brand-card-thumb has-photo"><img src="/images/geely-brand.jpg" alt="Geely" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="933" src="/images/geely-brand.jpg" alt="Geely" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/geely" style="color:inherit;text-decoration:none;">Geely</a></h3>
@@ -456,7 +458,7 @@
     </article>
   
     <article class="brand-card" id="brand-chery" data-brand-id="chery">
-      <div class="brand-card-thumb has-photo"><img src="/images/chery-brand.jpg" alt="Chery" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="938" src="/images/chery-brand.jpg" alt="Chery" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/chery" style="color:inherit;text-decoration:none;">Chery</a></h3>
@@ -473,7 +475,7 @@
     </article>
   
     <article class="brand-card" id="brand-changan" data-brand-id="changan">
-      <div class="brand-card-thumb has-photo"><img src="/images/changan-brand.jpg" alt="Changan" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1920" height="1099" src="/images/changan-brand.jpg" alt="Changan" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/changan" style="color:inherit;text-decoration:none;">Changan</a></h3>
@@ -490,7 +492,7 @@
     </article>
   
     <article class="brand-card" id="brand-saic" data-brand-id="saic">
-      <div class="brand-card-thumb has-photo"><img src="/images/saic-brand.jpg" alt="SAIC" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="1050" src="/images/saic-brand.jpg" alt="SAIC" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/saic" style="color:inherit;text-decoration:none;">SAIC</a></h3>
@@ -507,7 +509,7 @@
     </article>
   
     <article class="brand-card" id="brand-faw" data-brand-id="faw">
-      <div class="brand-card-thumb has-photo"><img src="/images/faw-brand.jpg" alt="FAW" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1920" height="1234" src="/images/faw-brand.jpg" alt="FAW" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/faw" style="color:inherit;text-decoration:none;">FAW</a></h3>
@@ -524,7 +526,7 @@
     </article>
   
     <article class="brand-card" id="brand-gwm" data-brand-id="gwm">
-      <div class="brand-card-thumb has-photo"><img src="/images/gwm-brand.jpg" alt="Great Wall" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="867" src="/images/gwm-brand.jpg" alt="Great Wall" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/gwm" style="color:inherit;text-decoration:none;">Great Wall</a></h3>
@@ -541,7 +543,7 @@
     </article>
   
     <article class="brand-card" id="brand-gac" data-brand-id="gac">
-      <div class="brand-card-thumb has-photo"><img src="/images/gac-brand.jpg" alt="GAC" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1920" height="1190" src="/images/gac-brand.jpg" alt="GAC" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/gac" style="color:inherit;text-decoration:none;">GAC</a></h3>
@@ -558,7 +560,7 @@
     </article>
   
     <article class="brand-card" id="brand-dongfeng" data-brand-id="dongfeng">
-      <div class="brand-card-thumb has-photo"><img src="/images/dongfeng-brand.jpg" alt="Dongfeng" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="896" src="/images/dongfeng-brand.jpg" alt="Dongfeng" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/dongfeng" style="color:inherit;text-decoration:none;">Dongfeng</a></h3>
@@ -575,7 +577,7 @@
     </article>
   
     <article class="brand-card" id="brand-baic" data-brand-id="baic">
-      <div class="brand-card-thumb has-photo"><img src="/images/baic-brand.jpg" alt="BAIC" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1920" height="1128" src="/images/baic-brand.jpg" alt="BAIC" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/baic" style="color:inherit;text-decoration:none;">BAIC</a></h3>
@@ -605,7 +607,7 @@
           </div>
           <div class="brands-grid">
     <article class="brand-card" id="brand-nio" data-brand-id="nio">
-      <div class="brand-card-thumb has-photo"><img src="/images/nio-brand.jpg" alt="NIO" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="960" src="/images/nio-brand.jpg" alt="NIO" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/nio" style="color:inherit;text-decoration:none;">NIO</a></h3>
@@ -622,7 +624,7 @@
     </article>
   
     <article class="brand-card" id="brand-xpeng" data-brand-id="xpeng">
-      <div class="brand-card-thumb has-photo"><img src="/images/xpeng-brand.jpg" alt="Xpeng" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="790" src="/images/xpeng-brand.jpg" alt="Xpeng" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/xpeng" style="color:inherit;text-decoration:none;">Xpeng</a></h3>
@@ -639,7 +641,7 @@
     </article>
   
     <article class="brand-card" id="brand-li" data-brand-id="li">
-      <div class="brand-card-thumb has-photo"><img src="/images/liauto-brand.jpg" alt="Li Auto" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="1050" src="/images/liauto-brand.jpg" alt="Li Auto" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/li" style="color:inherit;text-decoration:none;">Li Auto</a></h3>
@@ -656,7 +658,7 @@
     </article>
   
     <article class="brand-card" id="brand-leapmotor" data-brand-id="leapmotor">
-      <div class="brand-card-thumb has-photo"><img src="/images/leapmotor-c10.png" alt="Leapmotor" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1170" height="740" src="/images/leapmotor-c10.png" alt="Leapmotor" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/leapmotor" style="color:inherit;text-decoration:none;">Leapmotor</a></h3>
@@ -673,7 +675,7 @@
     </article>
   
     <article class="brand-card" id="brand-xiaomi" data-brand-id="xiaomi">
-      <div class="brand-card-thumb has-photo"><img src="/images/xiaomi-brand.jpg" alt="Xiaomi" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1600" height="900" src="/images/xiaomi-brand.jpg" alt="Xiaomi" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/xiaomi" style="color:inherit;text-decoration:none;">Xiaomi</a></h3>
@@ -711,7 +713,7 @@
               <div class="brands-grid">
                 
     <article class="brand-card" id="brand-zeekr" data-brand-id="zeekr">
-      <div class="brand-card-thumb has-photo"><img src="/images/zeekr-brand.jpg" alt="Zeekr" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="1148" src="/images/zeekr-brand.jpg" alt="Zeekr" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>吉利</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/zeekr" style="color:inherit;text-decoration:none;">Zeekr</a></h3>
@@ -728,7 +730,7 @@
     </article>
   
     <article class="brand-card" id="brand-lynkco" data-brand-id="lynkco">
-      <div class="brand-card-thumb has-photo"><img src="/images/lynkco-09.jpg" alt="Lynk & Co" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1600" height="900" src="/images/lynkco-09.jpg" alt="Lynk & Co" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>吉利</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/lynkco" style="color:inherit;text-decoration:none;">Lynk & Co</a></h3>
@@ -745,7 +747,7 @@
     </article>
   
     <article class="brand-card" id="brand-polestar" data-brand-id="polestar">
-      <div class="brand-card-thumb has-photo"><img src="/images/polestar-4.jpg" alt="Polestar" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="595" height="394" src="/images/polestar-4.jpg" alt="Polestar" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>吉利</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/polestar" style="color:inherit;text-decoration:none;">Polestar</a></h3>
@@ -762,7 +764,7 @@
     </article>
   
     <article class="brand-card" id="brand-volvo" data-brand-id="volvo">
-      <div class="brand-card-thumb has-photo"><img src="/images/volvo-ex90.jpg" alt="Volvo" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="1050" src="/images/volvo-ex90.jpg" alt="Volvo" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>吉利</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/volvo" style="color:inherit;text-decoration:none;">Volvo</a></h3>
@@ -779,7 +781,7 @@
     </article>
   
     <article class="brand-card" id="brand-lotus" data-brand-id="lotus">
-      <div class="brand-card-thumb has-photo"><img src="/images/lotus-eletre.jpg" alt="Lotus" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="927" src="/images/lotus-eletre.jpg" alt="Lotus" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>吉利</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/lotus" style="color:inherit;text-decoration:none;">Lotus</a></h3>
@@ -807,7 +809,7 @@
               <div class="brands-grid">
                 
     <article class="brand-card" id="brand-haval" data-brand-id="haval">
-      <div class="brand-card-thumb has-photo"><img src="/images/haval-brand.jpg" alt="Haval" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="1050" src="/images/haval-brand.jpg" alt="Haval" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>长城</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/haval" style="color:inherit;text-decoration:none;">Haval</a></h3>
@@ -824,7 +826,7 @@
     </article>
   
     <article class="brand-card" id="brand-tank" data-brand-id="tank">
-      <div class="brand-card-thumb has-photo"><img src="/images/tank-500.jpg" alt="Tank" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="1050" src="/images/tank-500.jpg" alt="Tank" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>长城</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/tank" style="color:inherit;text-decoration:none;">Tank</a></h3>
@@ -841,7 +843,7 @@
     </article>
   
     <article class="brand-card" id="brand-wey" data-brand-id="wey">
-      <div class="brand-card-thumb has-photo"><img src="/images/wey-lanshan.jpg" alt="Wey" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="1050" src="/images/wey-lanshan.jpg" alt="Wey" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>长城</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/wey" style="color:inherit;text-decoration:none;">Wey</a></h3>
@@ -858,7 +860,7 @@
     </article>
   
     <article class="brand-card" id="brand-ora" data-brand-id="ora">
-      <div class="brand-card-thumb has-photo"><img src="/images/ora-good-cat.jpg" alt="Ora" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="1046" src="/images/ora-good-cat.jpg" alt="Ora" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>长城</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/ora" style="color:inherit;text-decoration:none;">Ora</a></h3>
@@ -886,7 +888,7 @@
               <div class="brands-grid">
                 
     <article class="brand-card" id="brand-denza" data-brand-id="denza">
-      <div class="brand-card-thumb has-photo"><img src="/images/denza-z9gt.jpg" alt="Denza" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="1050" src="/images/denza-z9gt.jpg" alt="Denza" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>比亚迪</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/denza" style="color:inherit;text-decoration:none;">Denza</a></h3>
@@ -903,7 +905,7 @@
     </article>
   
     <article class="brand-card" id="brand-yangwang" data-brand-id="yangwang">
-      <div class="brand-card-thumb has-photo"><img src="/images/yangwang-u8.jpg" alt="Yangwang" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="884" src="/images/yangwang-u8.jpg" alt="Yangwang" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>比亚迪</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/yangwang" style="color:inherit;text-decoration:none;">Yangwang</a></h3>
@@ -920,7 +922,7 @@
     </article>
   
     <article class="brand-card" id="brand-fangchengbao" data-brand-id="fangchengbao">
-      <div class="brand-card-thumb has-photo"><img src="/images/fangchengbao-5.jpg" alt="Fang Cheng Bao" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="933" src="/images/fangchengbao-5.jpg" alt="Fang Cheng Bao" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>比亚迪</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/fangchengbao" style="color:inherit;text-decoration:none;">Fang Cheng Bao</a></h3>
@@ -948,7 +950,7 @@
               <div class="brands-grid">
                 
     <article class="brand-card" id="brand-mg" data-brand-id="mg">
-      <div class="brand-card-thumb has-photo"><img src="/images/mg-cyberster.jpg" alt="MG" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="934" src="/images/mg-cyberster.jpg" alt="MG" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>上汽</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/mg" style="color:inherit;text-decoration:none;">MG</a></h3>
@@ -965,7 +967,7 @@
     </article>
   
     <article class="brand-card" id="brand-maxus" data-brand-id="maxus">
-      <div class="brand-card-thumb has-photo"><img src="/images/maxus-mifa9.jpg" alt="Maxus" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="882" src="/images/maxus-mifa9.jpg" alt="Maxus" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>上汽</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/maxus" style="color:inherit;text-decoration:none;">Maxus</a></h3>
@@ -982,7 +984,7 @@
     </article>
   
     <article class="brand-card" id="brand-im" data-brand-id="im">
-      <div class="brand-card-thumb has-photo"><img src="/images/im-ls6.jpg" alt="IM Motors" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="934" src="/images/im-ls6.jpg" alt="IM Motors" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>上汽</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/im" style="color:inherit;text-decoration:none;">IM Motors</a></h3>
@@ -1010,7 +1012,7 @@
               <div class="brands-grid">
                 
     <article class="brand-card" id="brand-voyah" data-brand-id="voyah">
-      <div class="brand-card-thumb has-photo"><img src="/images/voyah-free.jpg" alt="Voyah" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="785" src="/images/voyah-free.jpg" alt="Voyah" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>东风</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/voyah" style="color:inherit;text-decoration:none;">Voyah</a></h3>
@@ -1027,7 +1029,7 @@
     </article>
   
     <article class="brand-card" id="brand-mhero" data-brand-id="mhero">
-      <div class="brand-card-thumb has-photo"><img src="/images/mhero-917.jpg" alt="M-Hero" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="1050" src="/images/mhero-917.jpg" alt="M-Hero" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>东风</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/mhero" style="color:inherit;text-decoration:none;">M-Hero</a></h3>
@@ -1055,7 +1057,7 @@
               <div class="brands-grid">
                 
     <article class="brand-card" id="brand-omoda" data-brand-id="omoda">
-      <div class="brand-card-thumb has-photo"><img src="/images/omoda-e5.jpg" alt="Omoda" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="873" src="/images/omoda-e5.jpg" alt="Omoda" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>奇瑞</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/omoda" style="color:inherit;text-decoration:none;">Omoda</a></h3>
@@ -1072,7 +1074,7 @@
     </article>
   
     <article class="brand-card" id="brand-jaecoo" data-brand-id="jaecoo">
-      <div class="brand-card-thumb has-photo"><img src="/images/jaecoo-7.jpg" alt="Jaecoo" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="1022" src="/images/jaecoo-7.jpg" alt="Jaecoo" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>奇瑞</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/jaecoo" style="color:inherit;text-decoration:none;">Jaecoo</a></h3>
@@ -1089,7 +1091,7 @@
     </article>
   
     <article class="brand-card" id="brand-exeed" data-brand-id="exeed">
-      <div class="brand-card-thumb has-photo"><img src="/images/exeed-vx.jpg" alt="Exeed" loading="lazy" /></div>
+      <div class="brand-card-thumb has-photo"><img width="1400" height="933" src="/images/exeed-vx.jpg" alt="Exeed" loading="lazy" decoding="async" /></div>
       <div class="brand-card-body">
         <div class="brand-card-parent">隶属于 <strong>奇瑞</strong></div>
         <h3 class="brand-card-name"><a href="/zh/chinese-car-brands/exeed" style="color:inherit;text-decoration:none;">Exeed</a></h3>
@@ -1151,6 +1153,7 @@
     </div>
     <div class="newsletter-form-wrap">
       <form class="newsletter-form" id="newsletterForm">
+        <label class="sr-only" for="newsletterEmail" data-i18n="newsletter.emailLabel">邮箱地址</label>
         <input class="newsletter-input" id="newsletterEmail" type="email" name="email" placeholder="你的邮箱" required data-i18n-attr="placeholder:newsletter.placeholder" />
         <button class="newsletter-btn" type="submit" data-i18n="newsletter.cta">订阅日报</button>
       </form>
@@ -1167,7 +1170,7 @@
       <p data-i18n="footer.tagline">An editorial guide to the new era of Chinese automobiles, written for the world.</p>
     </div>
     <div class="footer-col">
-      <h4 data-i18n="footer.explore">浏览</h4>
+      <h2 class="footer-heading" data-i18n="footer.explore">浏览</h2>
       <a href="/zh/news" data-i18n="nav.news">新闻</a>
       <a href="/zh/intelligence" data-i18n="nav.intelligence">情报</a>
       <a href="/zh/china-ev-news" data-i18n="nav.ev">新能源</a>
@@ -1177,7 +1180,7 @@
       <a href="/zh/models" data-i18n="nav.models">车型</a>
     </div>
     <div class="footer-col">
-      <h4 data-i18n="footer.about">关于</h4>
+      <h2 class="footer-heading" data-i18n="footer.about">关于</h2>
       <a href="/zh/about" data-i18n="nav.about">Our story</a>
       <a href="/zh/editorial-policy" data-i18n="footer.editorial">编辑方针</a>
       <a href="/zh/newsletter" data-i18n="footer.newsletter">邮件订阅</a>
@@ -1185,17 +1188,17 @@
       <a href="/zh/privacy" data-i18n="footer.privacy">隐私政策</a>
     </div>
     <div class="footer-col footer-meta">
-      <h4 data-i18n="footer.status">状态</h4>
+      <h2 class="footer-heading" data-i18n="footer.status">状态</h2>
       <p>© 2026 TopChinaCar</p>
       <p data-i18n="footer.rights">独立编辑，面向全球。</p>
     </div>
   </div>
 </footer>
 
-<script src="/js/data.js?v=202607112228"></script>
-<script src="/js/i18n.js?v=202607112228"></script>
-<script src="/js/articles-data.js?v=202607112228"></script>
-<script src="/js/pages.js?v=202607112228"></script>
-<script src="/js/app.js?v=202607112228"></script>
+<script src="/js/data.js?v=202607120431"></script>
+<script src="/js/i18n.js?v=202607120431"></script>
+<script src="/js/articles-data.js?v=202607120431"></script>
+<script src="/js/pages.js?v=202607120431"></script>
+<script src="/js/app.js?v=202607120431"></script>
 </body>
 </html>

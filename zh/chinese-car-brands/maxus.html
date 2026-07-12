@@ -34,8 +34,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=202607112228" />
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&amp;family=Inter:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@500;700;900&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=optional" as="style">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&amp;family=Inter:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@500;700;900&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=optional" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&amp;family=Inter:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@500;700;900&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=optional" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="/css/style.css?v=202607120431" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231a1a1a'/><text x='16' y='22' font-family='Playfair Display,serif' font-size='20' font-weight='900' text-anchor='middle' fill='%23d4302a'>T</text></svg>">
 <script type="application/ld+json">
 {
@@ -65,7 +67,7 @@
 
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
-    <a href="/zh/" class="logo" aria-label="TopChinaCar home">
+    <a href="/zh/" class="logo">
       <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <rect width="32" height="32" rx="2" fill="currentColor"/>
         <text x="16" y="23" font-family="Playfair Display,serif" font-size="22" font-weight="900" text-anchor="middle" fill="#d4302a">T</text>
@@ -90,7 +92,7 @@
 
     <div class="header-tools">
       <a class="admin-link" href="/zh/newsletter" data-i18n="nav.newsletter">邮件简报</a>
-      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language (EN/中)" title="Switch language">
         <span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-zh">中</span>
       </button>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false">
@@ -139,7 +141,7 @@
       <div class="models-grid">
         
     <article class="model-card">
-      <div class="model-thumb has-photo"><a href="/zh/models/maxus-mifa-9"><img src="/images/maxus-mifa9.jpg" alt="Maxus Mifa 9" loading="lazy" /><span class="img-credit">Photo: Calreyn88 / CC BY-SA 4.0</span></a></div>
+      <div class="model-thumb has-photo"><a href="/zh/models/maxus-mifa-9"><img width="1400" height="882" src="/images/maxus-mifa9.jpg" alt="Maxus Mifa 9" loading="lazy" decoding="async" /><span class="img-credit">Photo: Calreyn88 / CC BY-SA 4.0</span></a></div>
       <div class="model-body">
         <div class="model-brand">Maxus</div>
         <h3 class="model-name"><a href="/zh/models/maxus-mifa-9" style="color:inherit;text-decoration:none;">Mifa 9</a></h3>
@@ -169,6 +171,7 @@
     </div>
     <div class="newsletter-form-wrap">
       <form class="newsletter-form" id="newsletterForm">
+        <label class="sr-only" for="newsletterEmail" data-i18n="newsletter.emailLabel">邮箱地址</label>
         <input class="newsletter-input" id="newsletterEmail" type="email" name="email" placeholder="你的邮箱" required data-i18n-attr="placeholder:newsletter.placeholder" />
         <button class="newsletter-btn" type="submit" data-i18n="newsletter.cta">订阅日报</button>
       </form>
@@ -185,7 +188,7 @@
       <p data-i18n="footer.tagline">An editorial guide to the new era of Chinese automobiles, written for the world.</p>
     </div>
     <div class="footer-col">
-      <h4 data-i18n="footer.explore">浏览</h4>
+      <h2 class="footer-heading" data-i18n="footer.explore">浏览</h2>
       <a href="/zh/news" data-i18n="nav.news">新闻</a>
       <a href="/zh/intelligence" data-i18n="nav.intelligence">情报</a>
       <a href="/zh/china-ev-news" data-i18n="nav.ev">新能源</a>
@@ -195,7 +198,7 @@
       <a href="/zh/models" data-i18n="nav.models">车型</a>
     </div>
     <div class="footer-col">
-      <h4 data-i18n="footer.about">关于</h4>
+      <h2 class="footer-heading" data-i18n="footer.about">关于</h2>
       <a href="/zh/about" data-i18n="nav.about">Our story</a>
       <a href="/zh/editorial-policy" data-i18n="footer.editorial">编辑方针</a>
       <a href="/zh/newsletter" data-i18n="footer.newsletter">邮件订阅</a>
@@ -203,17 +206,17 @@
       <a href="/zh/privacy" data-i18n="footer.privacy">隐私政策</a>
     </div>
     <div class="footer-col footer-meta">
-      <h4 data-i18n="footer.status">状态</h4>
+      <h2 class="footer-heading" data-i18n="footer.status">状态</h2>
       <p>© 2026 TopChinaCar</p>
       <p data-i18n="footer.rights">独立编辑，面向全球。</p>
     </div>
   </div>
 </footer>
 
-<script src="/js/data.js?v=202607112228"></script>
-<script src="/js/i18n.js?v=202607112228"></script>
-<script src="/js/articles-data.js?v=202607112228"></script>
-<script src="/js/pages.js?v=202607112228"></script>
-<script src="/js/app.js?v=202607112228"></script>
+<script src="/js/data.js?v=202607120431"></script>
+<script src="/js/i18n.js?v=202607120431"></script>
+<script src="/js/articles-data.js?v=202607120431"></script>
+<script src="/js/pages.js?v=202607120431"></script>
+<script src="/js/app.js?v=202607120431"></script>
 </body>
 </html>
