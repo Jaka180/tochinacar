@@ -211,14 +211,14 @@ function newsThumbHTML(n, variant) {
   const klass = variant === 'main' ? 'news-main-thumb' : 'news-thumb';
   const shape = variant === 'main' ? 'sedan-long' : 'sedan';
   if (n.image) {
-    return `<div class="${klass} has-photo"><img src="/${n.image}" alt="${n.title_en || ''}" loading="lazy" />${n.imageCredit ? `<span class="img-credit">Photo: ${n.imageCredit}</span>` : ''}</div>`;
+    return `<div class="${klass} has-photo"><img src="/${n.image}" alt="${n.title_en || ''}" loading="lazy" decoding="async" />${n.imageCredit ? `<span class="img-credit">Photo: ${n.imageCredit}</span>` : ''}</div>`;
   }
   return `<div class="${klass}">${carSVG(shape, n.accent)}</div>`;
 }
 
 function modelCardHTML(m, lang) {
   const visual = m.image
-    ? `<img src="/${m.image}" alt="${m.brand} ${m.name}" loading="lazy" />` + (m.imageCredit ? `<span class="img-credit">Photo: ${m.imageCredit}</span>` : '')
+    ? `<img src="/${m.image}" alt="${m.brand} ${m.name}" loading="lazy" decoding="async" />` + (m.imageCredit ? `<span class="img-credit">Photo: ${m.imageCredit}</span>` : '')
     : carSVG(m.shape, m.colorA);
   const dual = m.priceLocal
     ? `<span class="spec-price-dual">${m.priceLocal}</span>`
@@ -254,7 +254,7 @@ function brandCardHTML(b, lang) {
     : '';
   return `
     <article class="brand-card" id="brand-${b.id}" data-brand-id="${b.id}">
-      <div class="brand-card-thumb${b.image ? ' has-photo' : ''}">${b.image ? `<img src="/${b.image}" alt="${b.name}" loading="lazy" />` : brandMarkSVG(b)}</div>
+      <div class="brand-card-thumb${b.image ? ' has-photo' : ''}">${b.image ? `<img src="/${b.image}" alt="${b.name}" loading="lazy" decoding="async" />` : brandMarkSVG(b)}</div>
       <div class="brand-card-body">
         ${parentBadge}
         <h3 class="brand-card-name"><a href="/chinese-car-brands/${b.id}" style="color:inherit;text-decoration:none;">${b.name}</a></h3>
@@ -308,7 +308,17 @@ function pageHome() {
           </div>
         </div>
         <div class="hero-visual">
-          <img src="/images/hero-xiaomi.jpg" alt="Xiaomi SU7 Ultra Prototype" loading="eager" />
+          <picture>
+            <source type="image/avif"
+                    srcset="/images/hero-xiaomi-480.avif 480w, /images/hero-xiaomi-800.avif 800w"
+                    sizes="(max-width: 960px) calc(100vw - 40px), min(50vw, 620px)" />
+            <img src="/images/hero-xiaomi.jpg"
+                 srcset="/images/hero-xiaomi-480.jpg 480w, /images/hero-xiaomi-800.jpg 800w, /images/hero-xiaomi.jpg 1400w"
+                 sizes="(max-width: 960px) calc(100vw - 40px), min(50vw, 620px)"
+                 alt="Xiaomi SU7 Ultra Prototype"
+                 loading="eager"
+                 fetchpriority="high" />
+          </picture>
           <span class="img-credit">Photo: Daniel Lu / CC BY-SA 4.0</span>
         </div>
       </div>
@@ -332,11 +342,11 @@ function pageHome() {
           </div>
         </article>
         <div class="news-side">
-          <div style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9ca3af;margin-bottom:14px;">${lang === 'zh' ? '最新新闻' : 'Latest News'}</div>
+          <div style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">${lang === 'zh' ? '最新新闻' : 'Latest News'}</div>
           ${rest.length ? rest.map(a => `
           <article class="news-item" style="grid-template-columns:1fr;">
             <div>
-              <h4 class="news-title"><a href="/news/${a.slug}" style="color:inherit;text-decoration:none;">${a['title_' + lang] || a.title_en}</a></h4>
+              <h3 class="news-title"><a href="/news/${a.slug}" style="color:inherit;text-decoration:none;">${a['title_' + lang] || a.title_en}</a></h3>
               <div class="news-date">${a.date}</div>
             </div>
           </article>`).join('') : `<p style="font-size:14px;color:#6b7280;">${lang === 'zh' ? '每个工作日更新。' : 'Updated every weekday.'}</p>`}
@@ -390,7 +400,7 @@ function pageHome() {
       <div class="feature-grid">
         ${features.map((f, i) => `
           <article class="feature-card${f.large ? ' large' : ''}">
-            <div class="feature-thumb${f.image ? ' has-photo' : ''}"><a href="/stories/${f.slug}">${f.image ? `<img src="/${f.image}" alt="${f['title_' + lang]}" loading="lazy" />${f.imageCredit ? `<span class="img-credit">Photo: ${f.imageCredit}</span>` : ''}` : carSVG(f.shape, f.accent)}</a></div>
+            <div class="feature-thumb${f.image ? ' has-photo' : ''}"><a href="/stories/${f.slug}">${f.image ? `<img src="/${f.image}" alt="${f['title_' + lang]}" loading="lazy" decoding="async" />${f.imageCredit ? `<span class="img-credit">Photo: ${f.imageCredit}</span>` : ''}` : carSVG(f.shape, f.accent)}</a></div>
             <div class="feature-body">
               <div class="feature-tag">${f['tag_' + lang]}</div>
               <h3 class="feature-title"><a href="/stories/${f.slug}" style="color:inherit;text-decoration:none;">${f['title_' + lang]}</a></h3>
@@ -497,7 +507,7 @@ function pageHome() {
       <div class="tech-grid">
         ${D.tech.map(tech => `
           <article class="tech-card">
-            <div class="tech-num">${tech.num}</div>
+            <div class="tech-num" aria-hidden="true">${tech.num}</div>
             <h3>${tech['title_' + lang]}</h3>
             <p>${tech['desc_' + lang]}</p>
             <div class="tech-tags">
@@ -751,7 +761,7 @@ function pageNews() {
         <div class="feature-grid">
           ${SITE_DATA.features.map(f => `
             <article class="feature-card${f.large ? ' large' : ''}">
-              <div class="feature-thumb${f.image ? ' has-photo' : ''}"><a href="/stories/${f.slug}">${f.image ? `<img src="/${f.image}" alt="${f['title_' + lang]}" loading="lazy" />${f.imageCredit ? `<span class="img-credit">Photo: ${f.imageCredit}</span>` : ''}` : carSVG(f.shape, f.accent)}</a></div>
+              <div class="feature-thumb${f.image ? ' has-photo' : ''}"><a href="/stories/${f.slug}">${f.image ? `<img src="/${f.image}" alt="${f['title_' + lang]}" loading="lazy" decoding="async" />${f.imageCredit ? `<span class="img-credit">Photo: ${f.imageCredit}</span>` : ''}` : carSVG(f.shape, f.accent)}</a></div>
               <div class="feature-body">
                 <div class="feature-tag">${f['tag_' + lang]}</div>
                 <h3 class="feature-title"><a href="/stories/${f.slug}" style="color:inherit;text-decoration:none;">${f['title_' + lang]}</a></h3>
@@ -782,7 +792,7 @@ function pageTech() {
         <div class="tech-grid">
           ${SITE_DATA.tech.map(tech => `
             <article class="tech-card">
-              <div class="tech-num">${tech.num}</div>
+              <div class="tech-num" aria-hidden="true">${tech.num}</div>
               <h3>${tech['title_' + lang]}</h3>
               <p>${tech['desc_' + lang]}</p>
               <div class="tech-tags">
@@ -1003,7 +1013,7 @@ function pageEditorialPolicy() {
           S('Every factual claim traces to a primary or reputable secondary source, linked inline and listed in the Sources block at the end of each article. We do not invent numbers. Where figures are estimates or approximations, we mark them as such.',
             '每一个事实性表述都可追溯到一手或可信的二手信源，正文内联引用并在文末 Sources 区块列出。我们不编造数字；估算或近似值会明确标注。'))}
         ${sec(S('How our articles are produced', '文章的生产方式'),
-          S('Daily coverage is compiled by TopChinaCar\\u2019s editorial system with AI assistance, from the primary sources cited in every story, and follows a fixed structure: what happened, why it matters, market context, impact on Chinese automakers, and what to watch next. Feature analysis is written and edited independently of any automaker.',
+          S('Daily coverage is compiled by TopChinaCar’s editorial system with AI assistance, from the primary sources cited in every story, and follows a fixed structure: what happened, why it matters, market context, impact on Chinese automakers, and what to watch next. Feature analysis is written and edited independently of any automaker.',
             '每日报道由 TopChinaCar 的编辑系统在 AI 辅助下，基于每篇文章所引用的一手信源编写，并遵循固定结构：发生了什么、为什么重要、市场背景、对中国车企的影响、下一步看什么。深度分析独立于任何车企撰写与编辑。'))}
         ${sec(S('Independence', '独立性'),
           S('No automaker, exporter or supplier pays for coverage or reviews stories before publication. Commercial relationships, if any, are disclosed on the page they touch.',
@@ -1072,6 +1082,7 @@ function pageNewsletterLanding() {
             <h2>${S('Subscribe by email', '邮箱订阅日报')}</h2>
             <p>${S('No generic updates. One focused daily brief on the China auto globalization signals global operators need to understand.', '不是泛泛更新，而是一封聚焦全球从业者需要理解的中国汽车全球化信号日报。')}</p>
             <form class="newsletter-form" id="newsletterForm">
+              <label class="sr-only" for="newsletterEmail">${S('Email address', '邮箱地址')}</label>
               <input class="newsletter-input" id="newsletterEmail" type="email" name="email" placeholder="${S('your@email.com', '你的邮箱')}" required />
               <button class="newsletter-btn" type="submit">${S('Subscribe', '订阅日报')}</button>
             </form>
@@ -1097,7 +1108,7 @@ function pageNewsletterLanding() {
             <div class="section-eyebrow">${S('What you get', '你会收到什么')}</div>
             <h2>${S('A focused daily read, not an inbox dump.', '一封有主题的日报，不是信息堆砌。')}</h2>
             <ul>
-              <li>${S('The day\\u2019s most important China auto globalization signals', '当天最重要的中国汽车全球化信号')}</li>
+              <li>${S('The day’s most important China auto globalization signals', '当天最重要的中国汽车全球化信号')}</li>
               <li>${S('One market or policy shift explained in plain language when it matters', '重要市场或政策变化会用清晰语言解释')}</li>
               <li>${S('Company moves from BYD, Geely, Chery, SAIC, Changan, GWM, NIO, Xpeng, Li Auto and others', '覆盖比亚迪、吉利、奇瑞、上汽、长安、长城、蔚来、小鹏、理想等公司的关键动作')}</li>
               <li>${S('Source links for numbers, policies and company announcements', '涉及数据、政策与企业公告时附信源链接')}</li>

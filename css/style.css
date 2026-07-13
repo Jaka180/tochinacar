@@ -36,6 +36,17 @@ html[lang="zh"] {
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 [hidden] { display: none !important; }
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
 html,
 body {
   overflow-x: hidden;
@@ -1209,6 +1220,7 @@ section { padding: clamp(64px, 8vw, 120px) 0; }
 
 /* ============ TECH SECTION ============ */
 .tech-section { background: var(--paper-2); }
+.tech-section .section-eyebrow { color: var(--accent-deep); }
 .tech-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1226,7 +1238,7 @@ section { padding: clamp(64px, 8vw, 120px) 0; }
   font-family: var(--serif);
   font-size: 64px;
   font-weight: 900;
-  color: var(--paper-2);
+  color: #94908a;
   position: absolute;
   top: 24px;
   right: 32px;
@@ -1725,7 +1737,7 @@ section { padding: clamp(64px, 8vw, 120px) 0; }
   margin-bottom: 12px;
 }
 .footer-brand p { font-size: 14px; line-height: 1.6; max-width: 36ch; margin: 0; }
-.footer-col h4 {
+.footer-heading {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.18em;
@@ -1784,6 +1796,24 @@ section { padding: clamp(64px, 8vw, 120px) 0; }
   }
 }
 @media (max-width: 720px) {
+  .admin-link { display: none; }
+  .header-inner,
+  .header-tools { gap: 8px; }
+  .logo { gap: 8px; min-width: 0; }
+  .logo-main { font-size: 18px; }
+  .lang-toggle {
+    min-height: 44px;
+    padding: 8px 10px;
+    flex-shrink: 0;
+  }
+  .menu-btn {
+    width: 44px;
+    height: 44px;
+    padding: 11px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
   .logo-sub { display: none; }
   .feature-grid { grid-template-columns: 1fr; }
   .feature-card.large { grid-column: auto; }
@@ -2139,7 +2169,7 @@ html[lang="zh"] .hero-title { letter-spacing: 0; }
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: #ff6b63;
   margin-bottom: 16px;
 }
 .newsletter-title {
@@ -2213,7 +2243,7 @@ html[lang="zh"] .hero-title { letter-spacing: 0; }
 .newsletter-note {
   font-family: var(--mono);
   font-size: 10.5px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.52);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;

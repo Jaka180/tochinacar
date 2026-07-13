@@ -12,10 +12,85 @@ const vm = require('vm');
 
 const ROOT = __dirname;
 const SITE = 'https://www.topchinacar.com';
-const BUILD_V = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, ''); // cache-busting version
-const TODAY = new Date().toISOString().slice(0, 10);
+const SITE_TIME_ZONE = 'Asia/Shanghai';
+const BUILD_NOW = process.env.BUILD_NOW ? new Date(process.env.BUILD_NOW) : new Date();
+if (Number.isNaN(BUILD_NOW.getTime())) {
+  throw new Error(`Invalid BUILD_NOW value: ${process.env.BUILD_NOW}`);
+}
+
+function dateInTimeZone(date, timeZone = SITE_TIME_ZONE) {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+function shiftIsoDate(date, days) {
+  const shifted = new Date(`${date}T12:00:00Z`);
+  shifted.setUTCDate(shifted.getUTCDate() + days);
+  return shifted.toISOString().slice(0, 10);
+}
+
+const BUILD_V = BUILD_NOW.toISOString().slice(0, 16).replace(/[-:T]/g, ''); // cache-busting version
+const TODAY = dateInTimeZone(BUILD_NOW);
 const DEFAULT_OG_IMAGE = 'images/hero-xiaomi.jpg';
 const SITE_LOGO = 'images/topchinacar-logo.svg';
+
+const imageDimensionCache = new Map();
+
+function imageDimensions(src) {
+  const relative = String(src || '').replace(/^\//, '');
+  if (!relative.startsWith('images/')) return null;
+  if (imageDimensionCache.has(relative)) return imageDimensionCache.get(relative);
+
+  const file = path.join(ROOT, relative);
+  let result = null;
+  try {
+    const buffer = fs.readFileSync(file);
+    if (buffer.length >= 24 && buffer.toString('ascii', 1, 4) === 'PNG') {
+      result = { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+    } else if (buffer.length >= 4 && buffer[0] === 0xff && buffer[1] === 0xd8) {
+      let offset = 2;
+      const sofMarkers = new Set([0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf]);
+      while (offset + 8 < buffer.length) {
+        if (buffer[offset] !== 0xff) { offset += 1; continue; }
+        const marker = buffer[offset + 1];
+        offset += 2;
+        if (marker === 0xd8 || marker === 0xd9) continue;
+        if (offset + 2 > buffer.length) break;
+        const segmentLength = buffer.readUInt16BE(offset);
+        if (sofMarkers.has(marker) && offset + 7 <= buffer.length) {
+          result = {
+            width: buffer.readUInt16BE(offset + 5),
+            height: buffer.readUInt16BE(offset + 3)
+          };
+          break;
+        }
+        if (segmentLength < 2) break;
+        offset += segmentLength;
+      }
+    }
+  } catch (error) {
+    console.warn(`! unable to read image dimensions for ${relative}: ${error.message}`);
+  }
+
+  imageDimensionCache.set(relative, result);
+  return result;
+}
+
+function addImageDimensions(html) {
+  return html.replace(/<img\b[^>]*>/g, tag => {
+    if (/\bwidth=/.test(tag) && /\bheight=/.test(tag)) return tag;
+    const src = tag.match(/\bsrc="([^"]+)"/)?.[1];
+    const dimensions = imageDimensions(src);
+    if (!dimensions) return tag;
+    return tag.replace('<img', `<img width="${dimensions.width}" height="${dimensions.height}"`);
+  });
+}
 
 // ---- Collect daily articles (articles/*.json, written by the GCP pipeline) ----
 const ARTICLES_DIR = path.join(ROOT, 'articles');
@@ -212,7 +287,7 @@ function headerHTML(route) {
     `<a href="${href}"${href === route ? ' class="active"' : ''} data-i18n="${key}">${label}</a>`).join('\n      ');
   return `<header class="site-header" id="siteHeader">
   <div class="container header-inner">
-    <a href="/" class="logo" aria-label="TopChinaCar home">
+    <a href="/" class="logo">
       <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <rect width="32" height="32" rx="2" fill="currentColor"/>
         <text x="16" y="23" font-family="Playfair Display,serif" font-size="22" font-weight="900" text-anchor="middle" fill="#d4302a">T</text>
@@ -229,7 +304,7 @@ function headerHTML(route) {
 
     <div class="header-tools">
       <a class="admin-link" href="/newsletter" data-i18n="nav.newsletter">Newsletter</a>
-      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language (EN/中)" title="Switch language">
         <span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-zh">中</span>
       </button>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false">
@@ -261,6 +336,7 @@ const NEWSLETTER = `<section class="newsletter" aria-label="Newsletter subscript
     </div>
     <div class="newsletter-form-wrap">
       <form class="newsletter-form" id="newsletterForm">
+        <label class="sr-only" for="newsletterEmail" data-i18n="newsletter.emailLabel">Email address</label>
         <input class="newsletter-input" id="newsletterEmail" type="email" name="email" placeholder="your@email.com" required data-i18n-attr="placeholder:newsletter.placeholder" />
         <button class="newsletter-btn" type="submit" data-i18n="newsletter.cta">Subscribe</button>
       </form>
@@ -277,7 +353,7 @@ const FOOTER = `<footer class="site-footer">
       <p data-i18n="footer.tagline">An editorial guide to the new era of Chinese automobiles, written for the world.</p>
     </div>
     <div class="footer-col">
-      <h4 data-i18n="footer.explore">Explore</h4>
+      <h2 class="footer-heading" data-i18n="footer.explore">Explore</h2>
       <a href="/news" data-i18n="nav.news">News</a>
       <a href="/intelligence" data-i18n="nav.intelligence">Intelligence</a>
       <a href="/china-ev-news" data-i18n="nav.ev">EV</a>
@@ -287,7 +363,7 @@ const FOOTER = `<footer class="site-footer">
       <a href="/models" data-i18n="nav.models">Models</a>
     </div>
     <div class="footer-col">
-      <h4 data-i18n="footer.about">About</h4>
+      <h2 class="footer-heading" data-i18n="footer.about">About</h2>
       <a href="/about" data-i18n="nav.about">Our story</a>
       <a href="/editorial-policy" data-i18n="footer.editorial">Editorial Policy</a>
       <a href="/newsletter" data-i18n="footer.newsletter">Newsletter</a>
@@ -295,7 +371,7 @@ const FOOTER = `<footer class="site-footer">
       <a href="/privacy" data-i18n="footer.privacy">Privacy Policy</a>
     </div>
     <div class="footer-col footer-meta">
-      <h4 data-i18n="footer.status">Status</h4>
+      <h2 class="footer-heading" data-i18n="footer.status">Status</h2>
       <p>© 2026 TopChinaCar</p>
       <p data-i18n="footer.rights">Editorial, independent, worldwide.</p>
     </div>
@@ -522,7 +598,11 @@ function pageHTML(route, meta, mainHTML, opts = {}) {
   meta = { ...meta, title: escAttr(truncateMeta(meta.title, 75)), desc: escAttr(truncateMeta(meta.desc, 165)) };
   const modified = meta.modified || meta.published;
   const includeNewsletter = route !== '/newsletter';
-  return `<!DOCTYPE html>
+  const fontFamilies = isZh
+    ? 'family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700'
+    : 'family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@400;500;600;700';
+  const fontHref = `https://fonts.googleapis.com/css2?${fontFamilies}&display=optional`.replace(/&/g, '&amp;');
+  const html = `<!DOCTYPE html>
 <html lang="${isZh ? 'zh' : 'en'}">
 <head>
 <meta charset="UTF-8" />
@@ -555,7 +635,9 @@ ${meta.published ? `<meta property="article:published_time" content="${meta.publ
 
 ${route === '/' ? JSONLD + '\n' : ''}${extraHead ? extraHead + '\n' : ''}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="${fontHref}" as="style">
+<link href="${fontHref}" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="${fontHref}" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="/css/style.css?v=${BUILD_V}" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231a1a1a'/><text x='16' y='22' font-family='Playfair Display,serif' font-size='20' font-weight='900' text-anchor='middle' fill='%23d4302a'>T</text></svg>">
 </head>
@@ -577,6 +659,7 @@ ${FOOTER}
 </body>
 </html>
 `;
+  return addImageDimensions(html);
 }
 
 function staticCollectionItems(route) {
@@ -1874,7 +1957,7 @@ function safeDate(date) {
 //  - 栏目页 / 市场页 / 首页 / News 索引：随最新文章变化（列表内容确实更新了）
 //  - 其余静态页、品牌页、车型页：固定的内容修改日 STATIC_LASTMOD——
 //    只有真正改动这些页面的内容时才手动更新，避免"天天都是今天"让 Google 不信任 lastmod
-const STATIC_LASTMOD = '2026-07-06';
+const STATIC_LASTMOD = '2026-07-12';
 const latestArticleDate = articles.length ? safeDate(articles[0].date) : STATIC_LASTMOD;
 const FRESH_ROUTES = new Set(['/', '/news']);
 
@@ -1917,9 +2000,19 @@ const postLines = storyUrls.concat(articleUrls);
 fs.writeFileSync(path.join(ROOT, 'sitemap-posts.xml'), urlset(postLines.concat(zhMirror(postLines))));
 
 // 子 sitemap 3：Google News（仅最近 48 小时，含时间戳）
-const newsPubDate = a => a.published_at || `${safeDate(a.date)}T08:00:00+08:00`;
+const newsPubDate = a => a.published_at || safeDate(a.date);
+const newsDateCutoff = shiftIsoDate(TODAY, -2);
+const newsTimestampCutoff = BUILD_NOW.getTime() - 2 * 24 * 60 * 60 * 1000;
 const recentNews = articles
-  .filter(a => safeDate(a.date) >= new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10))
+  .filter(a => {
+    if (a.published_at) {
+      const publishedAt = Date.parse(a.published_at);
+      return Number.isFinite(publishedAt)
+        && publishedAt <= BUILD_NOW.getTime()
+        && publishedAt >= newsTimestampCutoff;
+    }
+    return a.date <= TODAY && a.date >= newsDateCutoff;
+  })
   .slice(0, 1000);
 const newsSitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -1950,8 +2043,11 @@ const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemapIndex);
 console.log(`✓ sitemap.xml (index) + pages(${pageLines.length * 2}) + posts(${postLines.length * 2}) + news(${recentNews.length})`);
 
-function rssDate(date) {
-  return new Date(`${safeDate(date)}T00:00:00Z`).toUTCString();
+function rssDate(article) {
+  if (article.published_at && Number.isFinite(Date.parse(article.published_at))) {
+    return new Date(article.published_at).toUTCString();
+  }
+  return new Date(`${safeDate(article.date)}T00:00:00Z`).toUTCString();
 }
 
 const feed = `<?xml version="1.0" encoding="UTF-8"?>
@@ -1961,13 +2057,13 @@ const feed = `<?xml version="1.0" encoding="UTF-8"?>
     <link>${SITE}/news</link>
     <description>Chinese auto news, EVs, exports, policy and global market coverage from TopChinaCar.</description>
     <language>en</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <lastBuildDate>${BUILD_NOW.toUTCString()}</lastBuildDate>
     <atom:link href="${SITE}/feed.xml" rel="self" type="application/rss+xml" />
 ${articles.slice(0, 50).map(a => `    <item>
       <title>${xmlEscape(a.title_en)}</title>
       <link>${SITE}/news/${xmlEscape(a.slug)}</link>
       <guid isPermaLink="true">${SITE}/news/${xmlEscape(a.slug)}</guid>
-      <pubDate>${rssDate(a.date)}</pubDate>
+      <pubDate>${rssDate(a)}</pubDate>
       <description>${xmlEscape(a.excerpt_en || plainText(a.html_en).slice(0, 240))}</description>
       <category>${xmlEscape(a.tag_en || 'Daily Briefing')}</category>
     </item>`).join('\n')}

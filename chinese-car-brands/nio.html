@@ -34,8 +34,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=202607112228" />
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&amp;family=Inter:wght@400;500;600;700&amp;display=optional" as="style">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&amp;family=Inter:wght@400;500;600;700&amp;display=optional" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&amp;family=Inter:wght@400;500;600;700&amp;display=optional" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="/css/style.css?v=202607120431" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231a1a1a'/><text x='16' y='22' font-family='Playfair Display,serif' font-size='20' font-weight='900' text-anchor='middle' fill='%23d4302a'>T</text></svg>">
 <script type="application/ld+json">
 {
@@ -65,7 +67,7 @@
 
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
-    <a href="/" class="logo" aria-label="TopChinaCar home">
+    <a href="/" class="logo">
       <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <rect width="32" height="32" rx="2" fill="currentColor"/>
         <text x="16" y="23" font-family="Playfair Display,serif" font-size="22" font-weight="900" text-anchor="middle" fill="#d4302a">T</text>
@@ -90,7 +92,7 @@
 
     <div class="header-tools">
       <a class="admin-link" href="/newsletter" data-i18n="nav.newsletter">Newsletter</a>
-      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language (EN/中)" title="Switch language">
         <span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-zh">中</span>
       </button>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false">
@@ -139,7 +141,7 @@
       <div class="models-grid">
         
     <article class="model-card">
-      <div class="model-thumb has-photo"><a href="/models/nio-et5"><img src="/images/nio-et5.jpg" alt="NIO ET5" loading="lazy" /><span class="img-credit">Photo: conceptphoto.info / CC BY 2.0</span></a></div>
+      <div class="model-thumb has-photo"><a href="/models/nio-et5"><img width="1400" height="935" src="/images/nio-et5.jpg" alt="NIO ET5" loading="lazy" decoding="async" /><span class="img-credit">Photo: conceptphoto.info / CC BY 2.0</span></a></div>
       <div class="model-body">
         <div class="model-brand">NIO</div>
         <h3 class="model-name"><a href="/models/nio-et5" style="color:inherit;text-decoration:none;">ET5</a></h3>
@@ -155,7 +157,7 @@
     </article>
   
     <article class="model-card">
-      <div class="model-thumb has-photo"><a href="/models/nio-et9"><img src="/images/nio-et9.jpg" alt="NIO ET9" loading="lazy" /><span class="img-credit">Photo: S5A-0043 / CC BY 4.0</span></a></div>
+      <div class="model-thumb has-photo"><a href="/models/nio-et9"><img width="1400" height="1120" src="/images/nio-et9.jpg" alt="NIO ET9" loading="lazy" decoding="async" /><span class="img-credit">Photo: S5A-0043 / CC BY 4.0</span></a></div>
       <div class="model-body">
         <div class="model-brand">NIO</div>
         <h3 class="model-name"><a href="/models/nio-et9" style="color:inherit;text-decoration:none;">ET9</a></h3>
@@ -171,7 +173,7 @@
     </article>
   
     <article class="model-card">
-      <div class="model-thumb has-photo"><a href="/models/nio-onvo-l60"><img src="/images/nio-onvo-l60.jpg" alt="NIO Onvo L60" loading="lazy" /><span class="img-credit">Photo: Tim Wu / CC BY-SA 4.0</span></a></div>
+      <div class="model-thumb has-photo"><a href="/models/nio-onvo-l60"><img width="1400" height="933" src="/images/nio-onvo-l60.jpg" alt="NIO Onvo L60" loading="lazy" decoding="async" /><span class="img-credit">Photo: Tim Wu / CC BY-SA 4.0</span></a></div>
       <div class="model-body">
         <div class="model-brand">NIO</div>
         <h3 class="model-name"><a href="/models/nio-onvo-l60" style="color:inherit;text-decoration:none;">Onvo L60</a></h3>
@@ -187,7 +189,7 @@
     </article>
   
     <article class="model-card">
-      <div class="model-thumb has-photo"><a href="/models/nio-firefly"><img src="/images/nio-firefly.jpg" alt="NIO Firefly" loading="lazy" /><span class="img-credit">Photo: Matti Blume / CC BY-SA</span></a></div>
+      <div class="model-thumb has-photo"><a href="/models/nio-firefly"><img width="1400" height="1050" src="/images/nio-firefly.jpg" alt="NIO Firefly" loading="lazy" decoding="async" /><span class="img-credit">Photo: Matti Blume / CC BY-SA</span></a></div>
       <div class="model-body">
         <div class="model-brand">NIO</div>
         <h3 class="model-name"><a href="/models/nio-firefly" style="color:inherit;text-decoration:none;">Firefly</a></h3>
@@ -217,6 +219,7 @@
     </div>
     <div class="newsletter-form-wrap">
       <form class="newsletter-form" id="newsletterForm">
+        <label class="sr-only" for="newsletterEmail" data-i18n="newsletter.emailLabel">Email address</label>
         <input class="newsletter-input" id="newsletterEmail" type="email" name="email" placeholder="your@email.com" required data-i18n-attr="placeholder:newsletter.placeholder" />
         <button class="newsletter-btn" type="submit" data-i18n="newsletter.cta">Subscribe</button>
       </form>
@@ -233,7 +236,7 @@
       <p data-i18n="footer.tagline">An editorial guide to the new era of Chinese automobiles, written for the world.</p>
     </div>
     <div class="footer-col">
-      <h4 data-i18n="footer.explore">Explore</h4>
+      <h2 class="footer-heading" data-i18n="footer.explore">Explore</h2>
       <a href="/news" data-i18n="nav.news">News</a>
       <a href="/intelligence" data-i18n="nav.intelligence">Intelligence</a>
       <a href="/china-ev-news" data-i18n="nav.ev">EV</a>
@@ -243,7 +246,7 @@
       <a href="/models" data-i18n="nav.models">Models</a>
     </div>
     <div class="footer-col">
-      <h4 data-i18n="footer.about">About</h4>
+      <h2 class="footer-heading" data-i18n="footer.about">About</h2>
       <a href="/about" data-i18n="nav.about">Our story</a>
       <a href="/editorial-policy" data-i18n="footer.editorial">Editorial Policy</a>
       <a href="/newsletter" data-i18n="footer.newsletter">Newsletter</a>
@@ -251,17 +254,17 @@
       <a href="/privacy" data-i18n="footer.privacy">Privacy Policy</a>
     </div>
     <div class="footer-col footer-meta">
-      <h4 data-i18n="footer.status">Status</h4>
+      <h2 class="footer-heading" data-i18n="footer.status">Status</h2>
       <p>© 2026 TopChinaCar</p>
       <p data-i18n="footer.rights">Editorial, independent, worldwide.</p>
     </div>
   </div>
 </footer>
 
-<script src="/js/data.js?v=202607112228"></script>
-<script src="/js/i18n.js?v=202607112228"></script>
-<script src="/js/articles-data.js?v=202607112228"></script>
-<script src="/js/pages.js?v=202607112228"></script>
-<script src="/js/app.js?v=202607112228"></script>
+<script src="/js/data.js?v=202607120431"></script>
+<script src="/js/i18n.js?v=202607120431"></script>
+<script src="/js/articles-data.js?v=202607120431"></script>
+<script src="/js/pages.js?v=202607120431"></script>
+<script src="/js/app.js?v=202607120431"></script>
 </body>
 </html>
