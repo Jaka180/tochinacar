@@ -11,6 +11,16 @@ const SITE_ARTICLES = [
     "tag_zh": "深度分析"
   },
   {
+    "slug": "google-in-cars-from-suitcase-to-landlord",
+    "date": "2026-07-18",
+    "title_en": "From Suitcase to Landlord: Google's Decade Inside the Car",
+    "title_zh": "从行李箱到房东：Google进车这十年",
+    "excerpt_en": "GM is removing phone projection while deepening its use of Google's embedded stack. The apparent contradiction explains how Google moved from a guest on the screen to infrastructure inside the cockpit—and why Chinese automakers are becoming the next growth vector.",
+    "excerpt_zh": "GM一边取消手机投屏，一边加深对Google嵌入式技术栈的使用。这组悖论解释了Google如何从屏幕上的住客变成座舱基础设施，也解释了中国车企出海为何成为它的新增长变量。",
+    "tag_en": "Analysis",
+    "tag_zh": "深度分析"
+  },
+  {
     "slug": "2026-07-12-china-auto-daily",
     "date": "2026-07-12",
     "title_en": "China's Auto Exports Cross 1M Units in June as BYD, Geely and XPeng Push Global Offensive",

@@ -12,4 +12,15 @@
       <news:title>In-Car AI Will Be Won by the Need, Not the Model</news:title>
     </news:news>
   </url>
+  <url>
+    <loc>https://www.topchinacar.com/news/google-in-cars-from-suitcase-to-landlord</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-18T22:32:00+08:00</news:publication_date>
+      <news:title>From Suitcase to Landlord: Google&apos;s Decade Inside the Car</news:title>
+    </news:news>
+  </url>
 </urlset>
