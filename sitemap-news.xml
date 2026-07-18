@@ -2,36 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
-    <loc>https://www.topchinacar.com/news/2026-07-12-china-auto-daily</loc>
+    <loc>https://www.topchinacar.com/news/in-car-ai-assistants-win-on-need-not-model</loc>
     <news:news>
       <news:publication>
         <news:name>TopChinaCar</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-07-12T06:28:44+08:00</news:publication_date>
-      <news:title>China&apos;s Auto Exports Cross 1M Units in June as BYD, Geely and XPeng Push Global Offensive</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/2026-07-11-china-auto-daily</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-11</news:publication_date>
-      <news:title>China&apos;s Auto Exporters Post Blowout H1 2026: Chery at 944K, BYD at 792K, Geely Tops 100K in a Month</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.topchinacar.com/news/2026-07-10-china-auto-daily</loc>
-    <news:news>
-      <news:publication>
-        <news:name>TopChinaCar</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-07-10</news:publication_date>
-      <news:title>China Auto Exports Hit New Highs in H1 2026: BYD, Chery, Geely All Surpass 100k Monthly</news:title>
+      <news:publication_date>2026-07-18T21:13:57+08:00</news:publication_date>
+      <news:title>In-Car AI Will Be Won by the Need, Not the Model</news:title>
     </news:news>
   </url>
 </urlset>

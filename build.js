@@ -1882,6 +1882,7 @@ function articleMain(a) {
 }
 
 function articleImage(a) {
+  if (a.image && /^images\/[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(a.image) && !a.image.includes('..')) return a.image;
   const text = `${a.title_en || ''} ${a.excerpt_en || ''} ${a.title_zh || ''} ${a.excerpt_zh || ''}`.toLowerCase();
   const brand = SITE_DATA.brands.find(b =>
     text.includes(String(b.name).toLowerCase()) || (b.cn && text.includes(String(b.cn).toLowerCase())));
