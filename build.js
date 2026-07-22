@@ -1078,39 +1078,165 @@ const MARKETS = [
   { slug: 'europe', name_en: 'Europe', name_zh: '欧洲',
     kw: /Europe|\bEU\b|Germany|France|Spain|Italy|UK\b|Britain|Norway|Netherlands|Hungary|Munich|Zaragoza|Poland|Belgium/i,
     intro_en: 'Europe is the highest-stakes market for Chinese automakers: big EV demand, strong incumbent brands, and anti-subsidy tariffs that have pushed BYD, Chery, Leapmotor and others toward local production in Hungary, Spain and beyond. MG remains the best-selling Chinese badge; premium EV brands test the waters from Norway outward.',
-    intro_zh: '欧洲是中国车企风险与回报最高的市场：电动车需求大、本土品牌强势，反补贴关税正把比亚迪、奇瑞、零跑等推向匈牙利、西班牙等地的本地化生产。MG 仍是销量最高的中国血统品牌，高端电动品牌则从挪威开始试水。' },
+    intro_zh: '欧洲是中国车企风险与回报最高的市场：电动车需求大、本土品牌强势，反补贴关税正把比亚迪、奇瑞、零跑等推向匈牙利、西班牙等地的本地化生产。MG 仍是销量最高的中国血统品牌，高端电动品牌则从挪威开始试水。',
+    body_en: `<h3>Scale and momentum</h3>
+<p>Europe is where Chinese automakers face their toughest competition and their biggest prize. In full-year 2025, Chinese brands sold roughly 811,000 vehicles across Europe — up about 99% year on year — for close to a 6.1% market share, according to JATO Dynamics. December 2025 was the first month Chinese-brand sales topped 100,000 units, briefly reaching around 10% share. That momentum carried into 2026: Chinese brands roughly doubled their EU registration share to about 6% in early 2026, and by mid-year had out-registered Mercedes in a single month and Ford over the first half. Chinese brands now account for roughly 11% of Europe's electrified (BEV + PHEV) market.</p>
+<h3>Who is winning</h3>
+<p>MG (SAIC) remains the volume leader, with roughly 307,000 units in 2025, and it briefly outsold Tesla in the first half of 2025. BYD is the fastest riser — about 187,000 units in 2025, up from under 50,000 in 2024 — with Q1 2026 registrations up nearly 170%. Chery (via Omoda and Jaecoo) and Leapmotor (through its Stellantis joint venture) both grew triple digits in H1 2026. Key models include the MG ZS, MG3 and MG4; the BYD Dolphin Surf budget EV (launched May 2025 from around €23,000–26,000), Atto 3 and Seal; the Omoda 5 and Jaecoo 7 PHEV; and the Leapmotor T03 and C10.</p>
+<h3>Tariffs and localisation</h3>
+<p>Trade policy is the defining variable. Since October 2024 the EU has levied definitive anti-subsidy duties — on top of the standard 10% import duty — of roughly 17.0% on BYD, 18.8% on Geely and 35.3% on SAIC, pushing total tariffs as high as about 45%. Brussels has been negotiating minimum-import-price undertakings as an alternative and is weighing extending measures to plug-in hybrids. The response is localisation: BYD's plant in Szeged, Hungary is ramping to mass production in 2026 (targeting 300,000 units a year), a Turkey plant is due around mid-2026, Leapmotor's T03 is built at Stellantis's Tychy plant in Poland, and Chery is restarting the former Nissan plant in Barcelona under its Ebro venture. Growth is increasingly tilting toward PHEVs and hybrids to sidestep the BEV-specific duties.</p>
+<p style="font-size:13px;color:#6b7280;">Figures reflect 2025 full-year and 2026 H1 data (JATO Dynamics, European Commission, company releases).</p>`,
+    body_zh: `<h3>规模与势头</h3>
+<p>欧洲是中国车企竞争最激烈、也回报最高的战场。据 JATO Dynamics，2025 全年中国品牌在欧洲销量约 81 万辆，同比增长约 99%，市场份额接近 6.1%。2025 年 12 月首次单月突破 10 万辆，份额一度接近 10%。这一势头延续至 2026 年：中国品牌在欧盟的上牌份额较上年翻倍至约 6%，年中更曾单月超过奔驰、上半年累计超过福特。目前中国品牌约占欧洲电动化（BEV+PHEV）市场的 11%。</p>
+<h3>谁在领跑</h3>
+<p>MG（上汽）仍是销量冠军，2025 年约 30.7 万辆，并在 2025 上半年一度反超特斯拉。比亚迪增速最快——2025 年约 18.7 万辆，而 2024 年尚不足 5 万辆，2026 年一季度上牌量同比增长近 170%。奇瑞（经 Omoda、Jaecoo）与零跑（经 Stellantis 合资）在 2026 上半年均为三位数增长。主力车型包括 MG ZS、MG3、MG4；比亚迪 Dolphin Surf 入门电动车（2025 年 5 月起售，约 €2.3 万–2.6 万）、Atto 3、Seal；Omoda 5 与 Jaecoo 7 插混；以及零跑 T03、C10。</p>
+<h3>关税与本地化</h3>
+<p>贸易政策是决定性变量。自 2024 年 10 月起，欧盟在 10% 基准关税之上加征反补贴税——比亚迪约 +17.0%、吉利 +18.8%、上汽 +35.3%，使综合税率最高达约 45%。欧盟一直在谈判以"最低进口价"作为替代方案，并考虑将措施扩展至插电混动。车企的应对是本地化：比亚迪匈牙利 Szeged 工厂 2026 年进入量产（目标年产 30 万辆），土耳其工厂预计 2026 年年中投产，零跑 T03 在 Stellantis 波兰 Tychy 工厂生产，奇瑞则以 Ebro 品牌重启巴塞罗那前日产工厂。为规避针对纯电的关税，增长正日益向 PHEV 与混动倾斜。</p>
+<p style="font-size:13px;color:#6b7280;">数据为 2025 全年及 2026 上半年（来源：JATO Dynamics、欧盟委员会、企业公告）。</p>` },
   { slug: 'middle-east', name_en: 'Middle East', name_zh: '中东',
     kw: /Middle East|Gulf|Saudi|UAE|Dubai|Qatar|Kuwait|Oman|Bahrain|Israel|GCC/i,
     intro_en: 'The Gulf has become one of the fastest-adopting regions for Chinese cars — ICE SUVs first, EVs increasingly. Chery, GWM, BYD and MG all run growing dealer networks, and Dubai doubles as a re-export hub for the wider region.',
-    intro_zh: '海湾地区已成为中国汽车渗透最快的区域之一——先是燃油 SUV，如今电动车加速跟进。奇瑞、长城、比亚迪、MG 的经销网络都在扩张，迪拜还是面向更大区域的转口枢纽。' },
+    intro_zh: '海湾地区已成为中国汽车渗透最快的区域之一——先是燃油 SUV，如今电动车加速跟进。奇瑞、长城、比亚迪、MG 的经销网络都在扩张，迪拜还是面向更大区域的转口枢纽。',
+    body_en: `<h3>A fast-opening region</h3>
+<p>The Gulf Cooperation Council (GCC) has moved from the margins to the centre of China's export map. Chinese brands' combined GCC share rose from around 2% in 2019 to an estimated 15% by 2025, according to Roland Berger. Low tariffs are a big reason: the GCC applies a common external duty of roughly 5% on vehicles, with free movement between member states — a stark contrast to the EU and US walls. Industry trackers estimate the Gulf, led by Saudi Arabia and the UAE, absorbed well over a million China-made vehicles in 2025, making it one of China's largest external auto markets, and Middle East imports of Chinese EVs jumped sharply year on year.</p>
+<h3>Brands and models</h3>
+<p>The strongest players are MG, Geely, Changan, Haval and Chery on the ICE side, with Jetour a breakout success — it climbed into the UAE's top brands on the strength of the T2 SUV — and BYD leading on EVs. Typical best-sellers are the Jetour T1 and T2, Changan CS55/CS75, Haval H6 and Jolion, MG RX5 and ZS, Geely Coolray and Emgrand, and the BYD Atto 3, Song, Seal and Han. Dubai's Jebel Ali free zone acts as a regional assembly and distribution hub — Jetour, for example, uses it to stage a wider GCC rollout — though most volume is still imported fully built rather than assembled locally.</p>
+<h3>ICE today, EV tomorrow</h3>
+<p>The region remains overwhelmingly an ICE and SUV market — cheap fuel, long distances and extreme heat all favour combustion — but EV sales are climbing fast off a low base, and China dominates the Gulf's EV import mix. Governments are pulling rather than pushing: Saudi Vision 2030 and UAE EV targets back charging infrastructure and incentives instead of punitive tariffs. Notable 2025–2026 moves include Jetour's aggressive UAE expansion, major dealer groups such as Gargash adding Chinese franchises, and BYD's regional manufacturing push spanning Egypt entry, Pakistan production and Saudi feasibility studies.</p>
+<p style="font-size:13px;color:#6b7280;">Regional shares are estimates — the GCC has no single unified registration body (sources: Roland Berger, AGBI, company releases).</p>`,
+    body_zh: `<h3>一个快速开放的区域</h3>
+<p>海湾合作委员会（GCC）已从中国出口版图的边缘走到中心。据罗兰贝格，中国品牌在 GCC 的合计份额从 2019 年约 2% 升至 2025 年约 15%。低关税是重要原因：GCC 对整车统一征收约 5% 的对外关税，成员国之间自由流通，与欧美的高墙形成鲜明对比。行业机构估计，以沙特和阿联酋为首的海湾在 2025 年吸纳了远超百万辆的中国制造汽车，成为中国最大的海外汽车市场之一，中东对中国电动车的进口额亦同比大幅跃升。</p>
+<h3>品牌与车型</h3>
+<p>燃油车阵营中最强的是 MG、吉利、长安、哈弗与奇瑞；捷途（Jetour）异军突起，凭借 T2 SUV 跻身阿联酋畅销品牌之列；比亚迪则领跑电动车。典型畅销车型有捷途 T1/T2、长安 CS55/CS75、哈弗 H6 与 Jolion、MG RX5 与 ZS、吉利 Coolray 与 Emgrand，以及比亚迪 Atto 3、Song、Seal、Han。迪拜杰贝阿里自由区扮演区域组装与分销枢纽——例如捷途以此为跳板向整个 GCC 铺开——但目前多数销量仍为整车进口，而非本地组装。</p>
+<h3>今天是燃油，明天是电动</h3>
+<p>该区域仍以燃油 SUV 为绝对主体——低油价、长距离、极端高温都偏向内燃机——但电动车正从低基数快速攀升，而中国主导着海湾的电动车进口结构。当地政府以"拉"代"推"：沙特 2030 愿景与阿联酋电动化目标以充电基础设施和补贴激励为主，而非惩罚性关税。2025–2026 年的看点包括捷途在阿联酋的激进扩张、Gargash 等大型经销集团新增中国品牌代理，以及比亚迪进入埃及、在巴基斯坦投产、在沙特开展可行性研究的区域制造布局。</p>
+<p style="font-size:13px;color:#6b7280;">区域份额为估算值——GCC 没有统一的上牌统计机构（来源：罗兰贝格、AGBI、企业公告）。</p>` },
   { slug: 'saudi-arabia', name_en: 'Saudi Arabia', name_zh: '沙特阿拉伯',
     kw: /Saudi|Riyadh|Jeddah|KSA/i,
     intro_en: 'Saudi Arabia is the largest Gulf car market and a priority for Chinese brands, with rapid share gains in SUVs and growing EV ambitions tied to Vision 2030.',
-    intro_zh: '沙特是海湾最大的汽车市场，也是中国品牌的优先目标：SUV 份额快速攀升，电动化雄心与 2030 愿景绑定。' },
+    intro_zh: '沙特是海湾最大的汽车市场，也是中国品牌的优先目标：SUV 份额快速攀升，电动化雄心与 2030 愿景绑定。',
+    body_en: `<h3>The Gulf's biggest prize</h3>
+<p>Saudi Arabia is the largest car market in the Gulf and a priority target for Chinese brands, which collectively reached roughly 13.4% of the Saudi market in 2025 — with four Chinese names (Changan, MG, Geely and Jetour) in the top ten. But 2025 was a year of churn: even as the collective Chinese share rose, several established brands slipped. On local-market estimates, Changan led Chinese brands at about 11,600 units (down roughly 19% year on year), MG at about 10,200 (down about 34%) and Geely at about 9,500 (down about 31%), while Jetour surged around 63% to about 8,300 units on the strength of its T1 and T2 SUVs. Note that the broader Saudi market also contracted into 2026, so some of the decline is market-wide rather than brand-specific.</p>
+<h3>Models and imports</h3>
+<p>Best-sellers skew to SUVs and sedans: the Changan CS35/CS75 and Eado, MG RX5/ZS/5, Geely Coolray, Emgrand and Okavango, Jetour T1/T2 and Dashing, Haval H6 and Jolion, and BYD's Atto 3, Song and Han. Imports carry a 5% customs duty plus 15% VAT — an effective cost of roughly 20% of value — and vehicles must be manufactured within five years of import, with SASO conformity certification handled through the FASAH platform.</p>
+<h3>Local production and Vision 2030</h3>
+<p>Manufacturing is a national ambition under Vision 2030. The King Salman Automotive Cluster in King Abdullah Economic City (KAEC), formalised in 2025, is the anchor. So far the confirmed plants are non-Chinese — Lucid (kit assembly near Jeddah, full manufacturing targeted for end-2026), Hyundai (KAEC, around 50,000 units a year) and Saudi's own Ceer EV brand — while BYD has been running feasibility studies for a Saudi assembly plant via a local partner but has not committed. EV penetration is still low but is a state priority, backed by the sovereign PIF through Lucid, Ceer and the EVIQ charging network. Chinese brands' 2025 dip was partly blamed on thin hybrid and EV line-ups against shifting demand.</p>
+<p style="font-size:13px;color:#6b7280;">Brand volumes are 2025 local-market estimates; the market contracted further in early 2026 (sources: local registration trackers, PIF, S&P Global).</p>`,
+    body_zh: `<h3>海湾最大的战利品</h3>
+<p>沙特是海湾最大的汽车市场，也是中国品牌的优先目标。2025 年中国品牌合计约占沙特市场 13.4%，长安、MG、吉利、捷途四个中国品牌进入前十。但 2025 年也是"洗牌之年"：尽管合计份额上升，多个老牌却在下滑。据当地市场估算，长安以约 1.16 万辆领跑中国品牌（同比约 -19%），MG 约 1.02 万辆（约 -34%），吉利约 9,500 辆（约 -31%），而捷途凭借 T1、T2 SUV 逆势增长约 63% 至约 8,300 辆。需要说明的是，沙特整体市场进入 2026 年也在收缩，因此部分下滑属于全市场现象，而非单一品牌问题。</p>
+<h3>车型与进口</h3>
+<p>畅销车型以 SUV 和轿车为主：长安 CS35/CS75 与 Eado、MG RX5/ZS/5、吉利 Coolray/Emgrand/Okavango、捷途 T1/T2 与 Dashing、哈弗 H6 与 Jolion，以及比亚迪 Atto 3、Song、Han。进口车需缴 5% 关税加 15% 增值税——综合成本约为车值的 20%——且车辆须在进口年份前五年内生产，SASO 合规认证通过 FASAH 平台办理。</p>
+<h3>本地生产与 2030 愿景</h3>
+<p>制造是 2030 愿景下的国家雄心。2025 年正式确立的阿卜杜拉国王经济城（KAEC）"萨勒曼国王汽车集群"是核心载体。目前已确认的工厂均非中国企业——Lucid（吉达附近的组件组装，完整制造目标为 2026 年底）、现代（KAEC，年产约 5 万辆）以及沙特自有的 Ceer 电动品牌——比亚迪则一直在通过本地伙伴开展沙特组装厂可行性研究，但尚未承诺落地。电动车渗透率仍低，但属国家优先事项，由主权基金 PIF 通过 Lucid、Ceer 及 EVIQ 充电网络支持。中国品牌 2025 年的回落，部分被归因于混动与电动产品线相对单薄、未能跟上需求变化。</p>
+<p style="font-size:13px;color:#6b7280;">品牌销量为 2025 年当地市场估算；2026 年初市场进一步收缩（来源：当地上牌统计、PIF、S&P Global）。</p>` },
   { slug: 'uae', name_en: 'UAE', name_zh: '阿联酋',
     kw: /UAE|Dubai|Abu Dhabi|Emirates/i,
     intro_en: 'The UAE combines a wealthy domestic market with Dubai’s role as the region’s trading hub — many Chinese brands stage their Middle East entry, flagship showrooms and regional distribution here.',
-    intro_zh: '阿联酋既有高消费本地市场，又有迪拜的区域贸易枢纽角色——许多中国品牌把中东首发、旗舰展厅与区域分销放在这里。' },
+    intro_zh: '阿联酋既有高消费本地市场，又有迪拜的区域贸易枢纽角色——许多中国品牌把中东首发、旗舰展厅与区域分销放在这里。',
+    body_en: `<h3>Wealthy market, regional hub</h3>
+<p>The UAE pairs a high-spending domestic market with Dubai's role as the Middle East's trading and re-export hub, making it the launchpad many Chinese brands use to stage their regional entry, flagship showrooms and distribution. The overall market grew about 5.3% to roughly 335,800 vehicles in 2025, with Toyota still firmly in front — but the story underneath was Chinese share gains.</p>
+<h3>Jetour's breakout</h3>
+<p>Jetour was the standout, jumping about 82% year on year to become the UAE's #4 brand overall and overtaking MG as the best-selling Chinese marque; its T2 SUV rose to the #3 model nationally — the first Chinese model to crack the overall top three. MG held a top-five position (up about 10%), and Geely leapt from #12 to #6 (up about 48%). Chery continued to grow with the Tiggo range. On EVs — around 8% of the market and growing over 26% in 2025 — Tesla leads, but BYD is the top Chinese EV brand and roughly tripled its sales. Typical models include the Jetour T2 and Dashing, MG ZS and MG5, Geely Coolray, Emgrand and Starray, Chery Tiggo 4/7/8, and the BYD Atto 3, Seal, Dolphin and Han.</p>
+<h3>Policy and structure</h3>
+<p>The UAE is an import and re-export market, not an assembly base — there is no local Chinese production. ICE vehicles carry the standard 5% GCC customs duty plus 5% VAT, while fully electric vehicles have benefited from duty and VAT relief (status beyond end-2025 should be checked). As US and EU tariffs redirect Chinese EVs, the Gulf — and Dubai in particular — has become a natural outlet, and Chinese-brand resilience showed in early 2026 when Jetour kept growing even as the overall market fell.</p>
+<p style="font-size:13px;color:#6b7280;">Figures are 2025 full-year unless noted (sources: local registration trackers, company releases).</p>`,
+    body_zh: `<h3>高消费市场，区域枢纽</h3>
+<p>阿联酋既有高消费的本地市场，又依托迪拜作为中东贸易与转口枢纽的角色，成为许多中国品牌进入该区域、设立旗舰展厅与分销体系的跳板。2025 年整体市场增长约 5.3% 至约 33.58 万辆，丰田仍稳居第一——但水面之下是中国品牌份额的持续攀升。</p>
+<h3>捷途的爆发</h3>
+<p>捷途（Jetour）表现最抢眼，同比大涨约 82%，跃升为阿联酋整体第 4 大品牌，并超越 MG 成为销量最高的中国品牌；其 T2 SUV 升至全国第 3 畅销车型——这是首款进入整体前三的中国车型。MG 保持前五（增长约 10%），吉利则从第 12 位跃升至第 6 位（增长约 48%），奇瑞凭借 Tiggo 系列继续增长。在电动车领域（约占市场 8%，2025 年增长逾 26%），特斯拉领先，但比亚迪是最大的中国电动品牌，销量约增长两倍。典型车型包括捷途 T2 与 Dashing、MG ZS 与 MG5、吉利 Coolray/Emgrand/Starray、奇瑞 Tiggo 4/7/8，以及比亚迪 Atto 3、Seal、Dolphin、Han。</p>
+<h3>政策与结构</h3>
+<p>阿联酋是进口与转口市场，而非组装基地——没有本地中国产能。燃油车缴纳标准的 5% GCC 关税加 5% 增值税，纯电动车则曾享受关税与增值税减免（2025 年底之后的政策需核实）。随着美欧关税使中国电动车转向，海湾——尤其是迪拜——成为天然出口，中国品牌的韧性在 2026 年初已有体现：即便整体市场下滑，捷途仍在增长。</p>
+<p style="font-size:13px;color:#6b7280;">除特别注明外为 2025 全年数据（来源：当地上牌统计、企业公告）。</p>` },
   { slug: 'africa', name_en: 'Africa', name_zh: '非洲',
     kw: /Africa|South Africa|Egypt|Nigeria|Morocco|Kenya|Algeria|Rosslyn/i,
     intro_en: 'Africa is a pickup, SUV and commercial-vehicle story for Chinese automakers, with South Africa as the anchor market and local assembly beginning to take root.',
-    intro_zh: '在非洲，中国汽车的故事以皮卡、SUV 与商用车为主线，南非是锚点市场，本地组装也开始落地。' },
+    intro_zh: '在非洲，中国汽车的故事以皮卡、SUV 与商用车为主线，南非是锚点市场，本地组装也开始落地。',
+    body_en: `<h3>South Africa: the anchor</h3>
+<p>Africa is primarily a pickup, SUV and commercial-vehicle story, and South Africa is the anchor market with the best data. Some 15 Chinese brands were active there in 2025. GWM (including Haval, Tank and Ora) was the top-selling Chinese automaker at about 27,200 units and a 4.6% share (up from 3.7%), rising about 44% to become the #6 brand overall. Chery grew sharply — targeting roughly 39,000 units for the year and, with its Omoda, Jaecoo and Jetour sub-brands, ranking as high as #4 in some months — while BYD is small but now reports to the industry body NAAMSA and is expanding its dealer network.</p>
+<h3>Egypt, Nigeria, Morocco</h3>
+<p>Egypt is a fast-emerging volume market where Chinese cars topped passenger-car sales in January 2025, with Chery, MG and BYD in the top ten and Chinese OEMs supplying the bulk of EV sales; the government has signalled a shift toward tariffs that reward local assembly. Nigeria is earlier-stage, with GAC and others evaluating assembly to position the country as an ECOWAS hub. Morocco is the manufacturing and battery play: leveraging free-trade access to the EU, it has drawn billions in Chinese battery investment, including Gotion High-Tech's Kenitra gigafactory — Africa's first, with a first phase targeted for 2026.</p>
+<h3>The localisation turn</h3>
+<p>The through-line for 2025–2026 is a move from importing fully built vehicles toward local assembly. GWM and Chery both announced plans in late 2025 to assemble in South Africa, where the APDP programme rewards local content, and Jetour signed a roughly $123 million deal with Egypt's Kasrawy Group to assemble the T1 and T2 for the local market and export. Legacy manufacturers are lobbying for higher import tariffs on Chinese and Indian fully built units, adding pressure to build locally. Africa remains overwhelmingly ICE, with Chinese brands leading the small but growing EV and hybrid segment.</p>
+<p style="font-size:13px;color:#6b7280;">South Africa figures via NAAMSA; other-country data from local media and company releases.</p>`,
+    body_zh: `<h3>南非：锚点市场</h3>
+<p>在非洲，中国汽车主要是皮卡、SUV 与商用车的故事，南非则是数据最完整的锚点市场。2025 年约有 15 个中国品牌在当地活跃。长城（含哈弗、坦克、欧拉）以约 2.72 万辆、4.6% 份额（此前为 3.7%）成为销量最高的中国车企，同比增长约 44%，升至整体第 6 大品牌。奇瑞增长迅猛——全年目标约 3.9 万辆，加上 Omoda、Jaecoo、Jetour 子品牌，个别月份排名高至第 4——比亚迪体量尚小，但已开始向行业机构 NAAMSA 报数，并在扩张经销网络。</p>
+<h3>埃及、尼日利亚、摩洛哥</h3>
+<p>埃及是快速崛起的走量市场，2025 年 1 月中国乘用车销量登顶，奇瑞、MG、比亚迪进入前十，中国车企供应了绝大部分电动车销量；埃及政府已释放信号，转向以关税鼓励本地组装。尼日利亚仍处早期阶段，广汽等正评估建厂，以将该国打造为西非（ECOWAS）枢纽。摩洛哥则是制造与电池的重头戏：凭借对欧盟的自由贸易通道，吸引了数十亿美元的中国电池投资，包括国轩高科在 Kenitra 的超级工厂——非洲首座，第一期目标 2026 年。</p>
+<h3>本地化转向</h3>
+<p>2025–2026 年的主线，是从整车进口转向本地组装。长城与奇瑞均在 2025 年底宣布在南非组装的计划（南非 APDP 计划奖励本地含量），捷途与埃及 Kasrawy 集团签署约 1.23 亿美元协议，在当地组装 T1、T2 以供本地销售与出口。传统车企正游说对中国和印度整车进口提高关税，进一步加大本地生产的压力。非洲仍以燃油车为绝对主体，中国品牌在小而快速增长的电动与混动细分市场领先。</p>
+<p style="font-size:13px;color:#6b7280;">南非数据来自 NAAMSA；其他国家数据来自当地媒体与企业公告。</p>` },
   { slug: 'latin-america', name_en: 'Latin America', name_zh: '拉丁美洲',
     kw: /Latin America|LatAm|Mexico|Chile|Colombia|Peru|Uruguay|Argentina/i,
     intro_en: 'Latin America took Chinese brands early — Chery has deep roots here — and is now a localisation frontier, with plants and CKD assembly spreading from Brazil outward.',
-    intro_zh: '拉美很早就接纳了中国品牌——奇瑞在此根基深厚——如今正成为本地化前线，工厂与 CKD 组装从巴西向外扩散。' },
+    intro_zh: '拉美很早就接纳了中国品牌——奇瑞在此根基深厚——如今正成为本地化前线，工厂与 CKD 组装从巴西向外扩散。',
+    body_en: `<h3>Mexico: the tariff turning point</h3>
+<p>Latin America adopted Chinese brands early and is now a localisation frontier. Mexico is the largest market and the region's biggest inflection point: roughly 306,000 China-made light vehicles sold in 2025, about 19% of total sales, with BYD the largest Chinese participant. But under US pressure, Mexico imposed a 50% duty on cars from non-FTA countries — mainly China — from January 1, 2026. Imports fell sharply in early 2026, though Chinese-brand sales still rose in Q1 on stockpiled inventory, and BYD shelved its planned Mexican assembly plant in response.</p>
+<h3>The open Pacific markets</h3>
+<p>Chile has the region's highest Chinese penetration: Chinese brands topped 100,000 units in 2025 and, together with other Asian marques, accounted for roughly 72% of sales — surpassing Japanese and Korean brands for the first time. MG leads Chinese brands there, with BYD prominent in EVs. Colombia's market grew strongly in 2025, with BYD entering the top ten and taking more than half of EV and PHEV sales, while Chery, Changan/Deepal and MG posted triple-digit growth. Peru is being reshaped by the Chinese-built Port of Chancay, which is halving shipping times and turning the country into a regional distribution hub, with BYD driving an EV and hybrid surge.</p>
+<h3>Argentina and the EV opening</h3>
+<p>Argentina moved in 2025 to publish duty-free import quotas for electrified vehicles, with approved Chinese brands including BYD, Leapmotor, MG and Lynk & Co, while Chery, Changan, Haval and MG gain share on price and technology. Across the region, most Chinese volume is still ICE and hybrid SUVs, but BYD leads EVs in several markets. The dividing line is policy: Mexico's 50% wall stands in sharp contrast to the open, low-tariff markets of Chile, Peru and Colombia and Argentina's new EV quotas.</p>
+<p style="font-size:13px;color:#6b7280;">Figures are 2025 full-year and early-2026 (sources: national registration data, local media). Brazil is covered on its own page.</p>`,
+    body_zh: `<h3>墨西哥：关税转折点</h3>
+<p>拉美很早就接纳了中国品牌，如今正成为本地化前线。墨西哥是最大市场，也是区域最大的转折点：2025 年中国制造的轻型车销量约 30.6 万辆，约占总销量的 19%，比亚迪是最大的中国参与者。但在美国压力下，墨西哥自 2026 年 1 月 1 日起对非自贸协定国家（主要是中国）整车征收 50% 关税。2026 年初进口量骤降，不过靠库存缓冲，中国品牌一季度销量仍在增长，比亚迪则据此搁置了原定的墨西哥组装厂计划。</p>
+<h3>开放的太平洋沿岸市场</h3>
+<p>智利的中国品牌渗透率为区域最高：2025 年中国品牌销量突破 10 万辆，连同其他亚洲品牌合计约占销量 72%，首次超越日系与韩系。MG 领跑当地中国品牌，比亚迪在电动车中表现突出。哥伦比亚市场 2025 年强劲增长，比亚迪进入前十并拿下电动与插混销量的过半份额，奇瑞、长安/深蓝、MG 均为三位数增长。秘鲁则因中国承建的钱凯港（Chancay）而重塑——航运时间缩短一半，使该国成为区域分销枢纽，比亚迪带动电动与混动车激增。</p>
+<h3>阿根廷与电动化开口</h3>
+<p>阿根廷在 2025 年出台电动化车辆的免税进口配额，获批的中国品牌包括比亚迪、零跑、MG 与领克，奇瑞、长安、哈弗、MG 则凭价格与技术扩大份额。整个区域，中国销量主体仍是燃油与混动 SUV，但比亚迪在多个市场领跑电动车。分水岭在于政策：墨西哥 50% 的高墙，与智利、秘鲁、哥伦比亚的开放低关税市场及阿根廷新设的电动车配额，形成鲜明对比。</p>
+<p style="font-size:13px;color:#6b7280;">数据为 2025 全年及 2026 年初（来源：各国上牌数据、当地媒体）。巴西见其专属页面。</p>` },
   { slug: 'brazil', name_en: 'Brazil', name_zh: '巴西',
     kw: /Brazil|Bahia|Camaçari|São Paulo|Horizonte|Iracemápolis|Ayrton Senna/i,
     intro_en: 'Brazil is Latin America’s biggest market and the region’s manufacturing prize: BYD, GWM and SAIC are all investing in local production to serve the country and export across South America.',
-    intro_zh: '巴西是拉美最大市场，也是区域制造高地：比亚迪、长城、上汽都在投资本地生产，既供应巴西也辐射南美。' },
+    intro_zh: '巴西是拉美最大市场，也是区域制造高地：比亚迪、长城、上汽都在投资本地生产，既供应巴西也辐射南美。',
+    body_en: `<h3>From importer to #1 brand</h3>
+<p>Brazil is Latin America's biggest market and the region's manufacturing prize. Chinese brands reached around 10–11% of the passenger market in 2025, and BYD's rise has been extraordinary: roughly 112,900 units in 2025, up from about 76,700 in 2024 and just 260 in 2022. In April 2026 BYD became the first Chinese automaker to top Brazil's overall monthly retail brand chart, at nearly 15,000 units. GWM and Caoa Chery are the other two major players. BYD also leads Brazil's EV segment with well over half of it, and its Dolphin Mini (sold as the Seagull elsewhere) became Brazil's #1 retail model in February 2026.</p>
+<h3>Local production comes online</h3>
+<p>Two flagship plants opened in 2025. BYD's Camaçari complex in Bahia — a roughly $1 billion (R$5.5bn) conversion of a former Ford plant — began production on July 1, 2025, with 150,000 units a year of capacity, planned to double; the Dolphin Mini is its first local model. GWM's Iracemápolis plant in São Paulo state, a former Mercedes-Benz site, began production on August 15, 2025 with around 50,000 units a year of capacity, aiming to export across Mercosur by 2027.</p>
+<h3>The tariff clock</h3>
+<p>Local production is a direct response to a rising tariff schedule. Brazil is phasing out its EV tariff exemption: the BEV import duty rose to 25% in July 2025 and reaches the 35% Mercosur cap in July 2026, with hybrids and PHEVs climbing on similar tracks, and the preferential rate on assembly kits set to expire from January 2027. BYD front-loaded imports — shipping thousands of EVs ahead of tax deadlines — to bridge the gap. Chinese models supplied over 80% of Brazil's EV sales in early 2025, and the country started 2026 at roughly 9.8% electrified market share, with BYD targeting around 250,000 units and 10% of the total market.</p>
+<p style="font-size:13px;color:#6b7280;">Figures are 2025 full-year and early-2026 (sources: company releases, local media, industry trackers).</p>`,
+    body_zh: `<h3>从进口商到第一品牌</h3>
+<p>巴西是拉美最大市场，也是区域制造高地。2025 年中国品牌约占乘用车市场 10–11%，而比亚迪的崛起堪称惊人：2025 年约 11.29 万辆，2024 年约 7.67 万辆，2022 年仅 260 辆。2026 年 4 月，比亚迪以近 1.5 万辆成为首个登顶巴西整体月度零售品牌榜的中国车企。长城与 Caoa 奇瑞是另外两大玩家。比亚迪还以过半份额领跑巴西电动车市场，其 Dolphin Mini（在他处即"海鸥"）于 2026 年 2 月成为巴西零售销量第一的车型。</p>
+<h3>本地生产投产</h3>
+<p>2025 年两座旗舰工厂投产。比亚迪位于巴伊亚州的 Camaçari 基地——由前福特工厂改造，投资约 10 亿美元（55 亿雷亚尔）——于 2025 年 7 月 1 日投产，年产能 15 万辆并计划翻倍，Dolphin Mini 为首款本地车型。长城位于圣保罗州的 Iracemápolis 工厂（前奔驰工厂）于 2025 年 8 月 15 日投产，年产能约 5 万辆，目标 2027 年向南方共同市场出口。</p>
+<h3>关税倒计时</h3>
+<p>本地生产是对关税上行时间表的直接回应。巴西正逐步取消电动车关税豁免：纯电进口关税 2025 年 7 月升至 25%，2026 年 7 月达到南方共同市场 35% 的上限，混动与插混沿类似路径攀升，组装件优惠税率也将于 2027 年 1 月起到期。比亚迪提前抢运——在加税节点前运入数千辆电动车——以过渡衔接。2025 年初中国车型供应了巴西逾 80% 的电动车销量，2026 年开年电动化份额约 9.8%，比亚迪目标约 25 万辆、占总市场约 10%。</p>
+<p style="font-size:13px;color:#6b7280;">数据为 2025 全年及 2026 年初（来源：企业公告、当地媒体、行业统计）。</p>` },
   { slug: 'southeast-asia', name_en: 'Southeast Asia', name_zh: '东南亚',
     kw: /Southeast Asia|Thailand|Indonesia|Malaysia|Vietnam|Philippines|Singapore|ASEAN|Melaka|Proton/i,
     intro_en: 'Southeast Asia is China’s right-hand-drive EV workshop: Thailand and Indonesia host a cluster of Chinese plants that serve ASEAN and increasingly export onward — including to Europe.',
-    intro_zh: '东南亚是中国车企的右舵电动车工坊：泰国与印尼聚集了一批中国工厂，供应东盟并日益向外出口——包括欧洲。' },
+    intro_zh: '东南亚是中国车企的右舵电动车工坊：泰国与印尼聚集了一批中国工厂，供应东盟并日益向外出口——包括欧洲。',
+    body_en: `<h3>Thailand: the EV assembly hub</h3>
+<p>Southeast Asia is China's right-hand-drive EV workshop, and Thailand — the "Detroit of Southeast Asia" — is its centre. Chinese-made cars accounted for roughly 85% of Thailand's EV sales in 2024, and BYD sold about 24,000 units in H1 2025, roughly four times its nearest rival. BYD's Rayong plant (around 150,000 units a year) opened in 2024, GWM upgraded a former GM plant in Rayong, and MG/SAIC also assembles locally. Under the EV3.5 policy running to 2027, subsidies were trimmed and tied to local assembly, imported EVs lost benefits and face higher excise, and Chinese makers began raising 2026 prices as the incentives tapered.</p>
+<h3>Indonesia and Malaysia</h3>
+<p>Indonesia is the other manufacturing pillar: BYD went from nothing to a top-four automaker and commands close to half the country's EV market, with a roughly $1 billion plant in Subang, West Java. From January 2026, incentives apply only to locally produced EVs meeting a 40% local-content threshold that rises over the decade. Malaysia became the region's largest overall market in 2025 at over 820,000 vehicles, with 21 Chinese brands and 58 models on sale; Chery was the best-selling Chinese brand in H1 2025 (led by the Jaecoo J7) and BYD led the EV segment. BYD is building a CKD facility in Tanjung Malim (operational H2 2026) and Chery is investing in a Selangor industrial park, while Geely backs the national brand Proton.</p>
+<h3>Vietnam and the wider region</h3>
+<p>Vietnam is the exception: domestic champion VinFast dominates with around 175,000 units in 2025, and Chinese brands remain small there against a strong home player — though one Chinese automaker has committed an $800 million factory to challenge it. Regionally, Chinese-branded sales across the four main markets rose about 58% year on year in Q1 2025. The Philippines and Singapore see lighter penetration, with GAC, MG, Chery and BYD present. The strategic prize is that ASEAN plants increasingly export onward — including to Europe.</p>
+<p style="font-size:13px;color:#6b7280;">Figures span 2024–2025 by market as noted (sources: local industry data, company releases).</p>`,
+    body_zh: `<h3>泰国：电动车组装枢纽</h3>
+<p>东南亚是中国车企的右舵电动车工坊，而有"东南亚底特律"之称的泰国是其中心。2024 年中国制造汽车约占泰国电动车销量的 85%，比亚迪 2025 上半年售出约 2.4 万辆，约为第二名的四倍。比亚迪罗勇（Rayong）工厂（年产能约 15 万辆）2024 年投产，长城升级了罗勇的前通用工厂，MG/上汽也在当地组装。在延续至 2027 年的 EV3.5 政策下，补贴被削减并与本地组装挂钩，进口电动车失去优惠并面临更高消费税，中国厂商也随补贴退坡开始上调 2026 年售价。</p>
+<h3>印尼与马来西亚</h3>
+<p>印尼是另一制造支柱：比亚迪从零起步跃升为前四大车企，占据当地电动车市场近半份额，并在西爪哇 Subang 建有约 10 亿美元工厂。自 2026 年 1 月起，激励仅适用于满足 40% 本地含量门槛（该门槛在本十年内逐步提高）的本地生产电动车。马来西亚 2025 年以逾 82 万辆成为区域最大整体市场，在售的中国品牌达 21 个、车型 58 款；奇瑞是 2025 上半年最畅销的中国品牌（由 Jaecoo J7 领衔），比亚迪领跑电动细分。比亚迪正在丹戎马林（Tanjung Malim）建设 CKD 工厂（2026 下半年投产），奇瑞在雪兰莪投资工业园，吉利则扶持国民品牌 Proton。</p>
+<h3>越南与更广区域</h3>
+<p>越南是例外：本土冠军 VinFast 以 2025 年约 17.5 万辆占据主导，中国品牌在强势本土玩家面前体量尚小——不过已有一家中国车企承诺投资 8 亿美元建厂发起挑战。区域层面，四大主要市场的中国品牌销量在 2025 年一季度同比增长约 58%。菲律宾与新加坡渗透较轻，广汽、MG、奇瑞、比亚迪均有布局。战略价值在于：东盟工厂正日益向外出口——包括欧洲。</p>
+<p style="font-size:13px;color:#6b7280;">各市场数据涵盖 2024–2025 年（来源：当地行业数据、企业公告）。</p>` },
   { slug: 'australia', name_en: 'Australia', name_zh: '澳大利亚',
     kw: /Australia|New Zealand|Sydney|Melbourne/i,
     intro_en: 'Australia is one of the most open right-hand-drive markets, where GWM, MG and BYD already sit among the top-selling brands and PHEV utes are the new battleground.',
-    intro_zh: '澳大利亚是最开放的右舵市场之一，长城、MG、比亚迪已跻身畅销品牌之列，插混皮卡是新战场。' }
+    intro_zh: '澳大利亚是最开放的右舵市场之一，长城、MG、比亚迪已跻身畅销品牌之列，插混皮卡是新战场。',
+    body_en: `<h3>China becomes the #2 source</h3>
+<p>Australia is one of the most open right-hand-drive markets, and Chinese automakers have surged into it. China-made vehicles reached about 221,700 units in 2025 (up roughly 26%) — over 252,000 including the China-built Tesla and Polestar — making China the #2 source of new cars after Japan, at around 17.5% of sales, up from 2.7% in 2020. In August 2025, four Chinese brands sat in the national top ten simultaneously for the first time: BYD, GWM, MG and Chery. GWM was the top-selling Chinese brand for the year, while Chery grew fastest (up around 177%) and BYD up around 156%.</p>
+<h3>Models and the ute battleground</h3>
+<p>Chinese brands compete across both EV and ICE. Best-sellers include the GWM Haval Jolion and H6, MG ZS, MG3 and MG4, Chery Tiggo 4 Pro (which hit a record #4 overall in November 2025) and Omoda E5. The breakout segment is PHEV utes: the BYD Shark 6 and GWM Cannon Alpha opened a new front against the traditional diesel ute establishment. A wave of cheap EVs — the BYD Atto 1, Geely EX2 and MG4 Urban — is landing in 2026, setting up a price war, with XPeng, Zeekr and Leapmotor also entering.</p>
+<h3>Policy tailwinds and New Zealand</h3>
+<p>Two policies help. Chinese cars enter duty-free under the China–Australia Free Trade Agreement (in force since 2015), and the New Vehicle Efficiency Standard, which began in January 2025 and tightens through 2029, favours the low-emission EVs and PHEVs that Chinese brands supply — analysts project China could become Australia's #1 car source. New Zealand mirrors the trend: Chinese-owned brands are around 13.5% of the market, with MG, GWM, BYD and Chery the main players and popular PHEV SUVs such as the BYD Sealion 6, GWM Haval H6 and Jaecoo J7.</p>
+<p style="font-size:13px;color:#6b7280;">Figures are 2025 full-year via VFACTS/FCAI and local trackers.</p>`,
+    body_zh: `<h3>中国成为第二大来源国</h3>
+<p>澳大利亚是最开放的右舵市场之一，中国车企正涌入其中。2025 年中国制造汽车约 22.17 万辆（增长约 26%）——若计入中国产的特斯拉与极星则超过 25.2 万辆——使中国成为仅次于日本的第二大新车来源国，占销量约 17.5%，远高于 2020 年的 2.7%。2025 年 8 月，四个中国品牌首次同时进入全国前十：比亚迪、长城、MG、奇瑞。长城为当年最畅销中国品牌，奇瑞增速最快（约 +177%），比亚迪增长约 156%。</p>
+<h3>车型与皮卡战场</h3>
+<p>中国品牌在电动与燃油两条战线同时竞争。畅销车型包括长城哈弗 Jolion 与 H6、MG ZS/MG3/MG4、奇瑞 Tiggo 4 Pro（2025 年 11 月创下整体第 4 的纪录）与 Omoda E5。爆发的细分是插混皮卡：比亚迪 Shark 6 与长城 Cannon Alpha 向传统柴油皮卡阵营开辟了新战线。一批廉价电动车——比亚迪 Atto 1、吉利 EX2、MG4 Urban——正于 2026 年登陆，酝酿价格战，小鹏、极氪、零跑也在进入。</p>
+<h3>政策顺风与新西兰</h3>
+<p>两项政策助力。中国汽车凭《中澳自由贸易协定》（2015 年生效）零关税进入；2025 年 1 月启动、到 2029 年逐步收紧的《新车效率标准》（NVES）偏向中国品牌供应的低排放电动车与插混——分析师预计中国有望成为澳大利亚第一大汽车来源国。新西兰趋势相仿：中资品牌约占市场 13.5%，MG、长城、比亚迪、奇瑞为主力，比亚迪 Sealion 6、长城哈弗 H6、Jaecoo J7 等插混 SUV 广受欢迎。</p>
+<p style="font-size:13px;color:#6b7280;">数据为 2025 全年（来源：VFACTS/FCAI 及当地统计）。</p>` }
 ];
 
 function articleListHTML(list, emptyEn, emptyZh) {
@@ -1681,6 +1807,9 @@ for (const mk of MARKETS) {
   <section style="padding-top:0;">
     <div class="container" style="max-width:880px;">
       <p style="font-size:16px;line-height:1.8;color:#374151;margin:0 0 28px;">${langSpan(mk.intro_en, mk.intro_zh)}</p>
+      ${(mk.body_en || mk.body_zh) ? `<style>.market-body h3{font-family:var(--serif,Georgia,serif);font-size:20px;margin:34px 0 12px;color:#111827;}.market-body p{margin:0 0 18px;}</style><div class="market-body" style="font-size:16px;line-height:1.85;color:#374151;">
+        <div data-lang="en">${mk.body_en || ''}</div><div data-lang="zh" hidden>${mk.body_zh || ''}</div>
+      </div>` : ''}
       <h2 style="font-size:22px;margin:36px 0 18px;">${langSpan('Latest coverage', '最新报道')}</h2>
       ${articleListHTML(matched, `Market-specific coverage of ${mk.name_en} is ramping up.`, `${mk.name_zh}市场的专题报道正在积累中。`)}
       <p style="margin-top:36px;"><a href="/markets" style="color:var(--accent, #d4302a);font-family:var(--mono);font-size:13px;">← All markets</a></p>
@@ -1882,7 +2011,6 @@ function articleMain(a) {
 }
 
 function articleImage(a) {
-  if (a.image && /^images\/[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(a.image) && !a.image.includes('..')) return a.image;
   const text = `${a.title_en || ''} ${a.excerpt_en || ''} ${a.title_zh || ''} ${a.excerpt_zh || ''}`.toLowerCase();
   const brand = SITE_DATA.brands.find(b =>
     text.includes(String(b.name).toLowerCase()) || (b.cn && text.includes(String(b.cn).toLowerCase())));
