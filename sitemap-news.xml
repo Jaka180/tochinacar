@@ -2,25 +2,91 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
-    <loc>https://www.topchinacar.com/news/google-oem-partnership-four-layer-stack-2026</loc>
+    <loc>https://www.topchinacar.com/news/tomtom-here-forty-years-mapmaking-convergence</loc>
     <news:news>
       <news:publication>
         <news:name>TopChinaCar</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-07-22</news:publication_date>
-      <news:title>Google&apos;s OEM Partnerships in 2026: The Four-Layer Stack from Phone Projection to OS to Map Data</news:title>
+      <news:publication_date>2026-07-26</news:publication_date>
+      <news:title>Forty Years of Two Mapmakers: The Technology Converged. One Question Remains.</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://www.topchinacar.com/news/2026-07-22-china-auto-daily</loc>
+    <loc>https://www.topchinacar.com/news/overture-anti-google-alliance-now-ai-infrastructure</loc>
     <news:news>
       <news:publication>
         <news:name>TopChinaCar</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-07-22T06:30:00+08:00</news:publication_date>
-      <news:title>China Auto Overseas Daily | 2026-07-22: BYD Hits 100,000 EVs in Brazil and Enters Japan&apos;s Kei-Car Market as XPeng Launches the L03 in Munich</news:title>
+      <news:publication_date>2026-07-26</news:publication_date>
+      <news:title>The Anti-Google Map Alliance Now Says It&apos;s AI Infrastructure</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.topchinacar.com/news/no-new-stories-in-the-map-industry</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-26</news:publication_date>
+      <news:title>There Are No New Stories in the Map Industry</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.topchinacar.com/news/navteq-first-company-to-drive-every-street-in-america</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-26</news:publication_date>
+      <news:title>The First Company to Drive Every Street in America</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.topchinacar.com/news/here-wont-go-bankrupt-it-will-disappear</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-26</news:publication_date>
+      <news:title>HERE Won&apos;t Go Bankrupt. It Will Disappear.</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.topchinacar.com/news/here-tomtom-one-waits-for-a-buyer-one-waits-for-orders</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-26</news:publication_date>
+      <news:title>One Is Waiting for a Buyer. One Is Waiting for Orders.</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.topchinacar.com/news/google-maps-the-king-who-never-sold-maps</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-26</news:publication_date>
+      <news:title>The King Who Never Sold a Map</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.topchinacar.com/news/gers-a-registry-for-places-ai-agents</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TopChinaCar</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-07-26</news:publication_date>
+      <news:title>Giving Places an ID: The Foundation AI Agents Are Missing</news:title>
     </news:news>
   </url>
 </urlset>
