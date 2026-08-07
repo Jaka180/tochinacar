@@ -274,6 +274,37 @@ function brandCardHTML(b, lang) {
 
 // ============ PAGES ============
 
+function articleDateValue(article) {
+  return String(article && (article.published_at || article.date) || '').slice(0, 10);
+}
+
+function formatPublicationDate(article, lang) {
+  const value = articleDateValue(article);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return '';
+  const date = new Date(`${value}T00:00:00Z`);
+  return lang === 'zh'
+    ? `${date.getUTCFullYear()}年${date.getUTCMonth() + 1}月${date.getUTCDate()}日`
+    : date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+}
+
+function homepageNews(items, limit = 5, perCategory = 2) {
+  if (!items || !items.length) return { top: null, latest: [] };
+  const top = items[0];
+  const counts = new Map();
+  const tagKey = article => String(article.tag_en || 'News').trim().toLowerCase();
+  counts.set(tagKey(top), 1);
+  const latest = [];
+  for (const article of items.slice(1)) {
+    const key = tagKey(article);
+    const count = counts.get(key) || 0;
+    if (count >= perCategory) continue;
+    latest.push(article);
+    counts.set(key, count + 1);
+    if (latest.length === limit) break;
+  }
+  return { top, latest };
+}
+
 function pageHome() {
   const D = SITE_DATA;
   const lang = getLang();
@@ -282,6 +313,9 @@ function pageHome() {
   const homeModels = homeModelIds
     .map(id => D.models.find(m => m.id === id))
     .filter(Boolean);
+  const availableArticles = typeof SITE_ARTICLES !== 'undefined' ? SITE_ARTICLES : [];
+  const homeNews = homepageNews(availableArticles);
+  const newestDate = formatPublicationDate(homeNews.top, lang);
 
   return `
   <!-- HERO -->
@@ -290,10 +324,8 @@ function pageHome() {
       <div class="hero-grid">
         <div>
           <div class="hero-eyebrow">${(() => {
-            const d = new Date();
-            return lang === 'zh'
-              ? `每日更新 · ${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
-              : `Updated daily · ${d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+            if (newestDate) return lang === 'zh' ? `每日更新 · ${newestDate}` : `Updated daily · ${newestDate}`;
+            return lang === 'zh' ? '持续更新' : 'Updated regularly';
           })()}</div>
           <h1 class="hero-title">${t('hero.title')}</h1>
           <p class="hero-deck">${t('hero.deck')}</p>
@@ -326,14 +358,15 @@ function pageHome() {
   </section>
 
   <!-- TOP STORY + LATEST -->
-  ${typeof SITE_ARTICLES !== 'undefined' && SITE_ARTICLES.length ? (() => {
-    const top = SITE_ARTICLES[0];
-    const rest = SITE_ARTICLES.slice(1, 6);
+  ${homeNews.top ? (() => {
+    const top = homeNews.top;
+    const rest = homeNews.latest;
+    const topTag = String(top.tag_en || 'News').replace(/"/g, '&quot;');
     return `
   <section>
     <div class="container">
       <div class="news-grid">
-        <article class="news-main-article">
+        <article class="news-main-article" data-news-tag="${topTag}">
           <div class="news-main-body">
             <div class="news-meta" style="color:#dc2626;">${lang === 'zh' ? '头条' : 'Top Story'} · ${top.date}</div>
             <h2 style="font-family:var(--serif);font-size:34px;font-weight:700;line-height:1.2;margin:10px 0 14px;"><a href="/news/${top.slug}" style="color:inherit;text-decoration:none;">${top['title_' + lang] || top.title_en}</a></h2>
@@ -344,7 +377,7 @@ function pageHome() {
         <div class="news-side">
           <div style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">${lang === 'zh' ? '最新新闻' : 'Latest News'}</div>
           ${rest.length ? rest.map(a => `
-          <article class="news-item" style="grid-template-columns:1fr;">
+          <article class="news-item" data-news-tag="${String(a.tag_en || 'News').replace(/"/g, '&quot;')}" style="grid-template-columns:1fr;">
             <div>
               <h3 class="news-title"><a href="/news/${a.slug}" style="color:inherit;text-decoration:none;">${a['title_' + lang] || a.title_en}</a></h3>
               <div class="news-date">${a.date}</div>
@@ -368,7 +401,7 @@ function pageHome() {
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;">
         ${[
-          ['/intelligence', 'Intelligence', '情报', 'Live event ranking and system interpretation', '实时事件排序与系统解读'],
+          ['/intelligence', 'Intelligence', '情报', 'Editorial signals, evidence and market context', '编辑信号、证据与市场背景'],
           ['/china-ev-news', 'EV', '新能源', 'Electric vehicles, batteries and smart cars', '电动车、电池与智能汽车'],
           ['/china-car-export-news', 'Exports', '出口', 'Shipments, plants and overseas growth', '出口数据、海外工厂与增长'],
           ['/chinese-car-brands', 'Brands', '品牌', 'Chinese automakers, profiled', '中国车企档案'],
@@ -715,6 +748,68 @@ function dailyArticlesHTML(lang) {
     </section>`;
 }
 
+const MAP_WARS_SLUG_ORDER = [
+  'no-new-stories-in-the-map-industry',
+  'navteq-first-company-to-drive-every-street-in-america',
+  'tomtom-here-forty-years-mapmaking-convergence',
+  'here-wont-go-bankrupt-it-will-disappear',
+  'here-tomtom-one-waits-for-a-buyer-one-waits-for-orders',
+  'overture-anti-google-alliance-now-ai-infrastructure',
+  'gers-a-registry-for-places-ai-agents',
+  'google-maps-the-king-who-never-sold-maps'
+];
+
+function mapWarsArticles() {
+  if (typeof SITE_ARTICLES === 'undefined') return [];
+  const bySlug = new Map(SITE_ARTICLES
+    .filter(article => article.tag_en === 'Map Wars')
+    .map(article => [article.slug, article]));
+  return MAP_WARS_SLUG_ORDER.map(slug => bySlug.get(slug)).filter(Boolean);
+}
+
+function mapWarsCallout(lang) {
+  const count = mapWarsArticles().length;
+  if (!count) return '';
+  return `
+    <section style="padding:0 0 48px;">
+      <div class="container">
+        <a href="/series/map-wars" style="display:block;padding:24px 26px;border:1px solid #e5e7eb;border-left:5px solid #d4302a;background:#fafafa;color:inherit;text-decoration:none;">
+          <div class="section-eyebrow">${lang === 'zh' ? '专题 · 八部曲' : 'Series · Eight Essays'}</div>
+          <h2 style="font-family:var(--serif);font-size:26px;margin:8px 0;">${lang === 'zh' ? '地图战争：数字地图产业的四十年' : 'Map Wars: Forty Years of the Digital Map Industry'}</h2>
+          <p style="max-width:780px;margin:0;color:#6b7280;line-height:1.7;">${lang === 'zh' ? '从 Navteq、HERE 与 TomTom，到 Google、Overture 和 AI Agent 的地理基础设施。按顺序阅读全部八篇。' : 'From Navteq, HERE and TomTom to Google, Overture and geographic infrastructure for AI agents. Read all eight essays in order.'}</p>
+        </a>
+      </div>
+    </section>`;
+}
+
+function pageMapWars() {
+  const lang = getLang();
+  const items = mapWarsArticles();
+  return `
+    <section class="page-header page-header--dark">
+      <div class="container">
+        <div class="section-eyebrow">${lang === 'zh' ? 'TopChinaCar 专题' : 'TopChinaCar Series'}</div>
+        <h1 class="page-title">${lang === 'zh' ? '地图战争' : 'Map Wars'}</h1>
+        <p class="page-deck">${lang === 'zh' ? '八篇连续深度文章，梳理全球数字地图产业从外业采集、车载导航、平台垄断到 AI Agent 基础设施的四十年。' : 'Eight connected essays tracing the global digital-map industry from field collection and in-car navigation to platform power and infrastructure for AI agents.'}</p>
+      </div>
+    </section>
+    <section style="padding-top:48px;">
+      <div class="container" style="max-width:980px;">
+        <div style="display:grid;gap:18px;">
+          ${items.map((article, index) => `
+            <article style="display:grid;grid-template-columns:minmax(72px,100px) 1fr;gap:22px;padding:24px 0;border-bottom:1px solid #e5e7eb;">
+              <div style="font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:#d4302a;text-transform:uppercase;">${lang === 'zh' ? `第 ${index + 1} 篇` : `Essay ${index + 1}`}</div>
+              <div>
+                <h2 style="font-family:var(--serif);font-size:26px;line-height:1.25;margin:0 0 10px;"><a href="/news/${article.slug}" style="color:inherit;text-decoration:none;">${article['title_' + lang] || article.title_en}</a></h2>
+                <p style="margin:0 0 12px;color:#6b7280;line-height:1.7;">${article['excerpt_' + lang] || article.excerpt_en || ''}</p>
+                <a href="/news/${article.slug}" style="color:#d4302a;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;">${lang === 'zh' ? '阅读全文 →' : 'Read essay →'}</a>
+              </div>
+            </article>`).join('')}
+        </div>
+      </div>
+    </section>`;
+}
+
 function pageNews() {
   const lang = getLang();
   // Latest daily dispatch auto-fills the column card so it never goes stale.
@@ -730,6 +825,7 @@ function pageNews() {
         <p class="page-deck">${t('news.page.deck')}</p>
       </div>
     </section>
+    ${mapWarsCallout(lang)}
     ${dailyArticlesHTML(lang)}
     <section class="news-column-wrap">
       <div class="container">
@@ -1151,7 +1247,7 @@ function pageIntelligence() {
             <h1 class="system-intel-title">${S('Understand China auto globalization as it happens.', '看懂中国汽车全球化正在发生什么。')}</h1>
             <p class="system-intel-deck">${S('TopChinaCar tracks Chinese automakers, overseas markets, factories, exports, pricing and policy risk, then turns fragmented news into structured market signals.', 'TopChinaCar 追踪中国车企、海外市场、工厂、出口、价格与政策风险，把分散新闻转化为可判断的结构化市场信号。')}</p>
             <div class="system-intel-actions">
-              <a class="btn btn-primary" href="${liveUrl}">${S('View Live Intelligence', '查看实时情报')}</a>
+              <a class="btn btn-primary" href="${liveUrl}">${S('Read Latest Coverage', '阅读最新报道')}</a>
               <a class="btn btn-ghost" href="/data">${S('Explore Data Layer', '浏览数据层')}</a>
             </div>
           </div>
@@ -1190,7 +1286,7 @@ function pageIntelligence() {
               <div><span>03</span><strong>${S('Policy Pressure', '政策压力')}</strong><p>${S('Tariffs, regulation, subsidies and trade restrictions.', '关税、监管、补贴与贸易限制。')}</p></div>
               <div><span>04</span><strong>${S('Company Strategy', '企业策略')}</strong><p>${S('Launches, partnerships, investment and technology direction.', '新车、合作、投资与技术方向。')}</p></div>
             </div>
-            <div class="system-runtime">${S('Live intelligence feed:', '实时情报流：')} <a href="${liveUrl}">${S('TopChinaCar News', 'TopChinaCar 新闻')}</a></div>
+            <div class="system-runtime">${S('Latest editorial coverage:', '最新编辑报道：')} <a href="${liveUrl}">${S('TopChinaCar News', 'TopChinaCar 新闻')}</a></div>
           </section>
 
           <aside class="system-intel-panel">
@@ -1215,7 +1311,7 @@ function pageIntelligence() {
             <a class="system-intel-entry" href="${liveUrl}">
               <span>${S('Today', '今天')}</span>
               <h3>${S('What changed now?', '现在发生了什么？')}</h3>
-              <p>${S('Open the ranked live feed to see high-impact events and system interpretation.', '打开排序后的实时情报流，查看高影响事件与系统解读。')}</p>
+              <p>${S('Read the latest reporting and analysis, with sources and market context.', '阅读附有信源与市场背景的最新报道和分析。')}</p>
             </a>
             <a class="system-intel-entry" href="/data">
               <span>${S('Reference', '查询')}</span>
@@ -1238,8 +1334,8 @@ function pageIntelligence() {
           <div class="system-intel-pipeline">
             <div><span>${S('Sources', '来源')}</span><strong>${S('News, filings and data', '新闻、公告与数据')}</strong><p>${S('Incoming items come from media, official releases, policy sources and structured datasets.', '输入信息来自媒体、官方公告、政策来源与结构化数据集。')}</p></div>
             <div><span>${S('Signals', '信号')}</span><strong>${S('Normalized evidence', '规范化证据')}</strong><p>${S('Items are classified by company, market, event type and source strength.', '信息按公司、市场、事件类型与信源强度进行分类。')}</p></div>
-            <div><span>${S('Events', '事件')}</span><strong>${S('Traceable facts', '可追溯事实')}</strong><p>${S('Important events keep source references and scoring context.', '重要事件保留来源引用与评分上下文。')}</p></div>
-            <div><span>${S('Insights', '洞察')}</span><strong>${S('System interpretation', '系统解读')}</strong><p>${S('Ranked events support the market interpretation in the live feed.', '排序事件支撑实时情报流中的市场解读。')}</p></div>
+            <div><span>${S('Events', '事件')}</span><strong>${S('Traceable facts', '可追溯事实')}</strong><p>${S('Important claims retain source references and publication context.', '重要判断保留来源引用与发布时间背景。')}</p></div>
+            <div><span>${S('Insights', '洞察')}</span><strong>${S('Editorial analysis', '编辑分析')}</strong><p>${S('Reporting explains why a development matters without presenting an automated score as fact.', '报道解释事件为何重要，不把自动评分包装成既定事实。')}</p></div>
           </div>
         </section>
       </div>
@@ -1253,6 +1349,7 @@ const PAGE_ROUTES = {
   '/chinese-car-brands': pageBrands,
   '/models': pageModels,
   '/news':   pageNews,
+  '/series/map-wars': pageMapWars,
   '/tech':   pageTech,
   '/about':  pageAbout,
   '/quote':  pageQuote,
