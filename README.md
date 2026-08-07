@@ -51,6 +51,8 @@ GCP run_daily.sh 第7步 site_publish.py
   → git push → Cloudflare Pages 部署
 ```
 
+文章 JSON 可选用 `primary_brands` 和 `secondary_brands` 数组标注品牌（值可用品牌 ID 或英文名）。品牌页优先展示主标签文章，并最多补入 1 篇仅提及该品牌的文章；未提供标签时，构建器以标题为主标签、摘要/正文提及为次标签。这样新文章不会仅因顺带提到某品牌而压过品牌主线内容。
+
 **VM 上一次性配置**（在 GCP 服务器执行）：
 
 ```bash

@@ -89,6 +89,10 @@ function auditLocal() {
     const canonicals = matches(html, /<link\b[^>]*rel=["']canonical["'][^>]*>/gi);
     const h1s = matches(html, /<h1\b[^>]*>[\s\S]*?<\/h1>/gi);
 
+    if (/topchinacar-event-intelligence\.vercel\.app\/admin\/login/i.test(html)) {
+      addIssue(issues, 'admin-url-exposed', file, 'public template contains the admin login URL');
+    }
+
     if (titles.length !== 1 || !stripTags(titles[0] || '')) addIssue(issues, 'title', file, `found ${titles.length}`);
     if (!is404 && descriptions.length !== 1) addIssue(issues, 'description', file, `found ${descriptions.length}`);
     if (!is404 && canonicals.length !== 1) addIssue(issues, 'canonical', file, `found ${canonicals.length}`);
@@ -103,6 +107,20 @@ function auditLocal() {
 
     const lang = attr(html.match(/<html\b[^>]*>/i)?.[0] || '', 'lang');
     if (relative.startsWith('zh/') ? lang !== 'zh' : lang !== 'en') addIssue(issues, 'lang', file, lang || 'missing');
+
+    if (!is404) {
+      const alternates = matches(html, /<link\b[^>]*rel=["']alternate["'][^>]*hreflang=["'][^"']+["'][^>]*>/gi);
+      const byLanguage = new Map(alternates.map(tag => [attr(tag, 'hreflang'), attr(tag, 'href')]));
+      for (const language of ['en', 'zh-CN', 'x-default']) {
+        if (!byLanguage.has(language)) addIssue(issues, 'hreflang-missing', file, language);
+      }
+      for (const [language, href] of byLanguage) {
+        const pathname = cleanPathname(href);
+        if (!pathname || !localTarget(pathname)) addIssue(issues, 'hreflang-target', file, `${language}: ${href || 'missing href'}`);
+      }
+      const alternateLocale = matches(html, /<meta\b[^>]*property=["']og:locale:alternate["'][^>]*>/gi);
+      if (alternateLocale.length !== 1) addIssue(issues, 'og-locale-alternate', file, `found ${alternateLocale.length}`);
+    }
 
     const ids = matches(html, /\bid=["'][^"']+["']/gi).map(tag => attr(tag, 'id'));
     const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
@@ -147,6 +165,10 @@ function auditLocal() {
       if (!localTarget(pathname)) addIssue(issues, 'sitemap-target', file, loc);
     }
   }
+
+  const postSitemap = fs.readFileSync(path.join(ROOT, 'sitemap-posts.xml'), 'utf8');
+  const postLastmods = new Set(Array.from(postSitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g), match => match[1]));
+  if (postLastmods.size < 2) addIssue(issues, 'sitemap-lastmod', path.join(ROOT, 'sitemap-posts.xml'), 'all post dates are identical');
 
   return { pages: htmlFiles.length, issues };
 }

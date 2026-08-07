@@ -114,6 +114,14 @@ function namespaceFragmentIds(html, namespace) {
 
 // ---- Collect daily articles (articles/*.json, written by the GCP pipeline) ----
 const ARTICLES_DIR = path.join(ROOT, 'articles');
+function articlePublishedTime(article) {
+  const raw = article?.published_at || article?.date;
+  if (!raw) return 0;
+  const value = /^\d{4}-\d{2}-\d{2}$/.test(raw) ? `${raw}T00:00:00Z` : raw;
+  const parsed = Date.parse(value);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
 let articles = [];
 if (fs.existsSync(ARTICLES_DIR)) {
   articles = fs.readdirSync(ARTICLES_DIR)
@@ -123,7 +131,7 @@ if (fs.existsSync(ARTICLES_DIR)) {
       catch (e) { console.error(`✗ skipping bad article ${f}: ${e.message}`); return null; }
     })
     .filter(a => a && a.slug && a.date && a.title_en && a.html_en)
-    .sort((a, b) => b.date.localeCompare(a.date) || b.slug.localeCompare(a.slug));
+    .sort((a, b) => articlePublishedTime(b) - articlePublishedTime(a) || b.slug.localeCompare(a.slug));
 }
 
 function assertNoMarkdownResidue(article, field) {
@@ -148,7 +156,7 @@ for (const article of articles) {
 
 // Lightweight index (no article bodies) shared with the client for the News page
 const articlesIndex = articles.map(a => ({
-  slug: a.slug, date: a.date,
+  slug: a.slug, date: a.date, published_at: a.published_at || a.date,
   title_en: a.title_en, title_zh: a.title_zh || a.title_en,
   excerpt_en: a.excerpt_en || '', excerpt_zh: a.excerpt_zh || a.excerpt_en || '',
   tag_en: a.tag_en || 'Daily Briefing', tag_zh: a.tag_zh || '每日简报'
@@ -168,6 +176,7 @@ for (const f of ['js/data.js', 'js/i18n.js', 'js/articles-data.js', 'js/pages.js
   vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf-8'), sandbox, { filename: f });
 }
 const PAGE_ROUTES = vm.runInContext('PAGE_ROUTES', sandbox);
+const MAP_WARS_ORDER = vm.runInContext('MAP_WARS_SLUG_ORDER', sandbox);
 
 // ============ Chinese mirror (/zh/...) helpers ============
 const I18N_ZH = vm.runInContext('I18N.zh', sandbox);
@@ -209,6 +218,7 @@ const PAGES_ZH = {
   '/chinese-car-brands': { title: '中国汽车品牌大全 | TopChinaCar', desc: '中国汽车品牌指南：比亚迪、吉利、奇瑞、长安、上汽、一汽、长城、广汽、东风、北汽，以及蔚来、小鹏、理想、小米、零跑等新势力。' },
   '/models': { title: '中国电动车明星车型 — 续航、价格与参数 | TopChinaCar', desc: '定义新时代的中国电动车：比亚迪海豹、小米 SU7 Ultra、蔚来 ET9、小鹏 G6、理想 MEGA、极氪 001——真实续航、零百加速与美元指导价。' },
   '/news': { title: '中国汽车出海与电动车行业新闻 | TopChinaCar', desc: '中国汽车出口、新车发布、电池技术与政策动态的精选报道，以及每个工作日更新的出海简报。' },
+  '/series/map-wars': { title: '地图战争：全球数字地图产业八部曲 | TopChinaCar', desc: '八篇连续深度文章，梳理 Navteq、HERE、TomTom、Google、Overture 与 AI 地理基础设施的产业演变。' },
   '/intelligence': { title: 'TopChinaCar 情报系统 | 看懂中国汽车全球化', desc: 'TopChinaCar 追踪中国车企出海、海外工厂、出口、价格、政策风险与市场变化，把分散新闻转化为结构化市场信号。' },
   '/tech': { title: '中国电动车技术解读：800V、城市智驾、刀片电池 | TopChinaCar', desc: '深度解读中国汽车领先背后的技术：800V 高压平台、城市级智能驾驶、智能座舱、刀片电池与 CTB 电池车身一体化。' },
   '/about': { title: '关于 TopChinaCar — 独立的中国汽车编辑报道', desc: 'TopChinaCar 是面向海外读者的独立双语编辑出版物，讲解中国汽车——品牌、车型、技术与人。不吹捧，不贬低。' },
@@ -246,6 +256,12 @@ const PAGES = {
     file: 'news.html',
     title: 'China Auto Export & EV Industry News | TopChinaCar',
     desc: 'Curated reporting on Chinese car exports, new model launches, battery technology and policy — plus the daily China Auto Overseas Daily.'
+  },
+  '/series/map-wars': {
+    file: 'series/map-wars.html',
+    title: 'Map Wars: Eight Essays on the Global Digital Map Industry | TopChinaCar',
+    desc: 'An eight-part series on Navteq, HERE, TomTom, Google, Overture and the map infrastructure being rebuilt for AI agents.',
+    lastmod: '2026-07-26'
   },
   '/intelligence': {
     file: 'intelligence.html',
@@ -302,9 +318,12 @@ const NAV = [
   ['/analysis', 'nav.analysis', 'Analysis']
 ];
 
-function headerHTML(route) {
+function headerHTML(route, isZh = false) {
   const navLinks = NAV.map(([href, key, label]) =>
     `<a href="${href}"${href === route ? ' class="active"' : ''} data-i18n="${key}">${label}</a>`).join('\n      ');
+  const languageHref = isZh
+    ? (route === '/' ? `${SITE}/` : `${SITE}${route}`)
+    : (route === '/' ? '/zh/' : `/zh${route}`);
   return `<header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="/" class="logo">
@@ -324,9 +343,9 @@ function headerHTML(route) {
 
     <div class="header-tools">
       <a class="admin-link" href="/newsletter" data-i18n="nav.newsletter">Newsletter</a>
-      <button class="lang-toggle" id="langToggle" aria-label="Switch language (EN/中)" title="Switch language">
+      <a class="lang-toggle" id="langToggle" href="${languageHref}" aria-label="Switch language (EN/中)" title="Switch language">
         <span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-zh">中</span>
-      </button>
+      </a>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -609,14 +628,16 @@ function pageHTML(route, meta, mainHTML, opts = {}) {
   const enUrl = canonicalUrl(route, false);
   const zhUrl = canonicalUrl(route, true);
   const canonical = isZh ? zhUrl : enUrl;
-  const ogImage = assetUrl(meta.image || opts.image || DEFAULT_OG_IMAGE);
+  const ogImageSource = meta.image || opts.image || DEFAULT_OG_IMAGE;
+  const ogImage = assetUrl(ogImageSource);
+  const ogDimensions = imageDimensions(ogImageSource) || { width: 1200, height: 630 };
   const canonicalLinks = opts.noCanonical ? '' : `<link rel="canonical" href="${canonical}" />
 ${opts.noAlt ? '' : `<link rel="alternate" hreflang="en" href="${enUrl}" />
 <link rel="alternate" hreflang="zh-CN" href="${zhUrl}" />
 <link rel="alternate" hreflang="x-default" href="${enUrl}" />
 `}`;
   const extraHead = opts.extraHead || meta.extraHead || '';
-  meta = { ...meta, title: escAttr(truncateMeta(meta.title, 75)), desc: escAttr(truncateMeta(meta.desc, 165)) };
+  meta = { ...meta, title: escAttr(meta.title), desc: escAttr(truncateMeta(meta.desc, 165)) };
   const modified = meta.modified || meta.published;
   const includeNewsletter = route !== '/newsletter';
   const fontFamilies = isZh
@@ -640,11 +661,11 @@ ${canonicalLinks}
 <meta property="og:description" content="${meta.desc}" />
 ${opts.noCanonical ? '' : `<meta property="og:url" content="${canonical}" />`}
 <meta property="og:image" content="${ogImage}" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+<meta property="og:image:width" content="${ogDimensions.width}" />
+<meta property="og:image:height" content="${ogDimensions.height}" />
 <meta property="og:locale" content="${isZh ? 'zh_CN' : 'en_US'}" />
-<meta property="og:locale:alternate" content="${isZh ? 'en_US' : 'zh_CN'}" />
-${meta.published ? `<meta property="article:published_time" content="${meta.published}" />\n<meta property="article:modified_time" content="${modified}" />\n<meta property="article:section" content="China Auto Export" />` : ''}
+${opts.noAlt ? '' : `<meta property="og:locale:alternate" content="${isZh ? 'en_US' : 'zh_CN'}" />`}
+${meta.published ? `<meta property="article:published_time" content="${meta.published}" />\n<meta property="article:modified_time" content="${modified}" />\n<meta property="article:section" content="${escAttr(meta.section || 'Analysis')}" />` : ''}
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -663,7 +684,7 @@ ${route === '/' ? JSONLD + '\n' : ''}${extraHead ? extraHead + '\n' : ''}<link r
 </head>
 <body>
 
-${headerHTML(route)}
+${headerHTML(route, isZh)}
 
 <main id="app">${mainHTML}</main>
 
@@ -679,7 +700,7 @@ ${FOOTER}
 </body>
 </html>
 `;
-  return addImageDimensions(html);
+  return addImageDimensions(html.replace(/[ \t]+$/gm, ''));
 }
 
 function staticCollectionItems(route) {
@@ -691,6 +712,15 @@ function staticCollectionItems(route) {
   }
   if (route === '/news') {
     return articles.map(a => ({ route: `/news/${a.slug}`, name: a.title_en }));
+  }
+  if (route === '/series/map-wars') {
+    const bySlug = new Map(articles
+      .filter(a => a.tag_en === 'Map Wars')
+      .map(a => [a.slug, a]));
+    return MAP_WARS_ORDER
+      .map(slug => bySlug.get(slug))
+      .filter(Boolean)
+      .map(a => ({ route: `/news/${a.slug}`, name: a.title_en }));
   }
   if (route === '/tech') {
     const techArticles = articles
@@ -710,7 +740,7 @@ function staticCollectionItems(route) {
   return [];
 }
 
-const STATIC_COLLECTION_ROUTES = new Set(['/chinese-car-brands', '/models', '/news', '/tech']);
+const STATIC_COLLECTION_ROUTES = new Set(['/chinese-car-brands', '/models', '/news', '/tech', '/series/map-wars']);
 const STATIC_WEBPAGE_TYPES = {
   '/about': 'AboutPage',
   '/intelligence': 'WebPage',
@@ -740,7 +770,9 @@ function staticExtraHead(route, meta, lang = 'en') {
 let count = 0;
 for (const [route, meta] of Object.entries(PAGES)) {
   const mainHTML = PAGE_ROUTES[route]();
-  fs.writeFileSync(path.join(ROOT, meta.file), pageHTML(route, { ...meta, extraHead: staticExtraHead(route, meta, 'en') }, mainHTML));
+  const outputFile = path.join(ROOT, meta.file);
+  fs.mkdirSync(path.dirname(outputFile), { recursive: true });
+  fs.writeFileSync(outputFile, pageHTML(route, { ...meta, extraHead: staticExtraHead(route, meta, 'en') }, mainHTML));
   setSandboxLang('zh');
   const mainZh = PAGE_ROUTES[route]();
   setSandboxLang('en');
@@ -780,12 +812,47 @@ function langSpan(en, zh) {
   return `<span data-lang="en">${en}</span><span data-lang="zh" hidden>${zh}</span>`;
 }
 
+function entityMention(text, value) {
+  const source = String(text || '');
+  const needle = String(value || '').trim();
+  if (!needle) return false;
+  if (/^[\x00-\x7F]+$/.test(needle)) {
+    const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`(^|[^a-z0-9])${escaped}(?=$|[^a-z0-9])`, 'i').test(source);
+  }
+  return source.includes(needle);
+}
+
+function articleBrandRelevance(article, brand) {
+  const identities = [brand.id, brand.name, brand.cn].filter(Boolean);
+  const tagged = values => Array.isArray(values) && values.some(value =>
+    identities.some(identity => String(value).toLowerCase() === String(identity).toLowerCase()));
+
+  if (tagged(article.primary_brands) || tagged(article.brands)) return 3;
+  if (identities.some(identity => entityMention(`${article.title_en || ''} ${article.title_zh || ''}`, identity))) return 3;
+  if (tagged(article.secondary_brands)) return 1;
+  if (identities.some(identity => entityMention(`${article.excerpt_en || ''} ${article.excerpt_zh || ''}`, identity))) return 1;
+  if (identities.some(identity => entityMention(`${article.html_en || ''} ${article.html_zh || ''}`, identity))) return 1;
+  return 0;
+}
+
+function rankedBrandArticles(brand, limit = 5, secondaryLimit = 1) {
+  const matches = articles
+    .map(article => ({ article, relevance: articleBrandRelevance(article, brand) }))
+    .filter(item => item.relevance > 0)
+    .sort((a, b) => b.relevance - a.relevance
+      || articlePublishedTime(b.article) - articlePublishedTime(a.article)
+      || b.article.slug.localeCompare(a.article.slug));
+  const primary = matches.filter(item => item.relevance >= 3).map(item => item.article);
+  const secondary = matches.filter(item => item.relevance < 3).slice(0, secondaryLimit).map(item => item.article);
+  return primary.concat(secondary).slice(0, limit);
+}
+
 function brandMain(b) {
   const cat = CATEGORY_LABEL[b.category] || CATEGORY_LABEL.group;
   const ctx = CATEGORY_CONTEXT[b.category] || CATEGORY_CONTEXT.group;
   const models = SITE_DATA.models.filter(m => m.brand === b.name);
-  const related = articles.filter(a =>
-    (a.title_en + ' ' + (a.excerpt_en || '')).toLowerCase().includes(b.name.toLowerCase())).slice(0, 5);
+  const related = rankedBrandArticles(b);
 
   const fact = (labelEn, labelZh, val) => `
     <div class="brand-fact"><span class="spec-label">${langSpan(labelEn, labelZh)}</span><span class="spec-value">${val}</span></div>`;
@@ -920,9 +987,8 @@ function modelMain(m, brand) {
   const modelBodyZh = m.body_zh || `${m.brand} ${m.name} 被纳入 TopChinaCar 车型数据库，是因为它与中国车企海外产品策略相关。不同配置、市场、认证包与上市时间会导致参数差异，因此下方数据应作为编辑参考，而不是成交报价。`;
   const specNote = m.specNote_en ? `
         <p class="model-spec-note model-detail-spec-note" style="background:#f9fafb;border-left:3px solid #d4302a;padding:10px 12px;margin:18px 0 0;">${langSpan(m.specNote_en, m.specNote_zh || m.specNote_en)}</p>` : '';
-  const related = articles.filter(a =>
-    (a.title_en + ' ' + (a.excerpt_en || '')).toLowerCase().includes(m.brand.toLowerCase())
-    || (a.title_en + ' ' + (a.excerpt_en || '')).toLowerCase().includes(m.name.toLowerCase())).slice(0, 5);
+  const related = brand ? rankedBrandArticles(brand) : articles.filter(a =>
+    entityMention(`${a.title_en || ''} ${a.excerpt_en || ''}`, m.name)).slice(0, 5);
   const siblings = SITE_DATA.models.filter(x => x.brand === m.brand && x.id !== m.id);
   const fact = (labelEn, labelZh, val) => `
     <div class="brand-fact"><span class="spec-label">${langSpan(labelEn, labelZh)}</span><span class="spec-value">${val}</span></div>`;
@@ -2011,6 +2077,11 @@ function articleMain(a, primaryLang = 'en') {
     return `<div data-lang="${lang}"${lang === 'zh' ? ' hidden' : ''}>${linkifyBrands(body, lang)}</div>`;
   };
   const sources = extractSources(a.html_en);
+  const seriesCallout = a.tag_en === 'Map Wars' ? `
+      <aside style="display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap;margin:0 0 28px;padding:16px 18px;border:1px solid #e5e7eb;border-left:4px solid #d4302a;background:#fafafa;">
+        <div><strong>${langSpan('Map Wars · Eight-part series', '地图战争 · 八部曲')}</strong><br/><span style="font-size:13px;color:#6b7280;">${langSpan('How the global digital-map industry was built, consolidated and reopened by AI.', '全球数字地图产业如何形成、收敛，又如何被 AI 重新打开。')}</span></div>
+        <a href="/series/map-wars" style="color:var(--accent);font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;">${langSpan('View the full series →', '查看完整专题 →')}</a>
+      </aside>` : '';
   return `
   <section class="page-header">
     <div class="container">
@@ -2022,6 +2093,7 @@ function articleMain(a, primaryLang = 'en') {
   <section style="padding-top:0;">
     <div class="container" style="max-width:820px;">
       ${bylineHTML(dateNice, a.date)}
+      ${seriesCallout}
       <article class="article-body" style="font-size:16px;line-height:1.8;">
         ${langBlock('en', a.html_en)}
         ${langBlock('zh', a.html_zh || a.html_en)}
@@ -2034,12 +2106,13 @@ function articleMain(a, primaryLang = 'en') {
 }
 
 function articleImage(a) {
+  if (a.image) return a.image;
+  if (a.tag_en === 'Map Wars') return DEFAULT_OG_IMAGE;
   const text = `${a.title_en || ''} ${a.excerpt_en || ''} ${a.title_zh || ''} ${a.excerpt_zh || ''}`.toLowerCase();
-  const brand = SITE_DATA.brands.find(b =>
-    text.includes(String(b.name).toLowerCase()) || (b.cn && text.includes(String(b.cn).toLowerCase())));
+  const brand = SITE_DATA.brands.find(b => articleBrandRelevance(a, b) >= 3);
   if (brand && brand.image) return brand.image;
   if (/\bev\b|electric|battery|batteries|phev|hybrid/i.test(text)) return 'images/byd-seal.jpg';
-  if (/africa|pickup|commercial/i.test(text)) return 'images/chery-brand.jpg';
+  if (/\bafrica\b|\bpickups?\b|\bcommercial vehicles?\b/i.test(text)) return 'images/chery-brand.jpg';
   if (/middle east|gulf|saudi|uae|dubai/i.test(text)) return 'images/yangwang-u8.jpg';
   if (/europe|tariff/i.test(text)) return 'images/mg-mg4.jpg';
   return DEFAULT_OG_IMAGE;
@@ -2047,21 +2120,55 @@ function articleImage(a) {
 
 function articleJsonLd(a, isZh = false) {
   const image = articleImage(a);
-  return `<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "NewsArticle",
-  "headline": ${JSON.stringify(isZh ? (a.title_zh || a.title_en) : a.title_en)},
-  "description": ${JSON.stringify(isZh ? (a.excerpt_zh || a.excerpt_en || a.title_zh || a.title_en) : (a.excerpt_en || a.title_en))},
-  "datePublished": "${a.date}",
-  "dateModified": "${a.date}",
-  "image": "${assetUrl(image)}",
-  "inLanguage": "${isZh ? 'zh-CN' : 'en'}",
-  "mainEntityOfPage": "${canonicalUrl(`/news/${a.slug}`, isZh)}",
-  "author": {"@type": "Organization", "name": "TopChinaCar", "url": "${SITE}/"},
-  "publisher": {"@id": "${SITE}/#organization"}
-}
-</script>`;
+  const imageSize = imageDimensions(image);
+  const route = `/news/${a.slug}`;
+  const pageUrl = canonicalUrl(route, isZh);
+  const published = a.published_at || a.date;
+  const modified = a.modified_at || published;
+  const articleNode = {
+    '@type': 'NewsArticle',
+    '@id': `${pageUrl}#article`,
+    headline: isZh ? (a.title_zh || a.title_en) : a.title_en,
+    description: isZh
+      ? (a.excerpt_zh || a.excerpt_en || a.title_zh || a.title_en)
+      : (a.excerpt_en || a.title_en),
+    datePublished: published,
+    dateModified: modified,
+    image: {
+      '@type': 'ImageObject',
+      url: assetUrl(image),
+      ...(imageSize || {})
+    },
+    articleSection: isZh ? (a.tag_zh || a.tag_en || '分析') : (a.tag_en || 'Analysis'),
+    inLanguage: isZh ? 'zh-CN' : 'en',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+    author: { '@type': 'Organization', name: 'TopChinaCar Editorial', url: `${SITE}/about` },
+    publisher: {
+      '@type': 'Organization',
+      '@id': `${SITE}/#organization`,
+      name: 'TopChinaCar',
+      url: `${SITE}/`,
+      logo: { '@type': 'ImageObject', url: assetUrl(SITE_LOGO), width: 512, height: 512 }
+    }
+  };
+  if (a.tag_en === 'Map Wars') {
+    articleNode.isPartOf = {
+      '@type': 'CreativeWorkSeries',
+      name: isZh ? '地图战争' : 'Map Wars',
+      url: canonicalUrl('/series/map-wars', isZh)
+    };
+  }
+  return jsonLdScript({
+    '@context': 'https://schema.org',
+    '@graph': [
+      articleNode,
+      breadcrumbJsonLd(route, [
+        { name: isZh ? '首页' : 'Home', route: '/' },
+        { name: isZh ? '新闻' : 'News', route: '/news' },
+        { name: isZh ? (a.title_zh || a.title_en) : a.title_en, route }
+      ], isZh)
+    ]
+  });
 }
 
 for (const a of articles) {
@@ -2073,7 +2180,9 @@ for (const a of articles) {
     desc: (a.excerpt_en || a.title_en),
     image: articleImage(a),
     ogType: 'article',
-    published: a.date
+    published: a.published_at || a.date,
+    modified: a.modified_at || a.published_at || a.date,
+    section: a.tag_en || 'Analysis'
   }, main).replace('</head>', articleJsonLd(a) + '\n</head>');
   fs.writeFileSync(path.join(NEWS_OUT, `${a.slug}.html`), html);
   writeZh(`news/${a.slug}.html`, zhChrome(pageHTML(route, {
@@ -2081,7 +2190,9 @@ for (const a of articles) {
     desc: (a.excerpt_zh || a.excerpt_en || a.title_zh || a.title_en),
     image: articleImage(a),
     ogType: 'article',
-    published: a.date
+    published: a.published_at || a.date,
+    modified: a.modified_at || a.published_at || a.date,
+    section: a.tag_zh || a.tag_en || '分析'
   }, zhMain, { zh: true }).replace('</head>', articleJsonLd(a, true) + '\n</head>')));
 }
 if (articles.length) console.log(`✓ ${articles.length} article page(s) → news/ + zh/news/`);
@@ -2115,13 +2226,14 @@ function safeDate(date) {
 //  - 其余静态页、品牌页、车型页：固定的内容修改日 STATIC_LASTMOD——
 //    只有真正改动这些页面的内容时才手动更新，避免"天天都是今天"让 Google 不信任 lastmod
 const STATIC_LASTMOD = '2026-07-12';
-const latestArticleDate = articles.length ? safeDate(articles[0].date) : STATIC_LASTMOD;
+const articleContentDate = article => safeDate(String(article.modified_at || article.published_at || article.date || TODAY).slice(0, 10));
+const latestArticleDate = articles.length ? articleContentDate(articles[0]) : STATIC_LASTMOD;
 const FRESH_ROUTES = new Set(['/', '/news']);
 
 const staticUrls = Object.keys(PAGES).map(r =>
   PAGES[r].robots && PAGES[r].robots.includes('noindex')
     ? null
-    : `  <url><loc>${r === '/' ? SITE + '/' : SITE + r}</loc><lastmod>${FRESH_ROUTES.has(r) ? latestArticleDate : STATIC_LASTMOD}</lastmod></url>`
+    : `  <url><loc>${r === '/' ? SITE + '/' : SITE + r}</loc><lastmod>${PAGES[r].lastmod || (FRESH_ROUTES.has(r) ? latestArticleDate : STATIC_LASTMOD)}</lastmod></url>`
 ).filter(Boolean);
 const brandUrls = SITE_DATA.brands.map(b =>
   `  <url><loc>${SITE}/chinese-car-brands/${b.id}</loc><lastmod>${STATIC_LASTMOD}</lastmod></url>`);
@@ -2135,7 +2247,7 @@ const storyUrls = SITE_STORIES
   .filter(s => (SITE_DATA.features || []).some(f => f.slug === s.slug))
   .map(s => `  <url><loc>${SITE}/stories/${s.slug}</loc><lastmod>${safeDate(s.date)}</lastmod></url>`);
 const articleUrls = articles.map(a =>
-  `  <url><loc>${SITE}/news/${a.slug}</loc><lastmod>${safeDate(a.date)}</lastmod></url>`);
+  `  <url><loc>${SITE}/news/${a.slug}</loc><lastmod>${articleContentDate(a)}</lastmod></url>`);
 
 const zhMirror = lines => lines.map(l =>
   l.includes(`<loc>${SITE}/</loc>`)

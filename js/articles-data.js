@@ -3,6 +3,7 @@ const SITE_ARTICLES = [
   {
     "slug": "china-auto-exports-seven-months-2026",
     "date": "2026-08-07",
+    "published_at": "2026-08-07",
     "title_en": "China Just Exported a Year's Worth of Cars in Seven Months",
     "title_zh": "中国7个月出口量，已抵得上2024年全年",
     "excerpt_en": "China exported 6.40 million vehicles in the first seven months of 2026, matching its full-year 2024 volume. Export value rose even faster as the electric-vehicle and higher-priced mix strengthened.",
@@ -13,6 +14,7 @@ const SITE_ARTICLES = [
   {
     "slug": "china-vehicle-exports-h1-2026-powertrain-market-shift",
     "date": "2026-07-28",
+    "published_at": "2026-07-28",
     "title_en": "China Exported 5.31 Million Vehicles in H1 2026. The Bigger Story Is the Powertrain Shift",
     "title_zh": "上半年出口531万辆之后：中国汽车出海正在换一套增长引擎",
     "excerpt_en": "China’s vehicle exports crossed 5.31 million units in the customs-based series, but the most important change is beneath the headline: plug-in hybrids supplied almost half of the increase in new-energy vehicle exports, while growth spread across Europe, Latin America and Asia.",
@@ -23,6 +25,7 @@ const SITE_ARTICLES = [
   {
     "slug": "tomtom-here-forty-years-mapmaking-convergence",
     "date": "2026-07-26",
+    "published_at": "2026-07-26",
     "title_en": "Forty Years of Two Mapmakers: The Technology Converged. One Question Remains.",
     "title_zh": "两家图厂的四十年：技术收敛了，只剩一道选择题",
     "excerpt_en": "Field-survey sect versus probe sect: after forty years the two mapmakers' technology converged, leaving only a choice of commercial philosophy.",
@@ -33,6 +36,7 @@ const SITE_ARTICLES = [
   {
     "slug": "overture-anti-google-alliance-now-ai-infrastructure",
     "date": "2026-07-26",
+    "published_at": "2026-07-26",
     "title_en": "The Anti-Google Map Alliance Now Says It's AI Infrastructure",
     "title_zh": "反谷歌地图联盟，改口说自己是AI基础设施了",
     "excerpt_en": "Three and a half years on, Overture dropped 'anti-Google' and made AI the subject — buying what the old story couldn't.",
@@ -43,6 +47,7 @@ const SITE_ARTICLES = [
   {
     "slug": "no-new-stories-in-the-map-industry",
     "date": "2026-07-26",
+    "published_at": "2026-07-26",
     "title_en": "There Are No New Stories in the Map Industry",
     "title_zh": "地图行业没有新故事",
     "excerpt_en": "Every 2026 map-industry headline is a rerun of scripts Tele Atlas played out forty years ago.",
@@ -53,6 +58,7 @@ const SITE_ARTICLES = [
   {
     "slug": "navteq-first-company-to-drive-every-street-in-america",
     "date": "2026-07-26",
+    "published_at": "2026-07-26",
     "title_en": "The First Company to Drive Every Street in America",
     "title_zh": "第一个把美国开一遍的公司",
     "excerpt_en": "From a 1984 wrong turn to Nokia's $8.1B at the top: Navteq's forty-year parabola contains every commercial law the map industry ever learned.",
@@ -63,6 +69,7 @@ const SITE_ARTICLES = [
   {
     "slug": "here-wont-go-bankrupt-it-will-disappear",
     "date": "2026-07-26",
+    "published_at": "2026-07-26",
     "title_en": "HERE Won't Go Bankrupt. It Will Disappear.",
     "title_zh": "HERE不会倒闭，但会消失",
     "excerpt_en": "Company and assets parting ways is not a new script. HERE as an independent pole vanishes — in four possible forms.",
@@ -73,6 +80,7 @@ const SITE_ARTICLES = [
   {
     "slug": "here-tomtom-one-waits-for-a-buyer-one-waits-for-orders",
     "date": "2026-07-26",
+    "published_at": "2026-07-26",
     "title_en": "One Is Waiting for a Buyer. One Is Waiting for Orders.",
     "title_zh": "一个在等买家，一个在等订单",
     "excerpt_en": "Neither HERE nor TomTom will die — but their survival odds differ by an order of magnitude, for reasons no income statement records.",
@@ -83,6 +91,7 @@ const SITE_ARTICLES = [
   {
     "slug": "google-maps-the-king-who-never-sold-maps",
     "date": "2026-07-26",
+    "published_at": "2026-07-26",
     "title_en": "The King Who Never Sold a Map",
     "title_zh": "不卖地图的地图之王",
     "excerpt_en": "Everyone sells maps as a product; Google raises the map as an organ of Search. Forty years of map wars are a war between two valuation functions — and the space beyond Google's.",
@@ -93,6 +102,7 @@ const SITE_ARTICLES = [
   {
     "slug": "gers-a-registry-for-places-ai-agents",
     "date": "2026-07-26",
+    "published_at": "2026-07-26",
     "title_en": "Giving Places an ID: The Foundation AI Agents Are Missing",
     "title_zh": "给地点上户口：Agent缺的那块地基",
     "excerpt_en": "AI has no stable way to refer to a place. GERS wants to be the DNS of the physical world — the grounding layer agents are missing.",
@@ -103,6 +113,7 @@ const SITE_ARTICLES = [
   {
     "slug": "google-oem-partnership-four-layer-stack-2026",
     "date": "2026-07-22",
+    "published_at": "2026-07-22",
     "title_en": "Google's OEM Partnerships in 2026: The Four-Layer Stack from Phone Projection to OS to Map Data",
     "title_zh": "Google 与车企合作全景（2026 更新）：从投屏、操作系统到地图数据的四层技术栈",
     "excerpt_en": "An updated strategy analysis: Google's automaker cooperation splits into four independently purchasable layers — Android Auto projection, the open-source AAOS kernel, the Google built-in service pack, and the Google Maps Auto SDK data layer. We re-sort Volvo, GM, BMW, Toyota, Mercedes-Benz plus XPeng, BYD, Zeekr and Xiaomi by how much OS sovereignty each cedes, and correct the nature of the XPeng and Rivian deals.",
@@ -113,6 +124,7 @@ const SITE_ARTICLES = [
   {
     "slug": "2026-07-22-china-auto-daily",
     "date": "2026-07-22",
+    "published_at": "2026-07-22T06:30:00+08:00",
     "title_en": "China Auto Overseas Daily | 2026-07-22: BYD Hits 100,000 EVs in Brazil and Enters Japan's Kei-Car Market as XPeng Launches the L03 in Munich",
     "title_zh": "中国车企出海日报 | 2026年7月22日:比亚迪巴西第10万辆下线、进军日本微型车市场,小鹏L03慕尼黑全球首发",
     "excerpt_en": "BYD built its 100,000th EV in Brazil on July 16, signed a PSG sponsorship and will enter Japan's kei-car market with the Racco on July 28, while XPeng launched the L03 globally from Munich and the EU moved closer to taxing Chinese PHEVs.",
@@ -123,6 +135,7 @@ const SITE_ARTICLES = [
   {
     "slug": "chery-automobile-stock-shareholder-structure-2026",
     "date": "2026-07-19",
+    "published_at": "2026-07-19T09:30:00+08:00",
     "title_en": "Chery Automobile (9973.HK): Stock Valuation and Shareholder Structure Deep Dive",
     "title_zh": "奇瑞汽车（09973.HK）股票与股东结构深度研究",
     "excerpt_en": "Chery’s export engine is accelerating while its domestic brands diverge. An ownerless governance structure, a roughly 7x trailing earnings multiple and a large September lock-up expiry frame the investment debate.",
@@ -131,18 +144,9 @@ const SITE_ARTICLES = [
     "tag_zh": "深度研究"
   },
   {
-    "slug": "in-car-ai-assistants-win-on-need-not-model",
-    "date": "2026-07-18",
-    "title_en": "In-Car AI Will Be Won by the Need, Not the Model",
-    "title_zh": "车载AI助手的胜负手，不在模型，在它长在什么需求上",
-    "excerpt_en": "Google's advantage in the third generation of in-car assistants is not Gemini alone. It is the ability to anchor conversational AI to a hard-to-cut requirement: global maps and navigation.",
-    "excerpt_zh": "第三代车载助手的胜负手，不是谁的模型跑分更高，而是谁能把AI长在地图、导航等砍不掉的需求上。",
-    "tag_en": "Analysis",
-    "tag_zh": "深度分析"
-  },
-  {
     "slug": "google-in-cars-from-suitcase-to-landlord",
     "date": "2026-07-18",
+    "published_at": "2026-07-18T22:32:00+08:00",
     "title_en": "From Suitcase to Landlord: Google's Decade Inside the Car",
     "title_zh": "从行李箱到房东：Google进车这十年",
     "excerpt_en": "GM is removing phone projection while deepening its use of Google's embedded stack. The apparent contradiction explains how Google moved from a guest on the screen to infrastructure inside the cockpit—and why Chinese automakers are becoming the next growth vector.",
@@ -151,8 +155,20 @@ const SITE_ARTICLES = [
     "tag_zh": "深度分析"
   },
   {
+    "slug": "in-car-ai-assistants-win-on-need-not-model",
+    "date": "2026-07-18",
+    "published_at": "2026-07-18T21:13:57+08:00",
+    "title_en": "In-Car AI Will Be Won by the Need, Not the Model",
+    "title_zh": "车载AI助手的胜负手，不在模型，在它长在什么需求上",
+    "excerpt_en": "Google's advantage in the third generation of in-car assistants is not Gemini alone. It is the ability to anchor conversational AI to a hard-to-cut requirement: global maps and navigation.",
+    "excerpt_zh": "第三代车载助手的胜负手，不是谁的模型跑分更高，而是谁能把AI长在地图、导航等砍不掉的需求上。",
+    "tag_en": "Analysis",
+    "tag_zh": "深度分析"
+  },
+  {
     "slug": "2026-07-12-china-auto-daily",
     "date": "2026-07-12",
+    "published_at": "2026-07-12T06:28:44+08:00",
     "title_en": "China's Auto Exports Cross 1M Units in June as BYD, Geely and XPeng Push Global Offensive",
     "title_zh": "中国6月整车出口首破百万辆：比亚迪、吉利、小鹏领衔全球攻势",
     "excerpt_en": "China exported a record 1.037M vehicles in June (+75.1% YoY), with NEVs topping 50% of the total for the first time, as BYD overseas sales hit 175,349 units and Geely crossed 100,000 exports in a single month.",
@@ -163,6 +179,7 @@ const SITE_ARTICLES = [
   {
     "slug": "2026-07-11-china-auto-daily",
     "date": "2026-07-11",
+    "published_at": "2026-07-11",
     "title_en": "China's Auto Exporters Post Blowout H1 2026: Chery at 944K, BYD at 792K, Geely Tops 100K in a Month",
     "title_zh": "中国车企2026年上半年出口全面爆发：奇瑞94.4万辆、比亚迪79.2万辆、吉利单月破10万",
     "excerpt_en": "Chery, BYD, and Geely collectively posted record H1 2026 export figures—943,817, 792,256, and 474,228 units respectively—as Leapmotor entered Mexico and GAC, Changan, SAIC, GWM, and FAW all hit new overseas milestones.",
@@ -173,6 +190,7 @@ const SITE_ARTICLES = [
   {
     "slug": "2026-07-10-china-auto-daily",
     "date": "2026-07-10",
+    "published_at": "2026-07-10",
     "title_en": "China Auto Exports Hit New Highs in H1 2026: BYD, Chery, Geely All Surpass 100k Monthly",
     "title_zh": "中国车企2026年上半年出口全面突破：比亚迪、奇瑞、吉利单月均超10万辆",
     "excerpt_en": "BYD hit a record 175,349 overseas units in June (+94.7%), Chery posted 191,062 (+79.7%), and Geely broke 100k for the first time, as China's export boom spreads beyond its traditional duopoly.",
@@ -183,6 +201,7 @@ const SITE_ARTICLES = [
   {
     "slug": "twenty-points-euro-ncap-2026-speed-assistance",
     "date": "2026-07-09",
+    "published_at": "2026-07-09",
     "title_en": "Twenty Points That Redefine Whether Your Car Should Know the Speed Limit",
     "title_zh": "20分，重新定义“车该不该知道限速”",
     "excerpt_en": "Euro NCAP's 2026 Speed Assistance rules turn speed-limit knowledge into a measurable safety function, testing camera-map fusion, data freshness, V2X and iACC execution.",
@@ -193,6 +212,7 @@ const SITE_ARTICLES = [
   {
     "slug": "momenta-deep-dive-technology-global-clients-china-overseas-adas-2026",
     "date": "2026-07-09",
+    "published_at": "2026-07-09",
     "title_en": "Momenta Deep Dive: Technology, Global Clients and China's Overseas Advanced ADAS",
     "title_zh": "Momenta 深度研究：核心技术、全球客户矩阵与中国汽车出海高阶智驾",
     "excerpt_en": "A full research report on Momenta's HKEX listing, technology roadmap, global OEM clients, map-free ADAS architecture, overseas deployment and the globalization of China's advanced driver-assistance software.",
@@ -203,6 +223,7 @@ const SITE_ARTICLES = [
   {
     "slug": "automotive-cybersecurity-regulation-unece-r155-china-export-implications-2026",
     "date": "2026-07-09",
+    "published_at": "2026-07-09",
     "title_en": "Automotive Cybersecurity Regulation Deep Dive: UNECE R155, Global Landscape and China Export Implications",
     "title_zh": "汽车网络安全法规深度研究：UNECE R155、全球格局与中国出海影响",
     "excerpt_en": "A full regulatory deep dive on UNECE R155, ISO/SAE 21434, China's GB 44495/44496 framework, US connected-vehicle restrictions and cybersecurity implications for Chinese automakers overseas.",
@@ -213,6 +234,7 @@ const SITE_ARTICLES = [
   {
     "slug": "2026-07-09-china-auto-daily",
     "date": "2026-07-09",
+    "published_at": "2026-07-09",
     "title_en": "China Auto Overseas Daily | 2026-07-09: Exports Carry June, UK Shows Chinese Model Pull",
     "title_zh": "中国车企出海日报 | 7月9日：6月出口继续托底，英国市场验证中国车型拉力",
     "excerpt_en": "China exported 877,000 vehicles in June as domestic demand stayed weak; in the UK, MG HS and Jaecoo 7 entered June's top-10 registrations while Finland showed BYD's trust barrier.",
@@ -223,6 +245,7 @@ const SITE_ARTICLES = [
   {
     "slug": "mazda-ez60-cx6e-global-sales-market-strategy-2026",
     "date": "2026-07-08",
+    "published_at": "2026-07-08",
     "title_en": "Mazda EZ-60 / CX-6e Global Sales and Market Strategy Report (2026)",
     "title_zh": "Mazda EZ-60 / CX-6e 全球销量与市场战略研究报告",
     "excerpt_en": "A full research report on Mazda EZ-60 / CX-6e global sales, covering China sales data, Europe and Australia launch strategy, overseas forecasts, manufacturing, supply chain and strategic risks.",
@@ -233,6 +256,7 @@ const SITE_ARTICLES = [
   {
     "slug": "mazda-ev-strategy-deep-research-report-2026",
     "date": "2026-07-08",
+    "published_at": "2026-07-08",
     "title_en": "Mazda EV Strategy Deep Research Report (2026)",
     "title_zh": "马自达电动车战略深度研究报告",
     "excerpt_en": "A full research report on Mazda's EV strategy, covering the MX-30 lessons, Lean Asset Strategy, Changan Mazda EZ-6/EZ-60 track, Skyactiv EV platform delay, hybrid strategy, market layout and risks.",
@@ -243,6 +267,7 @@ const SITE_ARTICLES = [
   {
     "slug": "2026-07-08-china-auto-daily",
     "date": "2026-07-08",
+    "published_at": "2026-07-08",
     "title_en": "Leapmotor Lands in Mexico, BYD Posts 792K H1 Overseas, XPeng L03 Eyes 64 Markets",
     "title_zh": "零跑登陆墨西哥、比亚迪上半年出海79.2万辆、小鹏L03瞄准64国市场",
     "excerpt_en": "Leapmotor becomes first Chinese EV startup in North America via Stellantis, as BYD hits 792,256 overseas units in H1 2026 (+70.7%) and XPeng prepares a 64-market L03 global launch.",
@@ -253,6 +278,7 @@ const SITE_ARTICLES = [
   {
     "slug": "delivan-chery-commercial-vehicle-europe-strategy",
     "date": "2026-07-07",
+    "published_at": "2026-07-07",
     "title_en": "DELIVAN Deep Research: Chery Commercial Vehicle's Electric Van Export Playbook",
     "title_zh": "DELIVAN（得利凡）深度研究报告：奇瑞商用车的纯电商用车出海样本",
     "excerpt_en": "A structured research brief on DELIVAN, Chery Commercial Vehicle's new electric light-commercial-vehicle brand, covering brand strategy, product technology, Europe entry, partners, manufacturing, tariffs and competition.",
@@ -263,6 +289,7 @@ const SITE_ARTICLES = [
   {
     "slug": "chery-overseas-full-value-chain-layout-2026",
     "date": "2026-07-07",
+    "published_at": "2026-07-07",
     "title_en": "Chery Overseas Full Value Chain Layout: Deep Research Report (2026)",
     "title_zh": "奇瑞汽车海外全产业链布局深度研究报告（2026）",
     "excerpt_en": "A structured research report on Chery Automobile’s overseas value-chain layout, covering R&D, manufacturing, brands, supply chain, channels, local talent, ESG, capital markets and strategic risks.",
@@ -273,6 +300,7 @@ const SITE_ARTICLES = [
   {
     "slug": "chery-cv-overseas-sales-forecast-2025-2030",
     "date": "2026-07-07",
+    "published_at": "2026-07-07",
     "title_en": "Chery Commercial Vehicle Overseas Sales Forecast: 2025-2030",
     "title_zh": "奇瑞商用车海外销量规划研究与预测（2025-2030）",
     "excerpt_en": "A bilingual forecast model for Chery Commercial Vehicle's overseas sales path from roughly 40,000 units in 2026 to a 400,000-unit overseas target by 2030.",
@@ -283,6 +311,7 @@ const SITE_ARTICLES = [
   {
     "slug": "byd-vs-tesla-global-ev-comparison-2026",
     "date": "2026-07-07",
+    "published_at": "2026-07-07",
     "title_en": "BYD vs Tesla: Global EV Leaders Deep Comparison Report (2026)",
     "title_zh": "比亚迪 vs 特斯拉：全球电动车双雄深度对比研究报告（2026）",
     "excerpt_en": "A full original research report comparing BYD and Tesla across sales, financials, batteries, autonomous driving, charging infrastructure, product portfolios, globalization, AI strategy, valuation and risks.",
@@ -293,6 +322,7 @@ const SITE_ARTICLES = [
   {
     "slug": "byd-overseas-full-value-chain-layout-2026",
     "date": "2026-07-07",
+    "published_at": "2026-07-07",
     "title_en": "BYD Overseas Full Value Chain Layout: Deep Research Report (2026)",
     "title_zh": "比亚迪海外全产业链布局深度研究报告（2026）",
     "excerpt_en": "A full original research report on BYD’s overseas value-chain strategy, covering manufacturing, vertical integration, logistics, charging infrastructure, brands, key markets, R&D, supply chain and risks.",
@@ -303,6 +333,7 @@ const SITE_ARTICLES = [
   {
     "slug": "2026-07-07-china-auto-daily",
     "date": "2026-07-07",
+    "published_at": "2026-07-07",
     "title_en": "BYD Hits 175K Overseas in June, Korea Cuts Subsidies; XPeng Launches Mona L03 in Munich July 16",
     "title_zh": "比亚迪6月海外交付17.5万辆创纪录、韩国取消补贴；小鹏Mona L03定档7月16日慕尼黑全球首发",
     "excerpt_en": "BYD posted a record 175,349 overseas deliveries in June (+94.7%) even as South Korea stripped it of EV subsidies, while XPeng chose Munich for its first-ever overseas world premiere and Leapmotor set a new monthly record of 93,376 units.",
@@ -313,6 +344,7 @@ const SITE_ARTICLES = [
   {
     "slug": "what-eu-tariffs-mean-for-chinese-ev-makers",
     "date": "2026-07-06",
+    "published_at": "2026-07-06",
     "title_en": "What EU Tariffs Mean for Chinese EV Makers",
     "title_zh": "欧盟关税对中国电动车企意味着什么",
     "excerpt_en": "The EU's anti-subsidy duties were meant to slow Chinese EVs. Eighteen months on, the real effect is visible: not retreat, but localisation, PHEV substitution and a premium pivot.",
@@ -323,6 +355,7 @@ const SITE_ARTICLES = [
   {
     "slug": "chinese-plug-in-hybrids-why-phevs-are-gaining-attention",
     "date": "2026-07-06",
+    "published_at": "2026-07-06",
     "title_en": "Chinese Plug-in Hybrids: Why PHEVs Are Gaining Attention",
     "title_zh": "中国插混：PHEV 为什么突然成了主角",
     "excerpt_en": "Pure EVs made the headlines, but plug-in hybrids and EREVs are becoming China's stealth export weapon: no charging anxiety, no EV tariffs in Europe, and 1,000-plus kilometres of combined range.",
@@ -333,6 +366,7 @@ const SITE_ARTICLES = [
   {
     "slug": "chinese-pickup-trucks-a-growing-export-segment",
     "date": "2026-07-06",
+    "published_at": "2026-07-06",
     "title_en": "Chinese Pickup Trucks: A Growing Export Segment",
     "title_zh": "中国皮卡：正在崛起的出口细分",
     "excerpt_en": "Pickups are the most brand-loyal segment in the markets Chinese automakers covet — and the segment where they are advancing fastest, led by GWM's Poer, BYD's Shark 6 and a wave of PHEV utes.",
@@ -343,6 +377,7 @@ const SITE_ARTICLES = [
   {
     "slug": "changan-overseas-strategy-from-suvs-to-smart-evs",
     "date": "2026-07-06",
+    "published_at": "2026-07-06",
     "title_en": "Changan's Overseas Strategy: From SUVs to Smart EVs",
     "title_zh": "长安的出海战略：从 SUV 到智能电动车",
     "excerpt_en": "The quietest of China's big state-owned groups is running one of the most methodical globalization plays: Thai-built EVs for Europe, 22 overseas manufacturing bases, and a 1.5–1.8 million overseas target by 2030.",
@@ -353,6 +388,7 @@ const SITE_ARTICLES = [
   {
     "slug": "byd-vs-chery-overseas-two-different-globalization-models",
     "date": "2026-07-06",
+    "published_at": "2026-07-06",
     "title_en": "BYD vs Chery Overseas: Two Different Globalization Models",
     "title_zh": "BYD 对奇瑞：两种截然不同的全球化模型",
     "excerpt_en": "China's two biggest auto exporters got there by opposite routes — technology-led blitz versus market-led patience. Comparing them explains most of what is happening in China auto globalization.",
@@ -363,6 +399,7 @@ const SITE_ARTICLES = [
   {
     "slug": "2026-07-06-china-auto-daily",
     "date": "2026-07-06",
+    "published_at": "2026-07-06",
     "title_en": "BYD Hits 792K Overseas H1, XPeng Debuts in Munich, GAC Exports Surge 132%",
     "title_zh": "BYD上半年海外销量达79.2万辆，小鹏慕尼黑首发，广汽出口增132%",
     "excerpt_en": "Chinese automakers logged a historic overseas half-year in 2026: BYD's H1 exports hit 792,256 units (+70.7%), GAC surged 132%, and XPeng chose Munich—not Beijing—for the Mona L03 world premiere.",
@@ -373,6 +410,7 @@ const SITE_ARTICLES = [
   {
     "slug": "why-chinese-automakers-are-expanding-faster-overseas",
     "date": "2026-07-05",
+    "published_at": "2026-07-05",
     "title_en": "Why Chinese Automakers Are Expanding Faster Overseas",
     "title_zh": "中国车企为什么在海外越跑越快",
     "excerpt_en": "Price war at home, fatter margins abroad, and a closing tariff window: the three forces pushing every major Chinese automaker to accelerate globalization at the same time.",
@@ -383,6 +421,7 @@ const SITE_ARTICLES = [
   {
     "slug": "why-chinese-automakers-are-building-overseas-plants",
     "date": "2026-07-05",
+    "published_at": "2026-07-05",
     "title_en": "Why Chinese Automakers Are Building Overseas Plants",
     "title_zh": "中国车企为什么在海外建厂",
     "excerpt_en": "From Thailand to Hungary to Brazil, Chinese automakers are racing to manufacture where they sell. The logic: get inside the tariff wall before it rises further.",
@@ -393,6 +432,7 @@ const SITE_ARTICLES = [
   {
     "slug": "geely-global-brand-portfolio-explained",
     "date": "2026-07-05",
+    "published_at": "2026-07-05",
     "title_en": "Geely's Global Brand Portfolio Explained",
     "title_zh": "一文看懂吉利的全球品牌矩阵",
     "excerpt_en": "Volvo, Polestar, Lotus, Zeekr, Lynk & Co, Proton, the Galaxy line — no Chinese group globalized through ownership like Geely. Here is how the pieces fit, and why exports just hit a record.",
@@ -403,6 +443,7 @@ const SITE_ARTICLES = [
   {
     "slug": "chinese-evs-in-europe-opportunity-tariffs-and-competition",
     "date": "2026-07-05",
+    "published_at": "2026-07-05",
     "title_en": "Chinese EVs in Europe: Opportunity, Tariffs and Competition",
     "title_zh": "中国电动车在欧洲：机会、关税与竞争",
     "excerpt_en": "Europe is the hardest market Chinese EV makers have entered — and the one they refuse to give up. Tariffs reshaped the strategy from exporting cars to building them inside the wall.",
@@ -413,6 +454,7 @@ const SITE_ARTICLES = [
   {
     "slug": "chinese-cars-in-the-middle-east-why-demand-is-rising",
     "date": "2026-07-05",
+    "published_at": "2026-07-05",
     "title_en": "Chinese Cars in the Middle East: Why Demand Is Rising",
     "title_zh": "中国汽车在中东：需求为什么在上升",
     "excerpt_en": "The Gulf went from skeptical to one of the fastest-adopting regions for Chinese cars in five years. Petrol SUVs opened the door; EVs and flagship showrooms are walking through it.",
@@ -423,6 +465,7 @@ const SITE_ARTICLES = [
   {
     "slug": "chinese-cars-in-africa-suvs-pickups-and-commercial-vehicles",
     "date": "2026-07-05",
+    "published_at": "2026-07-05",
     "title_en": "Chinese Cars in Africa: SUVs, Pickups and Commercial Vehicles",
     "title_zh": "中国汽车在非洲：SUV、皮卡与商用车",
     "excerpt_en": "Africa is the quietest front of China auto globalization — and possibly the most durable. The wedge is not EVs but affordable SUVs, working pickups and commercial vehicles, with local assembly starting to take root.",
@@ -433,6 +476,7 @@ const SITE_ARTICLES = [
   {
     "slug": "chinas-car-exports-why-global-markets-are-paying-attention",
     "date": "2026-07-05",
+    "published_at": "2026-07-05",
     "title_en": "China's Car Exports: Why Global Markets Are Paying Attention",
     "title_zh": "中国汽车出口：全球市场为何开始认真对待",
     "excerpt_en": "China has been the world's largest car exporter for three straight years, and the first half of 2026 shows the machine accelerating: record brand-level shipments, overseas plants multiplying, and exports becoming the industry's profit engine.",
@@ -443,6 +487,7 @@ const SITE_ARTICLES = [
   {
     "slug": "china-auto-export-data-what-global-dealers-should-watch",
     "date": "2026-07-05",
+    "published_at": "2026-07-05",
     "title_en": "China Auto Export Data: What Global Dealers Should Watch",
     "title_zh": "中国汽车出口数据：全球经销商应该盯哪些指标",
     "excerpt_en": "Wholesale vs retail, exports vs overseas sales, customs vs association data — China auto numbers confuse even professionals. A practical guide to reading them, and the five indicators that matter most.",
@@ -453,6 +498,7 @@ const SITE_ARTICLES = [
   {
     "slug": "chery-overseas-growth-why-emerging-markets-matter",
     "date": "2026-07-05",
+    "published_at": "2026-07-05",
     "title_en": "Chery's Overseas Growth: Why Emerging Markets Matter",
     "title_zh": "奇瑞的海外增长：新兴市场为什么是胜负手",
     "excerpt_en": "China's export champion for 23 straight years built its lead the unfashionable way: petrol SUVs, emerging markets, and local assembly — long before the EV wave. Now that base is funding a push into Europe.",
@@ -463,6 +509,7 @@ const SITE_ARTICLES = [
   {
     "slug": "byd-global-expansion-strategy-key-markets-to-watch",
     "date": "2026-07-05",
+    "published_at": "2026-07-05",
     "title_en": "BYD's Global Expansion Strategy: Key Markets to Watch",
     "title_zh": "比亚迪全球扩张战略：值得盯住的关键市场",
     "excerpt_en": "BYD went from exporting almost nothing in 2021 to targeting 1.5 million overseas sales in 2026. Its strategy rests on three pillars: ships, plants, and a product ladder from the Seagull to Yangwang.",
@@ -473,6 +520,7 @@ const SITE_ARTICLES = [
   {
     "slug": "2026-07-05-china-auto-daily",
     "date": "2026-07-05",
+    "published_at": "2026-07-05",
     "title_en": "BYD Hits 792K Overseas in H1, Geely Breaks 100K Monthly, XPeng Goes to Munich",
     "title_zh": "比亚迪上半年海外79万辆、吉利单月破10万、小鹏赴慕尼黑全球首发",
     "excerpt_en": "BYD delivered 792,256 vehicles overseas in H1 2026 (+70.7%), Geely crossed 100K monthly exports for the first time, and XPeng will globally launch the Mona L03 in Munich on July 16 across 64 countries.",
@@ -483,6 +531,7 @@ const SITE_ARTICLES = [
   {
     "slug": "2026-07-04-china-auto-daily",
     "date": "2026-07-04",
+    "published_at": "2026-07-04",
     "title_en": "BYD, Geely Hit Export Records in June as XPeng Takes Mona L03 to 64 Markets",
     "title_zh": "比亚迪、吉利6月出口双双破纪录，小鹏Mona L03剑指全球64国",
     "excerpt_en": "BYD's June overseas deliveries hit an all-time high of 175,349 units (+94.7%), Geely first crossed 100,000 monthly exports (+157%), and XPeng will globally launch the Mona L03 in Munich on July 16 across 64 markets.",
