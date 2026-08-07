@@ -92,6 +92,26 @@ function addImageDimensions(html) {
   });
 }
 
+function namespaceFragmentIds(html, namespace) {
+  const source = String(html || '');
+  const ids = new Set(Array.from(
+    source.matchAll(/\bid=(["'])([^"']+)\1/gi),
+    match => match[2]
+  ));
+  if (!ids.size) return source;
+
+  return source
+    .replace(/\bid=(["'])([^"']+)\1/gi,
+      (all, quote, id) => `id=${quote}${namespace}-${id}${quote}`)
+    .replace(/\bhref=(["'])#([^"']+)\1/gi,
+      (all, quote, id) => ids.has(id) ? `href=${quote}#${namespace}-${id}${quote}` : all)
+    .replace(/\b(aria-labelledby|aria-describedby)=(["'])([^"']+)\2/gi,
+      (all, name, quote, value) => {
+        const references = value.split(/\s+/).map(id => ids.has(id) ? `${namespace}-${id}` : id);
+        return `${name}=${quote}${references.join(' ')}${quote}`;
+      });
+}
+
 // ---- Collect daily articles (articles/*.json, written by the GCP pipeline) ----
 const ARTICLES_DIR = path.join(ROOT, 'articles');
 let articles = [];
@@ -590,10 +610,11 @@ function pageHTML(route, meta, mainHTML, opts = {}) {
   const zhUrl = canonicalUrl(route, true);
   const canonical = isZh ? zhUrl : enUrl;
   const ogImage = assetUrl(meta.image || opts.image || DEFAULT_OG_IMAGE);
-  const altLinks = opts.noAlt ? '' : `<link rel="alternate" hreflang="en" href="${enUrl}" />
+  const canonicalLinks = opts.noCanonical ? '' : `<link rel="canonical" href="${canonical}" />
+${opts.noAlt ? '' : `<link rel="alternate" hreflang="en" href="${enUrl}" />
 <link rel="alternate" hreflang="zh-CN" href="${zhUrl}" />
 <link rel="alternate" hreflang="x-default" href="${enUrl}" />
-`;
+`}`;
   const extraHead = opts.extraHead || meta.extraHead || '';
   meta = { ...meta, title: escAttr(truncateMeta(meta.title, 75)), desc: escAttr(truncateMeta(meta.desc, 165)) };
   const modified = meta.modified || meta.published;
@@ -611,14 +632,13 @@ function pageHTML(route, meta, mainHTML, opts = {}) {
 <meta name="description" content="${meta.desc}" />
 ${meta.robots ? `<meta name="robots" content="${escAttr(meta.robots)}" />\n` : ''}<meta name="author" content="TopChinaCar Editorial" />
 <meta name="theme-color" content="#1a1a1a" />
-<link rel="canonical" href="${canonical}" />
-${altLinks}
+${canonicalLinks}
 <!-- Open Graph -->
 <meta property="og:type" content="${meta.ogType || 'website'}" />
 <meta property="og:site_name" content="TopChinaCar" />
 <meta property="og:title" content="${meta.title}" />
 <meta property="og:description" content="${meta.desc}" />
-<meta property="og:url" content="${canonical}" />
+${opts.noCanonical ? '' : `<meta property="og:url" content="${canonical}" />`}
 <meta property="og:image" content="${ogImage}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -1984,9 +2004,12 @@ function bylineHTML(dateNice, dateIso) {
       </div>`;
 }
 
-function articleMain(a) {
+function articleMain(a, primaryLang = 'en') {
   const dateNice = new Date(a.date + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
-  const langBlock = (lang, html) => `<div data-lang="${lang}"${lang === 'zh' ? ' hidden' : ''}>${linkifyBrands(html, lang)}</div>`;
+  const langBlock = (lang, html) => {
+    const body = lang === primaryLang ? html : namespaceFragmentIds(html, lang);
+    return `<div data-lang="${lang}"${lang === 'zh' ? ' hidden' : ''}>${linkifyBrands(body, lang)}</div>`;
+  };
   const sources = extractSources(a.html_en);
   return `
   <section class="page-header">
@@ -2043,7 +2066,8 @@ function articleJsonLd(a, isZh = false) {
 
 for (const a of articles) {
   const route = `/news/${a.slug}`;
-  const main = articleMain(a);
+  const main = articleMain(a, 'en');
+  const zhMain = articleMain(a, 'zh');
   const html = pageHTML(route, {
     title: `${a.title_en} | TopChinaCar`,
     desc: (a.excerpt_en || a.title_en),
@@ -2058,7 +2082,7 @@ for (const a of articles) {
     image: articleImage(a),
     ogType: 'article',
     published: a.date
-  }, main, { zh: true }).replace('</head>', articleJsonLd(a, true) + '\n</head>')));
+  }, zhMain, { zh: true }).replace('</head>', articleJsonLd(a, true) + '\n</head>')));
 }
 if (articles.length) console.log(`✓ ${articles.length} article page(s) → news/ + zh/news/`);
 
@@ -2072,7 +2096,11 @@ const notFoundMain = `
     </div>
   </section>`;
 fs.writeFileSync(path.join(ROOT, '404.html'),
-  pageHTML('/', { title: 'Page Not Found | TopChinaCar', desc: 'The page you are looking for does not exist.' }, notFoundMain, { noAlt: true }));
+  pageHTML('/', {
+    title: 'Page Not Found | TopChinaCar',
+    desc: 'The page you are looking for does not exist.',
+    robots: 'noindex,nofollow'
+  }, notFoundMain, { noAlt: true, noCanonical: true }));
 console.log('✓ 404.html');
 
 // ---- sitemaps: sitemap.xml (index) → sitemap-pages / sitemap-posts / sitemap-news ----
@@ -2111,7 +2139,7 @@ const articleUrls = articles.map(a =>
 
 const zhMirror = lines => lines.map(l =>
   l.includes(`<loc>${SITE}/</loc>`)
-    ? l.replace(`<loc>${SITE}/</loc>`, `<loc>${SITE}/zh</loc>`)
+    ? l.replace(`<loc>${SITE}/</loc>`, `<loc>${SITE}/zh/</loc>`)
     : l.replace(`<loc>${SITE}/`, `<loc>${SITE}/zh/`));
 
 const urlset = lines => `<?xml version="1.0" encoding="UTF-8"?>
