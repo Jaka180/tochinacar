@@ -38,12 +38,16 @@ test('build keeps Shanghai publication dates and emits accessible, stable markup
     const posts = read('sitemap-posts.xml');
     const news = read('sitemap-news.xml');
     const sitemapIndex = read('sitemap.xml');
+    const sitemapPages = read('sitemap-pages.xml');
     const home = read('index.html');
     const zhHome = read('zh/index.html');
+    const notFound = read('404.html');
 
     assert.match(posts, /2026-07-12-china-auto-daily<\/loc><lastmod>2026-07-12<\/lastmod>/);
     assert.match(news, /2026-07-12-china-auto-daily[\s\S]*?<news:publication_date>2026-07-12T06:28:44\+08:00<\/news:publication_date>/);
     assert.doesNotMatch(sitemapIndex, /<lastmod>2026-07-11<\/lastmod>/);
+    assert.match(sitemapPages, /<loc>https:\/\/www\.topchinacar\.com\/zh\/<\/loc>/);
+    assert.doesNotMatch(sitemapPages, /<loc>https:\/\/www\.topchinacar\.com\/zh<\/loc>/);
 
     assert.match(home, /<h3 class="news-title">/);
     assert.match(home, /<h2 class="footer-heading"/);
@@ -51,10 +55,19 @@ test('build keeps Shanghai publication dates and emits accessible, stable markup
     assert.match(home, /srcset="\/images\/hero-xiaomi-480\.jpg 480w,/);
     assert.doesNotMatch(home.match(/<link href="https:\/\/fonts\.googleapis\.com\/css2\?[^>]+>/)?.[0] || '', /Noto/);
     assert.match(zhHome.match(/<link href="https:\/\/fonts\.googleapis\.com\/css2\?[^>]+>/)?.[0] || '', /Noto\+Sans\+SC/);
+    assert.match(notFound, /<meta name="robots" content="noindex,nofollow" \/>/);
+    assert.doesNotMatch(notFound, /rel="canonical"/);
 
     for (const htmlFile of collectHtmlFiles(siteRoot)) {
       const html = fs.readFileSync(htmlFile, 'utf8');
       assert.doesNotMatch(html, /\\u[0-9a-f]{4}/i, `${htmlFile} contains an escaped Unicode literal`);
+      assert.doesNotMatch(html, /class="spec-label">\s*From\s*<\/span>\s*<span class="spec-value">\s*from\b/i,
+        `${htmlFile} contains a duplicated From prefix`);
+
+      const ids = Array.from(html.matchAll(/<[^>]+\bid=["']([^"']+)["'][^>]*>/gi), match => match[1]);
+      const duplicates = [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
+      assert.deepEqual(duplicates, [], `${htmlFile} contains duplicate IDs: ${duplicates.join(', ')}`);
+
       for (const [index, tag] of Array.from(html.matchAll(/<img\b[^>]*>/g), match => match[0]).entries()) {
         assert.match(tag, /\bwidth="\d+"/, `${htmlFile} image ${index + 1} has no width`);
         assert.match(tag, /\bheight="\d+"/, `${htmlFile} image ${index + 1} has no height`);

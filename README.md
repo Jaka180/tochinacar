@@ -76,6 +76,8 @@ cd ~/tochinacar && git config user.name briefing-bot && git config user.email bo
 ```bash
 node build.js   # 重新生成 6 个 HTML + sitemap
 node --test tests/build-output.test.js  # 日期边界、无障碍与图片尺寸回归
+node scripts/site-health.js             # 全站链接、SEO、结构化数据与重复 ID 检查
+node scripts/site-health.js --live      # 部署后检查 Sitemap 中的全部线上页面
 ```
 
 再 commit + push 即可。
